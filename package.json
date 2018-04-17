@@ -1,7 +1,7 @@
 {
   "name": "appbulance",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "A Webapp that allows to people connect with medical service in order to attend an emergency call",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.2",
     "ejs": "^2.5.8",

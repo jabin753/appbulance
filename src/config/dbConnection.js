@@ -1,11 +1,11 @@
 const { Pool, Client } = require('pg')
 
 const client = new Client({
-    user: 'usr_BD',
+    user: 'appbulance',
     host: 'localhost',
-    database: 'MI_BD',
-    password: 'jabinjabin',
-    port: 5433
+    database: 'appbulance',
+    password: 'appbulance2018',
+    port: 5432
 })
 client.connect()
 module.exports = client
