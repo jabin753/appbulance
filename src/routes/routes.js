@@ -1,17 +1,10 @@
-var statements = require('../model/model')
-var bd = require('../config/dbConnection')
+var inicio = require('../controllers/inicio')
 
 module.exports = app => {
 
-	app.get('/time',(req,res)=>{
-    bd.query(statements.showDate,(err,result)=>{
-    res.render('time',{pageTitle : 'Fecha',time: result.rows})
-    })
-	})
+	app.get('/time',inicio.time)
 
-    app.get('/inicio',(req,res)=>{
-        res.render('index')
-    })
+    app.get('/inicio',inicio.inicio)
 
     app.get('/*',(req,res)=>{
         res.render('partials/template/404')
