@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Appbulance - Registro de cuenta</title>
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <div align="center">
+    <br>
+    <img src="images/logoo.png" width="80px" height="80px">
+    <h2><font color="white">Appbulance</font></h2>
+  </div>
+  <div class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header">Registra una cuenta</div>
+      <div class="card-body">
+        <form>
+          <div class="form-group">
+            <label for="InputName">Nombre</label>
+            <input class="form-control" id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre">
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputLastName">Apellido Paterno</label>
+                <input class="form-control" id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
+              </div>
+              <div class="col-md-6">
+                <label for="InputLastName2">Apellido Materno</label>
+                <input class="form-control" id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno">
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputPassword1">Teléfono</label>
+                <input class="form-control" id="InputPhoneNumber" type="password" placeholder="Escribe tu número telefónico">
+              </div>
+              <div class="col-md-6">
+                <label for="InputSex">Sexo</label><br>
+                <select class="form-control" name="OS">
+                    <option value="0">Selecciona tu sexo</option>     
+                    <option value="1">Hombre</option> 
+                    <option value="2">Mujer</option>
+                </select>
+              </div>
+          </div>
+        <br>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputLastName">Ocupación</label>
+                <input class="form-control" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
+              </div>
+              <div class="col-md-6">
+                <label for="InputBlood">Tipo de sangre</label>
+                <select class="form-control" name="OS">
+                    <option value="0">Selecciona tu tipo de sangre</option>     
+                    <option value="1">O+</option> 
+                    <option value="2">O-</option>
+                    <option value="3">A+</option> 
+                    <option value="4">A-</option>
+                    <option value="5">B+</option> 
+                    <option value="6">B-</option>
+                    <option value="7">AB+</option> 
+                    <option value="8">AB-</option>
+                </select>
+              </div>
+            </div>
+          </div>
+            
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputDateBirth">Fecha de nacimiento</label>
+                  <input class="form-control" type="date" min="1910-01-01" max="2000-03-01">
+              </div>
+              
+            </div>
+          </div>
+            
+          <hr>
+          <div class="form-group">
+            <label for="InputEmail1">Dirección de correo electrónico</label>
+            <input class="form-control" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
+          </div>
+          <div class="form-group">
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputPassword1">Contraseña</label>
+                <input class="form-control" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
+              </div>
+              <div class="col-md-6">
+                <label for="ConfirmPassword">Confirma la contraseña</label>
+                <input class="form-control" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
+              </div>
+            </div>
+          </div>
+          <a class="btn btn-primary btn-block" href="login.html">Regístrate</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="login.html">¿Ya tienes una cuenta? Inicia sesión...</a>
+          <a class="d-block small" href="forgot-password.html">¿Olvidaste tu contraseña?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+</html>
