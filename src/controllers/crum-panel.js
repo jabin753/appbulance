@@ -1,16 +1,28 @@
-var bd = require('../config/dbConnection')
 var consultas = require('../model/model')
-
-exports.inicio = (req,res)=>{
-    res.render('index')
-  }
+var path = require('path')
+var rootViewPath = 'CRUM Panel'
+module.exports = {
+  inicio: (req,res)=>{
+    res.render(path.join(rootViewPath,'panel-inicio'))
+  },
   
-exports.panel = (req,res)=>{
-  res.render('panel')
-}
+  peticiones: (req,res)=>{
+    res.render(path.join(rootViewPath,'panel-peticiones'))
+  },
+  
+  tamps: (req,res)=>{
+    res.render(path.join(rootViewPath,'panel-tamps'))
+  },
 
-exports.time = (req,res)=>{
-  bd.query(consultas.showDate,(err,result)=>{
-  res.render('time',{pageTitle : 'Fecha',time: result.rows})
-  })
+  unidades: (req,res)=>{
+    res.render(path.join(rootViewPath,'panel-unidades'))
+  },
+
+  usuarios: (req,res)=>{
+    res.render(path.join(rootViewPath,'panel-usuarios'))
+  },
+
+  configuracion: (req,res)=>{
+    res.render(path.join(rootViewPath,'panel-configuracion'))
+  }
 }
