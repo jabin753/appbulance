@@ -1,6 +1,6 @@
 {
   "name": "appbulance",
-  "version": "1.1.1",
+  "version": "1.1.6",
   "description": "A Webapp that allows to people connect with medical service in order to attend an emergency call",
   "main": "index.js",
   "scripts": {
