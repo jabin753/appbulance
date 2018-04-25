@@ -1,10 +1,11 @@
 var inicio = require('../controllers/inicio')
 var panel = require('../controllers/crum-panel')
 module.exports = app => {    
-    app.get('/panel',inicio.panel)
-    app.get('/inicio',inicio.inicio)
-	app.get('/time',inicio.time)
+    app.get('/inicio',(req,res)=>{
+        res.render('index')
+    })
     
+    app.get('/panel',panel.inicio)
     app.get('/panel/inicio',panel.inicio)
     app.get('/panel/peticiones',panel.peticiones)
     app.get('/panel/tamps',panel.tamps)

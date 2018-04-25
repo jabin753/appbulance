@@ -1,31 +1,45 @@
 <!DOCTYPE html>
-<html lang="es">
-
+<html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <title>Appbulance</title>
-  <!-- Bootstrap core CSS-->
-  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Custom fonts for this template-->
-  <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <!-- Custom styles for this template-->
-  <link href="/css/sb-admin.css" rel="stylesheet">
+  <title>Appbulance - Panel</title>
+  <%- include partials/template/header -%>
 </head>
-<body class="bg-dark">
-  <div align="center">
-    <br>
-    <img src="/images/logo.png" width="80px" height="80px">
-    <h2><font color="white" size="23">Coming soon</font></h2>
-  </div>
-  <!-- Bootstrap core JavaScript-->
-  <script src="/vendor/jquery/jquery.min.js"></script>
-  <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-</body>
+<body  id="page-top">
+ <header>
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#FF9D89">
+        <img src="/images/logo.png" width="40px" height="40px">
+        <a class="navbar-brand" href="/inicio">&nbsp&nbsp Appbulance</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"> Características</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Precio</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Únase a nosotros
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Registrarse</a>
+                <a class="dropdown-item" href="#">Iniciar sesión</a>
+                <a class="dropdown-item" href="/panel/inicio">Panel</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+ </header>
 
+    <%- include partials/template/top-button -%>
+    <%- include partials/template/js-scripts -%>
+
+</body>
 </html>
