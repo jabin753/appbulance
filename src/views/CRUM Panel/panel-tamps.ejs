@@ -2,10 +2,10 @@
 <html>
   <head>
     <title>Appbulance - Panel</title>
-    <%- include ../partials/template/header -%>
+    <%include partials/template/header.ejs%>
   </head>
   <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-    <%- include ../partials/template/crum-navbar -%>
+    <%include partials/template/crum-navbar.ejs%>
     <div class="content-wrapper">
       <div class="container-fluid">
         <!-- Breadcrumbs-->
@@ -45,10 +45,10 @@
           <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
       </div>
-      <%- include ../partials/template/footer -%>
-      <%- include ../partials/template/top-button -%>
-      <%- include ../partials/modals/logout -%>
-      <%- include ../partials/template/js-scripts -%>
+      <%include partials/template/footer.ejs%>
+      <%include partials/template/top-button.ejs%>
+      <%include partials/modals/logout.ejs%>
+      <%include partials/template/js-scripts.ejs%>
     </div>
   </body>
 </html>
