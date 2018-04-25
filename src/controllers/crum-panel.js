@@ -12,6 +12,9 @@ module.exports = {
    res.render(path.join(rootViewPath,'panel-tamps'))
   },
  unidades: (req,res)=>{
+  console.log(req.originalUrl); // '/admin/new'
+  console.log(req.baseUrl); // '/admin'
+  console.log(req.path); // '/new'
      res.render(path.join(rootViewPath,'panel-unidades'))
    },
    usuarios: (req,res)=>{

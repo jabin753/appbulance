@@ -1,0 +1,122 @@
+<!-- Modify User Modal-->    
+<div class="modal fade" id="modModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modifica un usuario</h5>
+        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="InputName">Nombre</label>
+              <input class="form-control" id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre">
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="InputLastName">Apellido Paterno</label>
+                  <input class="form-control" id="InputLastName" type="text" aria-dEscribadby="nameHelp" placeholder="Escriba su apellido paterno">
+                </div>
+                <div class="col-md-6">
+                  <label for="InputLastName2">Apellido Materno</label>
+                  <input class="form-control" id="InputLastName2" type="text" aria-dEscribadby="nameHelp" placeholder="Escriba su apellido materno">
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4">
+                <label for="InputPhone">Teléfono</label>
+                <input class="form-control" id="InputPhoneNumber" type="text" placeholder="Escriba su número telefónico">
+              </div>
+              <div class="col-md-4">
+                <label for="InputSex">Sexo</label><br>
+                <select class="form-control" name="OS">
+                  <option value="0">Selecciona tu sexo</option>
+                  <option value="1">Hombre</option>
+                  <option value="2">Mujer</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="InputBlood">Tipo de sangre</label>
+                <select class="form-control" name="OS">
+                  <option value="0">Seleccione su tipo de sangre</option>
+                  <option value="1">O+</option>
+                  <option value="2">O-</option>
+                  <option value="3">A+</option>
+                  <option value="4">A-</option>
+                  <option value="5">B+</option>
+                  <option value="6">B-</option>
+                  <option value="7">AB+</option>
+                  <option value="8">AB-</option>
+                </select>
+              </div>
+            </div>
+            <br>    
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputOcuppation">Ocupación</label>
+                <select class="form-control" name="OS">
+                  <option value="0">Seleccione su ocupación</option>
+                  <option value="1">Estudiante</option>
+                  <option value="2">Ama de casa</option>
+                  <option value="3">Comerciante</option>
+                  <option value="4">Ingeniero</option>
+                  <option value="5">Licenciado</option>
+                  <option value="6">Doctor</option>
+                  <option value="7">Profesor</option>
+                  <option value="8">Obrero</option>
+                  <option value="9">Negociante</option>
+                  <option value="8">Otra...</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="InputDateBirth">Fecha de nacimiento</label>
+                <input class="form-control" type="date" min="1910-01-01" max="2000-03-01">
+              </div>
+            </div>
+            <br>
+            <div class="form-row">
+              <div class="col-md-6">
+                <label for="InputSecurity">Compañia de seguros</label>
+                <select class="form-control" name="OS">
+                  <option value="0">Seleccione su compañia de seguros</option>
+                  <option value="1">IMSS</option>
+                  <option value="2">ISSSTE</option>
+                  <option value="3">Otro...</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="InputNSS">NSS</label>
+                <input class="form-control" id="InputNSS" type="text" aria-dEscribadby="emailHelp" placeholder="Escriba su NSS">
+              </div>
+            </div>
+            <hr>
+            <div class="form-group">
+              <label for="InputEmail1">Dirección de correo electrónico</label>
+              <input class="form-control" id="InputEmail1" type="email" aria-dEscribadby="emailHelp" placeholder="Escriba su email">
+              <br>       
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="InputPassword1">Contraseña</label>
+                  <input class="form-control" id="InputPassword1" type="password" placeholder="Escriba una contraseña">
+                </div>
+                <div class="col-md-6">
+                  <label for="ConfirmPassword">Confirme la contraseña</label>
+                  <input class="form-control" id="ConfirmPassword" type="password" placeholder="Confirme la contraseña">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+        <a class="btn btn-primary btn-warning" style="color: #FFFFFF">Modificar</a>
+      </div>
+    </div>
+  </div>
+</div>
