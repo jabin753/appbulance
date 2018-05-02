@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "test": "nodemon src/index.js"
+    "test": "IS_TEST=yes nodemon src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -18,12 +18,12 @@
     "ejs": "^2.5.8",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "morgan-body": "^2.4.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1"
   },
   "devDependencies": {
+    "morgan": "^1.9.0",
     "nodemon": "^1.17.3"
   }
 }

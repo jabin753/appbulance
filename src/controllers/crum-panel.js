@@ -3,7 +3,6 @@ var path = require('path')
 var rootViewPath = 'CRUM Panel'
 module.exports = {
   inicio: (req,res)=>{
-    console.log(res)
     res.render(path.join(rootViewPath,'panel-inicio'),{pageTitle:'panel - inicio'})
   },
   peticiones: (req,res)=>{
