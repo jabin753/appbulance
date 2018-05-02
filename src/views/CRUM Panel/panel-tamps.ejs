@@ -1,54 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Appbulance - Panel</title>
-    <%- include ../partials/template/header -%>
-  </head>
-  <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-    <%- include ../partials/template/crum-navbar -%>
-    <div class="content-wrapper">
-      <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Mi Dashboard</li>
-        </ol>
-        <!-- Icon Cards-->
-        <div class="row">
-          <div class="col-xl-3 col-sm-6 mb-3">
-            <div class="card text-white bg-warning o-hidden h-100">
-              <div class="card-body">
-                <div class="card-body-icon">
-                  <i class="fa fa-fw fa-list"></i>
-                </div>
-                <div class="mr-5">¡10 Nuevas Peticiones!</div>
+<head>
+  <title>Appbulance - Panel</title>
+  <%- include ../partials/template/header -%>
+</head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <%- include ../partials/template/crum-navbar -%>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <main>
+        <section id="ViewTAMPS">    
+          <!-- Example DataTables Card-->
+          <div class="card mb-3">
+            <div class="card-header">
+              <i class="fa fa-table"></i> TAMPS</div>
+            <div class="card-body">
+                <!-- Toolbar -->
+                    <a class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" style="color: #FFFFFF">Registrar</a>
+                    <input id="btnEliminar" type="button" class="btn btn-primary btn-danger" style="color: #FFFFFF" data-toggle="modal" data-target="#deleteModal" value="Eliminar" disabled="true">
+                    <input id="btnModificar" type="button" class="btn btn-primary btn-warning" style="color: #FFFFFF" data-toggle="modal" data-target="#modModal" value="Modificar" disabled="true">
+                    <hr>
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>ID TAMP</th>   
+                      <th>Nombre</th>
+                      <th>Edad</th>
+                      <th>Fecha de nacimiento</th>    
+                      <th>Sexo</th>
+                      <th>Teléfono</th>
+                      <th>Email</th>
+                      <th>Grado</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>ID TAMP</th>  
+                      <th>Nombre</th>
+                      <th>Edad</th>
+                      <th>Fecha de nacimiento</th>    
+                      <th>Sexo</th>
+                      <th>Teléfono</th>
+                      <th>Email</th>
+                      <th>Grado</th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <tr id="selected" onclick="toolbarAdmon()">
+                      <td>TAMP1002</td>  
+                      <td>Joseph Jabin Cuevas Bustos</td>
+                      <td>21</td>
+                      <td>15/06/1996</td>    
+                      <td>H</td>
+                      <td>7531689562</td>
+                      <td>jabin.itlac@gmail.com</td>
+                      <td>Pro</td>
+                    </tr>
+                    <tr id="selected" onclick="toolbarAdmon()">
+                      <td >TAMP1001</td> 
+                      <td>José Luis Alcántara Bustamante</td>
+                      <td>21</td>
+                      <td>11/03/1997</td>    
+                      <td>H</td>
+                      <td>7531620388</td>
+                      <td>luizalcantara59@gmail.com</td>
+                      <td>Pro</td>
+                    </tr>  
+                  </tbody>
+                </table>
               </div>
-              <a class="card-footer text-white clearfix small z-1" href="#">
-              <span class="float-left">View Details</span>
-              <span class="float-right">
-              <i class="fa fa-angle-right"></i>
-              </span>
-              </a>
             </div>
+            <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM</div>
           </div>
-        </div>
-        <!-- Area Chart Example-->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-area-chart"></i> Area Chart Example
-          </div>
-          <div class="card-body">
-            <canvas id="myAreaChart" width="100%" height="30"></canvas>
-          </div>
-          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-        </div>
-      </div>
-      <%- include ../partials/template/footer -%>
-     <%- include ../partials/template/top-button -%>
-      <%- include ../partials/modals/logout -%>
-     <%- include ../partials/template/js-scripts -%>
+        </section>
+      </main>
     </div>
-  </body>
+    <script src="/js/ab-toolbarAdmon.js"></script>
+    <%- include ../partials/template/footer -%>
+    <%- include ../partials/template/top-button -%>
+    <%- include ../partials/modals/logout -%>
+    <%- include ../partials/template/js-scripts -%>
+  </div>
+</body>
 </html>

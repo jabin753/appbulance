@@ -1,6 +1,6 @@
 const { Pool } = require('pg')
 
-const pool = new Pool()
+const pool = new Pool({connectionString: process.env.PG_CONNECTION_STRING})
 
 module.exports = {
   query: (text, params, callback) => {
@@ -37,7 +37,6 @@ module.exports = {
         // set the query method back to its old un-monkey-patched version
         client.query = query
       }
-
       callback(err, client, done)
     })
   }
