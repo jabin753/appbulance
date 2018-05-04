@@ -1,6 +1,6 @@
 var bd = require('../config/dbConnection')
 module.exports = {
-	addUser: (req,res,next)=>{
+	addUser: (req,res)=>{
 		const query = {
 			name: 'addUser',
 			text: 'INSERT INTO public.pacientes(\
@@ -13,7 +13,7 @@ module.exports = {
 				"F_Nacimiento_P",\
 				"Tipo_Sangre_P",\
 				"Contrasena_P")\
-				VALUES($1,$2,$3,$4,$5,$6,$7,$8,md5($9);',
+				VALUES($1,$2,$3,$4,$5,$6,$7,$8,md5($9))',
 			values: [req.body['Nombre_P'],
 				req.body['A_Paterno_P'],
 				req.body['A_Materno_P'],
@@ -26,8 +26,8 @@ module.exports = {
 		}
 		bd.query(query,(err,result)=>{
 			if(!err){
-				next()}
-			else console.log(err)
+				res.redirect('/usuario/ingreso')}
+			else console.log(query,err)
 		})
 	}
 }

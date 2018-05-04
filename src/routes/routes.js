@@ -10,7 +10,7 @@ module.exports = (app,passport) => {
     app.post('/usuario/ingreso',passport.authenticate('local'),panel.inicio)
 
     app.get('/usuario/registro',registration.user)
-    app.post('/user-registration',registration.addUser,login.user)
+    app.post('/usuario/registro',registration.addUser,login.user)
     
     app.get('/panel',panel.inicio)
     app.get('/panel/inicio',panel.inicio)
