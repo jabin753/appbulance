@@ -2,7 +2,6 @@ var path = require('path')
 var express = require('express')
 var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
-var flash = require('connect-flash')
 var passport = require('passport');
     require('./passport')(passport)
     
@@ -18,8 +17,7 @@ app.use(express.static(path.join(__dirname,'..','public')))//Ruta de archivos es
 
 app.set('port',process.env.port || 8888);// Puerto de operación de la aplicación
 
-//Gestión de rutas
-require('../routes/routes')(app,passport)
+
 
 app.use(session({//Sesión secreta. Requerida por passport
     secret: '::appbulance2018::',
@@ -28,7 +26,8 @@ app.use(session({//Sesión secreta. Requerida por passport
 }))
 app.use(passport.initialize())
 app.use(passport.session()) //Logins persistentes
-app.use(flash)// uso de connect-flash para mensajes de sesión
+//Gestión de rutas
+require('../routes/routes')(app,passport)
 
 app.set('view engine','ejs') //Configuración del motor de vistas
 app.set('views', path.join(__dirname, '../views')) //Directorio donde están las vistas

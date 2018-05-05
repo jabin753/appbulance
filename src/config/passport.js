@@ -3,38 +3,29 @@ var LocalStrategy = require('passport-local').Strategy
 var db = require('./dbConnection')
 
 module.exports = (passport)=>{
-    //Autenticación local
-    passport.use(new LocalStrategy((username,password,cb) =>{
-        console.log('Iniciando autenticación')
-        db.query('SELECT ID_P, Email_P, Contrasena_P from pacientes WHERE Email_P = $1',[username],
-    (err,result) =>{
-        if(err){
-            return cb(err)
-        }
-        if(result.rows.lenght > 0){
-            const first = result.rows[0]
-            bcrypt.compare(password, first.password, (err,res)=>{
-                if(res){
-                    cb(null,{id: first.id, username:first.username})
-                }
-                else{
-                    cb(null, false)
-                }
-            })
-        } else{
-            cb(null,false)
-        }
-    })
-    }))
+    
     passport.serializeUser((user, done) => {
-        done(null, user.id)
-      })
-      passport.deserializeUser((id, cb) => {
-        db.query('SELECT ID_P, Email_P, Contrasena_P from pacientes WHERE Email_P = $1', [parseInt(id, 10)], (err, results) => {
-          if(err) {
-            return cb(err)
-          }
-          cb(null, results.rows[0])
-        })
-      })
+        return done(null,user)
+    })
+    passport.deserializeUser((user, done) => {
+        return done(null,user)
+    })
+    
+    //Autenticación local de prueba
+    passport.use('local-usuario',new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'contra',
+        passReqToCallback: true},  
+        (req,email,contra,done) => {
+            db.query({text:'SELECT * FROM public.pacientes WHERE "Email_P" = $1 AND "Contrasena_P" = md5($2)',
+            values:[req.body['email'],req.body['contra']]},(err,result)=>{
+                if(result.rowCount > 0){
+                    var user = result.rows[0]
+                    return done(null, user)
+                }
+                else return done(null, false)
+            }
+            
+        ) 
+    }))
 }
