@@ -4,7 +4,9 @@ var bodyParser = require('body-parser')
 var cookieParser = require('cookie-parser')
 var passport = require('passport');
     require('./passport')(passport)
-    
+
+var BDPrueba = require('./dbConnection').prueba()
+
 var session = require('express-session')
 var app = express()
 

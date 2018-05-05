@@ -39,5 +39,12 @@ module.exports = {
       }
       callback(err, client, done)
     })
+  },
+  prueba:()=>{
+    pool.query('SELECT NOW()',(err,result)=>{
+      if(!err){
+          if(result.rowCount>0)console.log('Conexión satisfactoria: ',result.rows[0])
+      }
+  })
   }
 }
