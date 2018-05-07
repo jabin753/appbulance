@@ -22,7 +22,7 @@
       "sizes": "256x256",
       "type": "image/png"
     }],
-  "start_url": "/inicio",
+  "start_url": "/usuario/ingreso",
   "display": "standalone",
   "background_color": "#FF4F2A",
   "theme_color": "#FF9D89"
