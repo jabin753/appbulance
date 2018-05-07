@@ -23,6 +23,7 @@ app.set('port',process.env.port || 8888);// Puerto de operación de la aplicaci�
 
 app.use(session({//Sesión secreta. Requerida por passport
     secret: '::appbulance2018::',
+    cookie:{maxAge:900000000000},
     resave: true,
     saveUninitialized: true
 }))
