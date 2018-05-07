@@ -11,13 +11,13 @@ module.exports = (passport)=>{
         return done(null,user)
     })
     
-    //Autenticación local
+    //Autenticación local para el paciente
     passport.use('local-usuario',new LocalStrategy({
         usernameField: 'email',
         passwordField: 'contra',
         passReqToCallback: true},  
         (req,email,contra,done) => {
-            db.query({text:'SELECT * FROM public.pacientes WHERE "Email_P" = $1 AND "Contrasena_P" = md5($2)',
+            db.query({text:'SELECT authuser($1,$2)',
             values:[req.body['email'],req.body['contra']]},(err,result)=>{
                 if(!err){
                     if(result.rowCount > 0){
@@ -26,7 +26,6 @@ module.exports = (passport)=>{
                     }
                     else return done(null, false)
                 }
-                
                 else return done(null, false)
             }
             
