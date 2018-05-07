@@ -5,8 +5,8 @@ var registration  = require('../controllers/registration')
 module.exports = (app,passport) => {    
     app.get('/',inicio.inicio)
     
-    app.get('/usuario/registro',registration.user)
-    app.post('/usuario/registro',registration.addUser)
+    app.get('/usuario/registro',registration.userPaciente)
+    app.post('/usuario/registro',registration.addUserPaciente)
     
     app.get('/usuario/ingreso',login.sesion,login.user)
     app.post('/usuario/ingreso',passport.authenticate('local-usuario',{

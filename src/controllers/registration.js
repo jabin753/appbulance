@@ -3,10 +3,10 @@ module.exports = {
   crum: (req,res)=>{
 
   },
-  user: (req,res)=>{
+  userPaciente: (req,res)=>{
     res.render('user-registration',{pageTitle:'appbulance - registro'})
   },
-  addUser: consultas.addUser,
+  addUserPaciente: consultas.addUserPaciente,
   tamp: (req,res)=>{
 
   }
