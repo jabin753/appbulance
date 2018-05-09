@@ -43,8 +43,8 @@ module.exports = {
   prueba:()=>{
     pool.query('SELECT NOW()',(err,result)=>{
       if(!err){
-          if(result.rowCount>0)console.log('Conexión satisfactoria: ',result.rows[0])
-      }
+          if(result.rowCount > 0)console.log('Conexión satisfactoria: ',result.rows[0])
+      } else{console.error('Error en la conexión con la base de datos',bd.connectionString)}
   })
   }
 }
