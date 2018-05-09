@@ -20,8 +20,8 @@ module.exports = (passport)=>{
             db.query({text:'SELECT authuser($1,$2)',
             values:[req.body['email'],req.body['contra']]},(err,result)=>{
                 if(!err){
-                    if(result.rowCount > 0){
-                        var user = result.rows[0]
+                    if(result.rows[0]['authuser']){
+                        var user = {id_p:result.rows[0]['authuser']}
                         return done(null, user)
                     }
                     else return done(null, false)
