@@ -58,3 +58,4 @@ typings/
 .env
 
 src/public/Thumbs.db
+package-lock.json
