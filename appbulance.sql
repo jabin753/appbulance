@@ -2,13 +2,14 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.12
--- Dumped by pg_dump version 9.5.12
+-- Dumped from database version 9.6.9
+-- Dumped by pg_dump version 9.6.9
 
--- Started on 2018-05-12 11:38:12 CDT
+-- Started on 2018-05-12 12:02:33
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -17,28 +18,7 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 2297 (class 1262 OID 25784)
--- Name: appbulance; Type: DATABASE; Schema: -; Owner: appbulance
---
-
-CREATE DATABASE appbulance WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
-
-
-ALTER DATABASE appbulance OWNER TO appbulance;
-
-\connect appbulance
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
---
--- TOC entry 10 (class 2615 OID 34095)
+-- TOC entry 5 (class 2615 OID 16386)
 -- Name: administracion; Type: SCHEMA; Schema: -; Owner: appbulance
 --
 
@@ -48,7 +28,7 @@ CREATE SCHEMA administracion;
 ALTER SCHEMA administracion OWNER TO appbulance;
 
 --
--- TOC entry 8 (class 2615 OID 34093)
+-- TOC entry 8 (class 2615 OID 16387)
 -- Name: configuraciones; Type: SCHEMA; Schema: -; Owner: appbulance
 --
 
@@ -58,7 +38,7 @@ CREATE SCHEMA configuraciones;
 ALTER SCHEMA configuraciones OWNER TO appbulance;
 
 --
--- TOC entry 12 (class 2615 OID 34101)
+-- TOC entry 7 (class 2615 OID 16388)
 -- Name: pacientes; Type: SCHEMA; Schema: -; Owner: appbulance
 --
 
@@ -68,7 +48,7 @@ CREATE SCHEMA pacientes;
 ALTER SCHEMA pacientes OWNER TO appbulance;
 
 --
--- TOC entry 9 (class 2615 OID 34094)
+-- TOC entry 4 (class 2615 OID 16389)
 -- Name: perfiles; Type: SCHEMA; Schema: -; Owner: appbulance
 --
 
@@ -78,7 +58,7 @@ CREATE SCHEMA perfiles;
 ALTER SCHEMA perfiles OWNER TO appbulance;
 
 --
--- TOC entry 11 (class 2615 OID 34096)
+-- TOC entry 11 (class 2615 OID 16390)
 -- Name: peticiones; Type: SCHEMA; Schema: -; Owner: appbulance
 --
 
@@ -88,7 +68,7 @@ CREATE SCHEMA peticiones;
 ALTER SCHEMA peticiones OWNER TO appbulance;
 
 --
--- TOC entry 1 (class 3079 OID 12395)
+-- TOC entry 1 (class 3079 OID 12387)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -96,7 +76,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2300 (class 0 OID 0)
+-- TOC entry 2284 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -105,7 +85,7 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- TOC entry 226 (class 1255 OID 34217)
+-- TOC entry 217 (class 1255 OID 16391)
 -- Name: newconfiguration(integer); Type: FUNCTION; Schema: configuraciones; Owner: appbulance
 --
 
@@ -123,7 +103,7 @@ $_$;
 ALTER FUNCTION configuraciones.newconfiguration(id_usr integer) OWNER TO appbulance;
 
 --
--- TOC entry 227 (class 1255 OID 34219)
+-- TOC entry 230 (class 1255 OID 16392)
 -- Name: adduserpacientes(json); Type: FUNCTION; Schema: perfiles; Owner: appbulance
 --
 
@@ -169,7 +149,7 @@ $$;
 ALTER FUNCTION perfiles.adduserpacientes(datos json) OWNER TO appbulance;
 
 --
--- TOC entry 225 (class 1255 OID 34231)
+-- TOC entry 231 (class 1255 OID 16393)
 -- Name: authuser(json); Type: FUNCTION; Schema: perfiles; Owner: appbulance
 --
 
@@ -188,7 +168,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- TOC entry 187 (class 1259 OID 25798)
+-- TOC entry 190 (class 1259 OID 16394)
 -- Name: ambulancias; Type: TABLE; Schema: administracion; Owner: appbulance
 --
 
@@ -206,7 +186,7 @@ CREATE TABLE administracion.ambulancias (
 ALTER TABLE administracion.ambulancias OWNER TO appbulance;
 
 --
--- TOC entry 186 (class 1259 OID 25796)
+-- TOC entry 191 (class 1259 OID 16402)
 -- Name: ambulancias_id_a_seq; Type: SEQUENCE; Schema: administracion; Owner: appbulance
 --
 
@@ -221,8 +201,8 @@ CREATE SEQUENCE administracion.ambulancias_id_a_seq
 ALTER TABLE administracion.ambulancias_id_a_seq OWNER TO appbulance;
 
 --
--- TOC entry 2301 (class 0 OID 0)
--- Dependencies: 186
+-- TOC entry 2285 (class 0 OID 0)
+-- Dependencies: 191
 -- Name: ambulancias_id_a_seq; Type: SEQUENCE OWNED BY; Schema: administracion; Owner: appbulance
 --
 
@@ -230,7 +210,7 @@ ALTER SEQUENCE administracion.ambulancias_id_a_seq OWNED BY administracion.ambul
 
 
 --
--- TOC entry 212 (class 1259 OID 34201)
+-- TOC entry 192 (class 1259 OID 16404)
 -- Name: navegacion; Type: TABLE; Schema: configuraciones; Owner: appbulance
 --
 
@@ -238,15 +218,15 @@ CREATE TABLE configuraciones.navegacion (
     id_usr integer NOT NULL,
     nav_style character varying(50) DEFAULT 'navbar-dark bg-dark'::character varying,
     body_style character varying(50) DEFAULT 'bg-dark'::character varying,
-    CONSTRAINT body_chk CHECK (((body_style)::text = ANY ((ARRAY['bg-dark'::character varying, ' bg-light'::character varying])::text[]))),
-    CONSTRAINT navbar_chk CHECK (((nav_style)::text = ANY ((ARRAY['navbar-dark bg-dark'::character varying, 'navbar-light bg-light'::character varying])::text[])))
+    CONSTRAINT body_chk CHECK (((body_style)::text = ANY (ARRAY[('bg-dark'::character varying)::text, (' bg-light'::character varying)::text]))),
+    CONSTRAINT navbar_chk CHECK (((nav_style)::text = ANY (ARRAY[('navbar-dark bg-dark'::character varying)::text, ('navbar-light bg-light'::character varying)::text])))
 );
 
 
 ALTER TABLE configuraciones.navegacion OWNER TO appbulance;
 
 --
--- TOC entry 205 (class 1259 OID 34136)
+-- TOC entry 193 (class 1259 OID 16411)
 -- Name: alergias; Type: TABLE; Schema: pacientes; Owner: appbulance
 --
 
@@ -260,7 +240,7 @@ CREATE TABLE pacientes.alergias (
 ALTER TABLE pacientes.alergias OWNER TO appbulance;
 
 --
--- TOC entry 204 (class 1259 OID 34134)
+-- TOC entry 194 (class 1259 OID 16417)
 -- Name: alergias_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
 --
 
@@ -275,8 +255,8 @@ CREATE SEQUENCE pacientes.alergias_id_seq
 ALTER TABLE pacientes.alergias_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2302 (class 0 OID 0)
--- Dependencies: 204
+-- TOC entry 2286 (class 0 OID 0)
+-- Dependencies: 194
 -- Name: alergias_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
 
@@ -284,7 +264,7 @@ ALTER SEQUENCE pacientes.alergias_id_seq OWNED BY pacientes.alergias.id;
 
 
 --
--- TOC entry 203 (class 1259 OID 34120)
+-- TOC entry 195 (class 1259 OID 16419)
 -- Name: enfermedad_cardiovascular; Type: TABLE; Schema: pacientes; Owner: appbulance
 --
 
@@ -298,7 +278,7 @@ CREATE TABLE pacientes.enfermedad_cardiovascular (
 ALTER TABLE pacientes.enfermedad_cardiovascular OWNER TO appbulance;
 
 --
--- TOC entry 202 (class 1259 OID 34118)
+-- TOC entry 196 (class 1259 OID 16425)
 -- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
 --
 
@@ -313,8 +293,8 @@ CREATE SEQUENCE pacientes.enfermedad_cardiovascular_id_seq
 ALTER TABLE pacientes.enfermedad_cardiovascular_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2303 (class 0 OID 0)
--- Dependencies: 202
+-- TOC entry 2287 (class 0 OID 0)
+-- Dependencies: 196
 -- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
 
@@ -322,7 +302,7 @@ ALTER SEQUENCE pacientes.enfermedad_cardiovascular_id_seq OWNED BY pacientes.enf
 
 
 --
--- TOC entry 209 (class 1259 OID 34168)
+-- TOC entry 197 (class 1259 OID 16427)
 -- Name: medicamentos; Type: TABLE; Schema: pacientes; Owner: appbulance
 --
 
@@ -336,7 +316,7 @@ CREATE TABLE pacientes.medicamentos (
 ALTER TABLE pacientes.medicamentos OWNER TO appbulance;
 
 --
--- TOC entry 208 (class 1259 OID 34166)
+-- TOC entry 198 (class 1259 OID 16433)
 -- Name: medicamentos_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
 --
 
@@ -351,8 +331,8 @@ CREATE SEQUENCE pacientes.medicamentos_id_seq
 ALTER TABLE pacientes.medicamentos_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2304 (class 0 OID 0)
--- Dependencies: 208
+-- TOC entry 2288 (class 0 OID 0)
+-- Dependencies: 198
 -- Name: medicamentos_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
 
@@ -360,7 +340,7 @@ ALTER SEQUENCE pacientes.medicamentos_id_seq OWNED BY pacientes.medicamentos.id;
 
 
 --
--- TOC entry 207 (class 1259 OID 34152)
+-- TOC entry 199 (class 1259 OID 16435)
 -- Name: padecimientos; Type: TABLE; Schema: pacientes; Owner: appbulance
 --
 
@@ -374,7 +354,7 @@ CREATE TABLE pacientes.padecimientos (
 ALTER TABLE pacientes.padecimientos OWNER TO appbulance;
 
 --
--- TOC entry 206 (class 1259 OID 34150)
+-- TOC entry 200 (class 1259 OID 16441)
 -- Name: padecimientos_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
 --
 
@@ -389,8 +369,8 @@ CREATE SEQUENCE pacientes.padecimientos_id_seq
 ALTER TABLE pacientes.padecimientos_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2305 (class 0 OID 0)
--- Dependencies: 206
+-- TOC entry 2289 (class 0 OID 0)
+-- Dependencies: 200
 -- Name: padecimientos_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
 
@@ -398,7 +378,7 @@ ALTER SEQUENCE pacientes.padecimientos_id_seq OWNED BY pacientes.padecimientos.i
 
 
 --
--- TOC entry 211 (class 1259 OID 34184)
+-- TOC entry 201 (class 1259 OID 16443)
 -- Name: seguro_medico; Type: TABLE; Schema: pacientes; Owner: appbulance
 --
 
@@ -412,7 +392,7 @@ CREATE TABLE pacientes.seguro_medico (
 ALTER TABLE pacientes.seguro_medico OWNER TO appbulance;
 
 --
--- TOC entry 210 (class 1259 OID 34182)
+-- TOC entry 202 (class 1259 OID 16449)
 -- Name: seguro_medico_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
 --
 
@@ -427,8 +407,8 @@ CREATE SEQUENCE pacientes.seguro_medico_id_seq
 ALTER TABLE pacientes.seguro_medico_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2306 (class 0 OID 0)
--- Dependencies: 210
+-- TOC entry 2290 (class 0 OID 0)
+-- Dependencies: 202
 -- Name: seguro_medico_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
 
@@ -436,7 +416,7 @@ ALTER SEQUENCE pacientes.seguro_medico_id_seq OWNED BY pacientes.seguro_medico.i
 
 
 --
--- TOC entry 189 (class 1259 OID 25811)
+-- TOC entry 203 (class 1259 OID 16451)
 -- Name: usuarios; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
@@ -455,8 +435,8 @@ CREATE TABLE perfiles.usuarios (
 ALTER TABLE perfiles.usuarios OWNER TO appbulance;
 
 --
--- TOC entry 2307 (class 0 OID 0)
--- Dependencies: 189
+-- TOC entry 2291 (class 0 OID 0)
+-- Dependencies: 203
 -- Name: COLUMN usuarios.tipo_usr; Type: COMMENT; Schema: perfiles; Owner: appbulance
 --
 
@@ -467,7 +447,7 @@ COMMENT ON COLUMN perfiles.usuarios.tipo_usr IS '
 
 
 --
--- TOC entry 191 (class 1259 OID 25819)
+-- TOC entry 204 (class 1259 OID 16454)
 -- Name: crums; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
@@ -484,7 +464,7 @@ INHERITS (perfiles.usuarios);
 ALTER TABLE perfiles.crums OWNER TO appbulance;
 
 --
--- TOC entry 190 (class 1259 OID 25817)
+-- TOC entry 205 (class 1259 OID 16460)
 -- Name: crums_id_cm_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
 --
 
@@ -499,8 +479,8 @@ CREATE SEQUENCE perfiles.crums_id_cm_seq
 ALTER TABLE perfiles.crums_id_cm_seq OWNER TO appbulance;
 
 --
--- TOC entry 2308 (class 0 OID 0)
--- Dependencies: 190
+-- TOC entry 2292 (class 0 OID 0)
+-- Dependencies: 205
 -- Name: crums_id_cm_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
 
@@ -508,7 +488,7 @@ ALTER SEQUENCE perfiles.crums_id_cm_seq OWNED BY perfiles.crums.id_cm;
 
 
 --
--- TOC entry 193 (class 1259 OID 25831)
+-- TOC entry 206 (class 1259 OID 16462)
 -- Name: personas; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
@@ -528,7 +508,7 @@ INHERITS (perfiles.usuarios);
 ALTER TABLE perfiles.personas OWNER TO appbulance;
 
 --
--- TOC entry 195 (class 1259 OID 25844)
+-- TOC entry 207 (class 1259 OID 16469)
 -- Name: pacientes; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
@@ -543,7 +523,7 @@ INHERITS (perfiles.personas);
 ALTER TABLE perfiles.pacientes OWNER TO appbulance;
 
 --
--- TOC entry 194 (class 1259 OID 25842)
+-- TOC entry 208 (class 1259 OID 16477)
 -- Name: pacientes_id_p_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
 --
 
@@ -558,8 +538,8 @@ CREATE SEQUENCE perfiles.pacientes_id_p_seq
 ALTER TABLE perfiles.pacientes_id_p_seq OWNER TO appbulance;
 
 --
--- TOC entry 2309 (class 0 OID 0)
--- Dependencies: 194
+-- TOC entry 2293 (class 0 OID 0)
+-- Dependencies: 208
 -- Name: pacientes_id_p_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
 
@@ -567,7 +547,7 @@ ALTER SEQUENCE perfiles.pacientes_id_p_seq OWNED BY perfiles.pacientes.id_p;
 
 
 --
--- TOC entry 192 (class 1259 OID 25829)
+-- TOC entry 209 (class 1259 OID 16479)
 -- Name: personas_id_prs_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
 --
 
@@ -582,8 +562,8 @@ CREATE SEQUENCE perfiles.personas_id_prs_seq
 ALTER TABLE perfiles.personas_id_prs_seq OWNER TO appbulance;
 
 --
--- TOC entry 2310 (class 0 OID 0)
--- Dependencies: 192
+-- TOC entry 2294 (class 0 OID 0)
+-- Dependencies: 209
 -- Name: personas_id_prs_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
 
@@ -591,7 +571,7 @@ ALTER SEQUENCE perfiles.personas_id_prs_seq OWNED BY perfiles.personas.id_prs;
 
 
 --
--- TOC entry 197 (class 1259 OID 25859)
+-- TOC entry 210 (class 1259 OID 16481)
 -- Name: tamps; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
@@ -607,7 +587,7 @@ INHERITS (perfiles.personas);
 ALTER TABLE perfiles.tamps OWNER TO appbulance;
 
 --
--- TOC entry 196 (class 1259 OID 25857)
+-- TOC entry 211 (class 1259 OID 16488)
 -- Name: tamps_id_tmp_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
 --
 
@@ -622,8 +602,8 @@ CREATE SEQUENCE perfiles.tamps_id_tmp_seq
 ALTER TABLE perfiles.tamps_id_tmp_seq OWNER TO appbulance;
 
 --
--- TOC entry 2311 (class 0 OID 0)
--- Dependencies: 196
+-- TOC entry 2295 (class 0 OID 0)
+-- Dependencies: 211
 -- Name: tamps_id_tmp_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
 
@@ -631,7 +611,7 @@ ALTER SEQUENCE perfiles.tamps_id_tmp_seq OWNED BY perfiles.tamps.id_tmp;
 
 
 --
--- TOC entry 188 (class 1259 OID 25809)
+-- TOC entry 212 (class 1259 OID 16490)
 -- Name: usuarios_id_usr_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
 --
 
@@ -646,8 +626,8 @@ CREATE SEQUENCE perfiles.usuarios_id_usr_seq
 ALTER TABLE perfiles.usuarios_id_usr_seq OWNER TO appbulance;
 
 --
--- TOC entry 2312 (class 0 OID 0)
--- Dependencies: 188
+-- TOC entry 2296 (class 0 OID 0)
+-- Dependencies: 212
 -- Name: usuarios_id_usr_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
 
@@ -655,7 +635,7 @@ ALTER SEQUENCE perfiles.usuarios_id_usr_seq OWNED BY perfiles.usuarios.id_usr;
 
 
 --
--- TOC entry 201 (class 1259 OID 25883)
+-- TOC entry 213 (class 1259 OID 16492)
 -- Name: fraps; Type: TABLE; Schema: peticiones; Owner: appbulance
 --
 
@@ -668,7 +648,7 @@ CREATE TABLE peticiones.fraps (
 ALTER TABLE peticiones.fraps OWNER TO appbulance;
 
 --
--- TOC entry 200 (class 1259 OID 25881)
+-- TOC entry 214 (class 1259 OID 16495)
 -- Name: fraps_id_frp_seq; Type: SEQUENCE; Schema: peticiones; Owner: appbulance
 --
 
@@ -683,8 +663,8 @@ CREATE SEQUENCE peticiones.fraps_id_frp_seq
 ALTER TABLE peticiones.fraps_id_frp_seq OWNER TO appbulance;
 
 --
--- TOC entry 2313 (class 0 OID 0)
--- Dependencies: 200
+-- TOC entry 2297 (class 0 OID 0)
+-- Dependencies: 214
 -- Name: fraps_id_frp_seq; Type: SEQUENCE OWNED BY; Schema: peticiones; Owner: appbulance
 --
 
@@ -692,7 +672,7 @@ ALTER SEQUENCE peticiones.fraps_id_frp_seq OWNED BY peticiones.fraps.id_frp;
 
 
 --
--- TOC entry 199 (class 1259 OID 25873)
+-- TOC entry 215 (class 1259 OID 16497)
 -- Name: peticiones; Type: TABLE; Schema: peticiones; Owner: appbulance
 --
 
@@ -710,7 +690,7 @@ CREATE TABLE peticiones.peticiones (
 ALTER TABLE peticiones.peticiones OWNER TO appbulance;
 
 --
--- TOC entry 198 (class 1259 OID 25871)
+-- TOC entry 216 (class 1259 OID 16501)
 -- Name: peticiones_id_pt_seq; Type: SEQUENCE; Schema: peticiones; Owner: appbulance
 --
 
@@ -725,8 +705,8 @@ CREATE SEQUENCE peticiones.peticiones_id_pt_seq
 ALTER TABLE peticiones.peticiones_id_pt_seq OWNER TO appbulance;
 
 --
--- TOC entry 2314 (class 0 OID 0)
--- Dependencies: 198
+-- TOC entry 2298 (class 0 OID 0)
+-- Dependencies: 216
 -- Name: peticiones_id_pt_seq; Type: SEQUENCE OWNED BY; Schema: peticiones; Owner: appbulance
 --
 
@@ -734,160 +714,160 @@ ALTER SEQUENCE peticiones.peticiones_id_pt_seq OWNED BY peticiones.peticiones.id
 
 
 --
--- TOC entry 2113 (class 2604 OID 25801)
--- Name: id_a; Type: DEFAULT; Schema: administracion; Owner: appbulance
+-- TOC entry 2096 (class 2604 OID 16503)
+-- Name: ambulancias id_a; Type: DEFAULT; Schema: administracion; Owner: appbulance
 --
 
 ALTER TABLE ONLY administracion.ambulancias ALTER COLUMN id_a SET DEFAULT nextval('administracion.ambulancias_id_a_seq'::regclass);
 
 
 --
--- TOC entry 2135 (class 2604 OID 34139)
--- Name: id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2102 (class 2604 OID 16504)
+-- Name: alergias id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.alergias ALTER COLUMN id SET DEFAULT nextval('pacientes.alergias_id_seq'::regclass);
 
 
 --
--- TOC entry 2134 (class 2604 OID 34123)
--- Name: id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2103 (class 2604 OID 16505)
+-- Name: enfermedad_cardiovascular id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.enfermedad_cardiovascular ALTER COLUMN id SET DEFAULT nextval('pacientes.enfermedad_cardiovascular_id_seq'::regclass);
 
 
 --
--- TOC entry 2137 (class 2604 OID 34171)
--- Name: id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2104 (class 2604 OID 16506)
+-- Name: medicamentos id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.medicamentos ALTER COLUMN id SET DEFAULT nextval('pacientes.medicamentos_id_seq'::regclass);
 
 
 --
--- TOC entry 2136 (class 2604 OID 34155)
--- Name: id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2105 (class 2604 OID 16507)
+-- Name: padecimientos id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.padecimientos ALTER COLUMN id SET DEFAULT nextval('pacientes.padecimientos_id_seq'::regclass);
 
 
 --
--- TOC entry 2138 (class 2604 OID 34187)
--- Name: id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2106 (class 2604 OID 16508)
+-- Name: seguro_medico id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.seguro_medico ALTER COLUMN id SET DEFAULT nextval('pacientes.seguro_medico_id_seq'::regclass);
 
 
 --
--- TOC entry 2117 (class 2604 OID 25822)
--- Name: id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2108 (class 2604 OID 16509)
+-- Name: crums id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.crums ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
 
 
 --
--- TOC entry 2118 (class 2604 OID 25823)
--- Name: id_cm; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2109 (class 2604 OID 16510)
+-- Name: crums id_cm; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.crums ALTER COLUMN id_cm SET DEFAULT nextval('perfiles.crums_id_cm_seq'::regclass);
 
 
 --
--- TOC entry 2122 (class 2604 OID 25847)
--- Name: id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2113 (class 2604 OID 16511)
+-- Name: pacientes id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
 
 
 --
--- TOC entry 2123 (class 2604 OID 25848)
--- Name: id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2114 (class 2604 OID 16512)
+-- Name: pacientes id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_prs SET DEFAULT nextval('perfiles.personas_id_prs_seq'::regclass);
 
 
 --
--- TOC entry 2124 (class 2604 OID 25850)
--- Name: id_p; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2115 (class 2604 OID 16513)
+-- Name: pacientes id_p; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_p SET DEFAULT nextval('perfiles.pacientes_id_p_seq'::regclass);
 
 
 --
--- TOC entry 2119 (class 2604 OID 25834)
--- Name: id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2110 (class 2604 OID 16514)
+-- Name: personas id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.personas ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
 
 
 --
--- TOC entry 2120 (class 2604 OID 25835)
--- Name: id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2111 (class 2604 OID 16515)
+-- Name: personas id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.personas ALTER COLUMN id_prs SET DEFAULT nextval('perfiles.personas_id_prs_seq'::regclass);
 
 
 --
--- TOC entry 2127 (class 2604 OID 25862)
--- Name: id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2118 (class 2604 OID 16516)
+-- Name: tamps id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
 
 
 --
--- TOC entry 2128 (class 2604 OID 25863)
--- Name: id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2119 (class 2604 OID 16517)
+-- Name: tamps id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_prs SET DEFAULT nextval('perfiles.personas_id_prs_seq'::regclass);
 
 
 --
--- TOC entry 2129 (class 2604 OID 25865)
--- Name: id_tmp; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2120 (class 2604 OID 16518)
+-- Name: tamps id_tmp; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_tmp SET DEFAULT nextval('perfiles.tamps_id_tmp_seq'::regclass);
 
 
 --
--- TOC entry 2116 (class 2604 OID 25814)
--- Name: id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2107 (class 2604 OID 16519)
+-- Name: usuarios id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.usuarios ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
 
 
 --
--- TOC entry 2133 (class 2604 OID 25886)
--- Name: id_frp; Type: DEFAULT; Schema: peticiones; Owner: appbulance
+-- TOC entry 2122 (class 2604 OID 16520)
+-- Name: fraps id_frp; Type: DEFAULT; Schema: peticiones; Owner: appbulance
 --
 
 ALTER TABLE ONLY peticiones.fraps ALTER COLUMN id_frp SET DEFAULT nextval('peticiones.fraps_id_frp_seq'::regclass);
 
 
 --
--- TOC entry 2131 (class 2604 OID 25876)
--- Name: id_pt; Type: DEFAULT; Schema: peticiones; Owner: appbulance
+-- TOC entry 2124 (class 2604 OID 16521)
+-- Name: peticiones id_pt; Type: DEFAULT; Schema: peticiones; Owner: appbulance
 --
 
 ALTER TABLE ONLY peticiones.peticiones ALTER COLUMN id_pt SET DEFAULT nextval('peticiones.peticiones_id_pt_seq'::regclass);
 
 
 --
--- TOC entry 2144 (class 2606 OID 25808)
--- Name: ambulancias_pkey; Type: CONSTRAINT; Schema: administracion; Owner: appbulance
+-- TOC entry 2126 (class 2606 OID 16523)
+-- Name: ambulancias ambulancias_pkey; Type: CONSTRAINT; Schema: administracion; Owner: appbulance
 --
 
 ALTER TABLE ONLY administracion.ambulancias
@@ -895,8 +875,8 @@ ALTER TABLE ONLY administracion.ambulancias
 
 
 --
--- TOC entry 2170 (class 2606 OID 34207)
--- Name: navegacion_pk; Type: CONSTRAINT; Schema: configuraciones; Owner: appbulance
+-- TOC entry 2128 (class 2606 OID 16525)
+-- Name: navegacion navegacion_pk; Type: CONSTRAINT; Schema: configuraciones; Owner: appbulance
 --
 
 ALTER TABLE ONLY configuraciones.navegacion
@@ -904,8 +884,8 @@ ALTER TABLE ONLY configuraciones.navegacion
 
 
 --
--- TOC entry 2162 (class 2606 OID 34144)
--- Name: alergias_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2130 (class 2606 OID 16527)
+-- Name: alergias alergias_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.alergias
@@ -913,8 +893,8 @@ ALTER TABLE ONLY pacientes.alergias
 
 
 --
--- TOC entry 2160 (class 2606 OID 34128)
--- Name: enfermedad_cardiovascular_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2132 (class 2606 OID 16529)
+-- Name: enfermedad_cardiovascular enfermedad_cardiovascular_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.enfermedad_cardiovascular
@@ -922,8 +902,8 @@ ALTER TABLE ONLY pacientes.enfermedad_cardiovascular
 
 
 --
--- TOC entry 2166 (class 2606 OID 34176)
--- Name: medicamentos_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2134 (class 2606 OID 16531)
+-- Name: medicamentos medicamentos_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.medicamentos
@@ -931,8 +911,8 @@ ALTER TABLE ONLY pacientes.medicamentos
 
 
 --
--- TOC entry 2164 (class 2606 OID 34160)
--- Name: padecimientos_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2136 (class 2606 OID 16533)
+-- Name: padecimientos padecimientos_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.padecimientos
@@ -940,8 +920,8 @@ ALTER TABLE ONLY pacientes.padecimientos
 
 
 --
--- TOC entry 2168 (class 2606 OID 34192)
--- Name: seguro_medico_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2138 (class 2606 OID 16535)
+-- Name: seguro_medico seguro_medico_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.seguro_medico
@@ -949,8 +929,8 @@ ALTER TABLE ONLY pacientes.seguro_medico
 
 
 --
--- TOC entry 2148 (class 2606 OID 25828)
--- Name: crums_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2142 (class 2606 OID 16537)
+-- Name: crums crums_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.crums
@@ -958,8 +938,8 @@ ALTER TABLE ONLY perfiles.crums
 
 
 --
--- TOC entry 2152 (class 2606 OID 25856)
--- Name: pacientes_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2146 (class 2606 OID 16539)
+-- Name: pacientes pacientes_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.pacientes
@@ -967,8 +947,8 @@ ALTER TABLE ONLY perfiles.pacientes
 
 
 --
--- TOC entry 2150 (class 2606 OID 25841)
--- Name: personas_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2144 (class 2606 OID 16541)
+-- Name: personas personas_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.personas
@@ -976,8 +956,8 @@ ALTER TABLE ONLY perfiles.personas
 
 
 --
--- TOC entry 2154 (class 2606 OID 25870)
--- Name: tamps_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2148 (class 2606 OID 16543)
+-- Name: tamps tamps_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.tamps
@@ -985,8 +965,8 @@ ALTER TABLE ONLY perfiles.tamps
 
 
 --
--- TOC entry 2146 (class 2606 OID 25816)
--- Name: usuarios_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
+-- TOC entry 2140 (class 2606 OID 16545)
+-- Name: usuarios usuarios_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
 --
 
 ALTER TABLE ONLY perfiles.usuarios
@@ -994,8 +974,8 @@ ALTER TABLE ONLY perfiles.usuarios
 
 
 --
--- TOC entry 2158 (class 2606 OID 25888)
--- Name: fraps_pkey; Type: CONSTRAINT; Schema: peticiones; Owner: appbulance
+-- TOC entry 2150 (class 2606 OID 16547)
+-- Name: fraps fraps_pkey; Type: CONSTRAINT; Schema: peticiones; Owner: appbulance
 --
 
 ALTER TABLE ONLY peticiones.fraps
@@ -1003,8 +983,8 @@ ALTER TABLE ONLY peticiones.fraps
 
 
 --
--- TOC entry 2156 (class 2606 OID 25879)
--- Name: peticiones_pkey; Type: CONSTRAINT; Schema: peticiones; Owner: appbulance
+-- TOC entry 2152 (class 2606 OID 16549)
+-- Name: peticiones peticiones_pkey; Type: CONSTRAINT; Schema: peticiones; Owner: appbulance
 --
 
 ALTER TABLE ONLY peticiones.peticiones
@@ -1012,8 +992,8 @@ ALTER TABLE ONLY peticiones.peticiones
 
 
 --
--- TOC entry 2171 (class 2606 OID 25900)
--- Name: id_cm_fk; Type: FK CONSTRAINT; Schema: administracion; Owner: appbulance
+-- TOC entry 2153 (class 2606 OID 16550)
+-- Name: ambulancias id_cm_fk; Type: FK CONSTRAINT; Schema: administracion; Owner: appbulance
 --
 
 ALTER TABLE ONLY administracion.ambulancias
@@ -1021,8 +1001,8 @@ ALTER TABLE ONLY administracion.ambulancias
 
 
 --
--- TOC entry 2174 (class 2606 OID 34145)
--- Name: alergias_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2154 (class 2606 OID 16555)
+-- Name: alergias alergias_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.alergias
@@ -1030,8 +1010,8 @@ ALTER TABLE ONLY pacientes.alergias
 
 
 --
--- TOC entry 2173 (class 2606 OID 34129)
--- Name: enfermedad_cardiovascular_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2155 (class 2606 OID 16560)
+-- Name: enfermedad_cardiovascular enfermedad_cardiovascular_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.enfermedad_cardiovascular
@@ -1039,8 +1019,8 @@ ALTER TABLE ONLY pacientes.enfermedad_cardiovascular
 
 
 --
--- TOC entry 2176 (class 2606 OID 34177)
--- Name: medicamentos_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2156 (class 2606 OID 16565)
+-- Name: medicamentos medicamentos_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.medicamentos
@@ -1048,8 +1028,8 @@ ALTER TABLE ONLY pacientes.medicamentos
 
 
 --
--- TOC entry 2175 (class 2606 OID 34161)
--- Name: padecimientos_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2157 (class 2606 OID 16570)
+-- Name: padecimientos padecimientos_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.padecimientos
@@ -1057,8 +1037,8 @@ ALTER TABLE ONLY pacientes.padecimientos
 
 
 --
--- TOC entry 2177 (class 2606 OID 34193)
--- Name: seguro_medico_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- TOC entry 2158 (class 2606 OID 16575)
+-- Name: seguro_medico seguro_medico_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.seguro_medico
@@ -1066,27 +1046,15 @@ ALTER TABLE ONLY pacientes.seguro_medico
 
 
 --
--- TOC entry 2172 (class 2606 OID 25910)
--- Name: fraps_id_pt_fkey; Type: FK CONSTRAINT; Schema: peticiones; Owner: appbulance
+-- TOC entry 2159 (class 2606 OID 16580)
+-- Name: fraps fraps_id_pt_fkey; Type: FK CONSTRAINT; Schema: peticiones; Owner: appbulance
 --
 
 ALTER TABLE ONLY peticiones.fraps
     ADD CONSTRAINT fraps_id_pt_fkey FOREIGN KEY (id_pt) REFERENCES peticiones.peticiones(id_pt) ON UPDATE CASCADE;
 
 
---
--- TOC entry 2299 (class 0 OID 0)
--- Dependencies: 6
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
-
-
--- Completed on 2018-05-12 11:38:13 CDT
+-- Completed on 2018-05-12 12:02:33
 
 --
 -- PostgreSQL database dump complete
