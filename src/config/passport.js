@@ -1,4 +1,3 @@
-var bcrypt = require('bcrypt')
 var LocalStrategy = require('passport-local').Strategy
 var db = require('./dbConnection')
 
@@ -17,11 +16,17 @@ module.exports = (passport)=>{
         passwordField: 'contra',
         passReqToCallback: true},  
         (req,email,contra,done) => {
-            db.query({text:'SELECT authuser($1,$2)',
-            values:[req.body['email'],req.body['contra']]},(err,result)=>{
+            db.query({text:'SELECT perfiles.authuser($1)',
+            values:[req.body]},(err,result)=>{
+                console.log(err,result)
                 if(!err){
                     if(result.rows[0]['authuser']){
-                        var user = {id_p:result.rows[0]['authuser']}
+                        var user = {id_p:result.rows[0]['authuser'],
+                        style:{
+                            nav_style:'navbar-light',
+                            nav_background_style:'bg-light',
+                            body_style:'bg-light' 
+                        }}
                         return done(null, user)
                     }
                     else return done(null, false)
