@@ -17,28 +17,28 @@
           <form action="/usuario/registro" method="POST">
             <div class="form-group">
               <label for="InputName">Nombre</label>
-              <input class="form-control"required name="Nombre_P"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre">
+              <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputLastName">Apellido Paterno</label>
-                  <input class="form-control" required name="A_Paterno_P"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
+                  <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
                 </div>
                 <div class="col-md-6">
                   <label for="InputLastName2">Apellido Materno</label>
-                  <input class="form-control" required name="A_Materno_P"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno">
+                  <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno">
                 </div>
               </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputPassword1">Teléfono</label>
-                  <input class="form-control" name="Tel_P"id="InputPhoneNumber" type="number" placeholder="Escribe tu número telefónico">
+                  <input class="form-control" name="telefono_usr"id="InputPhoneNumber" type="number" placeholder="Escribe tu número telefónico">
                 </div>
                 <div class="col-md-6">
                   <label for="InputSex">Sexo</label><br>
-                  <select class="form-control" name="Sexo_P">
+                  <select class="form-control" name="sexo_prs">
                       <option value="0">Selecciona tu sexo</option>     
                       <option value="M">Hombre</option> 
                       <option value="F">Mujer</option>
@@ -50,11 +50,11 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputLastName">Ocupación</label>
-                  <input class="form-control" name="Ocupacion_P" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
+                  <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
                 </div>
                 <div class="col-md-6">
                   <label for="InputBlood">Tipo de sangre</label>
-                  <select class="form-control" name="Tipo_Sangre_P" id="bloodType">
+                  <select class="form-control" name="tipo_sangre_p" id="bloodType">
                       <option value="0">Selecciona tu tipo de sangre</option>     
                       <option value="O+">O+</option> 
                       <option value="O-">O-</option>
@@ -73,7 +73,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputDateBirth">Fecha de nacimiento</label>
-                    <input class="form-control" required name="F_Nacimiento_P" type="date" min="1910-01-01" max="2000-03-01">
+                    <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
                 </div>
                 
               </div>
@@ -82,17 +82,17 @@
             <hr>
             <div class="form-group">
               <label for="InputEmail1">Dirección de correo electrónico</label>
-              <input class="form-control" name="Email_P" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
+              <input class="form-control" name="email_usr" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputPassword1">Contraseña</label>
-                  <input class="form-control" name="Contrasena_P" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
+                  <input class="form-control" name="contrasena_usr" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
                 </div>
                 <div class="col-md-6">
                   <label for="ConfirmPassword">Confirma la contraseña</label>
-                  <input class="form-control" name="Confirmar_Contra_P" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
+                  <input class="form-control" name="contrasena_usr_conf" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
                 </div>
               </div>
             </div>
