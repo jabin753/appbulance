@@ -1,6 +1,7 @@
 const { Pool } = require('pg')
 
-const pool = new Pool({connectionString: process.env.PG_CONNECTION_STRING})
+const pool = new Pool({connectionString: process.env.PG_CONNECTION_STRING 
+  || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'})
 
 module.exports = {
   query: (text, params, callback) => {
@@ -44,7 +45,7 @@ module.exports = {
     pool.query('SELECT NOW()',(err,result)=>{
       if(!err){
           if(result.rowCount > 0)console.log('Conexión satisfactoria: ',result.rows[0])
-      } else{console.error('Error en la conexión con la base de datos',bd.connectionString)}
+      } else{console.error('Error en la conexión con la base de datos, ',process.env.PG_CONNECTION_STRING,err)}
   })
   }
 }
