@@ -37,22 +37,23 @@
                   <input class="form-control" name="telefono_usr"id="InputPhoneNumber" type="number" placeholder="Escribe tu número telefónico">
                 </div>
                 <div class="col-md-6">
-                  <label for="InputSex">Sexo</label><br>
-                  <select class="form-control" name="sexo_prs">
-                      <option value="0">Selecciona tu sexo</option>     
-                      <option value="M">Hombre</option> 
-                      <option value="F">Mujer</option>
-                  </select>
-                </div>
+                    <label for="InputLastName">Ocupación</label>
+                    <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
+                  </div>
+                
             </div>
           <br>
             <div class="form-group">
               <div class="form-row">
-                <div class="col-md-6">
-                  <label for="InputLastName">Ocupación</label>
-                  <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
-                </div>
-                <div class="col-md-6">
+                  <div class="col-md-4">
+                      <label for="InputSex">Sexo</label><br>
+                      <select class="form-control" name="sexo_prs">
+                          <option value="0">Selecciona tu sexo</option>     
+                          <option value="M">Hombre</option> 
+                          <option value="F">Mujer</option>
+                      </select>
+                    </div>
+                <div class="col-md-4">
                   <label for="InputBlood">Tipo de sangre</label>
                   <select class="form-control" name="tipo_sangre_p" id="bloodType">
                       <option value="0">Selecciona tu tipo de sangre</option>     
@@ -66,15 +67,26 @@
                       <option value="AB-">AB-</option>
                   </select>
                 </div>
+                <div class="col-md-4">
+                    <label for="InputDateBirth">Fecha de nacimiento</label>
+                      <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
+                  </div>
               </div>
             </div>
               
             <div class="form-group">
               <div class="form-row">
-                <div class="col-md-6">
-                  <label for="InputDateBirth">Fecha de nacimiento</label>
-                    <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
-                </div>
+                  <div class="col-md-6">
+                      <label for="InputSecure">Derechohabiente a</label>
+                      <select class="form-control" name="tipo_sangre_p" id="bloodType">
+                          <option value="0">Selecciona tu tipo de sangre</option>     
+                          <option value="1">IMSS</option> 
+                          <option value="2">ISSSTE</option>
+                          <option value="3">SEDENA</option> 
+                          <option value="4">PEMEX</option>
+                          <option value="5">Seguro Popular</option>
+                      </select>                    
+                  </div>
                 <div class="col-md-6">
                   <label for="InputNSS">NSS</label>
                   <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS">
