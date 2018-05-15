@@ -1,19 +1,20 @@
 var inicio = require('../controllers/inicio')
 var panel  = require('../controllers/crum-panel')
+var user  = require('../controllers/user-panel')
 var login  = require('../controllers/login')
 var registration  = require('../controllers/registration')
 module.exports = (app,passport) => {    
     app.get('/',inicio.inicio)
-    
+    app.get('/usuario/inicio', )
     app.get('/usuario/registro',registration.userPaciente)
     app.post('/usuario/registro',registration.addUserPaciente)
     
     app.get('/usuario/ingreso',login.sesion,login.user)
     app.post('/usuario/ingreso',passport.authenticate('local-usuario',{
-        successRedirect : '/panel',
+        successRedirect : '/usuario/inicio',
         failureRedirect : '/usuario/ingreso'
     }))
-    
+    app.get('/usuario/inicio',user.sesion,user.inicio)
     app.get('/panel',panel.sesion,panel.inicio)
     app.get('/panel/*',panel.sesion)
     app.get('/panel/peticiones',panel.peticiones)
