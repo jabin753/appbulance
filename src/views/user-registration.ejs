@@ -7,8 +7,8 @@
   <main>
     <div align="center">
       <br>
-      <img src="/images/logo.png" width="80px" height="80px">
-      <h2><font color="white"><a class = "navbar-brand "href="/">&nbsp Appbulance</a></font></h2>
+      <img src="/images/logo.png" width="80px" height="80px" href="/">
+      <h2><font color="white"><a class = "navbar-brand ">&nbsp Appbulance</a></font></h2>
     </div>
     <div class="container">
       <div class="card card-register mx-auto mt-5">
@@ -50,7 +50,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputLastName">Ocupación</label>
-                  <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
+                  <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
                 </div>
                 <div class="col-md-6">
                   <label for="InputBlood">Tipo de sangre</label>
@@ -75,7 +75,11 @@
                   <label for="InputDateBirth">Fecha de nacimiento</label>
                     <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
                 </div>
-                
+                <div class="col-md-6">
+                  <label for="InputNSS">NSS</label>
+                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS">
+                </div>
+                <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
               </div>
             </div>
               
