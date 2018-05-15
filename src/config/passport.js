@@ -23,7 +23,7 @@ module.exports = (passport)=>{
                     if(result.rows[0]['authuser']){
                         var user = {id_p:result.rows[0]['authuser'],
                         style:{
-                            nav_style:'navbar-light',
+                            nav_style:'navbar-dark',
                             nav_background_style:'bg-light',
                             body_style:'bg-light' 
                         }}
