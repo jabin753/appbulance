@@ -7,7 +7,6 @@ module.exports = (app,passport) => {
     app.get('/',inicio.inicio)
     
     //Exclusive Users Routes
-    app.get('/usuario/*',user.sesion)
     app.get('/usuario/registro',registration.userPaciente)
     app.post('/usuario/registro',registration.addUserPaciente)
     app.get('/usuario/ingreso',login.validateUser,login.user)
@@ -25,13 +24,12 @@ module.exports = (app,passport) => {
         successRedirect : '/crum/inicio',
         failureRedirect : '/crum/ingreso'
     }))
-    app.get('/crum/*',crum.sesion)
-    app.get('/crum/inicio',crum.inicio)
-    app.get('/crum/peticiones',crum.peticiones)
-    app.get('/crum/tamps',crum.tamps)
-    app.get('/crum/unidades',crum.unidades)
-    app.get('/crum/usuarios',crum.usuarios)
-    app.get('/crum/configuracion',crum.configuracion)
+    app.get('/crum/inicio',crum.sesion,crum.inicio)
+    app.get('/crum/peticiones',crum.sesion,crum.peticiones)
+    app.get('/crum/tamps',crum.sesion,crum.tamps)
+    app.get('/crum/unidades',crum.sesion,crum.unidades)
+    app.get('/crum/usuarios',crum.sesion,crum.usuarios)
+    app.get('/crum/configuracion',crum.sesion,crum.configuracion)
     
     app.get('/logout', (req, res) => {
         req.logout();
