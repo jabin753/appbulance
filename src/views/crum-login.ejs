@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include partials/template/header -%>
+</head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <main>
+    <div align="center">
+      <br>
+      <img src="/images/logo.png" width="80px" height="80px">
+      <h2><font><a class = "navbar-brand " color="white" href="/">&nbsp Appbulance</a></font></h2>
+    </div>
+    <div class="container">
+      <div class="card card-login mx-auto mt-5">
+        <div class="card-header text-center">Inicio de sesión</div>
+        <div class="card-body">
+          <form action="/usuario/ingreso" method="POST" role="form">
+            <!--INGRESAR ERROR DE LOGIN--><label id="errorLogin" style="color: tomato; font-size: 5;"class="d-block small mt-2"></label>
+            <div class="form-group">
+              <label for="InputEmail1">Correo electrónico</label>
+              <input class="form-control" name="email" id="Email_P" required type="email" aria-describedby="emailHelp" placeholder="Escribe tu correo electrónico">
+            </div>
+            <div class="form-group">
+              <label for="InputPassword">Contraseña</label>
+              <input class="form-control" name="contra" id="Contrasena_P" required type="password" placeholder="Escribe tu contraseña">
+            </div>            
+              <button class="btn btn-primary btn-block" type="submit">Entrar</button>
+            </form>
+            <div class="text-center">
+              <a class="d-block small mt-3" href="/usuario/registro">¿No tienes una cuenta aún? Regístrate</a>
+              <a class="d-block small" href="/crum/ingreso">Soy un centro regulador de emergéncias médicas</a>
+            </div>
+          </div>  
+        </div>
+      </div>
+    </main>
+    <%- include partials/template/js-scripts -%>
+    <%- include partials/template/top-button -%>
+  </body>
+  </html>
