@@ -25,7 +25,7 @@ module.exports = {
     if (req.isAuthenticated()) { 
       next()
     } else {
-      res.redirect('/usuario/ingreso');
+      res.redirect('/u');//Pendiente
     }
   }
 }
