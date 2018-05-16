@@ -5,7 +5,7 @@
 -- Dumped from database version 9.6.9
 -- Dumped by pg_dump version 9.6.9
 
--- Started on 2018-05-15 16:29:02
+-- Started on 2018-05-15 23:45:38
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -76,7 +76,7 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2313 (class 0 OID 0)
+-- TOC entry 2286 (class 0 OID 0)
 -- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
@@ -205,7 +205,7 @@ CREATE SEQUENCE administracion.ambulancias_id_a_seq
 ALTER TABLE administracion.ambulancias_id_a_seq OWNER TO appbulance;
 
 --
--- TOC entry 2314 (class 0 OID 0)
+-- TOC entry 2287 (class 0 OID 0)
 -- Dependencies: 191
 -- Name: ambulancias_id_a_seq; Type: SEQUENCE OWNED BY; Schema: administracion; Owner: appbulance
 --
@@ -259,7 +259,7 @@ CREATE SEQUENCE pacientes.alergias_id_seq
 ALTER TABLE pacientes.alergias_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2315 (class 0 OID 0)
+-- TOC entry 2288 (class 0 OID 0)
 -- Dependencies: 194
 -- Name: alergias_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
@@ -297,7 +297,7 @@ CREATE SEQUENCE pacientes.enfermedad_cardiovascular_id_seq
 ALTER TABLE pacientes.enfermedad_cardiovascular_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2316 (class 0 OID 0)
+-- TOC entry 2289 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
@@ -335,7 +335,7 @@ CREATE SEQUENCE pacientes.medicamentos_id_seq
 ALTER TABLE pacientes.medicamentos_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2317 (class 0 OID 0)
+-- TOC entry 2290 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: medicamentos_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
@@ -373,7 +373,7 @@ CREATE SEQUENCE pacientes.padecimientos_id_seq
 ALTER TABLE pacientes.padecimientos_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2318 (class 0 OID 0)
+-- TOC entry 2291 (class 0 OID 0)
 -- Dependencies: 200
 -- Name: padecimientos_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
@@ -410,7 +410,7 @@ CREATE SEQUENCE pacientes.seguro_medico_id_seq
 ALTER TABLE pacientes.seguro_medico_id_seq OWNER TO appbulance;
 
 --
--- TOC entry 2319 (class 0 OID 0)
+-- TOC entry 2292 (class 0 OID 0)
 -- Dependencies: 202
 -- Name: seguro_medico_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
 --
@@ -438,7 +438,7 @@ CREATE TABLE perfiles.usuarios (
 ALTER TABLE perfiles.usuarios OWNER TO appbulance;
 
 --
--- TOC entry 2320 (class 0 OID 0)
+-- TOC entry 2293 (class 0 OID 0)
 -- Dependencies: 203
 -- Name: COLUMN usuarios.tipo_usr; Type: COMMENT; Schema: perfiles; Owner: appbulance
 --
@@ -482,7 +482,7 @@ CREATE SEQUENCE perfiles.crums_id_cm_seq
 ALTER TABLE perfiles.crums_id_cm_seq OWNER TO appbulance;
 
 --
--- TOC entry 2321 (class 0 OID 0)
+-- TOC entry 2294 (class 0 OID 0)
 -- Dependencies: 205
 -- Name: crums_id_cm_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
@@ -543,7 +543,7 @@ CREATE SEQUENCE perfiles.pacientes_id_p_seq
 ALTER TABLE perfiles.pacientes_id_p_seq OWNER TO appbulance;
 
 --
--- TOC entry 2322 (class 0 OID 0)
+-- TOC entry 2295 (class 0 OID 0)
 -- Dependencies: 208
 -- Name: pacientes_id_p_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
@@ -567,7 +567,7 @@ CREATE SEQUENCE perfiles.personas_id_prs_seq
 ALTER TABLE perfiles.personas_id_prs_seq OWNER TO appbulance;
 
 --
--- TOC entry 2323 (class 0 OID 0)
+-- TOC entry 2296 (class 0 OID 0)
 -- Dependencies: 209
 -- Name: personas_id_prs_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
@@ -607,7 +607,7 @@ CREATE SEQUENCE perfiles.tamps_id_tmp_seq
 ALTER TABLE perfiles.tamps_id_tmp_seq OWNER TO appbulance;
 
 --
--- TOC entry 2324 (class 0 OID 0)
+-- TOC entry 2297 (class 0 OID 0)
 -- Dependencies: 211
 -- Name: tamps_id_tmp_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
@@ -631,7 +631,7 @@ CREATE SEQUENCE perfiles.usuarios_id_usr_seq
 ALTER TABLE perfiles.usuarios_id_usr_seq OWNER TO appbulance;
 
 --
--- TOC entry 2325 (class 0 OID 0)
+-- TOC entry 2298 (class 0 OID 0)
 -- Dependencies: 212
 -- Name: usuarios_id_usr_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
 --
@@ -677,7 +677,7 @@ CREATE SEQUENCE peticiones.fraps_id_frp_seq
 ALTER TABLE peticiones.fraps_id_frp_seq OWNER TO appbulance;
 
 --
--- TOC entry 2326 (class 0 OID 0)
+-- TOC entry 2299 (class 0 OID 0)
 -- Dependencies: 214
 -- Name: fraps_id_frp_seq; Type: SEQUENCE OWNED BY; Schema: peticiones; Owner: appbulance
 --
@@ -717,7 +717,7 @@ CREATE SEQUENCE peticiones.peticiones_id_pt_seq
 ALTER TABLE peticiones.peticiones_id_pt_seq OWNER TO appbulance;
 
 --
--- TOC entry 2327 (class 0 OID 0)
+-- TOC entry 2300 (class 0 OID 0)
 -- Dependencies: 216
 -- Name: peticiones_id_pt_seq; Type: SEQUENCE OWNED BY; Schema: peticiones; Owner: appbulance
 --
@@ -875,276 +875,6 @@ ALTER TABLE ONLY peticiones.fraps ALTER COLUMN id_frp SET DEFAULT nextval('petic
 --
 
 ALTER TABLE ONLY peticiones.peticiones ALTER COLUMN id_pt SET DEFAULT nextval('peticiones.peticiones_id_pt_seq'::regclass);
-
-
---
--- TOC entry 2279 (class 0 OID 16395)
--- Dependencies: 190
--- Data for Name: ambulancias; Type: TABLE DATA; Schema: administracion; Owner: appbulance
---
-
-COPY administracion.ambulancias (id_a, num_placa_a, num_economico_a, id_cm, estado_a, posicion_actual_a) FROM stdin;
-\.
-
-
---
--- TOC entry 2328 (class 0 OID 0)
--- Dependencies: 191
--- Name: ambulancias_id_a_seq; Type: SEQUENCE SET; Schema: administracion; Owner: appbulance
---
-
-SELECT pg_catalog.setval('administracion.ambulancias_id_a_seq', 1, false);
-
-
---
--- TOC entry 2281 (class 0 OID 16405)
--- Dependencies: 192
--- Data for Name: navegacion; Type: TABLE DATA; Schema: configuraciones; Owner: appbulance
---
-
-COPY configuraciones.navegacion (id_usr, nav_style, body_style) FROM stdin;
-1	navbar-dark bg-dark	bg-dark
-2	navbar-dark bg-dark	bg-dark
-3	navbar-dark bg-dark	bg-dark
-4	navbar-dark bg-dark	bg-dark
-8	navbar-dark bg-dark	bg-dark
-\.
-
-
---
--- TOC entry 2282 (class 0 OID 16412)
--- Dependencies: 193
--- Data for Name: alergias; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-COPY pacientes.alergias (id, descripcion_alergia, id_p) FROM stdin;
-\.
-
-
---
--- TOC entry 2329 (class 0 OID 0)
--- Dependencies: 194
--- Name: alergias_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
---
-
-SELECT pg_catalog.setval('pacientes.alergias_id_seq', 1, false);
-
-
---
--- TOC entry 2284 (class 0 OID 16420)
--- Dependencies: 195
--- Data for Name: enfermedad_cardiovascular; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-COPY pacientes.enfermedad_cardiovascular (id, descripcion_ecardio, id_p) FROM stdin;
-\.
-
-
---
--- TOC entry 2330 (class 0 OID 0)
--- Dependencies: 196
--- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
---
-
-SELECT pg_catalog.setval('pacientes.enfermedad_cardiovascular_id_seq', 1, false);
-
-
---
--- TOC entry 2286 (class 0 OID 16428)
--- Dependencies: 197
--- Data for Name: medicamentos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-COPY pacientes.medicamentos (id, descripcion_medicamento, id_p) FROM stdin;
-\.
-
-
---
--- TOC entry 2331 (class 0 OID 0)
--- Dependencies: 198
--- Name: medicamentos_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
---
-
-SELECT pg_catalog.setval('pacientes.medicamentos_id_seq', 1, false);
-
-
---
--- TOC entry 2288 (class 0 OID 16436)
--- Dependencies: 199
--- Data for Name: padecimientos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-COPY pacientes.padecimientos (id, descripcion_padecimiento, id_p) FROM stdin;
-\.
-
-
---
--- TOC entry 2332 (class 0 OID 0)
--- Dependencies: 200
--- Name: padecimientos_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
---
-
-SELECT pg_catalog.setval('pacientes.padecimientos_id_seq', 1, false);
-
-
---
--- TOC entry 2290 (class 0 OID 16444)
--- Dependencies: 201
--- Data for Name: seguro_medico; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-COPY pacientes.seguro_medico (id_sm, descripcion_sm) FROM stdin;
-1	IMSS
-2	ISSSTE
-3	SEDENA
-4	PEMEX
-5	Seguro Popular
-\.
-
-
---
--- TOC entry 2333 (class 0 OID 0)
--- Dependencies: 202
--- Name: seguro_medico_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
---
-
-SELECT pg_catalog.setval('pacientes.seguro_medico_id_seq', 1, false);
-
-
---
--- TOC entry 2293 (class 0 OID 16455)
--- Dependencies: 204
--- Data for Name: crums; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-COPY perfiles.crums (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_cm, nombre_cm, direccion_cm, coordenadas_cm, rango_servicio_cm) FROM stdin;
-\.
-
-
---
--- TOC entry 2334 (class 0 OID 0)
--- Dependencies: 205
--- Name: crums_id_cm_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
---
-
-SELECT pg_catalog.setval('perfiles.crums_id_cm_seq', 1, false);
-
-
---
--- TOC entry 2296 (class 0 OID 16470)
--- Dependencies: 207
--- Data for Name: pacientes; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-COPY perfiles.pacientes (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_prs, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, id_p, tipo_sangre_p, nss_p, id_sm) FROM stdin;
-3	luizalcantara59@gmail.com	7531620388	63a9f0ea7bb98050796b649e85481845	2	2018-05-15	\N	\N	3	asdasda	asdsa	asda	1997-03-11	M	Obrero	3	O+	12345678912	\N
-4	luizalcantara59@gmail.com	7531620388	63a9f0ea7bb98050796b649e85481845	2	2018-05-15	\N	\N	4	dsds	sda	dsd	1990-03-15	M	sdsd	4	O+	12345678941	\N
-8	luizalcantara59@gmail.com	7531620388	63a9f0ea7bb98050796b649e85481845	2	2018-05-15	\N	\N	8	sad	dsd	dsd	1995-03-11	M	xD	8	O+	123654789	\N
-\.
-
-
---
--- TOC entry 2335 (class 0 OID 0)
--- Dependencies: 208
--- Name: pacientes_id_p_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
---
-
-SELECT pg_catalog.setval('perfiles.pacientes_id_p_seq', 8, true);
-
-
---
--- TOC entry 2295 (class 0 OID 16463)
--- Dependencies: 206
--- Data for Name: personas; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-COPY perfiles.personas (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_prs, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs) FROM stdin;
-\.
-
-
---
--- TOC entry 2336 (class 0 OID 0)
--- Dependencies: 209
--- Name: personas_id_prs_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
---
-
-SELECT pg_catalog.setval('perfiles.personas_id_prs_seq', 8, true);
-
-
---
--- TOC entry 2299 (class 0 OID 16482)
--- Dependencies: 210
--- Data for Name: tamps; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-COPY perfiles.tamps (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_prs, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, id_tmp, grado_tmp, experiencia_tmp, fecha_ingreso_tmp) FROM stdin;
-\.
-
-
---
--- TOC entry 2337 (class 0 OID 0)
--- Dependencies: 211
--- Name: tamps_id_tmp_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
---
-
-SELECT pg_catalog.setval('perfiles.tamps_id_tmp_seq', 1, false);
-
-
---
--- TOC entry 2292 (class 0 OID 16452)
--- Dependencies: 203
--- Data for Name: usuarios; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-COPY perfiles.usuarios (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr) FROM stdin;
-\.
-
-
---
--- TOC entry 2338 (class 0 OID 0)
--- Dependencies: 212
--- Name: usuarios_id_usr_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
---
-
-SELECT pg_catalog.setval('perfiles.usuarios_id_usr_seq', 8, true);
-
-
---
--- TOC entry 2302 (class 0 OID 16493)
--- Dependencies: 213
--- Data for Name: fraps; Type: TABLE DATA; Schema: peticiones; Owner: appbulance
---
-
-COPY peticiones.fraps (id_frp, id_pt, hrllamada_frp, hrsalida_frp, hrllegada_frp, hrtraslado_frp, hrhospital_frp, hrbase_frp, motivo_atencion_frp, lg_ocurrencia_frp, id_a) FROM stdin;
-\.
-
-
---
--- TOC entry 2339 (class 0 OID 0)
--- Dependencies: 214
--- Name: fraps_id_frp_seq; Type: SEQUENCE SET; Schema: peticiones; Owner: appbulance
---
-
-SELECT pg_catalog.setval('peticiones.fraps_id_frp_seq', 1, false);
-
-
---
--- TOC entry 2304 (class 0 OID 16498)
--- Dependencies: 215
--- Data for Name: peticiones; Type: TABLE DATA; Schema: peticiones; Owner: appbulance
---
-
-COPY peticiones.peticiones (id_pt, ubicacion_pt, direccion_pt, id_p, id_cm) FROM stdin;
-\.
-
-
---
--- TOC entry 2340 (class 0 OID 0)
--- Dependencies: 216
--- Name: peticiones_id_pt_seq; Type: SEQUENCE SET; Schema: peticiones; Owner: appbulance
---
-
-SELECT pg_catalog.setval('peticiones.peticiones_id_pt_seq', 1, false);
 
 
 --
@@ -1345,7 +1075,7 @@ ALTER TABLE ONLY peticiones.fraps
     ADD CONSTRAINT fraps_id_pt_fkey FOREIGN KEY (id_pt) REFERENCES peticiones.peticiones(id_pt) ON UPDATE CASCADE;
 
 
--- Completed on 2018-05-15 16:29:03
+-- Completed on 2018-05-15 23:45:39
 
 --
 -- PostgreSQL database dump complete
