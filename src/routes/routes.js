@@ -16,8 +16,6 @@ module.exports = (app,passport) => {
         failureRedirect : '/usuario/ingreso'
     }))
     app.get('/usuario/inicio',user.sesion,user.inicio)
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     //Exclusive CRUM Routes
     app.get('/crum/registro',registration.userCrum)
@@ -29,28 +27,12 @@ module.exports = (app,passport) => {
     }))
     app.get('/crum/*',crum.sesion)
     app.get('/crum/inicio',crum.inicio)
-=======
-    app.get('/crum',crum.sesion,crum.inicio)
-    app.get('/crum/*',crum.sesion)
->>>>>>> 14f5f3632899ea2af3b7541818478f633a3caaf8
-=======
-    app.get('/crum',crum.sesion,crum.inicio)
-    app.get('/crum/*',crum.sesion)
->>>>>>> 14f5f3632899ea2af3b7541818478f633a3caaf8
     app.get('/crum/peticiones',crum.peticiones)
     app.get('/crum/tamps',crum.tamps)
     app.get('/crum/unidades',crum.unidades)
     app.get('/crum/usuarios',crum.usuarios)
     app.get('/crum/configuracion',crum.configuracion)
-<<<<<<< HEAD
-<<<<<<< HEAD
     
-=======
-    app.get('/crum/registro')   /*AQUI AGREGA LOS PARAMETROS DE SESION*/
->>>>>>> 14f5f3632899ea2af3b7541818478f633a3caaf8
-=======
-    app.get('/crum/registro')   /*AQUI AGREGA LOS PARAMETROS DE SESION*/
->>>>>>> 14f5f3632899ea2af3b7541818478f633a3caaf8
     app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/usuario/ingreso');
