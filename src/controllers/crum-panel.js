@@ -25,7 +25,7 @@ module.exports = {
     if (req.isAuthenticated()) { 
       next()
     } else {
-      res.redirect('/u');//Pendiente
+      res.redirect('/crum/ingreso')
     }
   }
 }
