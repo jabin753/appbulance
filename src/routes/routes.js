@@ -15,13 +15,13 @@ module.exports = (app,passport) => {
         failureRedirect : '/usuario/ingreso'
     }))
     app.get('/usuario/inicio',user.sesion,user.inicio)
-    app.get('/panel',panel.sesion,panel.inicio)
-    app.get('/panel/*',panel.sesion)
-    app.get('/panel/peticiones',panel.peticiones)
-    app.get('/panel/tamps',panel.tamps)
-    app.get('/panel/unidades',panel.unidades)
-    app.get('/panel/usuarios',panel.usuarios)
-    app.get('/panel/configuracion',panel.configuracion)
+    app.get('/crum',panel.sesion,panel.inicio)
+    app.get('/crum/*',panel.sesion)
+    app.get('/crum/peticiones',panel.peticiones)
+    app.get('/crum/tamps',panel.tamps)
+    app.get('/crum/unidades',panel.unidades)
+    app.get('/crum/usuarios',panel.usuarios)
+    app.get('/crum/configuracion',panel.configuracion)
     
     app.get('/logout', (req, res) => {
         req.logout();
