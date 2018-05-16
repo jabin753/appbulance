@@ -1,5 +1,5 @@
 var inicio = require('../controllers/inicio')
-var panel  = require('../controllers/crum-panel')
+var crum  = require('../controllers/crum-panel')
 var user  = require('../controllers/user-panel')
 var login  = require('../controllers/login')
 var registration  = require('../controllers/registration')
@@ -15,14 +15,14 @@ module.exports = (app,passport) => {
         failureRedirect : '/usuario/ingreso'
     }))
     app.get('/usuario/inicio',user.sesion,user.inicio)
-    app.get('/crum',panel.sesion,panel.inicio)
-    app.get('/crum/*',panel.sesion)
-    app.get('/crum/peticiones',panel.peticiones)
-    app.get('/crum/tamps',panel.tamps)
-    app.get('/crum/unidades',panel.unidades)
-    app.get('/crum/usuarios',panel.usuarios)
-    app.get('/crum/configuracion',panel.configuracion)
-    
+    app.get('/crum',crum.sesion,crum.inicio)
+    app.get('/crum/*',crum.sesion)
+    app.get('/crum/peticiones',crum.peticiones)
+    app.get('/crum/tamps',crum.tamps)
+    app.get('/crum/unidades',crum.unidades)
+    app.get('/crum/usuarios',crum.usuarios)
+    app.get('/crum/configuracion',crum.configuracion)
+    app.get('/crum/registro')   /*AQUI AGREGA LOS PARAMETROS DE SESION*/
     app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/usuario/ingreso');
