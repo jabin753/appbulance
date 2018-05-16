@@ -24,7 +24,7 @@
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputLastName">Dirección</label>
-                  <input class="form-control" required name="direccion_cm" id="InputDirection" type="text" aria-describedby="nameHelp" placeholder="Escribe tu dirección">
+                  <input class="form-control" required name="direccion_cm" id="direccion_cm" type="text" aria-describedby="nameHelp" placeholder="Escribe tu dirección">
                   <button class="btn btn-primary btn-default" type="submit" name="submit-crum-map">Buscar</button>
                 </div>
                 <div class="col-md-6" id="crum-map"></div>
@@ -91,7 +91,7 @@
     <%- include partials/template/js-scripts -%>
     <%- include partials/template/top-button -%>
     <%- include partials/template/js-scripts-googlemaps -%>
-    
+
     <script>
       function initMap() {
         var map = new google.maps.Map(document.getElementById('crum-map'), {
@@ -105,8 +105,8 @@
       }
 
       function geocodeAddress(geocoder, resultsMap) {
-        var address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
+        var address = document.getElementById('direccion_cm').value;
+        geocoder.geocode({'direccion_cm': address}, function(results, status) {
           if (status === 'OK') {
             resultsMap.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
@@ -114,13 +114,10 @@
               position: results[0].geometry.location
             });
           } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            alert('Geocodificación no funcionó exitosamente por la siguiente razón: ' + status);
           }
         });
       }
-    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
     </script>
   </body>
   </html>
