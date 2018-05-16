@@ -7,7 +7,9 @@ module.exports = {
     res.render('user-registration',{pageTitle:'appbulance - registro'})
   },
   addUserPaciente: consultas.addUserPaciente,
-  addUserCrum: consultas.addUserCrum,
+  addUserCrum: (req,res,next)=>{
+
+  },
   tamp: (req,res)=>{
 
   }
