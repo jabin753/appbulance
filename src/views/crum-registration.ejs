@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include partials/template/header -%>
+</head>
+<body class="fixed-nav sticky-footer" style="background-color: teal" id="page-top">
+  <main>
+    <div align="center">
+      <br>
+      <img src="/images/logo.png" width="80px" height="80px" href="/">
+      <h2><font color="white"><a class = "navbar-brand ">&nbsp Appbulance</a></font></h2>
+    </div>
+    <div class="container">
+      <div class="card card-register mx-auto mt-5">
+        <div class="card-header">Registra una cuenta CRUM</div>
+        <div class="card-body">
+          <form action="/usuario/registro" method="POST">
+            <!-- <label style="color: tomato; font-size: 5;"class="d-block small mt-2">*: Campos requeridos</label> -->
+            <div class="form-group">
+              <label for="InputName">Nombre</label>
+              <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre">
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="InputLastName">Dirección</label>
+                  <input class="form-control" required name="direccion_cm" id="InputDirection" type="text" aria-describedby="nameHelp" placeholder="Escribe tu dirección">
+                  <button class="btn btn-primary btn-block" type="submit" name="submit-crum-map">Buscar</button>
+                </div>
+                <div class="col-md-6" id="crum-map"></div>
+              </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                  <label for="InputPassword1">Teléfono</label>
+                  <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="text" placeholder="Escribe tu número telefónico">
+                </div>
+                <div class="col-md-6">
+                    <label for="InputLastName">Ocupación</label>
+                    <input class="form-control" required name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
+                  </div>                
+            </div>
+          <br>
+            <div class="form-group">
+              <div class="form-row">
+                  <div class="col-md-4">
+                      <label for="InputSex">Sexo</label><br>
+                      <select class="form-control" required name="sexo_prs">
+                          <option value="0">Selecciona tu sexo</option>     
+                          <option value="M">Hombre</option> 
+                          <option value="F">Mujer</option>
+                      </select>
+                    </div>
+                <div class="col-md-4">
+                  <label for="InputBlood">Tipo de sangre</label>
+                  <select class="form-control" required name="tipo_sangre_p" id="bloodType">
+                      <option value="0">Selecciona tu tipo de sangre</option>     
+                      <option value="O+">O+</option> 
+                      <option value="O-">O-</option>
+                      <option value="A+">A+</option> 
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option> 
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option> 
+                      <option value="AB-">AB-</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="InputDateBirth">Fecha de nacimiento</label>
+                      <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
+                  </div>
+              </div>
+            </div>              
+            <div class="form-group">
+              <div class="form-row">
+                  <div class="col-md-6">
+                      <label for="InputSecure">Derechohabiente a</label>
+                      <select class="form-control" required name="smed_p" id="bloodType">
+                          <option value="0">Selecciona tu tipo de sangre</option>     
+                          <option value="1">IMSS</option> 
+                          <option value="2">ISSSTE</option>
+                          <option value="3">SEDENA</option> 
+                          <option value="4">PEMEX</option>
+                          <option value="5">Seguro Popular</option>
+                      </select>                    
+                  </div>
+                <div class="col-md-6">
+                  <label for="InputNSS">NSS</label>
+                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS">
+                </div>
+                <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
+              </div>
+            </div>              
+            <hr>
+            <div class="form-group">
+              <label for="InputEmail1">Dirección de correo electrónico</label>
+              <input class="form-control" required name="email_usr" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
+            </div>
+            <div class="form-group">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <label for="InputPassword1">Contraseña</label>
+                  <input class="form-control" required name="contrasena_usr" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
+                </div>
+                <div class="col-md-6">
+                  <label for="ConfirmPassword">Confirma la contraseña</label>
+                  <input class="form-control" required name="contrasena_usr_conf" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
+                </div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-block" type="submit" disabled name="btnRegister">Regístrate</button>
+          </form>
+          <div class="text-center">
+            <a class="d-block small mt-3" href="/usuario/ingreso">¿Ya tienes una cuenta? Inicia sesión...</a>
+            <a class="d-block small" href="#">¿Olvidaste tu contraseña?</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    </main>
+    <%- include partials/template/js-scripts -%>
+    <%- include partials/template/top-button -%>
+    <%- include partials/template/js-scripts-googlemaps -%>
+    <script>
+        $(function() {
+	      //variables
+        var pass1 = $('[name=contrasena_usr]');
+        var pass2 = $('[name=contrasena_usr_conf]');
+        var btn = $('[name=btnRegister]');
+        var confirmacion = "Las contraseñas si coinciden";
+        var longitud = "La contraseña debe estar formada entre 6-10 carácteres (ambos inclusive)";
+        var negacion = "No coinciden las contraseñas";
+        var vacio = "La contraseña no puede estar vacía";
+        //oculto por defecto el elemento span
+        var span = $('<span></span>').insertAfter(pass2);
+        span.hide();
+        //función que comprueba las dos contraseñas
+        function coincidePassword(){
+          var valor1 = pass1.val();
+          var valor2 = pass2.val();
+
+          //muestro el span
+            span.show().removeClass();
+          //condiciones dentro de la función
+          if(valor1 != valor2){
+            span.text(negacion).addClass('negacion');	
+          }
+          if(valor1.length==0 || valor1==""){
+            span.text(vacio).addClass('negacion');	
+          }
+          if(valor1.length<6 || valor1.length>10){
+            span.text(longitud).addClass('negacion');
+          }
+          if(valor1.length!=0 && valor1==valor2){            
+            span.text(confirmacion).removeClass("negacion").addClass('confirmacion');        
+            btn.removeAttr("disabled");
+          }
+        }
+        //ejecuto la función al soltar la tecla
+        pass2.keyup(function(){
+          coincidePassword();
+        });
+      });
+    </script>
+
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('crum-map'), {
+          zoom: 16,
+          center: {lat: -34.397, lng: 150.644}
+        });
+        var geocoder = new google.maps.Geocoder();
+        document.getElementById('submit-crum-map').addEventListener('click', function() {
+          geocodeAddress(geocoder, map);
+        });
+      }
+
+      function geocodeAddress(geocoder, resultsMap) {
+        var address = document.getElementById('address').value;
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status === 'OK') {
+            resultsMap.setCenter(results[0].geometry.location);
+            var marker = new google.maps.Marker({
+              map: resultsMap,
+              position: results[0].geometry.location
+            });
+          } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+          }
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+  </body>
+  </html>
