@@ -15,6 +15,7 @@ module.exports = (app,passport) => {
         failureRedirect : '/usuario/ingreso'
     }))
     app.get('/usuario/inicio',user.sesion,user.inicio)
+    app.get('/tamp/inicio',user.sesion,user.tamp) //Ruta del TAMP tempora y provisional para pruebas. Tiene parametros de usuario normal.
 
     //Exclusive CRUM Routes
     app.get('/crum/registro',registration.userCrum)
