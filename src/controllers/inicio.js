@@ -1,6 +1,6 @@
 var consultas = require('../model/model')
 module.exports = {
   inicio: (req,res)=>{
-    res.render('index',{pageTitle:'appbulance - bienvenido'})
+    res.render('index',{pageTitle:'Appbulance - Bienvenido'})
   }
 }
