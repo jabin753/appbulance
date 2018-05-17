@@ -7,11 +7,15 @@ module.exports = {
     res.render('user-login',{pageTitle:'Appbulance - Login'})
   },
   validateUser: (req,res,next)=>{
-    if (req.isAuthenticated()) { 
-      res.redirect('/usuario/inicio')
-    } else {
-      next()
-    }
+    if (req.isAuthenticated()){
+      switch(req.user.tipo_usr){
+        case 1: res.redirect('/crum/inicio') 
+        break
+        case 2: res.redirect('/usuario/inicio')
+        break
+        case 3: res.redirect('/tamp/inicio')
+      }
+    } else next()
 
   },
   validateCrum: (req,res,next) =>{
