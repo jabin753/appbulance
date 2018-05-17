@@ -18,24 +18,24 @@
             <!-- <label style="color: tomato; font-size: 5;"class="d-block small mt-2">*: Campos requeridos</label> -->
             <div class="form-group">
               <label for="InputName">Nombre</label>
-              <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre">
+              <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre" maxLength="30">
             </div>
             <div class="form-group">
               <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputLastName">Apellido Paterno</label>
-                  <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno">
+                  <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno" maxLength="30">
                 </div>
                 <div class="col-md-6">
                   <label for="InputLastName2">Apellido Materno</label>
-                  <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno">
+                  <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno" maxLength="30">
                 </div>
               </div>
             </div>
             <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputPassword1">Teléfono</label>
-                  <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="text" placeholder="Escribe tu número telefónico">
+                  <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="tel" placeholder="Escribe tu número telefónico" maxLength="10">
                 </div>
                 <div class="col-md-6">
                     <label for="InputLastName">Ocupación</label>
@@ -88,7 +88,7 @@
                   </div>
                 <div class="col-md-6">
                   <label for="InputNSS">NSS</label>
-                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS">
+                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12">
                 </div>
                 <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
               </div>

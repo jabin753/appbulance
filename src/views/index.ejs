@@ -12,7 +12,7 @@
 			<div id="wrapper">
 				<!-- Header -->
 					<header id="header" class="alt">
-						<span><img src="images/logo.png" alt="" /></span>
+						<span><img src="images/logo.png" style="width: 15%; height: 15%;" alt="" href="#intro"/></span>
 						<h1>Appbulance</h1>
 						<p>¿Aún no la tienes? Descárgala ahora en Google Play. <br/>
 						<a href="https://play.google.com" target="_blank"><img src="images/GooglePlay.png" width="15%" height="15%" alt="" /></a></p>
@@ -80,18 +80,18 @@
 									<h2>Contacto</h2>
 									<p>Ponte en contacto con nosotros.</p>
 								</header>
-								<form method="post" action="#">
+								<form method="post" action="mail.php">
 									<div class="row uniform">
 										<div class="6u 12u$(xsmall)">
-											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Nombre" />
+											<input type="text" name="demo-name" id="contact-name" value="" placeholder="Nombre" required/>
 										</div>
 										<div class="6u$ 12u$(xsmall)">
-											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+											<input type="email" name="demo-email" id="contact-email" value="" placeholder="Email" required/>
 										</div>
 										<div class="12u$">
 											<div class="select-wrapper">
-												<select name="demo-category" id="demo-category">
-													<option value="">- Motivo -</option>
+												<select name="demo-category" id="contact-category" required>
+													<option value="">- Asunto -</option>
 													<option value="1">Duda</option>
 													<option value="2">Queja</option>
 													<option value="3">Sugerencia</option>
@@ -102,11 +102,11 @@
 											
 										</div>
 										<div class="12u$">
-											<textarea name="demo-message" id="demo-message" placeholder="Escribe tu mensaje" rows="6"></textarea>
+											<textarea name="demo-message" id="contact-message" placeholder="Escribe tu mensaje" rows="6" required></textarea>
 										</div>
 										<div class="12u$">
 											<ul class="actions">
-												<input type="checkbox" id="demo-human" name="demo-human">
+												<input type="checkbox" id="demo-human" name="demo-human" required>
 												<label for="demo-human">No soy un robot</label>
 												<li><input type="submit" value="Enviar mensaje" class="special" /></li>
 												<li><input type="reset" value="Resetear" /></li>
