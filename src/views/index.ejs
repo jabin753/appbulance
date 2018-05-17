@@ -1,44 +1,162 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-<head>
-  <title>Appbulance</title>
-  <%- include partials/template/header -%>
-</head>
-<body  id="page-top">
- <header>
-    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#FF9D89">
-        <img src="/images/logo.png" width="40px" height="40px">
-        <a class="navbar-brand" href="/">&nbsp&nbsp Appbulance</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"> Características</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Precio</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Únase a nosotros
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/usuario/registro">Registrarse</a>
-                <a class="dropdown-item" href="/usuario/ingreso">Iniciar sesión</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
- </header>
+	<head>
+		<title>Appbulance</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main-home.css" />
+	</head>
+	<body>
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+					<header id="header" class="alt">
+						<span><img src="images/logo2.png" width="10%" height="10%" alt="" /></span>
+						<h1>Appbulance</h1>
+						<p>¿Aún no la tienes? Descárgala ahora en Google Play. <br/>
+						<a href="https://play.google.com" target="_blank"><img src="images/GooglePlay.png" width="15%" height="15%" alt="" /></a></p>
+					</header>
+				<!-- Nav -->
+					<nav id="nav">
+						<ul>
+							<li><a href="#intro" class="active">Introducción</a></li>
+							<li><a href="#who">¿Quienes somos?</a></li>
+							<li><a href="#contact">Contacto</a></li>
+							<li><a href="#join">Unete a nosotros</a></li>
+						</ul>
+					</nav>
+				<!-- Main -->
+					<div id="main">
+						<!-- Introduction -->
+							<section id="intro" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Bienvenido</h2>
+										</header>
+										<p>Esta es la pagina oficial de la aplicación "Appbulance".<br>
+										Appbulance es una aplicación móvil para solicitar un servicio médico de urgencias por medio con solo presionar un botón, esto con el uso de la geolocalización del API de Google Maps.<br>
+										Appbulance es el producto software de un proyecto de titulación. </p>
+										<ul class="actions">
+											<li><a href="generic.html" class="button">Ver más</a></li>
+										</ul>
+									</div>
+									<span class="image"><img src="images/logo.png" alt="" /></span>
+								</div>
+							</section>
 
-    <%- include partials/template/top-button -%>
-    <%- include partials/template/js-scripts -%>
+						<!-- First Section -->
+							<section id="who" class="main special">
+								<header class="major">
+									<h2>¿Quienes somos?</h2>
+								</header>
+								<ul class="features">
+									<li>
+										<img src="images/LogoITLAC.png"/>
+										<h3>Estudiantes</h3>
+										<p>Somos estudiantes en la carrera de Ingeniería en Sistemas Computacionales en el Instituto Tecnológico de Lázaro Cárdenas.</p>
+									</li>
+									<li>
+										<span class="icon major style3"></span>
+										<h3>Titulo 2</h3>
+										<p>Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.</p>
+									</li>
+									<li>
+										<span class="icon major style5"></span>
+										<h3>Titulo 3</h3>
+										<p>Texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto.</p>
+									</li>
+								</ul>
+								<footer class="major">
+									<ul class="actions">
+										<li><a href="generic.html" class="button">Ver más</a></li>
+									</ul>
+								</footer>
+							</section>
+						<!-- Form -->
+							<section id="contact" class="main special">
+								<header class="major">
+									<h2>Contacto</h2>
+									<p>Ponte en contacto con nosotros.</p>
+								</header>
+								<form method="post" action="#">
+									<div class="row uniform">
+										<div class="6u 12u$(xsmall)">
+											<input type="text" name="demo-name" id="demo-name" value="" placeholder="Nombre" />
+										</div>
+										<div class="6u$ 12u$(xsmall)">
+											<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+										</div>
+										<div class="12u$">
+											<div class="select-wrapper">
+												<select name="demo-category" id="demo-category">
+													<option value="">- Motivo -</option>
+													<option value="1">Duda</option>
+													<option value="2">Queja</option>
+													<option value="3">Sugerencia</option>
+												</select>
+											</div>
+										</div>										
+										<div class="12u$">
+											
+										</div>
+										<div class="12u$">
+											<textarea name="demo-message" id="demo-message" placeholder="Escribe tu mensaje" rows="6"></textarea>
+										</div>
+										<div class="12u$">
+											<ul class="actions">
+												<input type="checkbox" id="demo-human" name="demo-human">
+												<label for="demo-human">No soy un robot</label>
+												<li><input type="submit" value="Enviar mensaje" class="special" /></li>
+												<li><input type="reset" value="Resetear" /></li>
+											</ul>
+										</div>
+									</div>
+								</form>
+							</section>
 
-</body>
+						<!-- Get Started -->
+							<section id="join" class="main special">
+								<header class="major">
+									<h2>Únete ya</h2>
+									<p>Únete a nosotros y comienza a ser parte de este proyecto y recuerda que el tiempo es oro. .</p>
+								</header>
+								<footer class="major">
+									<ul class="actions">
+										<li><a href="generic.html" class="button special">Registrarse</a></li>
+										<li><a href="generic.html" class="button">Iniciar sesión</a></li>
+									</ul>
+								</footer>
+							</section>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<h2>Descárgala ya</h2>
+							<p>¿Eres usuario Android? Descarga nuestra aplicación móvil de la Play Store ahora mismo.</p>
+							<ul class="actions">
+								<li><a href="generic.html" class="button">Ir a Google Play</a></li>
+							</ul>
+						</section>
+						<section>
+							<h2>Datos de contacto</h2>
+							<dl class="alt">
+								<dt>Dirección</dt>
+								<dd>Lázaro Cárdenas &bull; Michoacán, CP 60950 &bull; MEX</dd>
+								<dt>Teléfono</dt>
+								<dd>(753) 162 0388</dd>
+								<dt>Email</dt>
+								<dd><a href="#">appbulance.itlac@gmail.com</a></dd>
+							</dl>
+						</section>
+						<p class="copyright"> 2018 &copy; Appbulance.</p>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+		<%- include ../partials/template/js-scripts-index -%> 
+	</body>
 </html>
