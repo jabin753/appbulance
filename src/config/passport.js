@@ -16,22 +16,19 @@ module.exports = (passport)=>{
         passwordField: 'contra',
         passReqToCallback: true},  
         (req,email,contra,done) => {
-            db.query({text:'SELECT perfiles.authuser($1)',
+            db.query({text:'SELECT  * FROM perfiles.authuser2($1)',
             values:[req.body]},(err,result)=>{
                 console.log(err,result)
-                if(!err){
-                    if(result.rows[0]['authuser']){
-                        var user = {id_usr:result.rows[0]['authuser'],
+                    if(result.rowCount > 0 && result.rows[0]['tipo_usr'] === 2){
+                        var user = {id_usr:result.rows[0]['id_usr'],
+                        tipo_usr:result.rows[0]['tipo_usr'],
                         style:{
-                            nav_style:'navbar-light',
-                            nav_background_style:'bg-light',
-                            body_style:'bg-light' 
+                            nav_style:result.rows[0]['nav_style'],
+                            body_style:result.rows[0]['body_style'] 
                         }}
                         return done(null, user)
                     }
                     else return done(null, false)
-                }
-                else return done(null, false)
             }
             
         ) 
@@ -43,24 +40,20 @@ module.exports = (passport)=>{
         passwordField: 'contra',
         passReqToCallback: true},  
         (req,email,contra,done) => {
-            db.query({text:'SELECT perfiles.authuser($1)',
+            db.query({text:'SELECT  * FROM perfiles.authuser2($1)',
             values:[req.body]},(err,result)=>{
                 console.log(err,result)
-                if(!err){
-                    if(result.rows[0]['authuser']){
-                        var user = {id_p:result.rows[0]['authuser'],
-                        style:{
-                            nav_style:'navbar-dark',
-                            nav_background_style:'bg-dark',
-                            body_style:'bg-dark' 
-                        }}
-                        return done(null, user)
-                    }
-                    else return done(null, false)
+                if(result.rowCount > 0 && result.rows[0]['tipo_usr'] === 1 ){
+                    var user = {id_usr:result.rows[0]['id_usr'],
+                    tipo_usr:result.rows[0]['tipo_usr'],
+                    style:{
+                        nav_style:result.rows[0]['nav_style'],
+                        body_style:result.rows[0]['body_style'] 
+                    }}
+                    return done(null, user)
                 }
                 else return done(null, false)
             }
-            
         ) 
     }))
 }
