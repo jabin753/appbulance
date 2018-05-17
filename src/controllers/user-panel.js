@@ -6,12 +6,6 @@ module.exports = {
     console.log(req.user.style)
     res.render(path.join(rootViewPath,'panel-inicio'),{pageTitle:'Appbulance - Inicio',style:req.user.style})
   },
-  // Callback del TAMP provisionalmente.
-  tamp: (req,res)=>{ 
-    console.log(req.user.style)
-    res.render(path.join(rootViewPath,'panel-inicio-tamp'),{pageTitle:'Appbulance (TAMP) - Inicio',style:req.user.style})
-  },
-  //
   historial_peticiones: (req,res)=>{
     res.render(path.join(rootViewPath,'panel-peticiones'),{pageTitle:'Appbulance - Historial',style:req.user.style})
   },
