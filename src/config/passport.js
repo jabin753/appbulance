@@ -18,7 +18,6 @@ module.exports = (passport)=>{
         (req,email,contra,done) => {
             db.query({text:'SELECT  * FROM perfiles.authuser2($1)',
             values:[req.body]},(err,result)=>{
-                console.log(err,result)
                     if(result.rowCount > 0 && result.rows[0]['tipo_usr'] === 2){
                         var user = {id_usr:result.rows[0]['id_usr'],
                         tipo_usr:result.rows[0]['tipo_usr'],

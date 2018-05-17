@@ -1,10 +1,10 @@
 var consultas = require('../model/model')
 module.exports = {
   crum: (req,res)=>{
-    res.render('crum-login',{pageTitle:'appbulance - login'})
+    res.render('crum-login',{pageTitle:'Appbulance (CRUM) - Login'})
   },
   user: (req,res)=>{
-    res.render('user-login',{pageTitle:'appbulance - login'})
+    res.render('user-login',{pageTitle:'Appbulance - Login'})
   },
   validateUser: (req,res,next)=>{
     if (req.isAuthenticated()){
