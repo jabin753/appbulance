@@ -157,20 +157,99 @@
         <div class="card-body">
             <form action="/usuario/registro" method="POST">
               <!-- <label style="color: tomato; font-size: 5;"class="d-block small mt-2">*: Campos requeridos</label> -->
-              <div class="form-group">
-                <label for="InputName">Nombre</label>
-                <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre" maxLength="30">
+              <!--I. PETICION-->
+              <h4>I. Peticion</h4>
+              <div class="form-group">                
+                <div class="form-row">
+                  <div class="col-md-4">                    
+                    <label for="InputLastName">Folio</label>
+                    <input class="form-control" required disabled name="apellido_paterno_prs"id="OutoutFolio" type="text" maxLength="30">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="InputLastName2">Estado</label>
+                    <input class="form-control" required disabled name="apellido_materno_prs"id="OutputState" type="text" maxLength="30">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="InputLastName2">Delegacion</label>
+                    <input class="form-control" required disabled name="apellido_materno_prs"id="OutputDelegation" type="text" maxLength="30">
+                  </div>
+                </div>
               </div>
+              <hr>
+              <h4>II. Datos del servicio</h4>
               <div class="form-group">
                 <div class="form-row">
-                  <div class="col-md-6">
-                    <label for="InputLastName">Apellido Paterno</label>
-                    <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno" maxLength="30">
+                  <div class="col-md-3">
+                      <label for="InputDateBirth">Fecha</label>
+                        <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
                   </div>
-                  <div class="col-md-6">
-                    <label for="InputLastName2">Apellido Materno</label>
-                    <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno" maxLength="30">
+                  <!--<div class="col-md-9">
+                      <div class="table-responsive">
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <tr>
+                              <th>Hora llamada</th>
+                              <th>Hora salida</th>
+                              <th>Hora llegada</th>
+                              <th>Hora traslado</th>
+                              <th>Hora hospital</th>
+                              <th>Hora base</th>
+                            </tr>
+                            <tr>
+                              <td>10:00</td>
+                              <td>10:04</td>
+                              <td>10:07</td>
+                              <td>10:12</td>
+                              <td>10:14</td>
+                              <td>10:16</td>
+                            </tr>  
+                            <tr>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                        </table>
+                      </div>
+                  </div>-->
+                    
+                  <div class="card mb-3">
+                      <div class="card-header">
+                        <i class="fa fa-table"></i> Cronometria
+                      </div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">                            
+                              <tr>
+                                <th>Hora llamada</th>
+                                <th>Hora salida</th>
+                                <th>Hora llegada</th>
+                                <th>Hora traslado</th>
+                                <th>Hora hospital</th>
+                                <th>Hora base</th>
+                              </tr>
+                              <tr>
+                                <td>10:00 a.m.</td>
+                                <td>10:00 a.m.</td>
+                                <td>10:00 a.m.</td>
+                                <td>10:00 a.m.</td>
+                                <td>10:00 a.m.</td>
+                                <td>10:00 a.m.</td>
+                              </tr> 
+                              <tr>
+                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
+                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
+                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
+                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
+                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
+                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
+                              </tr>
+                          </table>
+                        </div>
+                      </div>
                   </div>
+                    
                 </div>
               </div>
               <div class="form-row">
@@ -207,11 +286,7 @@
                         <option value="AB+">AB+</option> 
                         <option value="AB-">AB-</option>
                     </select>
-                  </div>
-                  <div class="col-md-4">
-                      <label for="InputDateBirth">Fecha de nacimiento</label>
-                        <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
-                    </div>
+                  </div>                  
                 </div>
               </div>              
               <div class="form-group">
