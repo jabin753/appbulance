@@ -163,15 +163,15 @@
                 <div class="form-row">
                   <div class="col-md-4">                    
                     <label for="InputLastName">Folio</label>
-                    <input class="form-control" required disabled name="apellido_paterno_prs"id="OutoutFolio" type="text" maxLength="30">
+                    <input class="form-control" required disabled name="id_pt"id="OutoutFolio" type="text" maxLength="30">
                   </div>
                   <div class="col-md-4">
                     <label for="InputLastName2">Estado</label>
-                    <input class="form-control" required disabled name="apellido_materno_prs"id="OutputState" type="text" maxLength="30">
+                    <input class="form-control" required disabled name="apellido_materno_prs"id="OutputState" type="text" maxLength="30"  placeholder="Michoacán">
                   </div>
                   <div class="col-md-4">
                     <label for="InputLastName2">Delegacion</label>
-                    <input class="form-control" required disabled name="apellido_materno_prs"id="OutputDelegation" type="text" maxLength="30">
+                    <input class="form-control" required disabled name="apellido_materno_prs"id="OutputDelegation" type="text" maxLength="30" placeholder="Lázaro Cárdenas">
                   </div>
                 </div>
               </div>
@@ -179,90 +179,94 @@
               <h4>II. Datos del servicio</h4>
               <div class="form-group">
                 <div class="form-row">
-                  <div class="col-md-3">
+
+                  <div class="col-md-4">
                       <label for="InputDateBirth">Fecha</label>
-                        <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
+                      <input class="form-control" required name="fecha_pt" type="date" min="1910-01-01" max="2000-03-01" value=""> <br>
+                      <div class="card mb-3">
+                          <div class="card-header">
+                            <i class="fa fa-table"></i> Cronometria
+                          </div>
+                          <div class="card-body">
+                            <div class="table-responsive">
+                              <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" name="tbCrono">                            
+                                  <tr>
+                                    <th>Hora llamada</th>
+                                    <td><input class="col-sm-6" required name="hrllamada_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrLlamada" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Hora salida</th>
+                                    <td><input class="col-sm-6" required name="hrsalida_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrSalida" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>
+                                  <tr>
+                                      <th>Hora llegada</th>
+                                      <td><input class="col-sm-6" required name="hrllegada_frp" type="text"><br></td>
+                                      <th><button type="button" name="btnHrLlegada" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr> 
+                                  <tr>
+                                    <th>Hora traslado</th>
+                                    <td><input class="col-sm-6" required name="hrtraslado_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrTraslado" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Hora hospital</th>
+                                    <td><input class="col-sm-6" required name="hrhospital_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrHospital" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>    
+                                  <tr>
+                                    <th>Hora base</th>
+                                    <td><input class="col-sm-6" required name="hrbase_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrBase" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>                                  
+                              </table>
+                            </div>
+                          </div>
+                      </div>
                   </div>
-                  <!--<div class="col-md-9">
-                      <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <tr>
-                              <th>Hora llamada</th>
-                              <th>Hora salida</th>
-                              <th>Hora llegada</th>
-                              <th>Hora traslado</th>
-                              <th>Hora hospital</th>
-                              <th>Hora base</th>
-                            </tr>
-                            <tr>
-                              <td>10:00</td>
-                              <td>10:04</td>
-                              <td>10:07</td>
-                              <td>10:12</td>
-                              <td>10:14</td>
-                              <td>10:16</td>
-                            </tr>  
-                            <tr>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                              <th></th>
-                            </tr>
-                        </table>
-                      </div>
-                  </div>-->
-                    
-                  <div class="card mb-3">
-                      <div class="card-header">
-                        <i class="fa fa-table"></i> Cronometria
-                      </div>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">                            
-                              <tr>
-                                <th>Hora llamada</th>
-                                <th>Hora salida</th>
-                                <th>Hora llegada</th>
-                                <th>Hora traslado</th>
-                                <th>Hora hospital</th>
-                                <th>Hora base</th>
-                              </tr>
-                              <tr>
-                                <td>10:00 a.m.</td>
-                                <td>10:00 a.m.</td>
-                                <td>10:00 a.m.</td>
-                                <td>10:00 a.m.</td>
-                                <td>10:00 a.m.</td>
-                                <td>10:00 a.m.</td>
-                              </tr> 
-                              <tr>
-                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
-                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
-                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
-                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
-                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
-                                <th><button type="button" class="btn btn-primary btn-xs">Asignar</button></th>
-                              </tr>
-                          </table>
+                  <div class="col-md-8">
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <label for="InputAttention">Motivo de atencion</label>
+                          <select class="form-control" required name="sexo_prs">
+                              <option value="0">Selecciona el motivo</option>     
+                              <option value="1">Enfermedad</option> 
+                              <option value="2">Traumatismo</option>
+                              <option value="2">Ginecoobstretico</option>
+                          </select> 
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputAttention">Lugar de referencia</label>
+                            <select class="form-control" required name="sexo_prs">
+                                <option value="0">Selecciona el lugar</option>     
+                                <option value="1">Hogar</option> 
+                                <option value="2">Via publica</option>
+                                <option value="3">Trabajo</option>
+                                <option value="4">Escuela</option>
+                                <option value="5">Recreacion y deporte</option>
+                                <option value="6">Transporte publico</option>
+                                <option value="7">Otra</option>
+                            </select>                      
                         </div>
                       </div>
-                  </div>
-                    
+                      <br>
+                      <div class="form-row">
+                        <div class="col-md-6"> 
+                          <label for="OutputDirection">Dirección</label>
+                          <textarea class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled></textarea><br>                
+                        </div>
+                        <div class="col-md-6" id="map" style="height: 250px"></div>
+                      </div>
+                  </div> 
                 </div>
               </div>
-              <div class="form-row">
-                  <div class="col-md-6">
-                    <label for="InputPassword1">Teléfono</label>
-                    <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="tel" placeholder="Escribe tu número telefónico" maxLength="10">
-                  </div>
-                  <div class="col-md-6">
-                      <label for="InputLastName">Ocupación</label>
-                      <input class="form-control" required name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
-                    </div>                
+              <hr>
+              <h4>III. Control</h4>
+              <div class="form-group">
+                
               </div>
-            <br>
+              <!---->
               <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-4">
@@ -293,7 +297,7 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <label for="InputSecure">Derechohabiente a</label>
-                        <select class="form-control" required name="smed_p" id="bloodType">
+                        <select class="form-control" required name="smed_p" id="SM">
                             <option value="0">Selecciona tu tipo de sangre</option>     
                             <option value="1">IMSS</option> 
                             <option value="2">ISSSTE</option>
@@ -408,6 +412,11 @@
     <script src="js/ab-admin.min.js"></script>
     <script src="js/ab-admin-datatables.min.js"></script>
     <script src="js/ab-admin-charts.min.js"></script>
+
+    <script src="/js/ab-google-maps.js"></script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKTc6Ob4-CA0ZqOHmuNEf9C_RjSAZWt-s&callback=initMap">
+  </script>
   </div>
 </body>
 
