@@ -14,9 +14,11 @@
       <div class="card card-login mx-auto mt-5">
         <div class="card-header text-center">Inicio de sesión</div>
         <div class="card-body">
+            <%if (flashMessage.length > 0){ %>
+              <div class="container" style="background-color: #fcb1a1"><%= flashMessage %></div>
+            <% } %> 
           <form action="/crum/ingreso" method="POST" role="form">
-            <!--INGRESAR ERROR DE LOGIN--><label id="errorLogin" style="color: tomato; font-size: 5;"class="d-block small mt-2"></label>
-            <div class="form-group">
+              <div class="form-group">
               <label for="InputEmail1">Correo electrónico</label>
               <input class="form-control" name="email" id="Email_P" required type="email" aria-describedby="emailHelp" placeholder="Escribe tu correo electrónico">
             </div>
