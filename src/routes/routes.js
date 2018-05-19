@@ -15,7 +15,7 @@ module.exports = (app,passport) => {
         failureRedirect : '/usuario/ingreso'
     }))
     app.get('/usuario/inicio',user.sesion,user.inicio)
-
+    
     //Exclusive CRUM Routes
     app.get('/crum/registro',registration.userCrum)
     app.post('/crum/registro',registration.addUserCrum)
@@ -30,6 +30,16 @@ module.exports = (app,passport) => {
     app.get('/crum/unidades',crum.sesion,crum.unidades)
     app.get('/crum/usuarios',crum.sesion,crum.usuarios)
     app.get('/crum/configuracion',crum.sesion,crum.configuracion)
+    
+    //Exclusive TAMP Routes
+    app.get('/tamp/registro',registration.userTamp)
+    app.post('/tamp/registro',registration.addUserTamp)
+    app.get('/tamp/ingreso',login.validateUser,login.tamp)
+    app.post('/tamp/ingreso',passport.authenticate('local-tamp',{
+        successRedirect : '/tamp/inicio',
+        failureRedirect : '/tamp/ingreso'
+    }))
+    app.get('/tamp/inicio',user.sesion,user.inicio)
     
     app.get('/logout', (req, res) => {
         req.logout();

@@ -6,11 +6,10 @@ module.exports = {
   userPaciente: (req,res)=>{
     res.render('user-registration',{pageTitle:'Appbulance - Registro'})
   },
-  addUserPaciente: consultas.addUserPaciente,
-  addUserCrum: (req,res,next)=>{
-
+  userTamp: (req,res)=>{
+    res.render('tamp-registration',{pageTitle:'Appbulance - Registro'})
   },
-  tamp: (req,res)=>{
-
-  }
+  addUserCrum: consultas.addUserCrum,
+  addUserPaciente: consultas.addUserPaciente,
+  addUserTamp: consultas.addUserTamp
 }
