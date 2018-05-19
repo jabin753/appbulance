@@ -25,9 +25,9 @@ module.exports = {
     if (req.isAuthenticated()) {
       if(req.user.tipo_usr === 1){
         next()
-      } else res.redirect('/usuario/ingreso')
+      }
     } else {
-      res.redirect('/crum/ingreso')
+      res.redirect('/usuario/ingreso')
     }
   }
 }
