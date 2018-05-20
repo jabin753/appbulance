@@ -14,8 +14,10 @@
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Registra una cuenta</div>
         <div class="card-body">
+          <%if (flashMessage.length > 0){ %>
+            <div class="container" style="background-color: #fcb1a1"><%= flashMessage %></div>
+          <% } %> 
           <form action="/usuario/registro" method="POST">
-            <!-- <label style="color: tomato; font-size: 5;"class="d-block small mt-2">*: Campos requeridos</label> -->
             <div class="form-group">
               <label for="InputName">Nombre</label>
               <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre" maxLength="30">
@@ -39,7 +41,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="InputLastName">Ocupación</label>
-                    <input class="form-control" required name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
+                    <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
                   </div>                
             </div>
           <br>
@@ -55,7 +57,7 @@
                     </div>
                 <div class="col-md-4">
                   <label for="InputBlood">Tipo de sangre</label>
-                  <select class="form-control" required name="tipo_sangre_p" id="bloodType">
+                  <select class="form-control" name="tipo_sangre_p" id="bloodType">
                       <option value="0">Selecciona tu tipo de sangre</option>     
                       <option value="O+">O+</option> 
                       <option value="O-">O-</option>
@@ -77,7 +79,7 @@
               <div class="form-row">
                   <div class="col-md-6">
                       <label for="InputSecure">Derechohabiente a</label>
-                      <select class="form-control" required name="smed_p" id="SM">
+                      <select class="form-control" name="smed_p" id="SM">
                           <option value="0">Selecciona</option>     
                           <option value="1">IMSS</option> 
                           <option value="2">ISSSTE</option>
@@ -88,7 +90,7 @@
                   </div>
                 <div class="col-md-6">
                   <label for="InputNSS">NSS</label>
-                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12">
+                  <input class="form-control" name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12">
                 </div>
                 <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
               </div>
