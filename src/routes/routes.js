@@ -1,6 +1,7 @@
 var inicio = require('../controllers/inicio')
 var crum  = require('../controllers/crum-panel')
 var user  = require('../controllers/user-panel')
+var tamp  = require('../controllers/tamp-panel')
 var login  = require('../controllers/login')
 var registration  = require('../controllers/registration')
 module.exports = (app,passport) => {    
@@ -39,8 +40,10 @@ module.exports = (app,passport) => {
         successRedirect : '/tamp/inicio',
         failureRedirect : '/tamp/ingreso'
     }))
+        /*Falta agregar las sesiones de tamp*/
     app.get('/tamp/inicio',user.sesion,user.inicio)
-    
+    app.get('/tamp/peticion',user.sesion,user.peticion)
+
     app.get('/logout', (req, res) => {
         req.logout();
         res.redirect('/usuario/ingreso');

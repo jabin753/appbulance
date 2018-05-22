@@ -2,7 +2,10 @@ var path = require('path')
 var rootViewPath = 'TAMP Panel'
 module.exports = {
   inicio: (req,res)=>{
-    res.render(path.join(rootViewPath,'panel-inicio'),{pageTitle:'panel - inicio',style:req.user.style})
+    res.render(path.join(rootViewPath,'panel-inicio'),{pageTitle:'Appbulance (TAMP) - Inicio',style:req.user.style})
+  },
+  peticion: (req,res)=>{
+    res.render(path.join(rootViewPath,'tamp-inicio'),{pageTitle:'Appbulance (TAMP) - Petición',style:req.user.style})
   },
   sesion: (req,res,next)=>{
     if (req.isAuthenticated()) {
@@ -10,7 +13,7 @@ module.exports = {
         next()
       }
     } else {
-      res.redirect('/usuario/ingreso')
+      res.redirect('/tamp/ingreso')
     }
   }
 }

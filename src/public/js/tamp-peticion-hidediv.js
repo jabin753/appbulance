@@ -31,3 +31,14 @@ function showDivIII(){
   $("#btnDownIII").hide();
   $("#btnUpIII").show();
 }
+/*III. Control*/
+function hideDivIV(){
+  $("#divPaciente").hide();
+  $("#btnDownIV").show();
+  $("#btnUpIV").hide();
+}
+function showDivIV(){
+  $("#divPaciente").show();      
+  $("#btnDownIV").hide();
+  $("#btnUpIV").show();
+}
