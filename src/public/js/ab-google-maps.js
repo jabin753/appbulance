@@ -19,7 +19,7 @@ function initMap() {
 				map: map
 			});
 			//Codigo para obtener la direccion en texto.
-			google.maps.event.addListener(map, 'bounds_changed', function() {
+			
 			geocoder.geocode(
 			{'latLng': pos},
 			function(results, status) {
@@ -32,7 +32,6 @@ function initMap() {
 				}
 			}
 		);
-		});
 			map.setCenter(pos);
 		}, function() {
 			handleLocationError(true, infoWindow, map.getCenter());
