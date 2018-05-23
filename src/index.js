@@ -7,4 +7,10 @@ var server = app.listen(app.get('port'),()=>{
 	
 })
 
+var io = require('socket.io')(server)
+io.on('connection',(socket)=>{
+	console.log('Cliente conectado')
+	
+})
+
 
