@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Appbulance - Panel</title>
   <%- include ../partials/template/header -%>
 </head>
 <body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
@@ -42,18 +41,16 @@
                     </tr>
                   </tfoot>
                   <tbody>
+                  <%if (data.length > 0) { %>
+                    <% for (var i = 0; i < data.length; i ++) { %>
                     <tr id="selected" onclick="toolbarAdmon()">
-                      <td>AMB1001</td>
-                      <td>PSG1FCB6</td>
-                      <td>159632</td>
-                      <td>Mantenimiento</td>
-                    </tr>
-                    <tr id="selected" onclick="toolbarAdmon()">
-                      <td>AMB1002</td>
-                      <td>ALE7BRA1</td>
-                      <td>189674</td>
-                      <td>Listo</td>
-                    </tr>
+                        <td><%= data[i].id_a %></td>
+                        <td><%= data[i].num_placa_a %></td>
+                        <td><%= data[i].num_economico_a %></td>
+                        <td><%= data[i].estado_a %></td>
+                      </tr>
+                    <% } %>
+                  <% } %>
                   </tbody>
                 </table>
               </div>
@@ -69,7 +66,6 @@
         <!-- Modify User Modal-->    
         <%- include ../partials/modals/modifyUnit -%>
         <!-- Scripts JavaScript-->
-        <script></script>
         <script src="/js/ab-toolbarAdmon.js"></script>
       </main>
     </div>
