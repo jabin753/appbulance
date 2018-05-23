@@ -5,11 +5,10 @@ module.exports = {
     res.render(path.join(rootViewPath,'panel-inicio'),{pageTitle:'panel - inicio',style:req.user.style})
   },
   sesion: (req,res,next)=>{
-    if (req.isAuthenticated()) {
-      if(req.user.tipo_usr === 3){
+    if (req.isAuthenticated() && req.user.tipo_usr === 3) {
         next()
-      }
     } else {
+      console.log('fsf')
       res.redirect('/usuario/ingreso')
     }
   }

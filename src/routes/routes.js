@@ -1,15 +1,16 @@
 var inicio = require('../controllers/inicio')
 var crum  = require('../controllers/crum-panel')
 var user  = require('../controllers/user-panel')
+var tamp = require('../controllers/tamp-panel')
 var login  = require('../controllers/login')
 var registration  = require('../controllers/registration')
 module.exports = (app,passport) => {    
-    app.get('/',inicio.inicio)
+    app.get('/',login.validate,inicio.inicio)
     
     //Exclusive Users Routes
     app.get('/usuario/registro',registration.userPaciente)
     app.post('/usuario/registro',registration.addUserPaciente)
-    app.get('/usuario/ingreso',login.validateUser,login.user)
+    app.get('/usuario/ingreso',login.validate,login.user)
     app.post('/usuario/ingreso',passport.authenticate('local-usuario',{
         successRedirect : '/usuario/inicio',
         failureRedirect : '/usuario/ingreso'
@@ -19,7 +20,7 @@ module.exports = (app,passport) => {
     //Exclusive CRUM Routes
     app.get('/crum/registro',registration.userCrum)
     app.post('/crum/registro',registration.addUserCrum)
-    app.get('/crum/ingreso',login.validateCrum,login.crum)
+    app.get('/crum/ingreso',login.validate,login.crum)
     app.post('/crum/ingreso',passport.authenticate('local-crum',{
         successRedirect : '/crum/inicio',
         failureRedirect : '/crum/ingreso'
@@ -30,16 +31,16 @@ module.exports = (app,passport) => {
     app.get('/crum/unidades',crum.sesion,crum.unidades)
     app.get('/crum/usuarios',crum.sesion,crum.usuarios)
     app.get('/crum/configuracion',crum.sesion,crum.configuracion)
-    
+
     //Exclusive TAMP Routes
     app.get('/tamp/registro',registration.userTamp)
     app.post('/tamp/registro',registration.addUserTamp)
-    app.get('/tamp/ingreso',login.validateUser,login.tamp)
+    app.get('/tamp/ingreso',login.validate,login.tamp)
     app.post('/tamp/ingreso',passport.authenticate('local-tamp',{
         successRedirect : '/tamp/inicio',
         failureRedirect : '/tamp/ingreso'
     }))
-    app.get('/tamp/inicio',user.sesion,user.inicio)
+    app.get('/tamp/inicio',tamp.sesion,tamp.inicio)
     
     app.get('/logout', (req, res) => {
         req.logout();
