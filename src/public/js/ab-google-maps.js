@@ -16,7 +16,9 @@ function initMap() {
 			infoWindow.setPosition(pos);
 			var marker = new google.maps.Marker({
 				position: pos,
-				map: map
+				map: map,
+				Title: 'Usted está aquí',
+				draggable: true
 			});
 			//Codigo para obtener la direccion en texto.
 			
@@ -25,7 +27,7 @@ function initMap() {
 			function(results, status) {
 				if (status == google.maps.GeocoderStatus.OK) {
 					var direccion = results[0].formatted_address;
-					document.getElementById("direction").value=direccion;
+					document.getElementById("direction").value = direccion;
 				} else {
 					console.log(status, results);
 					alert('Se desconoce la dirección debido a : ' + status);
