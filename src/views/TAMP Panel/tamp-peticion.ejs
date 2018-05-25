@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Appbulance - Inicio</title>
+  <%- include ../partials/template/header -%>
+</head>
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+
+<div class="content-wrapper">
+    <div class="container-fluid">
+        <h3>Peticion actual</h3>
+        <hr>
+        <div class="card-body">
+            <form action="/usuario/registro" method="POST">
+              <!-- <label style="color: tomato; font-size: 5;"class="d-block small mt-2">*: Campos requeridos</label> -->
+              <!--I. PETICION-->
+              <div class="form-group">
+                <div class="form-row">
+                  <font style="font-size: 25px; font-weight: 500; color: black;">I. Peticion</font>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img id="btnUpI" onclick="hideDivI()" src="images/Icons/desplegar-up.png" width="30px" height="30px">  
+                  <img id="btnDownI" onclick="showDivI()" src="images/Icons/desplegar-down.png" width="30px" height="30px">   
+                </div>
+              </div>
+              <div class="form-group" id="divPeticion">                
+                <div class="form-row">
+                  <div class="col-md-4">                    
+                    <label for="OutoutFolio">Folio</label>
+                    <input class="form-control" required disabled name="id_pt"id="OutoutFolio" type="text" maxLength="30">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="OutputState">Estado</label>
+                    <input class="form-control" required disabled name="estado"id="OutputState" type="text"placeholder="Michoacán">
+                  </div>
+                  <div class="col-md-4">
+                    <label for="OutputDelegation">Delegacion</label>
+                    <input class="form-control" required disabled name="delegacion"id="OutputDelegation" type="text" placeholder="Lázaro Cárdenas">
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <div class="form-row">
+                  <font style="font-size: 25px; font-weight: 500; color: black;">II. Servicio</font>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img id="btnUpII" onclick="hideDivII()" src="images/Icons/desplegar-up.png" width="30px" height="30px">  
+                  <img id="btnDownII" onclick="showDivII()" src="images/Icons/desplegar-down.png" width="30px" height="30px">   
+                </div>
+              </div>
+              <div class="form-group" id="divServicio">
+                <div class="form-row">
+
+                  <div class="col-md-4">
+                      <label for="InputDateBirth">Fecha</label>
+                      <input class="form-control" required name="fecha_pt" type="date" min="1910-01-01" max="2000-03-01" value=""> <br>
+                      <div class="card mb-3">
+                          <div class="card-header">
+                            <i class="fa fa-table"></i> Cronometria
+                          </div>
+                          <div class="card-body">
+                            <div class="table-responsive">
+                              <table class="table table-striped" id="dataTable" width="100%" cellspacing="0" name="tbCrono">                            
+                                  <tr>
+                                    <th>Hora llamada</th>
+                                    <td><input class="col-sm-6" required name="hrllamada_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrLlamada" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Hora salida</th>
+                                    <td><input class="col-sm-6" required name="hrsalida_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrSalida" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>
+                                  <tr>
+                                      <th>Hora llegada</th>
+                                      <td><input class="col-sm-6" required name="hrllegada_frp" type="text"><br></td>
+                                      <th><button type="button" name="btnHrLlegada" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr> 
+                                  <tr>
+                                    <th>Hora traslado</th>
+                                    <td><input class="col-sm-6" required name="hrtraslado_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrTraslado" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>
+                                  <tr>
+                                    <th>Hora hospital</th>
+                                    <td><input class="col-sm-6" required name="hrhospital_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrHospital" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>    
+                                  <tr>
+                                    <th>Hora base</th>
+                                    <td><input class="col-sm-6" required name="hrbase_frp" type="text"><br></td>
+                                    <th><button type="button" name="btnHrBase" class="btn btn-primary btn-xs">+</button></th>
+                                  </tr>                                  
+                              </table>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-md-8">
+                      <div class="form-row">
+                        <div class="col-md-6">
+                          <label for="InputAttention">Motivo de atencion</label>
+                          <select class="form-control" required name="sexo_prs">
+                              <option value="0">Selecciona el motivo</option>     
+                              <option value="1">Enfermedad</option> 
+                              <option value="2">Traumatismo</option>
+                              <option value="2">Ginecoobstretico</option>
+                          </select> 
+                        </div>
+                        <div class="col-md-6">
+                            <label for="InputAttention">Lugar de referencia</label>
+                            <select class="form-control" required name="sexo_prs">
+                                <option value="0">Selecciona el lugar</option>     
+                                <option value="1">Hogar</option> 
+                                <option value="2">Via publica</option>
+                                <option value="3">Trabajo</option>
+                                <option value="4">Escuela</option>
+                                <option value="5">Recreacion y deporte</option>
+                                <option value="6">Transporte publico</option>
+                                <option value="7">Otra</option>
+                            </select>                      
+                        </div>
+                      </div>
+                      <br>
+                      <div class="form-row">
+                        <div class="col-md-6"> 
+                          <label for="OutputDirection">Dirección</label>
+                          <textarea class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled></textarea><br>                
+                        </div>
+                        <div class="col-md-6" id="map" style="height: 250px"></div>
+                      </div>
+                  </div> 
+                </div>
+              </div>
+              <hr>
+              <div class="form-group">
+                <div class="form-row">
+                  <font style="font-size: 25px; font-weight: 500; color: black;">III. Control</font>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img id="btnUpIII" onclick="hideDivIII()" src="images/Icons/desplegar-up.png" width="30px" height="30px">  
+                  <img id="btnDownIII" onclick="showDivIII()" src="images/Icons/desplegar-down.png" width="30px" height="30px">   
+                </div>
+              </div>
+              <div class="form-group" id="divControl">
+                  <div class="form-row">
+                    <div class="col-md-3">
+                        <label for="OutputAmbulance">Ambulancia</label><br>
+                        <input class="form-control" required name="OutputAmbulance" id="OutputAmbulance" type="text" aria-describedby="nameHelp" disabled>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="OutputCRUM">Crum</label><br>
+                        <input class="form-control" required name="OutputCrum" id="OutputAmbulance" type="text" aria-describedby="nameHelp" disabled>
+                    </div>  
+                    <div class="col-md-3"> <!--Faltante en la BD.-->
+                        <label for="InputUnity">Otro tipo de unidad</label><br>
+                        <input class="form-control" required name="Otra_unidad_frp" id="InputUnity" type="text" aria-describedby="nameHelp">
+                    </div>    
+                    <div class="col-md-3"> <!--Faltante en la BD.-->
+                      <label for="InputNumUnity">Numero</label><br>
+                      <input class="form-control" required name="num_unidad_frp" id="InputNumUnity" type="number" aria-describedby="nameHelp">
+                    </div>           
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-5">
+                      <label for="OutputTAMP">Operador</label><br>
+                      <input class="form-control" required name="id_tmp" id="OutputTAMP" type="text" aria-describedby="nameHelp" disabled>
+                    </div>
+                    <div class="col-md-5">
+                      <label for="InputPrestadorServ">Prestador del servicio</label><br>
+                      <input class="form-control" required name="pestador_srv_tmp" id="InputPrestadorServ" type="text" aria-describedby="nameHelp">
+                    </div>
+                  </div>
+              </div>
+              <!---->
+              <div class="form-group">
+                <div class="form-row">
+                  <font style="font-size: 25px; font-weight: 500; color: black;">IV. Paciente</font>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <img id="btnUpIII" onclick="hideDivIII()" src="images/Icons/desplegar-up.png" width="30px" height="30px">  
+                  <img id="btnDownIII" onclick="showDivIII()" src="images/Icons/desplegar-down.png" width="30px" height="30px">   
+                </div>
+              </div>
+              <div class="form-group" id="divControl">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                        <label for="OutputNombre">Nombre</label><br>
+                        <input class="form-control" required name="nombre_prs" id="OutputAmbulance" type="text" aria-describedby="nameHelp" disabled>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="OutputApPat">Apellido Paterno</label><br>
+                        <input class="form-control" required name="apellido_paterno_prs" id="OutputApPat" type="text" aria-describedby="nameHelp" disabled>
+                    </div>  
+                    <div class="col-md-4">
+                        <label for="OutputApMat">Apellido Materno</label><br>
+                        <input class="form-control" required name="apellido_materno_prs" id="OutputApMat" type="text" aria-describedby="nameHelp" disabled>
+                    </div>        
+                  </div>
+                  <div class="form-row">
+                    <div class="col-md-3">
+                      <label for="OutputSex">Sexo</label><br>
+                      <input class="form-control" required name="sexo_prs" id="OutputSex" type="text" aria-describedby="nameHelp" disabled>
+                    </div>
+                    <div class="col-md-3">
+                      <label for="OutputAge">Edad</label><br>
+                      <input class="form-control" required name="edad_prs" id="OutputAge" type="text" aria-describedby="nameHelp" disabled>
+                    </div>                        
+                    <div class="col-md-3"> 
+                      <label for="OutputTel">Telefono</label><br>
+                      <input class="form-control" required name="telefono_usr" id="OutputTel" type="number" aria-describedby="nameHelp" disabled>
+                    </div>                      
+                    <div class="col-md-3">
+                      <label for="OutputOcupation">Ocupacion</label><br>
+                      <input class="form-control" required name="ocupation_prs" id="OutputOcupation" type="text" aria-describedby="nameHelp" disabled>
+                    </div>
+                  </div>
+
+              </div>
+
+              <button class="btn btn-primary btn-block" type="submit" disabled name="btnRegister">Regístrate</button>
+
+            </form>
+          </div>
+      <!-- Icon Cards-->
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-3">
+          <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-list"></i>
+              </div>
+              <div class="mr-5">¡Nueva Petición!</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="#">
+              <span class="float-left">Ver detalles</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        
+        
+      </div>
+
+      <!-- Area Chart Example-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-area-chart"></i> Estadisticas</div>
+        <div class="card-body">
+          <canvas id="myAreaChart" width="100%" height="30"></canvas>
+        </div>
+        <div class="card-footer small text-muted">Última actualización 17/05/2018 a las 11:59 PM</div>
+      </div>
+      
+    </div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>Copyright © Appbulance 2018</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">¿Seguro que desea cerrar sesión?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+            <a class="btn btn-primary" href="pg-0001-lg.html">Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- Scripts JavaScript-->
+    <%- include ../partials/template/footer -%>
+    <%- include ../partials/template/top-button -%>
+    <%- include ../partials/modals/logout -%>
+    <%- include ../partials/template/js-scripts -%> 
+    <%- include ../partials/template/js-scripts-googlemaps -%>  
+    <%- include ../partials/template/js-scripts -%> 
+    <%- include ../partials/template/js-scripts-tamp-peticion -%> 
+</html>

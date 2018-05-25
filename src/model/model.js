@@ -11,18 +11,6 @@ module.exports = {
 			}
 		})
 	},
-	addUserPaciente: (req,res)=>{
-		bd.query({text:'SELECT * FROM perfiles.adduserpacientes($1)',
-		values:[req.body]},(err,result)=>{
-			if(!err){
-				res.redirect('/usuario/ingreso')
-			} 
-			else{
-				req.flash('error','Error al registrar el usuario, inténtelo de nuevo')
-				res.redirect('/usuario/registro')
-			}
-		})
-	},
 	addUserTamp: (req,res)=>{
 		bd.query({text:'SELECT * FROM perfiles.addusertamp($1)',
 		values:[req.body]},(err,result)=>{
@@ -32,6 +20,18 @@ module.exports = {
 			} 
 			else {
 				
+				res.redirect('/usuario/registro')
+			}
+		})
+	},
+	addUserPaciente: (req,res)=>{
+		bd.query({text:'SELECT * FROM perfiles.adduserpacientes($1)',
+		values:[req.body]},(err,result)=>{
+			if(!err){
+				res.redirect('/usuario/ingreso')
+			} 
+			else{
+				req.flash('error','Error al registrar el usuario, inténtelo de nuevo')
 				res.redirect('/usuario/registro')
 			}
 		})
@@ -107,5 +107,19 @@ module.exports = {
 				return done(null, false)
 			}
 		}
-	)}
+	)},
+	crumPanelTamp:(req,res) =>{},
+	crumPanelUnidades:(req,res) => {
+		console.log(req.user.id_usr)
+		bd.query({
+			text: 'SELECT * FROM administracion.get_a($1)',
+			values: [req.user.id_usr]
+		},(err,response) => {
+			console.log(err,response.rows)
+			res.render('CRUM Panel/panel-unidades',
+			{pageTitle:'Appbulance (CRUM) - Unidades Médicas',
+			style:req.user.style,
+			data: response.rows})
+		})
+	}
 }
