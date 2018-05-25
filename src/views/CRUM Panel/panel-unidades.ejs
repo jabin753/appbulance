@@ -10,7 +10,7 @@
     <div class="container-fluid">
       <main>
         <!-- Breadcrumbs-->
-        <%- include ../partials/template/breadcrumb -%>      
+        <%- include ../partials/template/breadcrumb -%>     
         <section id="ViewUsers">
           <!-- Example DataTables Card-->
           <div class="card mb-3">
@@ -41,18 +41,12 @@
                       <th>Estado</th>
                     </tr>
                   </tfoot>
-                  <tbody>
+                  <tbody id="unitsTable">
                     <tr id="selected" onclick="toolbarAdmon()">
-                      <td>AMB1001</td>
-                      <td>PSG1FCB6</td>
-                      <td>159632</td>
-                      <td>Mantenimiento</td>
-                    </tr>
-                    <tr id="selected" onclick="toolbarAdmon()">
-                      <td>AMB1002</td>
-                      <td>ALE7BRA1</td>
-                      <td>189674</td>
-                      <td>Listo</td>
+                      <td id="id_a"></td>
+                      <td id="num_placa_a"></td>
+                      <td id="num_economico_a"></td>
+                      <td id="estado_a"></td>                      
                     </tr>
                   </tbody>
                 </table>
@@ -77,6 +71,30 @@
     <%- include ../partials/template/top-button -%>
     <%- include ../partials/modals/logout -%>
     <%- include ../partials/template/js-scripts -%>
+
+    <script>
+      function addUnit(){      
+        var _mat = document.getElementById("InputMatricula").value;
+        var _num_economic = document.getElementById("InputEconomicNumber").value;
+        var _state = document.getElementById("InputState").value;
+        
+        var fila="<tr id='selected' onclick='toolbarAdmon()'><td>"+ 1
+                +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td></tr>";
+        
+        if(_mat.trim()=='' || _num_economic.trim()=='' || _state.trim()==''){
+          alert("Operación fracasada. Ingrese los datos faltantes.");          
+        } else {
+          clear();
+          document.getElementById("unitsTable").innerHTML = fila;          
+        }          
+      }
+
+      function clear(){
+        document.getElementById("InputMatricula").value = "";
+        document.getElementById("InputEconomicNumber").value = "";
+        document.getElementById("InputState").value = "";
+      }
+    </script>
   </div>
 </body>
 </html>
