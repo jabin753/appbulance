@@ -9,7 +9,7 @@ module.exports = {
   tamp: (req,res)=>{
     res.render('tamp-login',{pageTitle:'Appbulance - Login',flashMessage: req.flash('tamp-login')})
   },
-  validateUser: (req,res,next)=>{
+  validate: (req,res,next)=>{
     if (req.isAuthenticated()){
       switch(req.user.tipo_usr){
         case 1: res.redirect('/crum/inicio') 
@@ -19,13 +19,5 @@ module.exports = {
         case 3: res.redirect('/tamp/inicio')
       }
     } else next()
-  },
-  validateCrum: (req,res,next) =>{
-    if (req.isAuthenticated()) { 
-      res.redirect('/crum/inicio')
-    } else {
-      next()
-    }
-  },
-  validateTamp: ()=>{}
+  }
 }
