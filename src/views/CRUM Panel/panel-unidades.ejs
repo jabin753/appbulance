@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Appbulance - Panel</title>
   <%- include ../partials/template/header -%>
 </head>
 <body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
@@ -41,13 +40,17 @@
                       <th>Estado</th>
                     </tr>
                   </tfoot>
-                  <tbody id="unitsTable">
+                  <tbody>
+                  <%if (data.length > 0) { %>
+                    <% for (var i = 0; i < data.length; i ++) { %>
                     <tr id="selected" onclick="toolbarAdmon()">
-                      <td id="id_a"></td>
-                      <td id="num_placa_a"></td>
-                      <td id="num_economico_a"></td>
-                      <td id="estado_a"></td>                      
-                    </tr>
+                        <td><%= data[i].id_a %></td>
+                        <td><%= data[i].num_placa_a %></td>
+                        <td><%= data[i].num_economico_a %></td>
+                        <td><%= data[i].estado_a %></td>
+                      </tr>
+                    <% } %>
+                  <% } %>
                   </tbody>
                 </table>
               </div>
@@ -63,7 +66,6 @@
         <!-- Modify User Modal-->    
         <%- include ../partials/modals/modifyUnit -%>
         <!-- Scripts JavaScript-->
-        <script></script>
         <script src="/js/ab-toolbarAdmon.js"></script>
       </main>
     </div>
@@ -71,24 +73,6 @@
     <%- include ../partials/template/top-button -%>
     <%- include ../partials/modals/logout -%>
     <%- include ../partials/template/js-scripts -%>
-
-    <script>
-      function guardar(){      
-        var _mat = document.getElementById("InputMatricula").value;
-        var _num_economic = document.getElementById("InputEconomicNumber").value;
-        var _state = document.getElementById("InputState").value;
-        
-        var fila="<tr id='selected' onclick='toolbarAdmon()'><td>"+ _mat
-                +"</td><td>"+_num_economic+"</td><td>"+_state+"</td></tr>";
-        
-        if(_mat.trim()=='' || _num_economic.trim()=='' || _state.trim()==''){
-          alert("Operación fracasada. Ingrese los datos faltantes.");
-        } else {
-          document.getElementById("unitsTable").innerHTML = fila;
-        }
-          
-    }
-    </script>
   </div>
 </body>
 </html>

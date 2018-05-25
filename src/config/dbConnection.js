@@ -45,7 +45,7 @@ module.exports = {
     pool.query('SELECT NOW()',(err,result)=>{
       if(!err){
           if(result.rowCount > 0)console.log('Conexión satisfactoria: ',result.rows[0]['now'])
-      } else{console.error('Error en la conexión con la base de datos ok, ',process.env.PG_CONNECTION_STRING,err)}
+      } else{console.error('Error en la conexión con la base de datos:, ',process.env.PG_CONNECTION_STRING,err)}
   })
   }
 }

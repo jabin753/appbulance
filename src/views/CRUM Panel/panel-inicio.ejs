@@ -1,7 +1,11 @@
+<%# 
+DATOS DE ENTRADA:
+  style.body_style
+  pageTitle
+#%>  
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Appbulance - Panel</title>
   <%- include ../partials/template/header -%>
 </head>
 <body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
@@ -9,16 +13,17 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <main>
+          <body>
+              <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+              <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+              <script>
+                $(function () {
+                  var socket = io();
+                });
+              </script>
+            </body>
         <div id="map" style="width:100%;height:480px;background:white"></div>
-        <script>
-          var map;
-          function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-              center: {lat: 17.961760, lng: -102.199524},
-              zoom: 13
-            });
-          }
-        </script>
+        <script src="/js/ab-google-maps.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap" async defer></script>
       </main>
     </div>
