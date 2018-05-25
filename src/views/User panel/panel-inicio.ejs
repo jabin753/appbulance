@@ -3,6 +3,8 @@
 <head>
   <title>Appbulance - Panel</title>
   <%- include ../partials/template/header -%>
+  <%- include ../partials/template/js-scripts -%> 
+  <%- include ../partials/template/js-scripts-googlemaps -%>  
 </head>
 <body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
   <%- include ../partials/template/user-navbar%>
@@ -11,25 +13,44 @@
           <h5>Inicio</h5>
           <hr>
           <div class="form-group">
-              <form action="/usuario/peticion" method="POST" role="form">
+              <form action="/usuario/peticion" method="POST" name="formularioPeticion" role="form">
                 <div class="form-row">                    
                     <div class="col-md-6" id="map" style="height: 250px"></div>
                     <div class="col-md-6">                        
                         <label for="OutputDirection">Tu dirección</label>
-                        <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>                        
+                        <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
+                        <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
+                        <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>                        
                     <hr>
                     <button class="btn btn-primary btn-block" type="submit">Solicitar ambulancia</button>
                     <hr>
                     </div>
                 </div>
                 </form>
+                <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+                <script>
+                $(function() {
+                    var socket = io();
+                    socket.on('connect', function(){
+                    var peticion = document.forms.formularioPeticion;
+                    if(peticion){
+                        peticion.addEventListener('submit',function(e){
+                            e.preventDefault();
+                            var direction = $('#direction').val();
+                            socket.emit('sendPetition',{
+                                direction: direction,
+                                latLng: [$('#lat').val(),$('#lng').val()]
+                            });
+                        });
+                    }
+                });
+                });
+                </script>
               </div>
         </div>
     <%- include ../partials/template/footer -%>
     <%- include ../partials/template/top-button -%>
-    <%- include ../partials/modals/logout -%>
-    <%- include ../partials/template/js-scripts -%> 
-    <%- include ../partials/template/js-scripts-googlemaps -%>   
+    <%- include ../partials/modals/logout -%> 
   </div>  
 </body>
 </html>

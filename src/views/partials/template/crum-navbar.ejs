@@ -1,3 +1,13 @@
+<script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  $(function () {
+    var socket = io();
+    socket.on('receivePetition',function(data){
+      alert('Petición entrante: '+ data.latLng +'.\nDirección: ' + data.direction);
+    })
+  });
+</script>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg <%=style.nav_style%> <%=style.nav_background_style%> fixed-top" id="mainNav">
   <img src="/images/logo.png" width="40px" height="40px">

@@ -12,7 +12,7 @@ function initMap() {
 				lat: position.coords.latitude,
 				lng: position.coords.longitude
 			};
-
+			
 			infoWindow.setPosition(pos);
 			var marker = new google.maps.Marker({
 				position: pos,
@@ -20,20 +20,39 @@ function initMap() {
 				Title: 'Usted está aquí',
 				draggable: true
 			});
-			//Codigo para obtener la direccion en texto.
+			marker.addListener('dragend', function() {
+				document.getElementById("lat").value = marker.getPosition().lat();
+				document.getElementById("lng").value = marker.getPosition().lng();
+				map.setCenter(marker.getPosition());
+				geocoder.geocode(
+					{'latLng': marker.getPosition()},
+					function(results, status) {
+						if (status == google.maps.GeocoderStatus.OK) {
+							var direccion = results[0].formatted_address;
+							document.getElementById("direction").value = direccion;
+						} else {
+							console.log(status, results);
+							alert('Se desconoce la dirección debido a : ' + status);
+						}
+					}
+				);
+			});
 			
+			//Codigo para obtener la direccion en texto.
+			document.getElementById("lat").value = marker.getPosition().lat();
+			document.getElementById("lng").value = marker.getPosition().lng();
 			geocoder.geocode(
-			{'latLng': pos},
-			function(results, status) {
-				if (status == google.maps.GeocoderStatus.OK) {
-					var direccion = results[0].formatted_address;
-					document.getElementById("direction").value = direccion;
-				} else {
-					console.log(status, results);
-					alert('Se desconoce la dirección debido a : ' + status);
+				{'latLng': pos},
+				function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var direccion = results[0].formatted_address;
+						document.getElementById("direction").value = direccion;
+					} else {
+						console.log(status, results);
+						alert('Se desconoce la dirección debido a : ' + status);
+					}
 				}
-			}
-		);
+			);
 			map.setCenter(pos);
 		}, function() {
 			handleLocationError(true, infoWindow, map.getCenter());
@@ -41,12 +60,13 @@ function initMap() {
 	} else {
 		// El navegador no soporta la geolocalización
 		handleLocationError(false, infoWindow, map.getCenter());
-	}	
+	}
+	
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 	infoWindow.setPosition(pos);
 	infoWindow.setContent(browserHasGeolocation ?
-												'Error: El servicio de geolocalización ha fallado.' :
-												'Error: Tu navegador no soporta la geolocazación.');
-}		
+		'Error: El servicio de geolocalización ha fallado.' :
+		'Error: Tu navegador no soporta la geolocazación.');
+	}	
