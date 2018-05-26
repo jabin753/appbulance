@@ -6,7 +6,7 @@ module.exports = {
 			if(!err){
 				req.redirect('/crum/ingreso')
 			} else{
-				req.flash('error','Error al registrar el usuario, inténtelo de nuevo')
+				req.flash('crum-registration','Error al registrar el usuario, inténtelo de nuevo')
 				res.redirect('/usuario/registro')
 			}
 		})
@@ -15,11 +15,10 @@ module.exports = {
 		bd.query({text:'SELECT * FROM perfiles.addusertamp($1)',
 		values:[req.body]},(err,result)=>{
 			if(!err){
-				req.flash('tamp-registration-succesful','Usuario registrado')
 				res.redirect('/tamp/ingreso')
 			} 
 			else {
-				
+				req.flash('tamp-registration','Error al registrar el usuario, inténtelo de nuevo')
 				res.redirect('/usuario/registro')
 			}
 		})
@@ -27,11 +26,12 @@ module.exports = {
 	addUserPaciente: (req,res)=>{
 		bd.query({text:'SELECT * FROM perfiles.adduserpacientes($1)',
 		values:[req.body]},(err,result)=>{
+			console.log(err)
 			if(!err){
 				res.redirect('/usuario/ingreso')
 			} 
 			else{
-				req.flash('error','Error al registrar el usuario, inténtelo de nuevo')
+				req.flash('user-registration','Error al registrar el usuario, inténtelo de nuevo')
 				res.redirect('/usuario/registro')
 			}
 		})
