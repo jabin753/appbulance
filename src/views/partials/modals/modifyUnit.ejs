@@ -9,25 +9,14 @@
             </div>
             <div class="modal-body">            
                 <div class="card-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="InputMatricula">Matrícula</label>
-                      <input class="form-control" id="InputMatricula" type="text" aria-describedby="nameHelp" placeholder="Escribe la matrícula">
-                    </div> 
-                    <div class="form-group">
-                      <label for="InputEconomicNumber">Número Económico</label>
-                      <input class="form-control" id="InputEconomicNumber" type="text" aria-describedby="nameHelp" placeholder="Escribe el número económico">
-                    </div>   
-                    <div class="form-group">
-                      <label for="InputState">Estado</label>
-                      <input class="form-control" id="InputState" type="text" aria-describedby="nameHelp" placeholder="Escribe el estado de la unidad">
-                    </div>
+                  <form id="modal-modUnits">
+                    <!-- Fragment inserted from Script -->
                   </form>
                 </div>
             </div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-              <a class="btn btn-primary btn-warning" style="color: #FFFFFF">Modificar</a>
+              <a class="btn btn-primary btn-warning" style="color: #FFFFFF" onclick="confirmModUnit()" data-dismiss="modal">Modificar</a>
             </div>
           </div>
         </div>

@@ -31,6 +31,7 @@
                       <th>Matrícula</th>
                       <th>Número Económico</th>
                       <th>Estado</th>
+                      <th>Operaciones</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -39,20 +40,24 @@
                       <th>Matrícula</th>
                       <th>Número Económico</th>
                       <th>Estado</th>
+                      <th>Operaciones</th>
                     </tr>
                   </tfoot>
                   <tbody id="unitsTable">
                     <tr id="selected" onclick="toolbarAdmon()">
-                      <td id="id_a"></td>
-                      <td id="num_placa_a"></td>
-                      <td id="num_economico_a"></td>
-                      <td id="estado_a"></td>                      
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>   
+                      <td></td>                  
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
             <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM
+            </div>
+            <div id="contenedorForm">
             </div>
           </div>
         </section>
@@ -73,13 +78,16 @@
     <%- include ../partials/template/js-scripts -%>
 
     <script>
-      function addUnit(){      
+      function addUnit(){ 
+        var _id = Math.floor((Math.random() * 100) + 1);
         var _mat = document.getElementById("InputMatricula").value;
         var _num_economic = document.getElementById("InputEconomicNumber").value;
         var _state = document.getElementById("InputState").value;
-        
-        var fila="<tr id='selected' onclick='toolbarAdmon()'><td>"+ 1
-                +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td></tr>";
+        var fila="<tr id='unit_"+ _id + "' onclick='toolbarAdmon()'><td>"+ _id
+                +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td><td>"+ 
+                  "<input id='btnModificar' onclick='modUnit(this)' type='button' class='btn btn-primary btn-warning' style='color: #FFFFFF' data-toggle='modal' data-target='#modModal' value='Modificar'> " +
+                  "<input id='btnEliminar' type='button' class='btn btn-primary btn-danger' style='color: #FFFFFF' data-toggle='modal' data-target='#deleteModal' value='Eliminar'>"
+                  +"</td></tr>";
         
         if(_mat.trim()=='' || _num_economic.trim()=='' || _state.trim()==''){
           alert("Operación fracasada. Ingrese los datos faltantes.");          
@@ -93,7 +101,61 @@
         document.getElementById("InputMatricula").value = "";
         document.getElementById("InputEconomicNumber").value = "";
         document.getElementById("InputState").value = "";
+        document.getElementById("OutputIDUnit_modal").value = "";
+        document.getElementById("OutputMatricula_modal").value = "";
+        document.getElementById("OutputEconomicNumber_modal").value = "";
+        document.getElementById("OutputState_modal").value = "";        
       }
+
+      var editando=false;
+      function modUnit(nodo){
+        if (editando == false) {
+          var nodoTd = nodo.parentNode;
+          var nodoTr = nodoTd.parentNode;
+          var nodosEnTr = nodoTr.getElementsByTagName('td');
+          var _id = nodosEnTr[0].textContent; 
+          var _matricula = nodosEnTr[1].textContent;
+          var _num_e = nodosEnTr[2].textContent; 
+          var _estado = nodosEnTr[3].textContent;
+          var opciones = nodosEnTr[4].textContent;
+
+          var _modal = "<div class='form-group'>"+
+                          " <label for='OutputIDUnit'>ID Ambulancia</label>"+
+                          "<input class='form-control' id='OutputIDUnit_modal' type='text' value='"+ _id +"' disabled>"+
+                        "</div> "+
+                        "<div class='form-group'>"+
+                          "<label for='OutputMatricula'>Matrícula</label>"+
+                          "<input class='form-control' id='OutputMatricula_modal' type='text' value='"+ _matricula +"'>"+
+                        "</div>"+
+                        "<div class='form-group'>"+
+                          "<label for='OutputEconomicNumber'>Número Económico</label>"+
+                          "<input class='form-control' id='OutputEconomicNumber_modal' type='text' value='"+ _num_e +"'>"+
+                        "</div>"+   
+                        "<div class='form-group'>"+
+                          "<label for='OutputState'>Estado</label>"+
+                          "<input class='form-control' id='OutputState_modal' type='text' value='"+ _estado +"'>"+
+                        "</div>";
+          document.getElementById('modal-modUnits').innerHTML = _modal;
+        }else {
+          alert ('Solo se puede editar un registro a la vez. Recargue la página para poder editar otra.');
+        }
+      } 
+
+      function confirmModUnit(){ //Este metodo puede ser reemplazado sencillamente ejecutando la consulta de UPDATE y 
+        var _id = document.getElementById("OutputIDUnit_modal").value;
+        var _mat = document.getElementById("OutputMatricula_modal").value;
+        var _num_economic = document.getElementById("OutputEconomicNumber_modal").value;
+        var _state = document.getElementById("OutputState_modal").value;
+
+        var fila="<tr id='unit_"+ _id + "' onclick='toolbarAdmon()'><td>"+ _id
+                +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td><td>"+ 
+                  "<input id='btnModificar' onclick='modUnit(this)' type='button' class='btn btn-primary btn-warning' style='color: #FFFFFF' data-toggle='modal' data-target='#modModal' value='Modificar'> " +
+                  "<input id='btnEliminar' type='button' class='btn btn-primary btn-danger' style='color: #FFFFFF' data-toggle='modal' data-target='#deleteModal' value='Eliminar'>"
+                  +"</td></tr>";
+        document.getElementById("unitsTable").innerHTML = fila; 
+      }
+
+
     </script>
   </div>
 </body>
