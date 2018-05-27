@@ -9,7 +9,6 @@
     <div class="container-fluid">
       <main>
         <!-- Breadcrumbs-->
-        <%- include ../partials/template/breadcrumb -%>      
         <section id="ViewUsers">
           <!-- Example DataTables Card-->
           <div class="card mb-3">
@@ -18,13 +17,14 @@
             </div>
             <div class="card-body">
               <!-- Toolbar -->
-              <a class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" style="color: #FFFFFF">Registrar</a>
-              <input id="btnEliminar" type="button" class="btn btn-primary btn-danger" style="color: #FFFFFF" data-toggle="modal" data-target="#deleteModal" value="Eliminar" disabled="true">
-              <input id="btnModificar" type="button" class="btn btn-primary btn-warning" style="color: #FFFFFF" data-toggle="modal" data-target="#modModal" value="Modificar" disabled="true">
+              <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
+              <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
+              <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
+              <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary"> <i class="fa fa-fw fa-download fa-lg"></i> </button>
               <hr>
-              <div class="table-responsive">
+              <div class="table-responsive" id="tableUnits">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
+                  <thead class="thead-dark">
                     <tr>
                       <th>ID Ambulancia</th>
                       <th>Matrícula</th>
@@ -40,10 +40,10 @@
                       <th>Estado</th>
                     </tr>
                   </tfoot>
-                  <tbody>
+                  <tbody id="unitsTable">
                   <%if (data.length > 0) { %>
                     <% for (var i = 0; i < data.length; i ++) { %>
-                    <tr id="selected" onclick="toolbarAdmon()">
+                    <tr>
                         <td><%= data[i].id_a %></td>
                         <td><%= data[i].num_placa_a %></td>
                         <td><%= data[i].num_economico_a %></td>
@@ -66,7 +66,8 @@
         <!-- Modify User Modal-->    
         <%- include ../partials/modals/modifyUnit -%>
         <!-- Scripts JavaScript-->
-        <script src="/js/ab-toolbarAdmon.js"></script>
+        <script src="/js/ab-script-units.js"></script>
+
       </main>
     </div>
     <%- include ../partials/template/footer -%>
