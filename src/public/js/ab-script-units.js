@@ -11,8 +11,6 @@ $('#unitsTable').on("click", function(){
     _mat = $(this).parents("tr").find("td").eq(1).html();
     _num_e = $(this).parents("tr").find("td").eq(2).html();
     _estado = $(this).parents("tr").find("td").eq(3).html();
-    $("input[name=btnEliminar]").attr("disabled", false); 
-    $("input[name=btnModificar]").attr("disabled", false);
     $("button[name=btnDel]").attr("disabled", false); 
     $("button[name=btnMod]").attr("disabled", false); 
     loadValues();

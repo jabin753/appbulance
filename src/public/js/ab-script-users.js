@@ -15,8 +15,6 @@ $('#unitsTable').on("click", function(){
     _mat = $(this).parents("tr").find("td").eq(1).html();
     _num_e = $(this).parents("tr").find("td").eq(2).html();
     _estado = $(this).parents("tr").find("td").eq(3).html();
-    $("input[name=btnEliminar]").attr("disabled", false); 
-    $("input[name=btnModificar]").attr("disabled", false);
     $("button[name=btnDel]").attr("disabled", false); 
     $("button[name=btnMod]").attr("disabled", false); 
     loadValues();
@@ -24,11 +22,12 @@ $('#unitsTable').on("click", function(){
 }); 
 }); 
 
-function addUnit(){ 
-var _id = Math.floor((Math.random() * 100) + 1);
+function addUser(){ 
+var _id = "DEFAULT";
 var _mat = document.getElementById("InputMatricula").value;
 var _num_economic = document.getElementById("InputEconomicNumber").value;
 var _state = document.getElementById("InputState").value;
+
 var fila="<tr id='unit_"+ _id + "'><td>"+ _id
         +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td></tr>"; 
 if(_mat.trim()=='' || _num_economic.trim()=='' || _state.trim()==''){
