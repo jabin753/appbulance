@@ -21,9 +21,8 @@
               <!-- Toolbar -->
               <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
               <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
-              <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-edit fa-lg"></i> </button>
-              <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-dark" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-sync  fa-lg"></i> </button>
-
+              <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
+              <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-download fa-lg"></i> </button>
               <hr>
               <div class="table-responsive" id="tableUnits">
                 <table class="table table-bordered table-hover" id="dataTable" width="100%" cellspacing="0">
@@ -33,7 +32,6 @@
                       <th>Matrícula</th>
                       <th>Número Económico</th>
                       <th>Estado</th>
-                      <th>Operaciones</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -42,24 +40,9 @@
                       <th>Matrícula</th>
                       <th>Número Económico</th>
                       <th>Estado</th>
-                      <th>Operaciones</th>
                     </tr>
                   </tfoot>
                   <tbody id="unitsTable">
-                      <tr id="unit147">
-                          <td id="jsaksja">Hola</td>
-                          <td>a</td>
-                          <td>todos</td>
-                          <td>esto es</td>
-                          <td><a href="#" class="distribuir">Distribuir</a></td>
-                        </tr>
-                        <tr id="unit753">
-                            <td id="xd">ID Ambulancia</td>
-                            <td>ID Ambulancia</td>
-                            <td>ID Ambulancia</td>
-                            <td>ID Ambulancia</td>
-                            <td><a href="#" class="distribuir">Distribuir</a></td>
-                          </tr>
                   </tbody>
                 </table>
               </div>
@@ -92,30 +75,28 @@
       var _estado;
       
       $(document).ready(function(){     
-        
-        $('td').click(function(){
-          _id = $(this).parents("tr").find("td").eq(0).html();
-          _mat = $(this).parents("tr").find("td").eq(1).html();
-          _num_e = $(this).parents("tr").find("td").eq(2).html();
-          _estado = $(this).parents("tr").find("td").eq(3).html();
-          $("input[name=btnEliminar]").attr("disabled", false); 
-          $("input[name=btnModificar]").attr("disabled", false);
-          $("button[name=btnDel]").attr("disabled", false); 
-          $("button[name=btnMod]").attr("disabled", false); 
-          loadValues();          
-        });
-      });  
+        $('#unitsTable').on("click", function(){
+            $('td').click(function(){          
+            _id = $(this).parents("tr").find("td").eq(0).html();
+            _mat = $(this).parents("tr").find("td").eq(1).html();
+            _num_e = $(this).parents("tr").find("td").eq(2).html();
+            _estado = $(this).parents("tr").find("td").eq(3).html();
+            $("input[name=btnEliminar]").attr("disabled", false); 
+            $("input[name=btnModificar]").attr("disabled", false);
+            $("button[name=btnDel]").attr("disabled", false); 
+            $("button[name=btnMod]").attr("disabled", false); 
+            loadValues();
+          });
+        }); 
+      }); 
 
       function addUnit(){ 
         var _id = Math.floor((Math.random() * 100) + 1);
         var _mat = document.getElementById("InputMatricula").value;
         var _num_economic = document.getElementById("InputEconomicNumber").value;
         var _state = document.getElementById("InputState").value;
-        var fila="<tr id='unit_"+ _id + "' onclick='toolbar()'><td>"+ _id
-                +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td><td>"+ 
-                  "<input id='btnModificar' onclick='modUnit(this)' type='button' class='btn btn-primary btn-warning' style='color: #FFFFFF' data-toggle='modal' data-target='#modModal' value='Modificar'> " +
-                  "<input id='btnEliminar' type='button' class='btn btn-primary btn-danger' style='color: #FFFFFF' data-toggle='modal' data-target='#deleteModal' value='Eliminar'>"
-                  +"</td></tr>"; 
+        var fila="<tr id='unit_"+ _id + "'><td>"+ _id
+                +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td></tr>"; 
         if(_mat.trim()=='' || _num_economic.trim()=='' || _state.trim()==''){
           alert("Operación fracasada. Ingrese los datos faltantes.");          
         } else {
@@ -133,7 +114,6 @@
         document.getElementById("OutputEconomicNumber_modal").value = "";
         document.getElementById("OutputState_modal").value = "";        
       }
-     
       
       function loadValues(){
         var _modal_mod = "<div class='form-group'>"+
@@ -155,7 +135,6 @@
         var _modal_del = "<div class='modal-body'>¿Está seguro que desea eliminar la unidad '"+ _id +"' con la matricula '"+ _mat + "'?</div>";
         document.getElementById('modal-modUnits').innerHTML = _modal_mod;
         document.getElementById('modal-delUnits').innerHTML = _modal_del;
-        alert("Hola");
       }
           
     </script>
