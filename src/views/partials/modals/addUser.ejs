@@ -29,11 +29,11 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-md-6">
-                                  <label for="InputPassword1">Teléfono</label>
+                                  <label for="InputPhoneNumber">Teléfono</label>
                                   <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="tel" placeholder="Escribe tu número telefónico" maxLength="10">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="InputLastName">Ocupación</label>
+                                    <label for="InputOccupation">Ocupación</label>
                                     <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
                                   </div>                
                             </div>
@@ -42,7 +42,7 @@
                               <div class="form-row">
                                   <div class="col-md-6">
                                       <label for="InputSex">Sexo</label><br>
-                                      <select class="form-control" required name="sexo_prs">
+                                      <select class="form-control" required name="sexo_prs" id="InputSex">
                                           <option value="0">Selecciona tu sexo</option>     
                                           <option value="M">Hombre</option> 
                                           <option value="F">Mujer</option>
@@ -50,7 +50,7 @@
                                     </div>
                                 <div class="col-md-6">
                                   <label for="InputBlood">Tipo de sangre</label>
-                                  <select class="form-control" name="tipo_sangre_p" id="bloodType">
+                                  <select class="form-control" required name="tipo_sangre_p" id="InputBlood">
                                       <option value="0">Selecciona tu tipo de sangre</option>     
                                       <option value="O+">O+</option> 
                                       <option value="O-">O-</option>
@@ -65,14 +65,14 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="InputDateBirth">Fecha de nacimiento</label>
-                                  <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
+                                  <input class="form-control" required name="fecha_nacimiento_prs" id="InputDateBirth" type="date" min="1910-01-01" max="2000-03-01">
                                 </div>
                             </div>              
                             <div class="form-group">
                               <div class="form-row">
                                   <div class="col-md-6">
                                       <label for="InputSecure">Derechohabiente a</label>
-                                      <select class="form-control" name="smed_p" id="SM">
+                                      <select class="form-control" name="smed_p" id="InputSecure">
                                           <option value="0">Selecciona</option>     
                                           <option value="1">IMSS</option> 
                                           <option value="2">ISSSTE</option>
@@ -110,7 +110,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-success" type="submit" disabled name="btnRegister">Regístrate</button>
+                <button class="btn btn-success" type="submit" disabled name="btnRegister" onclick="addUser()" data-dismiss="modal">Regístrate</button>
             </div>
         </div>
     </div>
