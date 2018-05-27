@@ -20,7 +20,7 @@
               <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
               <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
               <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
-              <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary"> <i class="fa fa-fw fa-download fa-lg"></i> </button>
+              <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" onclick="load()"> <i class="fa fa-fw fa-refresh fa-lg"></i> </button>
               <hr>
               <div class="table-responsive" id="tableUnits">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -75,5 +75,6 @@
     <%- include ../partials/modals/logout -%>
     <%- include ../partials/template/js-scripts -%>
   </div>
+
 </body>
 </html>

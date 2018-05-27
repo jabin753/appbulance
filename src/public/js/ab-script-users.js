@@ -1,8 +1,12 @@
 var _operation;
 var _id;
-var _mat;
-var _num_e;
-var _estado;
+var _name;
+var _age;
+var _date_bir;
+var _sex;
+var _tel;
+var _email;
+var _ocupation;
 
 $(document).ready(function(){     
 $('#unitsTable').on("click", function(){

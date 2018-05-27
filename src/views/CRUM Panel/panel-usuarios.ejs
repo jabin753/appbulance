@@ -10,7 +10,6 @@
     <div class="container-fluid">
       <main>
         <!-- Breadcrumbs-->
-        <%- include ../partials/template/breadcrumb -%>      
         <section id="ViewUsers">    
           <!-- Example DataTables Card-->
           <div class="card mb-3">
@@ -18,15 +17,16 @@
               <i class="fa fa-user"></i> Usuarios atendidos</div>
               <div class="card-body">
                 <!-- Toolbar -->
-                <a class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" style="color: #FFFFFF">Registrar</a>
-                <input id="btnEliminar" type="button" class="btn btn-primary btn-danger" style="color: #FFFFFF" data-toggle="modal" data-target="#deleteModal" value="Eliminar" disabled="true">
-                <input id="btnModificar" type="button" class="btn btn-primary btn-warning" style="color: #FFFFFF" data-toggle="modal" data-target="#modModal" value="Modificar" disabled="true">
+                <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
+                <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
+                <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
+                <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" onclick="load()"> <i class="fa fa-fw fa-refresh fa-lg"></i> </button>
                 <hr>
                 <div class="table-responsive">
                   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                       <tr>
-                        <th>Información</th>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Edad</th>
                         <th>Fecha de nacimiento</th>    
@@ -34,69 +34,46 @@
                         <th>Teléfono</th>
                         <th>Email</th>
                         <th>Ocupación</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                          <tr id="" onclick="toolbarAdmon()">
-                            <td><a href="">Ver más</a></td>
-                            <td>Joseph Jabin Cuevas Bustos</td>
-                            <td>21</td>
-                            <td>15/06/1996</td>    
-                            <td>H</td>
-                            <td>7531689562</td>
-                            <td>jabin.itlac@gmail.com</td>
-                            <td>Estudiante</td>
-                            </tr>
-                            <tr id="" onclick="toolbarAdmon()">
-                              <td>US1001</td>
-                              <td>José Luis Alcántara Bustamante</td>
-                              <td>21</td>
-                              <td>11/03/1997</td>    
-                              <td>H</td>
-                              <td>7531620388</td>
-                              <td>luizalcantara59@gmail.com</td>
-                              <td>Estudiante</td>
-                              </tr> 
-                            </tbody>
-                      <tfoot>
-                        <tr>
-                          <th>Información</th>    
-                          <th>Nombre</th>
-                          <th>Edad</th>
-                          <th>Fecha de nacimiento</th>    
-                          <th>Sexo</th>
-                          <th>Teléfono</th>
-                          <th>Email</th>
-                          <th>Ocupación</th>
-                          </tr>
-                        </tfoot>
-                          </table>
-                        </div>
-                      </div>
-                      <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM
-                      </div>
-                    </div>
-                  </section>               
-                  <!-- Add User Modal-->    
-                  <%- include ../partials/modals/addUser -%>
-                  
-                  <!-- Logout Modal-->
-                  <%- include ../partials/modals/dropUser -%>
-                  
-                  <!-- Modify User Modal-->    
-                  <%- include ../partials/modals/modifyUser -%>
-                  <!-- Scripts JavaScript-->
-                  <script>
-                  
-                  </script>
-                  <script src="/js/ab-toolbarAdmon.js"></script>
-                </main>
+                      </tr>
+                    </thead>
+                    <tfoot>
+                      <tr>
+                        <th>ID</th>    
+                        <th>Nombre</th>
+                        <th>Edad</th>
+                        <th>Fecha de nacimiento</th>    
+                        <th>Sexo</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
+                        <th>Ocupación</th>
+                      </tr>
+                    </tfoot>
+                    <tbody id="unitsTable">
+                          
+                    </tbody>
+                      
+                  </table>
+                </div>
               </div>
-              <%- include ../partials/template/footer -%>
-              <%- include ../partials/template/top-button -%>
-              <%- include ../partials/modals/logout -%>
-              <%- include ../partials/template/js-scripts -%>
+              <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM
+              </div>
             </div>
-          </body>
-          </html>
+          </section>               
+        <!-- Add User Modal-->    
+        <%- include ../partials/modals/addUser -%>          
+        <!-- Logout Modal-->
+        <%- include ../partials/modals/dropUser -%>          
+        <!-- Modify User Modal-->    
+        <%- include ../partials/modals/modifyUser -%>
+        <!-- Scripts JavaScript-->
+        <script src="/js/ab-toolbarAdmon.js"></script>
+      </main>
+    </div>
+    <%- include ../partials/template/footer -%>
+    <%- include ../partials/template/top-button -%>
+    <%- include ../partials/modals/logout -%>
+    <%- include ../partials/template/js-scripts -%>
+  </div>
+</body>
+</html>
           
