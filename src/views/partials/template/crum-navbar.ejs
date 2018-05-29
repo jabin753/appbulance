@@ -4,7 +4,7 @@
   $(function () {
     var socket = io();
     socket.on('receivePetition',function(data){
-      alert('Petición entrante: '+ data.latLng +'.\nDirección: ' + data.direction);
+      confirm('Petición entrante: '+ data.latLng +'.\nDirección: ' + data.direction);
     })
   });
 </script>
