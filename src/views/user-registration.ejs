@@ -3,19 +3,19 @@
 <head>
   <%- include partials/template/header -%>
 </head>
-<body class="fixed-nav sticky-footer"  style="background-color:#FF532E" id="page-top">
+<body class="fixed-nav sticky-footer"  style="background-color:#F7F7F7" id="page-top">
   <main>
     <div align="center">
       <br>
       <img src="/images/logo.png" width="80px" height="80px" href="/"> <br>
-      <font color="white" size="40">&nbsp Appbulance</font>
+      <font color="#464646" size="40">&nbsp Appbulance</font>
     </div>
     <div class="container">
       <div class="card card-register mx-auto mt-5">
         <div class="card-header">Registra una cuenta</div>
         <div class="card-body">
           <%if (flashMessage.length > 0){ %>
-            <div class="container" style="background-color: #fcb1a1"><%= flashMessage %></div>
+            <div class="container" style="background-color: #FF5A5A"><%= flashMessage %></div>
           <% } %> 
           <form action="/usuario/registro" method="POST">
             <div class="form-group">
