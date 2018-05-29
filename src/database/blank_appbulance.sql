@@ -901,6 +901,205 @@ ALTER TABLE ONLY peticiones.peticiones ALTER COLUMN id_pt SET DEFAULT nextval('p
 
 
 --
+-- Data for Name: ambulancias; Type: TABLE DATA; Schema: administracion; Owner: appbulance
+--
+
+
+
+--
+-- Name: ambulancias_id_a_seq; Type: SEQUENCE SET; Schema: administracion; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('administracion.ambulancias_id_a_seq', 1, false);
+
+
+--
+-- Data for Name: ambulancia_audit; Type: TABLE DATA; Schema: auditorias; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: frap_audit; Type: TABLE DATA; Schema: auditorias; Owner: postgres
+--
+
+
+
+--
+-- Data for Name: usuario_audit; Type: TABLE DATA; Schema: auditorias; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: navegacion; Type: TABLE DATA; Schema: configuraciones; Owner: appbulance
+--
+
+INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (2, 'navbar-dark bg-dark', 'bg-dark');
+INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (4, 'navbar-dark bg-dark', 'bg-dark');
+INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (6, 'navbar-dark bg-dark', 'bg-dark');
+
+
+--
+-- Data for Name: alergias; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Name: alergias_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('pacientes.alergias_id_seq', 1, false);
+
+
+--
+-- Data for Name: enfermedad_cardiovascular; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('pacientes.enfermedad_cardiovascular_id_seq', 1, false);
+
+
+--
+-- Data for Name: medicamentos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Name: medicamentos_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('pacientes.medicamentos_id_seq', 1, false);
+
+
+--
+-- Data for Name: padecimientos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Name: padecimientos_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('pacientes.padecimientos_id_seq', 1, false);
+
+
+--
+-- Data for Name: seguro_medico; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Name: seguro_medico_id_seq; Type: SEQUENCE SET; Schema: pacientes; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('pacientes.seguro_medico_id_seq', 1, false);
+
+
+--
+-- Data for Name: crums; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+INSERT INTO perfiles.crums (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_cm, nombre_cm, direccion_cm, coordenadas_cm, rango_servicio_cm) VALUES (2, 'crum@email.com', NULL, '0afbf9c010d879c71a403220399e1ac5', 1, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL);
+
+
+--
+-- Name: crums_id_cm_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('perfiles.crums_id_cm_seq', 2, true);
+
+
+--
+-- Data for Name: pacientes; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+INSERT INTO perfiles.pacientes (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_prs, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, id_p, tipo_sangre_p, nss_p, id_sm) VALUES (4, 'paciente@email.com', NULL, '0afbf9c010d879c71a403220399e1ac5', 2, NULL, NULL, NULL, 2, 'Jabin', 'Cuevas', 'Bustos', NULL, NULL, NULL, 2, NULL, NULL, NULL);
+
+
+--
+-- Name: pacientes_id_p_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('perfiles.pacientes_id_p_seq', 2, true);
+
+
+--
+-- Data for Name: personas; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+
+
+--
+-- Name: personas_id_prs_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('perfiles.personas_id_prs_seq', 4, true);
+
+
+--
+-- Data for Name: tamps; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+INSERT INTO perfiles.tamps (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_prs, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, id_tmp, grado_tmp, experiencia_tmp, fecha_ingreso_tmp) VALUES (6, 'tamp@email.com', NULL, '0afbf9c010d879c71a403220399e1ac5', 3, NULL, NULL, NULL, 4, 'Jose Luis', 'Alcantara', 'Bustamante', NULL, NULL, NULL, 2, NULL, NULL, NULL);
+
+
+--
+-- Name: tamps_id_tmp_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('perfiles.tamps_id_tmp_seq', 2, true);
+
+
+--
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+
+
+--
+-- Name: usuarios_id_usr_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('perfiles.usuarios_id_usr_seq', 6, true);
+
+
+--
+-- Data for Name: fraps; Type: TABLE DATA; Schema: peticiones; Owner: appbulance
+--
+
+
+
+--
+-- Name: fraps_id_frp_seq; Type: SEQUENCE SET; Schema: peticiones; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('peticiones.fraps_id_frp_seq', 1, false);
+
+
+--
+-- Data for Name: peticiones; Type: TABLE DATA; Schema: peticiones; Owner: appbulance
+--
+
+
+
+--
+-- Name: peticiones_id_pt_seq; Type: SEQUENCE SET; Schema: peticiones; Owner: appbulance
+--
+
+SELECT pg_catalog.setval('peticiones.peticiones_id_pt_seq', 1, false);
+
+
+--
 -- Name: ambulancias ambulancias_pkey; Type: CONSTRAINT; Schema: administracion; Owner: appbulance
 --
 
@@ -1029,17 +1228,45 @@ ALTER TABLE ONLY peticiones.peticiones
 
 
 --
--- Name: usuarios borrar_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
+-- Name: crums borrar_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
 --
 
-CREATE TRIGGER borrar_perfil BEFORE DELETE ON perfiles.usuarios FOR EACH ROW EXECUTE PROCEDURE perfiles.borrar_perfil();
+CREATE TRIGGER borrar_perfil BEFORE DELETE ON perfiles.crums FOR EACH ROW EXECUTE PROCEDURE perfiles.borrar_perfil();
 
 
 --
--- Name: usuarios nuevo_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
+-- Name: pacientes borrar_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
 --
 
-CREATE TRIGGER nuevo_perfil AFTER INSERT OR UPDATE ON perfiles.usuarios FOR EACH ROW EXECUTE PROCEDURE perfiles.nuevo_perfil();
+CREATE TRIGGER borrar_perfil BEFORE DELETE ON perfiles.pacientes FOR EACH ROW EXECUTE PROCEDURE perfiles.borrar_perfil();
+
+
+--
+-- Name: tamps borrar_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TRIGGER borrar_perfil BEFORE DELETE ON perfiles.tamps FOR EACH ROW EXECUTE PROCEDURE perfiles.borrar_perfil();
+
+
+--
+-- Name: crums nuevo_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TRIGGER nuevo_perfil AFTER INSERT ON perfiles.crums FOR EACH ROW EXECUTE PROCEDURE perfiles.nuevo_perfil();
+
+
+--
+-- Name: pacientes nuevo_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TRIGGER nuevo_perfil AFTER INSERT ON perfiles.pacientes FOR EACH ROW EXECUTE PROCEDURE perfiles.nuevo_perfil();
+
+
+--
+-- Name: tamps nuevo_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TRIGGER nuevo_perfil AFTER INSERT ON perfiles.tamps FOR EACH ROW EXECUTE PROCEDURE perfiles.nuevo_perfil();
 
 
 --
