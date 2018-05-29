@@ -13,17 +13,17 @@
           <h5>Inicio</h5>
           <hr>
           <div class="form-group">
-              <form action="/usuario/peticion" method="POST" name="formularioPeticion" role="form">
+              <form name="formularioPeticion" role="form">
                 <div class="form-row">                    
                     <div class="col-md-6" id="map" style="height: 250px"></div>
                     <div class="col-md-6">                        
-                        <label for="OutputDirection">Tu dirección</label>
-                        <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
-                        <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
-                        <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>                        
-                    <hr>
-                    <button class="btn btn-primary btn-block" type="submit">Solicitar ambulancia</button>
-                    <hr>
+                        <label for="OutputDirection">Tu dirección</label><hr>
+                        <button class="btn btn-primary btn-block" type="submit">Solicitar ambulancia</button><hr>
+                        <div style="display: none">
+                            <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
+                            <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
+                            <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>
+                        </div>
                     </div>
                 </div>
                 </form>

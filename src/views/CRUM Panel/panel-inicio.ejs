@@ -14,9 +14,14 @@ DATOS DE ENTRADA:
     <div class="container-fluid">
       <main>
         <div id="map" style="width:100%;height:480px;background:white"></div>
-        <script src="/js/ab-google-maps.js"></script>
+        <div style="display: none">
+          <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
+          <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
+          <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>
+        </div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap" async defer></script>
-      </main>
+        <script src="/js/ab-google-maps.js"></script>
+        </main>
     </div>
     <%- include ../partials/template/footer -%>
     <%- include ../partials/template/top-button -%>
