@@ -8,9 +8,10 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
+      <form action="/crum/unidades" method="POST" role="form">
       <div class="modal-body">            
           <div class="card-body">
-            <form>
+           
               <div class="form-group">
                 <label for="InputMatricula">Matrícula</label>
                 <input class="form-control" id="InputMatricula" type="text" aria-describedby="nameHelp" placeholder="Escribe la matrícula">
@@ -23,13 +24,14 @@
                 <label for="InputState">Estado</label>
                 <input class="form-control" id="InputState" type="text" aria-describedby="nameHelp" placeholder="Escribe el estado de la unidad">
               </div>
-            </form>
+            
           </div>
       </div>
       <div class="modal-footer">
         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary btn-success" style="color: #FFFFFF" onclick="addUnit()" data-dismiss="modal">Registrar</a>
+        <button class="btn btn-primary btn-success" style="color: #FFFFFF" type="submit" data-dismiss="modal">Registrar</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
