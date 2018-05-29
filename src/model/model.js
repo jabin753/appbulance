@@ -110,16 +110,25 @@ module.exports = {
 	)},
 	crumPanelTamp:(req,res) =>{},
 	crumPanelUnidades:(req,res) => {
-		console.log(req.user.id_usr)
 		bd.query({
 			text: 'SELECT * FROM administracion.get_a($1)',
 			values: [req.user.id_usr]
 		},(err,response) => {
-			console.log(err,response.rows)
-			res.render('CRUM Panel/panel-unidades',
-			{pageTitle:'Appbulance (CRUM) - Unidades Médicas',
-			style:req.user.style,
-			data: response.rows})
+			res.render('CRUM Panel/panel-unidades',{
+				pageTitle:'Appbulance (CRUM) - Unidades Médicas',
+				style:req.user.style,
+				data: response.rows
+			})
+		})
+	},
+	crumPanelUnidadesAdd:(req,res) => {
+		bd.query({
+			text: 'INSERT INTO administracion.ambulancias(num_placa_a, num_economico_a, id_cm, estado_a)'+
+				  'VALUES($1,$2,$3,$4)',
+			values: [req.body['num_placa_a'],req.body['num_economico_a'],2,req.body['estado_a']]
+		},(err,response) => {
+			console.log(err,response);
+			res.redirect('/crum/unidades')
 		})
 	}
 }

@@ -29,6 +29,7 @@ module.exports = (app,passport) => {
     app.get('/crum/peticiones',crum.sesion,crum.peticiones)
     app.get('/crum/tamps',crum.sesion,crum.tamps)
     app.get('/crum/unidades',crum.sesion,crum.unidades)
+    app.post('/crum/unidades',crum.sesion,crum.addUnidades)
     app.get('/crum/usuarios',crum.sesion,crum.usuarios)
     app.get('/crum/configuracion',crum.sesion,crum.configuracion)
 
