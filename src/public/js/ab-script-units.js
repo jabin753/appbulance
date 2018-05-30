@@ -60,7 +60,31 @@ var _modal_mod = "<div class='form-group'>"+
                     "<label for='OutputState'>Estado</label>"+
                     "<input class='form-control' id='OutputState_modal' type='text' value='"+ _estado +"'>"+
                 "</div>";
-var _modal_del = "<div class='modal-body'>¿Está seguro que desea eliminar la unidad '"+ _id +"' con la matricula '"+ _mat + "'?</div>";
+var _modal_del = "<div class='modal-body'>¿Está seguro que desea eliminar la unidad '"+ _id +"' con la matricula '"+ _mat + "'?</div>"+
+                "<div style='display: none;'>"+
+                    "<div class='form-group'>"+
+                        "<label for='OutputIDUnit'>ID Ambulancia</label>"+
+                        "<input class='form-control' id='OutputIDUnit_modal' type='text' value='"+ _id +"' disabled>"+
+                    "</div> "+
+                    "<div class='form-group'>"+
+                        "<label for='OutputMatricula'>Matrícula</label>"+
+                        "<input class='form-control' id='OutputMatricula_modal' type='text' value='"+ _mat +"'>"+
+                    "</div>"+
+                    "<div class='form-group'>"+
+                        "<label for='OutputEconomicNumber'>Número Económico</label>"+
+                        "<input class='form-control' id='OutputEconomicNumber_modal' type='number' value='"+ _num_e +"'>"+
+                    "</div>"+   
+                    "<div class='form-group'>"+
+                        "<label for='OutputState'>Estado</label>"+
+                        "<select class='form-control' required name='estado_a'> id='OutputState_modal'"+
+                          "<option value='0'>Selecciona el estado</option>"+
+                          "<option value='0'>Mantenimiento</option> "+
+                          "<option value='1'>Activo</option>"+
+                          "<option value='2'>Fuera de servicio</option>"+
+                        "</select>"+
+                        //"<input class='form-control' id='OutputState_modal' type='number' value='"+ _estado +"'>"+
+                    "</div>"+
+                "</div>";
 document.getElementById('modal-modUnits').innerHTML = _modal_mod;
 document.getElementById('modal-delUnits').innerHTML = _modal_del;
 }

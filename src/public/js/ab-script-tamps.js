@@ -184,7 +184,87 @@ function loadValues(){
                             "</div>"+
                         "</div>"+
                     "</div>";*/
-    var _modal_del = "<div class='modal-body'>¿Está seguro que desea eliminar el TAMP '"+ _id +"' cuyo nombre es '"+ _name + " "+ _ap_pat + " "+ _ap_mat + "'?</div>";
+    var _modal_del = "<div class='modal-body'>¿Está seguro que desea eliminar el TAMP '"+ _id +"' cuyo nombre es '"+ _name + " "+ _ap_pat + " "+ _ap_mat + "'?</div>"+
+                    "<div style:'display:none'>"+
+                    "<div class='form-group'>"+
+                        "<div class='form-row'>"+
+                            "<div class='col-md-6'>"+
+                                "<label for='InputID'>ID</label>"+
+                                "<input value='" + _id + "' disabled class='form-control'required name='id_usr'id='InputID' type='text' aria-describedby='nameHelp'>"+
+                            "</div>"+
+                            "<div class='col-md-6'>"+
+                                "<label for='InputName'>Nombre</label>"+
+                                "<input value='" + _name + "' class='form-control'required name='nombre_prs'id='InputName' type='text' aria-describedby='nameHelp' placeholder='Escribe tu nombre' maxLength='30'>"+
+                            "</div>"+
+                        "</div>"+
+                    "</div>"+
+                    "<div class='form-group'>"+
+                        "<div class='form-row'>"+
+                            "<div class='col-md-6'>"+
+                                "<label for='InputLastName'>Apellido Paterno</label>"+
+                                "<input value='" + _ap_pat + "' class='form-control' required name='apellido_paterno_prs'id='InputLastName' type='text' aria-describedby='nameHelp' placeholder='Escribe tu apellido paterno' maxLength='30'>"+
+                            "</div>"+
+                            "<div class='col-md-6'>"+
+                                "<label for='InputLastName2'>Apellido Materno</label>"+
+                                "<input value='" + _ap_mat + "' class='form-control' required name='apellido_materno_prs'id='InputLastName2' type='text' aria-describedby='nameHelp' placeholder='Escribe tu apellido materno' maxLength='30'>"+
+                            "</div>"+
+                        "</div>"+
+                   "</div>"+
+                   "<div class='form-row'>"+
+                        "<div class='col-md-6'>"+
+                            "<label for='InputPhoneNumber'>Teléfono</label>"+
+                            "<input value='" + _tel + "' class='form-control' required name='telefono_usr'id='InputPhoneNumber' type='tel' placeholder='Escribe tu número telefónico' maxLength='10'>"+
+                        "</div>"+
+                        "<div class='col-md-6'>"+
+                            "<label for='InputGrade'>Grado</label>"+
+                            "<input value='" + _grade + "' class='form-control' name='grado_tmp' id='InputGrade' type='text' aria-describedby='nameHelp' placeholder='Escribe tu grado'>"+
+                        "</div>"+           
+                    "</div>"+
+                    "<br>"+
+                    "<div class='form-group'>"+
+                       "<div class='form-row'>"+
+                            "<div class='col-md-6'>"+
+                                "<label for='InputSex'>Sexo</label><br>"+
+                                "<select class='form-control' required name='sexo_prs' id='InputSex'>"+
+                                    "<option value='0'>Selecciona tu sexo</option> "+    
+                                    "<option value='H'>Hombre</option> "+
+                                    "<option value='M'>Mujer</option>"+
+                                "</select>"+
+                            "</div>"+
+                            "<div class='col-md-6'>"+
+                                "<label for='InputBlood'>Tipo de sangre</label>"+
+                                "<select class='form-control' required name='tipo_sangre_p' id='InputBlood'>"+
+                                    "<option value='0'>Selecciona tu tipo de sangre</option>"+ 
+                                    "<option value='O+'>O+</option>"+
+                                    "<option value='O-'>O-</option>"+
+                                    "<option value='A+'>A+</option>"+
+                                    "<option value='A-'>A-</option>"+
+                                    "<option value='B+'>B+</option>"+
+                                    "<option value='B-'>B-</option>"+
+                                    "<option value='AB+'>AB+</option> "+
+                                    "<option value='AB-'>AB-</option>"+
+                                "</select>"+
+                            "</div>"+
+                        "</div>"+                        
+                    "</div>"+
+                    "<div class='form-group'>"+
+                              "<div class='form-row'>"+
+                                "<div class='col-md-6'>"+
+                                  "<label for='InputDateBirth'>Fecha de nacimiento</label>"+
+                                  "<input value='" + _date_birt + "' class='form-control' required name='fecha_nacimiento_prs' id='InputDateBirth' type='date' min='1910-01-01' max='2000-03-01'>"+
+                                "</div>"+
+                                "<div class='col-md-6'>"+
+                                  "<label for='InputDateEnter'>Fecha de ingreso</label>"+
+                                  "<input value='" + _date_enter + "'  class='form-control' required name='fecha_ingreso_tmp' id='InputDateEnter' type='date' min='1910-01-01' max='2000-03-01'>"+
+                                "</div>"+
+                              "</div>"+                                   
+                            "</div>"+     
+                    "<hr>"+
+                    "<div class='form-group'>"+
+                        "<label for='InputEmail1'>Dirección de correo electrónico</label>"+
+                        "<input value='" + _email + "' class='form-control' required name='email_usr' id='InputEmail1' type='email' aria-describedby='emailHelp' placeholder='Escribe tu email'>"+
+                    "</div>"+
+                    "</div>";
     document.getElementById('modal-modTamps').innerHTML = _modal_mod;
     document.getElementById('modal-delTamps').innerHTML = _modal_del;
 }
