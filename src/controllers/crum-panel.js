@@ -19,6 +19,7 @@ module.exports = {
     style:req.user.style})
   },
   unidades: model.crumPanelUnidades,
+  addUnidades: model.crumPanelUnidadesAdd,
   usuarios: (req,res)=>{
     res.render(path.join(rootViewPath,'panel-usuarios'),
     {pageTitle:'Appbulance (CRUM) - Usuarios atendidos',
