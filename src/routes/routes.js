@@ -4,27 +4,16 @@ var user  = require('../controllers/user-panel')
 var tamp = require('../controllers/tamp-panel')
 var login  = require('../controllers/login')
 var registration  = require('../controllers/registration')
-module.exports = (app,passport) => {    
-    app.get('/',login.validate,inicio.inicio)
-    
+module.exports = (app,passport) => {   
+    app.get('/',login.validate,login.user)
+    app.get('/nosotros',inicio.inicio) 
+    app.get('/usuario/ingreso',login.validate,login.user)
+    app.post('/usuario/ingreso',passport.authenticate('local',{failureRedirect : '/usuario/ingreso'}),login.validate)
     //Exclusive Users Routes
     app.get('/usuario/registro',registration.userPaciente)
     app.post('/usuario/registro',registration.addUserPaciente)
-    app.get('/usuario/ingreso',login.validate,login.user)
-    app.post('/usuario/ingreso',passport.authenticate('local-usuario',{
-        successRedirect : '/usuario/inicio',
-        failureRedirect : '/usuario/ingreso'
-    }))
     app.get('/usuario/inicio',user.sesion,user.inicio)
-    
     //Exclusive CRUM Routes
-    app.get('/crum/registro',registration.userCrum)
-    app.post('/crum/registro',registration.addUserCrum)
-    app.get('/crum/ingreso',login.validate,login.crum)
-    app.post('/crum/ingreso',passport.authenticate('local-crum',{
-        successRedirect : '/crum/inicio',
-        failureRedirect : '/crum/ingreso'
-    }))
     app.get('/crum/inicio',crum.sesion,crum.inicio)
     app.get('/crum/peticiones',crum.sesion,crum.peticiones)
     app.get('/crum/tamps',crum.sesion,crum.tamps)
@@ -32,15 +21,7 @@ module.exports = (app,passport) => {
     app.post('/crum/unidades',crum.sesion,crum.addUnidades)
     app.get('/crum/usuarios',crum.sesion,crum.usuarios)
     app.get('/crum/configuracion',crum.sesion,crum.configuracion)
-
     //Exclusive TAMP Routes
-    app.get('/tamp/registro',registration.userTamp)
-    app.post('/tamp/registro',registration.addUserTamp)
-    app.get('/tamp/ingreso',login.validate,login.tamp)
-    app.post('/tamp/ingreso',passport.authenticate('local-tamp',{
-        successRedirect : '/tamp/inicio',
-        failureRedirect : '/tamp/ingreso'
-    }))
     app.get('/tamp/inicio',tamp.sesion,tamp.inicio)
     
     app.get('/logout', (req, res) => {
