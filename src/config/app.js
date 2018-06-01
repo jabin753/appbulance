@@ -1,3 +1,4 @@
+var morgan = require('morgan')
 var path = require('path')
 var express = require('express')
 var bodyParser = require('body-parser')
@@ -20,7 +21,7 @@ app.use(express.static(path.join(__dirname,'..','public')))//Ruta de archivos es
 
 app.set('port',process.env.port || 8888);// Puerto de operación de la aplicación
 
-
+app.use(morgan('tiny'))
 
 app.use(session({//Sesión secreta. Requerida por passport
     secret: '::appbulance2018::',

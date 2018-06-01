@@ -1,18 +1,23 @@
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Eliminar unidad</h5>
-        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body" id="modal-delUnits">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary btn-danger" style="color: #FFFFFF">Eliminar</a>
-      </div>
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Eliminar una unidad</h5>
+      <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
     </div>
+    <form action="/crum/unidades-B" id="delUnits" method="POST" role="form">
+    <div class='modal-body'>¿Está seguro que desea eliminar la unidad?</div>
+    <div style="display: none">
+    <input name="id_a">
+    <input name="num_placa_a">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+      <button class="btn btn-primary btn-danger" style="color: #FFFFFF" type="submit">Eliminar</button>
+    </div>
+    </form>
   </div>
+</div>
 </div>

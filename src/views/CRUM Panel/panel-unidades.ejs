@@ -8,7 +8,6 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <main>
-        <!-- Breadcrumbs-->
         <section id="ViewUsers">
           <!-- Example DataTables Card-->
           <div class="card mb-3">
@@ -32,14 +31,6 @@
                       <th>Estado</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>ID Ambulancia</th>
-                      <th>Matrícula</th>
-                      <th>Número Económico</th>
-                      <th>Estado</th>
-                    </tr>
-                  </tfoot>
                   <tbody id="unitsTable">
                   <%if (data.length > 0) { %>
                     <% for (var i = 0; i < data.length; i ++) { %>
@@ -52,6 +43,14 @@
                     <% } %>
                   <% } %>
                   </tbody>
+                  <tfoot>
+                    <tr>
+                      <th>ID Ambulancia</th>
+                      <th>Matrícula</th>
+                      <th>Número Económico</th>
+                      <th>Estado</th>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
             </div>

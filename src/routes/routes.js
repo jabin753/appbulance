@@ -15,11 +15,27 @@ module.exports = (app,passport) => {
     app.get('/usuario/inicio',user.sesion,user.inicio)
     //Exclusive CRUM Routes
     app.get('/crum/inicio',crum.sesion,crum.inicio)
+
     app.get('/crum/peticiones',crum.sesion,crum.peticiones)
+    app.post('/crum/peticiones-A',crum.sesion,crum.peticiones_A)
+    app.post('/crum/peticiones-B',crum.sesion,crum.peticiones_B)
+    app.post('/crum/peticiones-C',crum.sesion,crum.peticiones_C)
+    
     app.get('/crum/tamps',crum.sesion,crum.tamps)
+    app.post('/crum/tamps-A',crum.sesion,crum.tamps_A)
+    app.post('/crum/tamps-B',crum.sesion,crum.tamps_B)
+    app.post('/crum/tamps-C',crum.sesion,crum.tamps_C)
+
     app.get('/crum/unidades',crum.sesion,crum.unidades)
-    app.post('/crum/unidades',crum.sesion,crum.addUnidades)
+    app.post('/crum/unidades-A',crum.sesion,crum.unidades_A)
+    app.post('/crum/unidades-B',crum.sesion,crum.unidades_B)
+    app.post('/crum/unidades-C',crum.sesion,crum.unidades_C)
+
     app.get('/crum/usuarios',crum.sesion,crum.usuarios)
+    app.post('/crum/usuarios-A',crum.sesion,crum.usuarios_A)
+    app.post('/crum/usuarios-B',crum.sesion,crum.usuarios_B)
+    app.post('/crum/usuarios-C',crum.sesion,crum.usuarios_C)
+
     app.get('/crum/configuracion',crum.sesion,crum.configuracion)
     //Exclusive TAMP Routes
     app.get('/tamp/inicio',tamp.sesion,tamp.inicio)
