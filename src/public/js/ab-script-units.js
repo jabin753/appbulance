@@ -1,95 +1,69 @@
-var _operation;
-var _id;
-var _mat;
-var _num_e;
-var _estado;
+var id_a;
+var num_placa_a;
+var num_economico_a;
+var estado_a;
 
-$(document).ready(function(){     
-$('#unitsTable').on("click", function(){
-    $('td').click(function(){          
-    _id = $(this).parents("tr").find("td").eq(0).html();
-    _mat = $(this).parents("tr").find("td").eq(1).html();
-    _num_e = $(this).parents("tr").find("td").eq(2).html();
-    _estado = $(this).parents("tr").find("td").eq(3).html();
-    $("button[name=btnDel]").attr("disabled", false); 
-    $("button[name=btnMod]").attr("disabled", false); 
-    loadValues();
+$(document).ready(function () {
+	$('#unitsTable td').on("click", function(){
+		id_a = $(this).parents("tr").find("td").eq(0).html();
+		num_placa_a = $(this).parents("tr").find("td").eq(1).html();
+		num_economico_a = $(this).parents("tr").find("td").eq(2).html();
+		estado_a = $(this).parents("tr").find("td").eq(3).html();
+		$("button[name='btnDel']").attr("disabled", false);
+		$("button[name='btnMod']").attr("disabled", false);
     });
-}); 
-}); 
+    $("button[name='btnMod']").on("click", function(){ 
+        var $form = $('#modUnits');
+		$form.find("input[name='id_a']").attr("value",id_a);
+        $form.find("input[name='num_placa_a']").attr("value",num_placa_a);
+        $form.find("input[name='num_economico_a']").attr("value",num_economico_a);
+		$form.find("input[name='estado_a']").attr("value",estado_a);
+	});
+	$("button[name='btnDel']").on("click", function(){
+		$("#delUnits input[name='id_a']").attr("value",id_a);
+		$("#delUnits input[name='num_placa_a']").attr("value",num_placa_a);
+	})
+    
+});
 
-function addUnit(){ 
-var _id = Math.floor((Math.random() * 100) + 1);
-var _mat = document.getElementById("InputMatricula").value;
-var _num_economic = document.getElementById("InputEconomicNumber").value;
-var _state = document.getElementById("InputState").value;
-var fila="<tr id='unit_"+ _id + "'><td>"+ _id
-        +"</td><td>"+_mat+"</td><td>"+_num_economic+"</td><td>"+_state+"</td></tr>"; 
-if(_mat.trim()=='' || _num_economic.trim()=='' || _state.trim()==''){
-    alert("Operación fracasada. Ingrese los datos faltantes.");          
-} else {
-    document.getElementById("unitsTable").innerHTML = fila;
-    clear();                    
-}          
+function addUnit() {
+	var num_placa_a = document.getElementById("InputMatricula").value;
+	var num_economico_a = document.getElementById("InputEconomicNumber").value;
+	var _state = document.getElementById("InputState").value;
+	if (num_placa_a.trim() == '' || num_economico_a.trim() == '' || _state.trim() == '') {
+		alert("Operación fracasada. Ingrese los datos faltantes.");
+	} else {
+		clear();
+	}
+}
+function clear() {
+	document.getElementById("InputMatricula").value = "";
+	document.getElementById("InputEconomicNumber").value = "";
+	document.getElementById("InputState").value = "";
+	document.getElementById("OutputIDUnit_modal").value = "";
+	document.getElementById("OutputMatricula_modal").value = "";
+	document.getElementById("OutputEconomicNumber_modal").value = "";
+	document.getElementById("OutputState_modal").value = "";
 }
 
-function clear(){
-document.getElementById("InputMatricula").value = "";
-document.getElementById("InputEconomicNumber").value = "";
-document.getElementById("InputState").value = "";
-document.getElementById("OutputIDUnit_modal").value = "";
-document.getElementById("OutputMatricula_modal").value = "";
-document.getElementById("OutputEconomicNumber_modal").value = "";
-document.getElementById("OutputState_modal").value = "";        
+function modifyUnit() {
+    $('#modal-modUnits').on('submit',function(event){
+        var $form = $(this);
+        var term = $form.find("input[name='s']").val();
+        var url = $form.attr('action'); 
+    });
+	var num_placa_a = document.getElementById("InputMatricula").value;
+	var num_economico_a = document.getElementById("InputEconomicNumber").value;
+	var _state = document.getElementById("InputState").value;
+	var fila = "<tr id='unit_" + id_a + "'><td>" + id_a +
+		"</td><td>" + num_placa_a + "</td><td>" + num_economico_a + "</td><td>" + _state + "</td></tr>";
+	if (num_placa_a.trim() == '' || num_economico_a.trim() == '' || _state.trim() == '') {
+		alert("Operación fracasada. Ingrese los datos faltantes.");
+	} else {
+		document.getElementById("unitsTable").innerHTML = fila;
+		clear();
+	}
 }
-
-function loadValues(){
-var _modal_mod = "<div class='form-group'>"+
-                    "<label for='OutputIDUnit'>ID Ambulancia</label>"+
-                    "<input class='form-control' id='OutputIDUnit_modal' type='text' value='"+ _id +"' disabled>"+
-                "</div> "+
-                "<div class='form-group'>"+
-                    "<label for='OutputMatricula'>Matrícula</label>"+
-                    "<input class='form-control' id='OutputMatricula_modal' type='text' value='"+ _mat +"'>"+
-                "</div>"+
-                "<div class='form-group'>"+
-                    "<label for='OutputEconomicNumber'>Número Económico</label>"+
-                    "<input class='form-control' id='OutputEconomicNumber_modal' type='text' value='"+ _num_e +"'>"+
-                "</div>"+   
-                "<div class='form-group'>"+
-                    "<label for='OutputState'>Estado</label>"+
-                    "<input class='form-control' id='OutputState_modal' type='text' value='"+ _estado +"'>"+
-                "</div>";
-var _modal_del = "<div class='modal-body'>¿Está seguro que desea eliminar la unidad '"+ _id +"' con la matricula '"+ _mat + "'?</div>"+
-                "<div style='display: none;'>"+
-                    "<div class='form-group'>"+
-                        "<label for='OutputIDUnit'>ID Ambulancia</label>"+
-                        "<input class='form-control' id='OutputIDUnit_modal' type='text' value='"+ _id +"' disabled>"+
-                    "</div> "+
-                    "<div class='form-group'>"+
-                        "<label for='OutputMatricula'>Matrícula</label>"+
-                        "<input class='form-control' id='OutputMatricula_modal' type='text' value='"+ _mat +"'>"+
-                    "</div>"+
-                    "<div class='form-group'>"+
-                        "<label for='OutputEconomicNumber'>Número Económico</label>"+
-                        "<input class='form-control' id='OutputEconomicNumber_modal' type='number' value='"+ _num_e +"'>"+
-                    "</div>"+   
-                    "<div class='form-group'>"+
-                        "<label for='OutputState'>Estado</label>"+
-                        "<select class='form-control' required name='estado_a'> id='OutputState_modal'"+
-                          "<option value='0'>Selecciona el estado</option>"+
-                          "<option value='0'>Mantenimiento</option> "+
-                          "<option value='1'>Activo</option>"+
-                          "<option value='2'>Fuera de servicio</option>"+
-                        "</select>"+
-                        //"<input class='form-control' id='OutputState_modal' type='number' value='"+ _estado +"'>"+
-                    "</div>"+
-                "</div>";
-document.getElementById('modal-modUnits').innerHTML = _modal_mod;
-document.getElementById('modal-delUnits').innerHTML = _modal_del;
+function load() {
+	location.reload();
 }
-
-function load(){
-    location.reload();
-  }
-          
