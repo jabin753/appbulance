@@ -1,7 +1,7 @@
 var LocalStrategy = require('passport-local').Strategy
-var db = require('./../model/model')
+var model = require('./../model/model')
 
-module.exports = (passport)=>{
+module.exports = (passport) => {
     
     passport.serializeUser((user, done) => {
         return done(null,user)
@@ -9,28 +9,12 @@ module.exports = (passport)=>{
     passport.deserializeUser((user, done) => {
         return done(null,user)
     })
-    
-    //Autenticación local para el CRUM
-    passport.use('local-crum',new LocalStrategy({
+  
+    //Autenticación local para los usuarios
+    passport.use(new LocalStrategy({
         usernameField: 'email',
         passwordField: 'contra',
         passReqToCallback: true}, 
-        db.authusercrum 
-    ))
-    
-    //Autenticación local para el paciente
-    passport.use('local-usuario',new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'contra',
-        passReqToCallback: true}, 
-        db.authuser 
-    ))
-    
-    //Autenticación local para el TAMP
-    passport.use('local-tamp',new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'contra',
-        passReqToCallback: true}, 
-        db.addUserTamp 
+        model.authuser 
     ))
 }

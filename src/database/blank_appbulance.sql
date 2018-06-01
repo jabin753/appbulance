@@ -184,21 +184,67 @@ $$;
 ALTER FUNCTION perfiles.adduserpacientes(datos json) OWNER TO appbulance;
 
 --
--- Name: authuser(json); Type: FUNCTION; Schema: perfiles; Owner: appbulance
+-- Name: authuser(json); Type: FUNCTION; Schema: perfiles; Owner: postgres
 --
 
-CREATE FUNCTION perfiles.authuser(datos json) RETURNS TABLE(id_usr integer, tipo_usr integer, nav_style character varying, body_style character varying)
-    LANGUAGE sql
+CREATE FUNCTION perfiles.authuser(datos json) RETURNS TABLE(id_usr integer, tipo_usr integer, id integer, nav_style character varying, body_style character varying)
+    LANGUAGE plpgsql
     AS $$
-SELECT usuarios.id_usr,usuarios.tipo_usr,navegacion.nav_style, navegacion.body_style FROM perfiles.usuarios, configuraciones.navegacion WHERE 
-usuarios.id_usr = navegacion.id_usr
---Obtencion de datos del json
-AND email_usr = json_extract_path_text(datos, 'email') AND contrasena_usr = md5(json_extract_path_text(datos, 'contra')) 
-
+DECLARE 
+	usuario RECORD;
+BEGIN
+	PERFORM usuarios.id_usr FROM perfiles.usuarios 
+		WHERE usuarios.email_usr = json_extract_path_text(datos, 'email');
+	IF NOT FOUND THEN
+		RAISE EXCEPTION 'Correo % no registrado',json_extract_path_text(datos, 'email')
+			USING HINT = 'Este correo no está registrado';
+	END IF;
+	PERFORM usuarios.id_usr FROM perfiles.usuarios 
+		WHERE usuarios.email_usr = json_extract_path_text(datos, 'email')
+		AND   contrasena_usr = md5(json_extract_path_text(datos, 'contra'));
+	IF NOT FOUND THEN
+		RAISE EXCEPTION 'Contraseña incorrecta'
+			USING HINT = 'Contraseña incorrecta';
+	END IF;
+        SELECT usuarios.id_usr, usuarios.tipo_usr INTO STRICT usuario FROM perfiles.usuarios 
+		WHERE email_usr = json_extract_path_text(datos, 'email') 
+		AND   contrasena_usr = md5(json_extract_path_text(datos, 'contra'));
+	IF FOUND THEN
+		IF usuario.tipo_usr = 1 THEN
+			RETURN QUERY
+			SELECT usuarios.id_usr,
+				usuarios.tipo_usr,
+				crums.id_cm,
+				navegacion.nav_style,
+				navegacion.body_style FROM perfiles.usuarios, perfiles.crums, configuraciones.navegacion
+				WHERE crums.id_usr = usuarios.id_usr  AND
+				usuarios.id_usr = navegacion.id_usr;
+		ELSEIF usuario.tipo_usr = 2 THEN
+			RETURN QUERY
+			SELECT usuarios.id_usr,
+				usuarios.tipo_usr,
+				pacientes.id_p,
+				navegacion.nav_style,
+				navegacion.body_style FROM perfiles.usuarios, perfiles.pacientes, configuraciones.navegacion
+				WHERE pacientes.id_usr = usuarios.id_usr  AND
+				usuarios.id_usr = navegacion.id_usr;
+		ELSEIF usuario.tipo_usr = 3 THEN
+			RETURN QUERY
+			SELECT usuarios.id_usr,
+				usuarios.tipo_usr,
+				tamps.id_tmp,
+				navegacion.nav_style,
+				navegacion.body_style FROM perfiles.usuarios, perfiles.tamps, configuraciones.navegacion
+				WHERE tamps.id_usr = usuarios.id_usr  AND
+				usuarios.id_usr = navegacion.id_usr;
+		END IF;
+	END IF;
+	
+END;
 $$;
 
 
-ALTER FUNCTION perfiles.authuser(datos json) OWNER TO appbulance;
+ALTER FUNCTION perfiles.authuser(datos json) OWNER TO postgres;
 
 --
 -- Name: borrar_perfil(); Type: FUNCTION; Schema: perfiles; Owner: postgres
@@ -270,6 +316,95 @@ $_$;
 
 
 ALTER FUNCTION perfiles.get_cm(id_usr integer) OWNER TO postgres;
+
+--
+-- Name: get_cm_id(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
+--
+
+CREATE FUNCTION perfiles.get_cm_id(id_usr integer) RETURNS SETOF integer
+    LANGUAGE sql
+    AS $_$
+SELECT id_cm FROM perfiles.crums WHERE id_usr = $1
+$_$;
+
+
+ALTER FUNCTION perfiles.get_cm_id(id_usr integer) OWNER TO postgres;
+
+--
+-- Name: personas; Type: TABLE; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TABLE perfiles.personas (
+    id_prs integer NOT NULL,
+    nombre_prs character varying(50) NOT NULL,
+    apellido_paterno_prs character varying(50) NOT NULL,
+    apellido_materno_prs character varying(50) NOT NULL,
+    fecha_nacimiento_prs date,
+    sexo_prs character(1),
+    ocupacion_prs text,
+    CONSTRAINT sexo_chk CHECK ((sexo_prs = ANY (ARRAY['M'::bpchar, 'F'::bpchar])))
+)
+INHERITS (perfiles.usuarios);
+
+
+ALTER TABLE perfiles.personas OWNER TO appbulance;
+
+--
+-- Name: pacientes; Type: TABLE; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TABLE perfiles.pacientes (
+    id_p integer NOT NULL,
+    tipo_sangre_p character varying(3),
+    nss_p character varying(12),
+    id_sm integer,
+    CONSTRAINT tipo_sangre_chk CHECK (((tipo_sangre_p)::text = ANY (ARRAY[('A+'::character varying)::text, ('A-'::character varying)::text, ('B+'::character varying)::text, ('B-'::character varying)::text, ('O+'::character varying)::text, ('O-'::character varying)::text, ('AB+'::character varying)::text, ('AB-'::character varying)::text])))
+)
+INHERITS (perfiles.personas);
+
+
+ALTER TABLE perfiles.pacientes OWNER TO appbulance;
+
+--
+-- Name: get_p(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
+--
+
+CREATE FUNCTION perfiles.get_p(id_usr integer) RETURNS SETOF perfiles.pacientes
+    LANGUAGE sql
+    AS $_$
+SELECT * FROM perfiles.pacientes WHERE id_usr = $1
+$_$;
+
+
+ALTER FUNCTION perfiles.get_p(id_usr integer) OWNER TO postgres;
+
+--
+-- Name: tamps; Type: TABLE; Schema: perfiles; Owner: appbulance
+--
+
+CREATE TABLE perfiles.tamps (
+    id_tmp integer NOT NULL,
+    grado_tmp text,
+    experiencia_tmp text,
+    fecha_ingreso_tmp date
+)
+INHERITS (perfiles.personas);
+
+
+ALTER TABLE perfiles.tamps OWNER TO appbulance;
+
+--
+-- Name: get_tmp(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
+--
+
+CREATE FUNCTION perfiles.get_tmp(id_usr integer) RETURNS SETOF perfiles.tamps
+    LANGUAGE sql
+    AS $_$
+SELECT * FROM perfiles.tamps WHERE id_usr = $1
+$_$;
+
+
+ALTER FUNCTION perfiles.get_tmp(id_usr integer) OWNER TO postgres;
 
 --
 -- Name: nuevo_perfil(); Type: FUNCTION; Schema: perfiles; Owner: postgres
@@ -556,41 +691,6 @@ ALTER SEQUENCE perfiles.crums_id_cm_seq OWNED BY perfiles.crums.id_cm;
 
 
 --
--- Name: personas; Type: TABLE; Schema: perfiles; Owner: appbulance
---
-
-CREATE TABLE perfiles.personas (
-    id_prs integer NOT NULL,
-    nombre_prs character varying(50) NOT NULL,
-    apellido_paterno_prs character varying(50) NOT NULL,
-    apellido_materno_prs character varying(50) NOT NULL,
-    fecha_nacimiento_prs date,
-    sexo_prs character(1),
-    ocupacion_prs text,
-    CONSTRAINT sexo_chk CHECK ((sexo_prs = ANY (ARRAY['M'::bpchar, 'F'::bpchar])))
-)
-INHERITS (perfiles.usuarios);
-
-
-ALTER TABLE perfiles.personas OWNER TO appbulance;
-
---
--- Name: pacientes; Type: TABLE; Schema: perfiles; Owner: appbulance
---
-
-CREATE TABLE perfiles.pacientes (
-    id_p integer NOT NULL,
-    tipo_sangre_p character varying(3),
-    nss_p character varying(12),
-    id_sm integer,
-    CONSTRAINT tipo_sangre_chk CHECK (((tipo_sangre_p)::text = ANY (ARRAY[('A+'::character varying)::text, ('A-'::character varying)::text, ('B+'::character varying)::text, ('B-'::character varying)::text, ('O+'::character varying)::text, ('O-'::character varying)::text, ('AB+'::character varying)::text, ('AB-'::character varying)::text])))
-)
-INHERITS (perfiles.personas);
-
-
-ALTER TABLE perfiles.pacientes OWNER TO appbulance;
-
---
 -- Name: pacientes_id_p_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
 --
 
@@ -631,21 +731,6 @@ ALTER TABLE perfiles.personas_id_prs_seq OWNER TO appbulance;
 
 ALTER SEQUENCE perfiles.personas_id_prs_seq OWNED BY perfiles.personas.id_prs;
 
-
---
--- Name: tamps; Type: TABLE; Schema: perfiles; Owner: appbulance
---
-
-CREATE TABLE perfiles.tamps (
-    id_tmp integer NOT NULL,
-    grado_tmp text,
-    experiencia_tmp text,
-    fecha_ingreso_tmp date
-)
-INHERITS (perfiles.personas);
-
-
-ALTER TABLE perfiles.tamps OWNER TO appbulance;
 
 --
 -- Name: tamps_id_tmp_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
@@ -904,13 +989,15 @@ ALTER TABLE ONLY peticiones.peticiones ALTER COLUMN id_pt SET DEFAULT nextval('p
 -- Data for Name: ambulancias; Type: TABLE DATA; Schema: administracion; Owner: appbulance
 --
 
+INSERT INTO administracion.ambulancias (id_a, num_placa_a, num_economico_a, id_cm, estado_a, posicion_actual_a) VALUES (1, 'AMX-322456', '44451235', 3, 0, NULL);
+INSERT INTO administracion.ambulancias (id_a, num_placa_a, num_economico_a, id_cm, estado_a, posicion_actual_a) VALUES (3, 'AMX-322456', '0225665489', 3, 0, NULL);
 
 
 --
 -- Name: ambulancias_id_a_seq; Type: SEQUENCE SET; Schema: administracion; Owner: appbulance
 --
 
-SELECT pg_catalog.setval('administracion.ambulancias_id_a_seq', 1, false);
+SELECT pg_catalog.setval('administracion.ambulancias_id_a_seq', 4, true);
 
 
 --
@@ -938,6 +1025,7 @@ SELECT pg_catalog.setval('administracion.ambulancias_id_a_seq', 1, false);
 INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (2, 'navbar-dark bg-dark', 'bg-dark');
 INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (4, 'navbar-dark bg-dark', 'bg-dark');
 INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (6, 'navbar-dark bg-dark', 'bg-dark');
+INSERT INTO configuraciones.navegacion (id_usr, nav_style, body_style) VALUES (7, 'navbar-dark bg-dark', 'bg-dark');
 
 
 --
@@ -1009,14 +1097,14 @@ SELECT pg_catalog.setval('pacientes.seguro_medico_id_seq', 1, false);
 -- Data for Name: crums; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
 --
 
-INSERT INTO perfiles.crums (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_cm, nombre_cm, direccion_cm, coordenadas_cm, rango_servicio_cm) VALUES (2, 'crum@email.com', NULL, '0afbf9c010d879c71a403220399e1ac5', 1, NULL, NULL, NULL, 2, NULL, NULL, NULL, NULL);
+INSERT INTO perfiles.crums (id_usr, email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, id_cm, nombre_cm, direccion_cm, coordenadas_cm, rango_servicio_cm) VALUES (7, 'crum@email.com', NULL, '0afbf9c010d879c71a403220399e1ac5', 1, NULL, NULL, NULL, 3, 'Crum', 'Crum 01', NULL, NULL);
 
 
 --
 -- Name: crums_id_cm_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
 --
 
-SELECT pg_catalog.setval('perfiles.crums_id_cm_seq', 2, true);
+SELECT pg_catalog.setval('perfiles.crums_id_cm_seq', 3, true);
 
 
 --
@@ -1070,7 +1158,7 @@ SELECT pg_catalog.setval('perfiles.tamps_id_tmp_seq', 2, true);
 -- Name: usuarios_id_usr_seq; Type: SEQUENCE SET; Schema: perfiles; Owner: appbulance
 --
 
-SELECT pg_catalog.setval('perfiles.usuarios_id_usr_seq', 6, true);
+SELECT pg_catalog.setval('perfiles.usuarios_id_usr_seq', 7, true);
 
 
 --
