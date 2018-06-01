@@ -483,3 +483,33 @@ footer.sticky-footer {
     width: 100%;
     
 }
+
+input:invalid {
+  border-color: #DD2C00;
+}
+select:invalid {
+  border-color: #DD2C00;
+}
+input,
+input:valid {
+  border-color: #ccc;
+}
+#notify {
+margin-top: 5px;
+padding: 10px;
+font-size: 12px;
+width: 100%;
+color: #fff;
+display: block;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+}
+#notify.error {
+background-color: #DD2C00;
+}
+.error-message-form {
+  font-size: 5;
+  color: #DD2C00;
+}

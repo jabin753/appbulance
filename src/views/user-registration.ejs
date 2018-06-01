@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%- include partials/template/header -%>
+  <%- include partials/template/header -%>  
 </head>
 <body class="fixed-nav sticky-footer"  style="background-color:#F7F7F7" id="page-top">
   <main>
@@ -17,10 +17,11 @@
           <%if (flashMessage.length > 0){ %>
             <div class="container" style="background-color: #FF5A5A"><%= flashMessage %></div>
           <% } %> 
-          <form action="/usuario/registro" method="POST">
+          <form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
             <div class="form-group">
               <label for="InputName">Nombre</label>
-              <input class="form-control"required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre" maxLength="30">
+              <input class="form-control" required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre" maxLength="30">
+              <div class="help-block with-errors"></div>
             </div>
             <div class="form-group">
               <div class="form-row">
@@ -37,11 +38,11 @@
             <div class="form-row">
                 <div class="col-md-6">
                   <label for="InputPassword1">Teléfono</label>
-                  <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="tel" placeholder="Escribe tu número telefónico" maxLength="10">
+                  <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="text" placeholder="Escribe tu número telefónico" maxlength="10" min="3300000001" max="9999999999">
                 </div>
                 <div class="col-md-6">
                     <label for="InputLastName">Ocupación</label>
-                    <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
+                    <input class="form-control" required name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
                   </div>                
             </div>
           <br>
@@ -50,15 +51,15 @@
                   <div class="col-md-4">
                       <label for="InputSex">Sexo</label><br>
                       <select class="form-control" required name="sexo_prs">
-                          <option value="0">Selecciona tu sexo</option>     
+                          <option value="">Selecciona tu sexo</option>     
                           <option value="M">Hombre</option> 
                           <option value="F">Mujer</option>
                       </select>
                     </div>
                 <div class="col-md-4">
                   <label for="InputBlood">Tipo de sangre</label>
-                  <select class="form-control" name="tipo_sangre_p" id="bloodType">
-                      <option value="0">Selecciona tu tipo de sangre</option>     
+                  <select class="form-control" name="tipo_sangre_p" id="bloodType" required>
+                      <option value="">Selecciona tu tipo de sangre</option>     
                       <option value="O+">O+</option> 
                       <option value="O-">O-</option>
                       <option value="A+">A+</option> 
@@ -71,7 +72,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="InputDateBirth">Fecha de nacimiento</label>
-                      <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-03-01">
+                      <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
                   </div>
               </div>
             </div>              
@@ -79,18 +80,18 @@
               <div class="form-row">
                   <div class="col-md-6">
                       <label for="InputSecure">Derechohabiente a</label>
-                      <select class="form-control" name="smed_p" id="SM">
-                          <option value="0">Selecciona</option>     
+                      <select class="form-control" name="smed_p" id="SM" required>
+                          <option value="">Selecciona una institución médica</option>     
                           <option value="1">IMSS</option> 
                           <option value="2">ISSSTE</option>
                           <option value="3">SEDENA</option> 
                           <option value="4">PEMEX</option>
                           <option value="5">Seguro Popular</option>
-                      </select>                    
+                      </select>
                   </div>
                 <div class="col-md-6">
-                  <label for="InputNSS">NSS</label>
-                  <input class="form-control" name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12">
+                  <label for="InputNSS">Número de Seguro Social</label>
+                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12" data-smk-type="number">
                 </div>
                 <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
               </div>
@@ -112,7 +113,7 @@
                 </div>
               </div>
             </div>
-            <button class="btn btn-primary btn-block" type="submit" disabled name="btnRegister">Regístrate</button>
+            <button class="btn btn-primary btn-block" type="submit" name="btnRegister" id="btnRegister">Regístrate</button>
           </form>
           <div class="text-center">
             <a class="d-block small mt-3" href="/usuario/ingreso">¿Ya tienes una cuenta? Inicia sesión...</a>
@@ -124,5 +125,6 @@
     </main>
     <%- include partials/template/js-scripts -%>
     <%- include partials/template/top-button -%>
-  </body>
+    <%- include partials/template/js-scripts-validation -%>
+  </body>    
   </html>
