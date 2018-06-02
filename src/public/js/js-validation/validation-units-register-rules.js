@@ -1,5 +1,4 @@
 $(function() {
-
     $.validator.setDefaults({
       errorClass: 'help-block',
       highlight: function(element) {
