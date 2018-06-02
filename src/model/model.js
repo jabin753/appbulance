@@ -119,8 +119,8 @@ module.exports = {
 			values: [req.user.id_cm]
 		}, (err,result) => {
 			console.log(err,result.rows)
-			res.render('CRUM Panel/panel-peticiones',{
-			pageTitle:'Appbulance (CRUM) - Peticiones',
+			res.render('CRUM Panel/panel-tamps',{
+			pageTitle:'Appbulance (CRUM) - tamps',
 			style:req.user.style,
 			data:result.rows})
 		})
