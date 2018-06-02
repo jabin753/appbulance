@@ -2,116 +2,115 @@
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Registra un usuario</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Registra un usuario</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
             <div class="modal-body">
-                <div class="card-body">
-                    <form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-4">
-                            <label for="InputName">Nombre</label>
-                            <input class="form-control" required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe el nombre" maxLength="30">
-                          </div>
-                          <div class="col-md-4">
-                            <label for="InputLastName">Apellido Paterno</label>
-                            <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe el apellido paterno" maxLength="30">
-                          </div>
-                          <div class="col-md-4">
-                            <label for="InputLastName2">Apellido Materno</label>
-                            <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe el apellido materno" maxLength="30">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-row">
-                        <div class="col-md-3">
-                          <label for="InputPassword1">Teléfono</label>
-                          <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="text" placeholder="Escribe el número telefónico" maxlength="10" min="3300000001" max="9999999999">
-                        </div>
-                        <div class="col-md-3">
-                          <label for="InputSex">Sexo</label><br>
-                          <select class="form-control" required name="sexo_prs">
-                            <option value="">Selecciona el sexo</option>     
-                            <option value="M">Hombre</option> 
-                            <option value="F">Mujer</option>
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="InputBlood">Tipo de sangre</label>
-                          <select class="form-control" name="tipo_sangre_p" id="bloodType" required>
-                            <option value="">Selecciona el tipo de sangre</option>     
-                            <option value="O+">O+</option> 
-                            <option value="O-">O-</option>
-                            <option value="A+">A+</option> 
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option> 
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option> 
-                            <option value="AB-">AB-</option>
-                          </select>
-                        </div>
-                        <div class="col-md-3">
-                          <label for="InputDateBirth">Fecha de nacimiento</label>
-                          <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
-                        </div>
-                          <!--
-                            -->
-
-                      </div>  <br>                           
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-4">
-                            <label for="InputLastName">Ocupación</label>
-                            <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe la ocupación">
-                          </div>
-                          <div class="col-md-4">
-                            <label for="InputSecure">Derechohabiente a</label>
-                            <select class="form-control" name="smed_p" id="SM" >
-                              <option value="">Selecciona una institución médica</option>     
-                              <option value="1">IMSS</option> 
-                              <option value="2">ISSSTE</option>
-                              <option value="3">SEDENA</option> 
-                              <option value="4">PEMEX</option>
-                              <option value="5">Seguro Popular</option>
-                            </select>
-                          </div>
-                          <div class="col-md-4">
-                            <label for="InputNSS">Número de Seguro Social</label>
-                            <input class="form-control"  name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe el NSS" maxLength="11">
-                          </div>  
-                          <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
-                        </div>
-                      </div>              
-                      <hr>                      
-                      <div class="form-group">
-                        <div class="form-row">
-                          <div class="col-md-4">
-                            <label for="InputEmail1">Dirección de correo electrónico</label>
-                            <input class="form-control" required name="email_usr" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
-                          </div>
-                          <div class="col-md-4">
-                            <label for="InputPassword1">Contraseña</label>
-                            <input class="form-control" required name="contrasena_usr" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
-                          </div>
-                          <div class="col-md-4">
-                            <label for="ConfirmPassword">Confirma la contraseña</label>
-                            <input class="form-control" required name="contrasena_usr_conf" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
-                          </div>
-                        </div>
-                      </div>
-                    
+              <div class="card-body">  
+                <div style="display:none">
+                  <input name='id_p' id='id_p'>
+                </div>                  
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="InputName">Nombre</label>
+                      <input class="form-control" required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe el nombre" maxLength="30">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="InputLastName">Apellido Paterno</label>
+                      <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe el apellido paterno" maxLength="30">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="InputLastName2">Apellido Materno</label>
+                      <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe el apellido materno" maxLength="30">
+                    </div>
+                  </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                <button class="btn btn-primary" type="reset">Limpiar</button>
-                <button class="btn btn-success" type="submit" name="btnRegister" id="btnRegister" onclick="">Regístrate</button>
-                <!--<button class="btn btn-success" type="submit" name="btnRegister" id="btnRegister" onclick="addUser()">Registrar</button>-->
-            </div>
+                <div class="form-row">
+                  <div class="col-md-3">
+                    <label for="InputPassword1">Teléfono</label>
+                    <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="text" placeholder="Escribe el número telefónico" maxlength="10" min="3300000001" max="9999999999">
+                  </div>
+                  <div class="col-md-3">
+                    <label for="InputSex">Sexo</label><br>
+                    <select class="form-control" required name="sexo_prs">
+                      <option value="">Selecciona el sexo</option>     
+                      <option value="M">Hombre</option> 
+                      <option value="F">Mujer</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="InputBlood">Tipo de sangre</label>
+                    <select class="form-control" name="tipo_sangre_p" id="bloodType" required>
+                      <option value="">Selecciona el tipo de sangre</option>     
+                      <option value="O+">O+</option> 
+                      <option value="O-">O-</option>
+                      <option value="A+">A+</option> 
+                      <option value="A-">A-</option>
+                      <option value="B+">B+</option> 
+                      <option value="B-">B-</option>
+                      <option value="AB+">AB+</option> 
+                      <option value="AB-">AB-</option>
+                    </select>
+                  </div>
+                  <div class="col-md-3">
+                    <label for="InputDateBirth">Fecha de nacimiento</label>
+                    <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
+                  </div>
+                </div>  <br>                           
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="InputLastName">Ocupación</label>
+                      <input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe la ocupación">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="InputSecure">Derechohabiente a</label>
+                      <select class="form-control" name="id_sm" id="InputSecure" >
+                        <option value="">Selecciona una institución médica</option>     
+                        <option value="1">IMSS</option> 
+                        <option value="2">ISSSTE</option>
+                        <option value="3">SEDENA</option> 
+                        <option value="4">PEMEX</option>
+                        <option value="5">Seguro Popular</option>
+                      </select>
+                    </div>
+                    <div class="col-md-4">
+                      <label for="InputNSS">Número de Seguro Social</label>
+                      <input class="form-control"  name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe el NSS" maxLength="11">
+                    </div>  
+                    <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
+                  </div>
+                </div>              
+                <hr>                      
+                <div class="form-group">
+                  <div class="form-row">
+                    <div class="col-md-4">
+                      <label for="InputEmail1">Dirección de correo electrónico</label>
+                      <input class="form-control" required name="email_usr" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="InputPassword1">Contraseña</label>
+                      <input class="form-control" required name="contrasena_usr" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
+                    </div>
+                    <div class="col-md-4">
+                      <label for="ConfirmPassword">Confirma la contraseña</label>
+                      <input class="form-control" required name="contrasena_usr_conf" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+              <button class="btn btn-primary" type="reset">Limpiar</button>
+              <button class="btn btn-success" type="submit" name="btnRegister" id="btnRegister" onclick="">Regístrate</button>
+              <!--<button class="btn btn-success" type="submit" name="btnRegister" id="btnRegister" onclick="addUser()">Registrar</button>-->
+          </div>
           </form>
         </div>
     </div>
