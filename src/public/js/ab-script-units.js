@@ -51,12 +51,15 @@ function modifyUnit() {
         var $form = $(this);
         var term = $form.find("input[name='s']").val();
         var url = $form.attr('action'); 
-    });
+	});
+	
 	var num_placa_a = document.getElementById("InputMatricula").value;
 	var num_economico_a = document.getElementById("InputEconomicNumber").value;
 	var _state = document.getElementById("InputState").value;
+
 	var fila = "<tr id='unit_" + id_a + "'><td>" + id_a +
 		"</td><td>" + num_placa_a + "</td><td>" + num_economico_a + "</td><td>" + _state + "</td></tr>";
+
 	if (num_placa_a.trim() == '' || num_economico_a.trim() == '' || _state.trim() == '') {
 		alert("Operación fracasada. Ingrese los datos faltantes.");
 	} else {
@@ -64,6 +67,7 @@ function modifyUnit() {
 		clear();
 	}
 }
+
 function load() {
 	location.reload();
 }
