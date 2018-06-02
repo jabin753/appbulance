@@ -339,6 +339,7 @@ CREATE TABLE perfiles.pacientes (
     tipo_sangre_p character varying(3),
     nss_p character varying(12),
     id_sm integer,
+    id_cm integer,
     CONSTRAINT tipo_sangre_chk CHECK (((tipo_sangre_p)::text = ANY (ARRAY[('A+'::character varying)::text, ('A-'::character varying)::text, ('B+'::character varying)::text, ('B-'::character varying)::text, ('O+'::character varying)::text, ('O-'::character varying)::text, ('AB+'::character varying)::text, ('AB-'::character varying)::text])))
 )
 INHERITS (perfiles.personas);
@@ -367,7 +368,8 @@ CREATE TABLE perfiles.tamps (
     id_tmp integer NOT NULL,
     grado_tmp text,
     experiencia_tmp text,
-    fecha_ingreso_tmp date
+    fecha_ingreso_tmp date,
+    id_cm integer
 )
 INHERITS (perfiles.personas);
 
@@ -1094,6 +1096,20 @@ CREATE UNIQUE INDEX id_usr_i ON configuraciones.navegacion USING btree (id_usr);
 
 
 --
+-- Name: fki_perfiles_pacientes_id_cm_fk; Type: INDEX; Schema: perfiles; Owner: appbulance
+--
+
+CREATE INDEX fki_perfiles_pacientes_id_cm_fk ON perfiles.pacientes USING btree (id_cm);
+
+
+--
+-- Name: fki_perfiles_tamps_id_cm_fk; Type: INDEX; Schema: perfiles; Owner: appbulance
+--
+
+CREATE INDEX fki_perfiles_tamps_id_cm_fk ON perfiles.tamps USING btree (id_cm);
+
+
+--
 -- Name: crums borrar_perfil; Type: TRIGGER; Schema: perfiles; Owner: appbulance
 --
 
@@ -1173,6 +1189,22 @@ ALTER TABLE ONLY pacientes.medicamentos
 
 ALTER TABLE ONLY pacientes.padecimientos
     ADD CONSTRAINT padecimientos_fk FOREIGN KEY (id_p) REFERENCES perfiles.pacientes(id_p) ON UPDATE CASCADE;
+
+
+--
+-- Name: pacientes perfiles_pacientes_id_cm_fk; Type: FK CONSTRAINT; Schema: perfiles; Owner: appbulance
+--
+
+ALTER TABLE ONLY perfiles.pacientes
+    ADD CONSTRAINT perfiles_pacientes_id_cm_fk FOREIGN KEY (id_cm) REFERENCES perfiles.crums(id_cm) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: tamps perilfes_tamps_id_cm_fk; Type: FK CONSTRAINT; Schema: perfiles; Owner: appbulance
+--
+
+ALTER TABLE ONLY perfiles.tamps
+    ADD CONSTRAINT perilfes_tamps_id_cm_fk FOREIGN KEY (id_cm) REFERENCES perfiles.crums(id_cm) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
