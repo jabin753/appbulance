@@ -18,7 +18,7 @@
                     <div class="col-md-6" id="map" style="height: 250px"></div>
                     <div class="col-md-6">                        
                         <label for="OutputDirection">Tu dirección</label><hr>
-                        <button class="btn btn-primary btn-block" type="submit">Solicitar ambulancia</button><hr>
+                        <button class="btn btn-primary btn-block" type="submit" id="btnSolicitud">Solicitar ambulancia</button><hr>
                         <div style="display: none">
                             <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
                             <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
@@ -50,7 +50,76 @@
         </div>
     <%- include ../partials/template/footer -%>
     <%- include ../partials/template/top-button -%>
-    <%- include ../partials/modals/logout -%> 
+    <%- include ../partials/modals/logout -%>
+    <!-- Modal -->
+    <div class="modal fade" id="timerCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalCenterTitle">Cancelacion</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form>
+                <div class="modal-body" id="Message">
+                    <p style="text-align: center;">¿Desea cancelar la petición?<br>
+                    Para cancelar el servicio usted tiene</p>
+                    <p id="timer"></p>
+                    <p style="text-align: center;">segundos</p>
+                    <input id="inputCancel" name="inputCancel" placeholder="Escriba 'cancelar' para confirmar" required>
+                </div>
+
+                <div class="modal-body" id="Expirated">  
+                    <p class='seconds-timer'>EXPIRADO</p>              
+                </div>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-danger" name="btnCancelSolicitud" id="btnCancelSolicitud" >Cancelar peticion</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    <script>
+        var _seconds;    
+        $("#btnSolicitud").on("click", function(){
+            _seconds = 5;
+            $("#Message").show();
+            $("#Expirated").hide();   
+            $('#btnCancelSolicitud').removeAttr('disabled');
+            $('#timerCancel').modal('show');
+            $('#inputCancel').removeAttr('disabled'); 
+            $('#inputCancel').val("");
+            var _timer = setInterval(function() {
+                _seconds = _seconds - 1;
+                $("#timer").html("<p class='seconds-timer'>"+ _seconds + "</p>");
+                
+                if (_seconds < 0) {
+                    clearInterval(_timer);
+                    $("#Message").hide();
+                    $("#Expirated").show();
+                    $('#btnCancelSolicitud').attr('disabled','disabled');
+                    $('#inputCancel').attr('disabled','disabled');
+                    $('#inputCancel').val("");
+                }
+            }, 1000);
+        })
+        
+        $("#btnCancelSolicitud").on("click", function(){
+            var _confirm = $('#inputCancel').val();
+            if(_confirm == "cancelar"){
+                alert("Solicitud cancelada.");
+            } else {
+                alert("Error en la confirmacion.");
+            }
+
+        })
+
+        
+        
+    </script>
   </div>  
 </body>
 </html>

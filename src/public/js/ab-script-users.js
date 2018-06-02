@@ -45,7 +45,7 @@ $(document).ready(function(){
 	$("button[name='btnDel']").on("click", function(){
 		$("#delUsers input[name='id_p']").attr("value",id_p);
 	})
-}); 
+    }); 
 
 function addUser(){ 
     var _name = document.getElementById("InputName").value;

@@ -513,3 +513,9 @@ background-color: #DD2C00;
   font-size: 5;
   color: #DD2C00;
 }*/
+.seconds-timer{
+  text-align: center; 
+  font-size: 40px; 
+  margin-top:0px; 
+  color: tomato;
+}
