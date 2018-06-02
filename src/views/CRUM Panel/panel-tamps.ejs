@@ -25,13 +25,11 @@
                 <table class="table table-bordered table-responsive" id="dataTable" width="100%" cellspacing="0">
                   <thead class="thead-dark">
                     <tr>
-                      <th>ID</th>
                       <th>Nombre</th>
                       <th>Apellido Paterno</th>
                       <th>Apellido Materno</th>
                       <th>Teléfono</th>
                       <th>Sexo</th>
-                      <th>Tipo Sangre</th>
                       <th>Fecha Nacimiento</th>    
                       <th>Fecha Ingreso</th>
                       <th>Experiencia</th>
@@ -41,13 +39,11 @@
                   </thead>
                   <tfoot>
                     <tr>
-                      <th>ID</th>
                       <th>Nombre</th>
                       <th>Apellido Paterno</th>
                       <th>Apellido Materno</th>
                       <th>Teléfono</th>
                       <th>Sexo</th>
-                      <th>Tipo Sangre</th>
                       <th>Fecha Nacimiento</th>    
                       <th>Fecha Ingreso</th>
                       <th>Experiencia</th>
@@ -56,20 +52,22 @@
                     </tr>
                   </tfoot>
                   <tbody id="unitsTable">
-                    <tr>
-                      <td>TAMP1002</td>  
-                      <td>Joseph Jabin Cuevas Bustos</td>
-                      <td>21</td>
-                      <td>15/06/1996</td>    
-                      <td>H</td>
-                      <td>7531689562</td>
-                      <td>jabin.itlac@gmail.com</td>
-                      <td>Pro</td>                    
-                      <td >TAMP1001</td> 
-                      <td>José Luis Alcántara Bustamante</td>
-                      <td>21</td>
-                      <td>11/03/1997</td> 
-                    </tr>  
+                  <%if (data.length > 0) { %>
+                    <% for (var i = 0; i < data.length; i ++) { %>
+                    <tr id="<%= data[i].id_tmp %>">
+                        <td><%= data[i].nombre_prs %></td>
+                        <td><%= data[i].apellido_paterno_prs %></td>
+                        <td><%= data[i].apellido_materno_prs %></td>
+                        <td><%= data[i].telefono_usr %></td>
+                        <td><%= data[i].sexo_prs %></td>
+                        <td><%= data[i].fecha_nacimiento_prs %></td>
+                        <td><%= data[i].fecha_ingreso_tmp %></td>
+                        <td><%= data[i].experiencia_tmp %></td>
+                        <td><%= data[i].grado_tmp %></td>
+                        <td><%= data[i].email_usr %></td>
+                      </tr>
+                    <% } %>
+                  <% } %>
                   </tbody>
                 </table>
               </div>
@@ -79,13 +77,13 @@
         </section>
       </main>
     </div>
-    <!-- Add User Modal-->    
+    <!-- Add TAMP Modal-->    
     <%- include ../partials/modals/addTamp -%>          
-    <!-- Logout Modal-->
+    <!-- Drop TAMP Modal-->
     <%- include ../partials/modals/dropTamp -%>          
-    <!-- Modify User Modal-->    
+    <!-- Modify TAMP Modal-->    
     <%- include ../partials/modals/modifyTamp -%>
-    <!-- Scripts JavaScript-->
+    <!-- TAMP DOM Events-->
     <script src="/js/ab-script-tamps.js"></script>
 
     <%- include ../partials/template/footer -%>
