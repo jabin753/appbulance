@@ -18,12 +18,14 @@ function initMap() {
 				position: pos,
 				map: map,
 				Title: 'Usted está aquí',
-				draggable: true
+				draggable: false
 			});
-			marker.addListener('dragend', function() {
+			map.addListener('center_changed', function(){
+				marker.setPosition(map.getCenter());
+			})
+			map.addListener('dragend', function() {
 				document.getElementById("lat").value = marker.getPosition().lat();
 				document.getElementById("lng").value = marker.getPosition().lng();
-				map.setCenter(marker.getPosition());
 				geocoder.geocode(
 					{'latLng': marker.getPosition()},
 					function(results, status) {
