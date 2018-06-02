@@ -20,6 +20,7 @@ $(function() {
         && /\d/.test(value)
         && /[a-z]/i.test(value);
     }, 'Your password must be at least 6 characters long and contain at least one number and one char\'.')
+  
     $("#userRegister").validate({
       rules: {
         nombre_prs:{
@@ -28,18 +29,21 @@ $(function() {
         },  
         apellido_paterno_prs: {
             required: true,
+            nowhitespace: true,
             lettersonly: true
         },
         apellido_materno_prs: {
             required: true,
+            nowhitespace: true,
             lettersonly: true
         },
         telefono_usr:{
             required: true,
             //number: true
-            digits: true            
+            digits: true
         },
         ocupacion_prs:{
+            required: true,
             lettersonly: true
         },
         sexo_psr:{
@@ -51,7 +55,11 @@ $(function() {
         fecha_nacimiento_prs:{
             required: true
         },
+        smed_p:{
+            required: true
+        },
         nss_p:{
+            required: true,
             digits: true
         },
         email_usr: {
@@ -76,19 +84,29 @@ $(function() {
         },  
         apellido_paterno_prs: {
             required: '<span class="badge badge-danger">Campo requerido, por favor.</span>',
+            nowhitespace: "<span class='badge badge-danger'>Espacio intermedio no válido.</span>",
             lettersonly: '<span class="badge badge-danger">Solo letras, por favor.</span>'
         },
         apellido_materno_prs: {
             required: '<span class="badge badge-danger">Campo requerido, por favor.</span>',
+            nowhitespace: '<span class="badge badge-danger">Espacio intermedio no válido, por favor.</span>',
+            lettersonly: '<span class="badge badge-danger">Solo texto, por favor.</span>'
+        },
+        apellido_materno_prs: {
+            required: '<span class="badge badge-danger">Campo requerido, por favor.</span>',
+            nowhitespace: '<span class="badge badge-danger">Espacio intermedio no válido, por favor.</span>',
             lettersonly: '<span class="badge badge-danger">Solo texto, por favor.</span>'
         },
         telefono_usr:{
             required: '<span class="badge badge-danger">Campo requerido, por favor.</span>',
+            //number: '<span class="badge badge-danger">Solo dígitos, por favor.</span>',
             digits: '<span class="badge badge-danger">Solo dígitos, por favor.</span>',
             min: $.validator.format( "<span class='badge badge-danger'>Ingrese un valor mayor o igual a {0}.</span>" ),
             max: $.validator.format( "<span class='badge badge-danger'>Ingrese un valor menor o igual a {0}.</span>" )
+            //phonesMX: '<span class="badge badge-danger">Numero de telefono invalido.</span>'
         },
         ocupacion_prs:{
+            required: '<span class="badge badge-danger">Campo requerido, por favor.</span>',
             lettersonly: '<span class="badge badge-danger">Solo texto, por favor.</span>'
         },        
         sexo_prs:{
@@ -102,7 +120,11 @@ $(function() {
             min: $.validator.format( "<span class='badge badge-danger'>Ingrese un valor mayor o igual a {0}.</span>" ),
             max: $.validator.format( "<span class='badge badge-danger'>Ingrese un valor menor o igual a {0}.</span>" )
         },
+        smed_p:{
+            required: '<span class="badge badge-danger">Campo requerido, por favor.</span>'      
+        },
         nss_p:{
+            required: '<span class="badge badge-danger">Campo requerido, por favor.</span>',
             digits: '<span class="badge badge-danger">Solo dígitos, por favor.</span>'
         },
         email_usr: {
