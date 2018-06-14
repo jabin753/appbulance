@@ -4,13 +4,13 @@ const pool = new Pool({connectionString: process.env.PG_CONNECTION_STRING
   || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'})
 
 module.exports = {
-  query: (text, params, callback) => {
+  
+  query: async(text, params) => {
     const start = Date.now()
-    return pool.query(text, params, (err, res) => {
+      const res = await pool.query(text,params)
       const duration = Date.now() - start
-      console.log('Consulta ejecutada', { text, duration, rows: res.rowCount })
-      callback(err, res)
-    })
+      console.log(`Consulta ${text} ejecutada en ${duration} ms`)
+      return res
   },
   getClient: (callback) => {
     pool.connect((err, client, done) => {
