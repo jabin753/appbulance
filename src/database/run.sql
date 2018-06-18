@@ -19,7 +19,7 @@ SET row_security = off;
 -- Name: appbulance; Type: DATABASE; Schema: -; Owner: appbulance
 --
 
-CREATE DATABASE appbulance WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'Spanish_Mexico.1252' LC_CTYPE = 'Spanish_Mexico.1252';
+CREATE DATABASE appbulance;
 
 CREATE USER appbulance WITH
   PASSWORD '::appbulance2018::'
