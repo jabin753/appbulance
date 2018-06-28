@@ -1,73 +1,104 @@
-var id_a;
-var num_placa_a;
-var num_economico_a;
-var estado_a;
+var ambulancias = {};
+var ambulancia = {};
 
 $(document).ready(function () {
-	$('#unitsTable td').on("click", function(){
-		id_a = $(this).parents("tr").find("td").eq(0).html();
-		num_placa_a = $(this).parents("tr").find("td").eq(1).html();
-		num_economico_a = $(this).parents("tr").find("td").eq(2).html();
-		estado_a = $(this).parents("tr").find("td").eq(3).html();
-		$("button[name='btnDel']").attr("disabled", false);
-		$("button[name='btnMod']").attr("disabled", false);
+    $.getJSON("/api/a", function(json){
+        ambulancias = $("#ambulancias").DataTable({
+            select: true,
+            data: json,
+            rowId: 'id_a',
+            columns: [
+                { data: 'num_placa_a' },
+                { data: 'num_economico_a' },
+                { data: 'estado_a' }
+            ]
+        });
+    });
+
+    //DOM EVENTS
+
+    $(document).on('click','#ambulancias tr',function(){
+        ambulancia = ambulancias.row(this).data();
+        if(typeof ambulancia !== 'undefined'){
+            $("button[name='btnDel']").attr("disabled", false);
+            $("button[name='btnMod']").attr("disabled", false);
+        }else{
+            $("button[name='btnDel']").attr("disabled", true);
+            $("button[name='btnMod']").attr("disabled", true);
+        }
     });
     $("button[name='btnMod']").on("click", function(){ 
-        var $form = $('#modUnits');
-		$form.find("input[name='id_a']").attr("value",id_a);
-        $form.find("input[name='num_placa_a']").attr("value",num_placa_a);
-        $form.find("input[name='num_economico_a']").attr("value",num_economico_a);
-		$form.find("input[name='estado_a']").attr("value",estado_a);
-	});
-	$("button[name='btnDel']").on("click", function(){
-		$("#delUnits input[name='id_a']").attr("value",id_a);
-		$("#delUnits input[name='num_placa_a']").attr("value",num_placa_a);
-	})
-    
+        var $form = $('#FRMput_a');
+        $form.find("input[name='INnum_placa_a']").attr("value",ambulancia.num_placa_a);
+        $form.find("input[name='INnum_economico_a']").attr("value",ambulancia.num_economico_a);
+        $form.find("input[name='INestado_a']").attr("value",ambulancia.estado_a);
+    });
+    $('#FRMpost_a').on('submit',function(e){
+        e.preventDefault();
+        post_a();
+        reload();
+    });
+    $('#FRMdelete_a').on('submit',function(e){
+        e.preventDefault();
+        delete_a();
+        reload();
+    });
+    $('#FRMput_a').on('submit',function(e){
+        e.preventDefault();
+        put_a();
+        reload();
+    });
 });
 
-function addUnit() {
-	var num_placa_a = document.getElementById("InputMatricula").value;
-	var num_economico_a = document.getElementById("InputEconomicNumber").value;
-	var _state = document.getElementById("InputState").value;
-	if (num_placa_a.trim() == '' || num_economico_a.trim() == '' || _state.trim() == '') {
-		alert("Operación fracasada. Ingrese los datos faltantes.");
-	} else {
-		clear();
-	}
+//FUNCTIONS
+
+function post_a(){
+    $.ajax({
+        url: '/api/a',
+        method: 'POST',
+        data: {
+            num_placa_a: $('#INnum_placa_a').val(),
+            num_economico_a: $('#INnum_economico_a').val(),
+            estado_a: parseInt($('#INestado_a').val()) 
+        },
+        success: function(response){
+            console.log(response);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
 }
-function clear() {
-	document.getElementById("InputMatricula").value = "";
-	document.getElementById("InputEconomicNumber").value = "";
-	document.getElementById("InputState").value = "";
-	document.getElementById("OutputIDUnit_modal").value = "";
-	document.getElementById("OutputMatricula_modal").value = "";
-	document.getElementById("OutputEconomicNumber_modal").value = "";
-	document.getElementById("OutputState_modal").value = "";
+function put_a(){
+    var $form = $('#FRMput_a');
+    $.ajax({
+        url: `/api/a/${ambulancia.id_a}`,
+        method: 'PUT',
+        data:{
+            num_placa_a: $form.find("input[name='INnum_placa_a']").val(),
+            num_economico_a: $form.find("input[name='INnum_economico_a']").val(),
+            estado_a: parseInt($form.find("input[name='INestado_a']").val())
+        },
+        success: function(response){
+            console.log(response);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
 }
-
-function modifyUnit() {
-    $('#modal-modUnits').on('submit',function(event){
-        var $form = $(this);
-        var term = $form.find("input[name='s']").val();
-        var url = $form.attr('action'); 
-	});
-	
-	var num_placa_a = document.getElementById("InputMatricula").value;
-	var num_economico_a = document.getElementById("InputEconomicNumber").value;
-	var _state = document.getElementById("InputState").value;
-
-	var fila = "<tr id='unit_" + id_a + "'><td>" + id_a +
-		"</td><td>" + num_placa_a + "</td><td>" + num_economico_a + "</td><td>" + _state + "</td></tr>";
-
-	if (num_placa_a.trim() == '' || num_economico_a.trim() == '' || _state.trim() == '') {
-		alert("Operación fracasada. Ingrese los datos faltantes.");
-	} else {
-		document.getElementById("unitsTable").innerHTML = fila;
-		clear();
-	}
+function delete_a(){
+    $.ajax({
+        url: `/api/a/${ambulancia.id_a}`,
+        method: 'DELETE',
+        success: function(response){
+            console.log(response);
+        },
+        error: function(err){
+            console.log(err);
+        }
+    });
 }
-
-function load() {
+function reload() {
 	location.reload();
 }

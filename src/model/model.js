@@ -143,14 +143,9 @@ module.exports = {
 	},	
 	crumPanelUnidades: async(req, res) => {
 		try{
-			const result = await bd.query(
-				'SELECT * FROM administracion.ambulancias WHERE ambulancias.id_cm = $1',
-				[req.user.id_cm]
-			)
 			res.render('CRUM Panel/panel-unidades', {
 				pageTitle: 'Appbulance (CRUM) - Unidades Médicas',
 				style: req.user.style,
-				data: result.rows
 			})
 		}
 		catch(err){

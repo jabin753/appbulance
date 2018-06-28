@@ -1,79 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <%- include ../partials/template/header -%>
-</head>
-<body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
-  <%- include ../partials/template/crum-navbar -%>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <main>
-        <section id="ViewUnits">
-          <!-- Example DataTables Card-->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-truck"></i> Unidades Médicas
+    <head>
+        <%- include ../partials/template/header -%>
+    </head>
+    <body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
+        <%- include ../partials/template/crum-navbar -%>
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                <main>
+                    <section id="ViewUnits">
+                        <!-- Example DataTables Card-->
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                <i class="fa fa-truck"></i> Unidades Médicas
+                            </div>
+                            <div class="card-body">
+                                <!-- Toolbar -->
+                                <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
+                                <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
+                                <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
+                                <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" onclick="reload()"> <i class="fa fa-fw fa-refresh fa-lg"></i> </button>
+                                <hr>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered nowrap hover" id="ambulancias" width="100%" cellspacing="0">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Matrícula</th>
+                                                <th>Número Económico</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Matrícula</th>
+                                                <th>Número Económico</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM
+                            </div>
+                        </div>
+                    </section>
+                    <!-- Add User Modal-->    
+                    <%- include ../partials/modals/addUnit -%>
+                    <!-- Logout Modal-->
+                    <%- include ../partials/modals/dropUnit -%>
+                    <!-- Modify User Modal-->    
+                    <%- include ../partials/modals/modifyUnit -%>
+                    
+                </main>
             </div>
-            <div class="card-body">
-              <!-- Toolbar -->
-              <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
-              <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
-              <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
-              <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" onclick="load()"> <i class="fa fa-fw fa-refresh fa-lg"></i> </button>
-              <hr>
-              <div class="table-responsive" id="tableUnits">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th>ID Ambulancia</th>
-                      <th>Matrícula</th>
-                      <th>Número Económico</th>
-                      <th>Estado</th>
-                    </tr>
-                  </thead>
-                  <tbody id="unitsTable">
-                  <%if (data.length > 0) { %>
-                    <% for (var i = 0; i < data.length; i ++) { %>
-                    <tr>
-                        <td><%= data[i].id_a %></td>
-                        <td><%= data[i].num_placa_a %></td>
-                        <td><%= data[i].num_economico_a %></td>
-                        <td><%= data[i].estado_a %></td>
-                      </tr>
-                    <% } %>
-                  <% } %>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th>ID Ambulancia</th>
-                      <th>Matrícula</th>
-                      <th>Número Económico</th>
-                      <th>Estado</th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-            <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM
-            </div>
-          </div>
-        </section>
-        <!-- Add User Modal-->    
-        <%- include ../partials/modals/addUnit -%>
-        <!-- Logout Modal-->
-        <%- include ../partials/modals/dropUnit -%>
-        <!-- Modify User Modal-->    
-        <%- include ../partials/modals/modifyUnit -%>
-        <!-- Scripts JavaScript-->
-        <script src="/js/ab-script-units.js"></script>
-        
-      </main>
-    </div>
-    <%- include ../partials/template/footer -%>
-    <%- include ../partials/template/top-button -%>
-    <%- include ../partials/modals/logout -%>
-    <%- include ../partials/template/js-scripts -%>
-    <%- include ../partials/template/js-scripts-validation -%>
-  </div>
-</body>
+            <%- include ../partials/template/footer -%>
+            <%- include ../partials/template/top-button -%>
+            <%- include ../partials/modals/logout -%>
+            <!-- Scripts JavaScript-->
+            <script src="/vendor/jquery/jquery.min.js"></script>
+            <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+            <script src="/vendor/datatables/jquery.dataTables.js"></script>
+            <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+            <script src="/js/ab-admin.min.js"></script>
+            <script src="/js/ab-admin-datatables.min.js"></script>
+            <script src="/js/ab-script-units.js"></script>
+            <script src="/js/js-validation/jquery.validate.min.js"></script>
+            <script src="/js/js-validation/additional-methods.min.js"></script>
+            <script src="/js/js-validation/validation-forms-rules.js"></script>
+            <%- include ../partials/template/js-scripts-validation -%>
+        </div>
+    </body>
 </html>

@@ -34,8 +34,7 @@ app.use(passport.initialize())
 app.use(passport.session()) //Logins persistentes
 
 //Rutas
-
+require('../routes/api')(app)
 require('../routes/routes')(app,passport)
-
 
 module.exports = app
