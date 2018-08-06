@@ -51,32 +51,35 @@ $(document).ready(function () {
             );
         });
 
+        $("#btnSolicitud").on("click", function(){  
+            $('#timerCancel').modal('show');
+            _timer = setInterval(function() {
+                _seconds--;
+                $("#timer").html(_seconds);           
+                if (_seconds <= 0) {
+                    $("#Message").hide();
+                    $("#btnCancelSolicitud").hide();
+                    $("#Succeded").show();
+                    clearInterval(_timer);
+                    _seconds = 5;
+                    $("#btnSolicitud").attr("disabled", "enabled");
+                    post_pt();
+                }
+            }, 1000);
+        });
+        $("#btnCancelSolicitud").on("click", function(){
+            $('#timerCancel').modal('hide');
+            clearInterval(_timer);
+            _seconds = 5;
+            alert("Solicitud cancelada");
+        });
     }, function () {
         alert('No cuenta con servicio de geolocalización. Intente recargando la página');
+        $('button#btnSolicitud').text('Realizar llamada de emergencia(911)');
+        $('button#btnSolicitud').click(function(){
+            window.location.href='tel:911';
+         })
     });
-    $("#btnSolicitud").on("click", function(){  
-        $('#timerCancel').modal('show');
-        _timer = setInterval(function() {
-            _seconds--;
-            $("#timer").html(_seconds);           
-            if (_seconds <= 0) {
-                $("#Message").hide();
-                $("#btnCancelSolicitud").hide();
-                $("#Succeded").show();
-                clearInterval(_timer);
-                _seconds = 5;
-                $("#btnSolicitud").attr("disabled", "enabled");
-                post_pt();
-            }
-        }, 1000);
-    });
-    $("#btnCancelSolicitud").on("click", function(){
-        $('#timerCancel').modal('hide');
-        clearInterval(_timer);
-        _seconds = 5;
-        alert("Solicitud cancelada");
-    });
-    
 });
 
 
