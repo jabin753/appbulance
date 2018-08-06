@@ -35,17 +35,6 @@ COMMENT ON ROLE appbulance IS 'appbulance default pooling client';
 ALTER DATABASE appbulance OWNER TO appbulance;
 
 \connect appbulance
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
 --
 -- Name: administracion; Type: SCHEMA; Schema: -; Owner: appbulance
 --
@@ -114,39 +103,19 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
 --
--- Name: ambulancias; Type: TABLE; Schema: administracion; Owner: appbulance
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
 --
 
-CREATE TABLE administracion.ambulancias (
-    id_a integer NOT NULL,
-    num_placa_a character varying(10),
-    num_economico_a character varying(20),
-    id_cm integer NOT NULL,
-    estado_a integer DEFAULT 0 NOT NULL,
-    posicion_actual_a point,
-    CONSTRAINT estado_a_chk CHECK ((estado_a = ANY (ARRAY[0, 1, 2, 3])))
-);
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA pg_catalog;
 
-
-ALTER TABLE administracion.ambulancias OWNER TO appbulance;
 
 --
--- Name: get_a(integer); Type: FUNCTION; Schema: administracion; Owner: postgres
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
 --
 
-CREATE FUNCTION administracion.get_a(id_usr integer) RETURNS SETOF administracion.ambulancias
-    LANGUAGE sql
-    AS $_$
-SELECT * FROM administracion.ambulancias WHERE id_cm = (SELECT id_cm FROM perfiles.get_cm($1))
-$_$;
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
-
-ALTER FUNCTION administracion.get_a(id_usr integer) OWNER TO postgres;
 
 --
 -- Name: adduserpacientes(json); Type: FUNCTION; Schema: perfiles; Owner: appbulance
@@ -171,8 +140,7 @@ INSERT INTO perfiles.pacientes(
 	ocupacion_prs,
 	id_p,
 	tipo_sangre_p,
-	nss_p,
-	id_sm
+	nss_p
 ) VALUES (
 	2,
 	json_extract_path_text(datos, 'email_usr'::character varying),
@@ -187,8 +155,7 @@ INSERT INTO perfiles.pacientes(
 	json_extract_path_text(datos, 'ocupacion_prs')::character varying,
 	DEFAULT,
 	json_extract_path_text(datos, 'tipo_sangre_p')::character varying,
-	json_extract_path_text(datos, 'nss_p')::character varying,
-	json_extract_path_text(datos, 'id_sm')::integer	
+	json_extract_path_text(datos, 'nss_p')::character varying
 );
 $$;
 
@@ -196,12 +163,13 @@ $$;
 ALTER FUNCTION perfiles.adduserpacientes(datos json) OWNER TO appbulance;
 
 --
--- Name: authuser(json); Type: FUNCTION; Schema: perfiles; Owner: postgres
+-- Name: authuser(json); Type: FUNCTION; Schema: perfiles; Owner: appbulance
 --
 
-CREATE FUNCTION perfiles.authuser(datos json) RETURNS TABLE(id_usr integer, tipo_usr integer, id integer, nav_style character varying, body_style character varying)
+CREATE FUNCTION perfiles.authuser(datos json) RETURNS TABLE(id_usr uuid, tipo_usr integer, id uuid, nav_style character varying, body_style character varying)
     LANGUAGE plpgsql
     AS $$
+
 DECLARE 
 	usuario RECORD;
 BEGIN
@@ -218,9 +186,18 @@ BEGIN
 		RAISE EXCEPTION 'Contraseña incorrecta'
 			USING HINT = 'Contraseña incorrecta';
 	END IF;
+	PERFORM usuarios.id_usr, usuarios.tipo_usr FROM perfiles.usuarios 
+		WHERE email_usr = json_extract_path_text(datos, 'email') 
+		AND   contrasena_usr = md5(json_extract_path_text(datos, 'contra'))
+		AND valido_usr = true;
+	IF NOT FOUND THEN
+		RAISE EXCEPTION 'Cuenta desactivada'
+	USING HINT = 'Esta cuenta no ha sido activada aún';
+	END IF;
         SELECT usuarios.id_usr, usuarios.tipo_usr INTO STRICT usuario FROM perfiles.usuarios 
 		WHERE email_usr = json_extract_path_text(datos, 'email') 
-		AND   contrasena_usr = md5(json_extract_path_text(datos, 'contra'));
+		AND   contrasena_usr = md5(json_extract_path_text(datos, 'contra'))
+		AND valido_usr = true;
 	IF FOUND THEN
 		IF usuario.tipo_usr = 1 THEN
 			RETURN QUERY
@@ -251,12 +228,12 @@ BEGIN
 				usuarios.id_usr = navegacion.id_usr;
 		END IF;
 	END IF;
-	
 END;
+
 $$;
 
 
-ALTER FUNCTION perfiles.authuser(datos json) OWNER TO postgres;
+ALTER FUNCTION perfiles.authuser(datos json) OWNER TO appbulance;
 
 --
 -- Name: borrar_perfil(); Type: FUNCTION; Schema: perfiles; Owner: postgres
@@ -273,18 +250,359 @@ END; $$;
 ALTER FUNCTION perfiles.borrar_perfil() OWNER TO postgres;
 
 --
+-- Name: nuevo_perfil(); Type: FUNCTION; Schema: perfiles; Owner: postgres
+--
+
+CREATE FUNCTION perfiles.nuevo_perfil() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$ BEGIN
+INSERT INTO configuraciones.navegacion(id_usr) VALUES (NEW.id_usr);
+RETURN NEW;
+END; $$;
+
+
+ALTER FUNCTION perfiles.nuevo_perfil() OWNER TO postgres;
+
+--
+-- Name: delete_a(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.delete_a(uuid) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+
+BEGIN
+		DELETE FROM administracion.ambulancias
+			WHERE ambulancias.id_a = $1;
+END;
+
+$_$;
+
+
+ALTER FUNCTION public.delete_a(uuid) OWNER TO appbulance;
+
+--
+-- Name: delete_pt(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.delete_pt(uuid) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+-- Usage: SELECT * FROM delete_pt(1);
+BEGIN
+	DELETE FROM peticiones.peticiones
+		WHERE peticiones.id_pt = $1;
+END;
+$_$;
+
+
+ALTER FUNCTION public.delete_pt(uuid) OWNER TO appbulance;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: ambulancias; Type: TABLE; Schema: administracion; Owner: appbulance
+--
+
+CREATE TABLE administracion.ambulancias (
+    id_a uuid DEFAULT uuid_generate_v4() NOT NULL,
+    num_placa_a character varying(10),
+    num_economico_a character varying(20),
+    estado_a integer DEFAULT 0 NOT NULL,
+    posicion_actual_a point,
+    CONSTRAINT estado_a_chk CHECK ((estado_a = ANY (ARRAY[0, 1, 2, 3])))
+);
+
+
+ALTER TABLE administracion.ambulancias OWNER TO appbulance;
+
+--
+-- Name: get_a(); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.get_a() RETURNS SETOF administracion.ambulancias
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+	RETURN QUERY
+		SELECT * FROM administracion.ambulancias;
+END;
+$$;
+
+
+ALTER FUNCTION public.get_a() OWNER TO appbulance;
+
+--
+-- Name: get_a(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.get_a(id_a uuid) RETURNS SETOF administracion.ambulancias
+    LANGUAGE plpgsql
+    AS $_$
+
+BEGIN
+	RETURN QUERY
+		SELECT * FROM administracion.ambulancias
+			WHERE ambulancias.id_a = $1;
+END;
+
+$_$;
+
+
+ALTER FUNCTION public.get_a(id_a uuid) OWNER TO appbulance;
+
+--
+-- Name: peticiones; Type: TABLE; Schema: peticiones; Owner: appbulance
+--
+
+CREATE TABLE peticiones.peticiones (
+    id_pt uuid DEFAULT uuid_generate_v4() NOT NULL,
+    id_p uuid,
+    id_cm uuid,
+    ubicacion_pt point,
+    direccion_pt character varying(255),
+    timestamp_pt timestamp with time zone DEFAULT now(),
+    resuelto boolean DEFAULT false
+);
+
+
+ALTER TABLE peticiones.peticiones OWNER TO appbulance;
+
+--
+-- Name: get_pt(); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.get_pt() RETURNS SETOF peticiones.peticiones
+    LANGUAGE plpgsql
+    AS $$
+-- Usage: SELECT * FROM get_pt();
+BEGIN
+	RETURN QUERY
+		SELECT * FROM peticiones.peticiones;
+END;
+$$;
+
+
+ALTER FUNCTION public.get_pt() OWNER TO appbulance;
+
+--
+-- Name: get_pt(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.get_pt(uuid) RETURNS SETOF peticiones.peticiones
+    LANGUAGE plpgsql
+    AS $_$
+-- Usage: SELECT * FROM get_pt(1);
+BEGIN
+	RETURN QUERY
+		SELECT * FROM peticiones.peticiones
+			WHERE peticiones.id_pt = $1;
+END;
+$_$;
+
+
+ALTER FUNCTION public.get_pt(uuid) OWNER TO appbulance;
+
+--
+-- Name: glb(text); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION public.glb(code text) RETURNS text
+    LANGUAGE sql
+    AS $$
+    select current_setting('glb.' || code)::text;
+$$;
+
+
+ALTER FUNCTION public.glb(code text) OWNER TO postgres;
+
+--
+-- Name: post_a(character, character, integer, point); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.post_a(num_placa_a character, num_economico_a character, estado_a integer, posicion_actual_a point) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+
+BEGIN
+		INSERT INTO administracion.ambulancias (num_placa_a, num_economico_a, estado_a, posicion_actual_a)
+			VALUES ($1,$2,$3,$4);
+END;
+
+$_$;
+
+
+ALTER FUNCTION public.post_a(num_placa_a character, num_economico_a character, estado_a integer, posicion_actual_a point) OWNER TO appbulance;
+
+--
+-- Name: post_pt(point, character, uuid, uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.post_pt(point, character, uuid, uuid) RETURNS SETOF peticiones.peticiones
+    LANGUAGE plpgsql
+    AS $_$
+-- Usage: SELECT post_pt(point(10.21231,15.21434),'Av. Mateo 32#',2,1);
+BEGIN
+RETURN QUERY
+	INSERT INTO peticiones.peticiones(ubicacion_pt, direccion_pt, id_p, id_cm) 
+	VALUES($1,$2,$3,$4)
+	returning *;
+END;
+$_$;
+
+
+ALTER FUNCTION public.post_pt(point, character, uuid, uuid) OWNER TO appbulance;
+
+--
+-- Name: put_a(uuid, character, character, integer, point); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.put_a(uuid, character, character, integer, point) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+
+BEGIN
+UPDATE administracion.ambulancias
+	SET num_placa_a=$2, num_economico_a=$3, estado_a=$4, posicion_actual_a=$5
+	WHERE id_a=$1;	
+END;
+
+$_$;
+
+
+ALTER FUNCTION public.put_a(uuid, character, character, integer, point) OWNER TO appbulance;
+
+--
+-- Name: put_pt(uuid, point, character, uuid, uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.put_pt(uuid, point, character, uuid, uuid) RETURNS void
+    LANGUAGE plpgsql
+    AS $_$
+-- Usage: SELECT put_pt(2,point(77.21231,77.21434),'Av. Mateo 322#',2,1);
+BEGIN
+	UPDATE peticiones.peticiones 
+		SET ubicacion_pt=$2, direccion_pt=$3, id_p=$4, id_cm=$5 
+	WHERE id_pt=$1;
+END;
+$_$;
+
+
+ALTER FUNCTION public.put_pt(uuid, point, character, uuid, uuid) OWNER TO appbulance;
+
+--
+-- Name: auditorias; Type: TABLE; Schema: auditorias; Owner: appbulance
+--
+
+CREATE TABLE auditorias.auditorias (
+    id_audit uuid DEFAULT uuid_generate_v4() NOT NULL,
+    timestamp_audit timestamp with time zone DEFAULT now(),
+    type_audit character(7) NOT NULL,
+    table_audit character(30) NOT NULL,
+    field_audit character(30),
+    old_data_audit json,
+    new_data_audit json
+);
+
+
+ALTER TABLE auditorias.auditorias OWNER TO appbulance;
+
+--
+-- Name: navegacion; Type: TABLE; Schema: configuraciones; Owner: appbulance
+--
+
+CREATE TABLE configuraciones.navegacion (
+    nav_style character varying(50) DEFAULT 'navbar-dark bg-dark'::character varying,
+    body_style character varying(50) DEFAULT 'bg-dark'::character varying,
+    id_usr uuid,
+    CONSTRAINT body_chk CHECK (((body_style)::text = ANY (ARRAY[('bg-light'::character varying)::text, ('bg-dark'::character varying)::text]))),
+    CONSTRAINT navbar_chk CHECK (((nav_style)::text = ANY (ARRAY[('navbar-dark bg-dark'::character varying)::text, ('navbar-light bg-light'::character varying)::text])))
+);
+
+
+ALTER TABLE configuraciones.navegacion OWNER TO appbulance;
+
+--
+-- Name: alergias; Type: TABLE; Schema: pacientes; Owner: appbulance
+--
+
+CREATE TABLE pacientes.alergias (
+    id_alergia uuid DEFAULT uuid_generate_v4() NOT NULL,
+    descripcion_alergia text,
+    id_p uuid NOT NULL
+);
+
+
+ALTER TABLE pacientes.alergias OWNER TO appbulance;
+
+--
+-- Name: enfermedad_cardiovascular; Type: TABLE; Schema: pacientes; Owner: appbulance
+--
+
+CREATE TABLE pacientes.enfermedad_cardiovascular (
+    id_ecardio uuid DEFAULT uuid_generate_v4() NOT NULL,
+    descripcion_ecardio text,
+    id_p uuid
+);
+
+
+ALTER TABLE pacientes.enfermedad_cardiovascular OWNER TO appbulance;
+
+--
+-- Name: medicamentos; Type: TABLE; Schema: pacientes; Owner: appbulance
+--
+
+CREATE TABLE pacientes.medicamentos (
+    id_medicamento uuid DEFAULT uuid_generate_v4() NOT NULL,
+    descripcion_medicamento text,
+    id_p uuid
+);
+
+
+ALTER TABLE pacientes.medicamentos OWNER TO appbulance;
+
+--
+-- Name: padecimientos; Type: TABLE; Schema: pacientes; Owner: appbulance
+--
+
+CREATE TABLE pacientes.padecimientos (
+    id_padecimiento uuid DEFAULT uuid_generate_v4() NOT NULL,
+    descripcion_padecimiento text,
+    id_p uuid
+);
+
+
+ALTER TABLE pacientes.padecimientos OWNER TO appbulance;
+
+--
+-- Name: seguro_medico; Type: TABLE; Schema: pacientes; Owner: appbulance
+--
+
+CREATE TABLE pacientes.seguro_medico (
+    id_sm uuid DEFAULT uuid_generate_v4() NOT NULL,
+    id_p uuid,
+    descripcion_sm text
+);
+
+
+ALTER TABLE pacientes.seguro_medico OWNER TO appbulance;
+
+--
 -- Name: usuarios; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
 CREATE TABLE perfiles.usuarios (
-    id_usr integer NOT NULL,
+    id_usr uuid DEFAULT uuid_generate_v4() NOT NULL,
     email_usr character varying(100) NOT NULL,
     telefono_usr character varying(13),
     contrasena_usr character varying(255) NOT NULL,
     tipo_usr integer,
     fecha_registro_usr date,
     fecha_ultimo_acceso_usr date,
-    ip_ultimo_acceso_usr character varying(15)
+    ip_ultimo_acceso_usr character varying(15),
+    valido_usr boolean DEFAULT false
 );
 
 
@@ -305,7 +623,7 @@ COMMENT ON COLUMN perfiles.usuarios.tipo_usr IS '
 --
 
 CREATE TABLE perfiles.crums (
-    id_cm integer NOT NULL,
+    id_cm uuid DEFAULT uuid_generate_v4() NOT NULL,
     nombre_cm character varying(80),
     direccion_cm character varying(50),
     coordenadas_cm point,
@@ -317,37 +635,11 @@ INHERITS (perfiles.usuarios);
 ALTER TABLE perfiles.crums OWNER TO appbulance;
 
 --
--- Name: get_cm(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
---
-
-CREATE FUNCTION perfiles.get_cm(id_usr integer) RETURNS SETOF perfiles.crums
-    LANGUAGE sql
-    AS $_$
-SELECT * FROM perfiles.crums WHERE id_usr = $1
-$_$;
-
-
-ALTER FUNCTION perfiles.get_cm(id_usr integer) OWNER TO postgres;
-
---
--- Name: get_cm_id(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
---
-
-CREATE FUNCTION perfiles.get_cm_id(id_usr integer) RETURNS SETOF integer
-    LANGUAGE sql
-    AS $_$
-SELECT id_cm FROM perfiles.crums WHERE id_usr = $1
-$_$;
-
-
-ALTER FUNCTION perfiles.get_cm_id(id_usr integer) OWNER TO postgres;
-
---
 -- Name: personas; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
 CREATE TABLE perfiles.personas (
-    id_prs integer NOT NULL,
+    id_prs uuid DEFAULT uuid_generate_v4(),
     nombre_prs character varying(50) NOT NULL,
     apellido_paterno_prs character varying(50) NOT NULL,
     apellido_materno_prs character varying(50) NOT NULL,
@@ -366,11 +658,10 @@ ALTER TABLE perfiles.personas OWNER TO appbulance;
 --
 
 CREATE TABLE perfiles.pacientes (
-    id_p integer NOT NULL,
+    id_p uuid DEFAULT uuid_generate_v4() NOT NULL,
+    id_cm uuid,
     tipo_sangre_p character varying(3),
     nss_p character varying(12),
-    id_sm integer,
-    id_cm integer,
     CONSTRAINT tipo_sangre_chk CHECK (((tipo_sangre_p)::text = ANY (ARRAY[('A+'::character varying)::text, ('A-'::character varying)::text, ('B+'::character varying)::text, ('B-'::character varying)::text, ('O+'::character varying)::text, ('O-'::character varying)::text, ('AB+'::character varying)::text, ('AB-'::character varying)::text])))
 )
 INHERITS (perfiles.personas);
@@ -379,28 +670,15 @@ INHERITS (perfiles.personas);
 ALTER TABLE perfiles.pacientes OWNER TO appbulance;
 
 --
--- Name: get_p(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
---
-
-CREATE FUNCTION perfiles.get_p(id_usr integer) RETURNS SETOF perfiles.pacientes
-    LANGUAGE sql
-    AS $_$
-SELECT * FROM perfiles.pacientes WHERE id_usr = $1
-$_$;
-
-
-ALTER FUNCTION perfiles.get_p(id_usr integer) OWNER TO postgres;
-
---
 -- Name: tamps; Type: TABLE; Schema: perfiles; Owner: appbulance
 --
 
 CREATE TABLE perfiles.tamps (
-    id_tmp integer NOT NULL,
+    id_tmp uuid DEFAULT uuid_generate_v4() NOT NULL,
+    id_cm uuid,
     grado_tmp text,
     experiencia_tmp text,
-    fecha_ingreso_tmp date,
-    id_cm integer
+    fecha_ingreso_tmp date
 )
 INHERITS (perfiles.personas);
 
@@ -408,643 +686,208 @@ INHERITS (perfiles.personas);
 ALTER TABLE perfiles.tamps OWNER TO appbulance;
 
 --
--- Name: get_tmp(integer); Type: FUNCTION; Schema: perfiles; Owner: postgres
---
-
-CREATE FUNCTION perfiles.get_tmp(id_usr integer) RETURNS SETOF perfiles.tamps
-    LANGUAGE sql
-    AS $_$
-SELECT * FROM perfiles.tamps WHERE id_usr = $1
-$_$;
-
-
-ALTER FUNCTION perfiles.get_tmp(id_usr integer) OWNER TO postgres;
-
---
--- Name: nuevo_perfil(); Type: FUNCTION; Schema: perfiles; Owner: postgres
---
-
-CREATE FUNCTION perfiles.nuevo_perfil() RETURNS trigger
-    LANGUAGE plpgsql
-    AS $$ BEGIN
-INSERT INTO configuraciones.navegacion(id_usr) VALUES (NEW.id_usr);
-RETURN NEW;
-END; $$;
-
-
-ALTER FUNCTION perfiles.nuevo_perfil() OWNER TO postgres;
-
---
--- Name: ambulancias_id_a_seq; Type: SEQUENCE; Schema: administracion; Owner: appbulance
---
-
-CREATE SEQUENCE administracion.ambulancias_id_a_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE administracion.ambulancias_id_a_seq OWNER TO appbulance;
-
---
--- Name: ambulancias_id_a_seq; Type: SEQUENCE OWNED BY; Schema: administracion; Owner: appbulance
---
-
-ALTER SEQUENCE administracion.ambulancias_id_a_seq OWNED BY administracion.ambulancias.id_a;
-
-
---
--- Name: ambulancia_audit; Type: TABLE; Schema: auditorias; Owner: postgres
---
-
-CREATE TABLE auditorias.ambulancia_audit (
-    id_a_audit integer,
-    operacion_a_audit character(1),
-    fecha_operacion_a_audit timestamp with time zone,
-    id_a integer,
-    id_usr integer
-);
-
-
-ALTER TABLE auditorias.ambulancia_audit OWNER TO postgres;
-
---
--- Name: frap_audit; Type: TABLE; Schema: auditorias; Owner: postgres
---
-
-CREATE TABLE auditorias.frap_audit (
-    id_frp_audit integer,
-    operacion_frp_audit character(1),
-    fecha_operacion_frp_audit time with time zone,
-    id_frp integer,
-    id_usr integer
-);
-
-
-ALTER TABLE auditorias.frap_audit OWNER TO postgres;
-
---
--- Name: usuario_audit; Type: TABLE; Schema: auditorias; Owner: appbulance
---
-
-CREATE TABLE auditorias.usuario_audit (
-    id_usr_audit integer,
-    operacion_usr_audit character(1),
-    fecha_operacion_usr_audit timestamp with time zone,
-    id_usr integer
-);
-
-
-ALTER TABLE auditorias.usuario_audit OWNER TO appbulance;
-
---
--- Name: navegacion; Type: TABLE; Schema: configuraciones; Owner: appbulance
---
-
-CREATE TABLE configuraciones.navegacion (
-    id_usr integer NOT NULL,
-    nav_style character varying(50) DEFAULT 'navbar-dark bg-dark'::character varying,
-    body_style character varying(50) DEFAULT 'bg-dark'::character varying,
-    CONSTRAINT body_chk CHECK (((body_style)::text = ANY (ARRAY[('bg-light'::character varying)::text, ('bg-dark'::character varying)::text]))),
-    CONSTRAINT navbar_chk CHECK (((nav_style)::text = ANY (ARRAY[('navbar-dark bg-dark'::character varying)::text, ('navbar-light bg-light'::character varying)::text])))
-);
-
-
-ALTER TABLE configuraciones.navegacion OWNER TO appbulance;
-
---
--- Name: alergias; Type: TABLE; Schema: pacientes; Owner: appbulance
---
-
-CREATE TABLE pacientes.alergias (
-    id integer NOT NULL,
-    descripcion_alergia text,
-    id_p integer
-);
-
-
-ALTER TABLE pacientes.alergias OWNER TO appbulance;
-
---
--- Name: alergias_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
---
-
-CREATE SEQUENCE pacientes.alergias_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE pacientes.alergias_id_seq OWNER TO appbulance;
-
---
--- Name: alergias_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
---
-
-ALTER SEQUENCE pacientes.alergias_id_seq OWNED BY pacientes.alergias.id;
-
-
---
--- Name: enfermedad_cardiovascular; Type: TABLE; Schema: pacientes; Owner: appbulance
---
-
-CREATE TABLE pacientes.enfermedad_cardiovascular (
-    id integer NOT NULL,
-    descripcion_ecardio text,
-    id_p integer
-);
-
-
-ALTER TABLE pacientes.enfermedad_cardiovascular OWNER TO appbulance;
-
---
--- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
---
-
-CREATE SEQUENCE pacientes.enfermedad_cardiovascular_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE pacientes.enfermedad_cardiovascular_id_seq OWNER TO appbulance;
-
---
--- Name: enfermedad_cardiovascular_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
---
-
-ALTER SEQUENCE pacientes.enfermedad_cardiovascular_id_seq OWNED BY pacientes.enfermedad_cardiovascular.id;
-
-
---
--- Name: medicamentos; Type: TABLE; Schema: pacientes; Owner: appbulance
---
-
-CREATE TABLE pacientes.medicamentos (
-    id integer NOT NULL,
-    descripcion_medicamento text,
-    id_p integer
-);
-
-
-ALTER TABLE pacientes.medicamentos OWNER TO appbulance;
-
---
--- Name: medicamentos_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
---
-
-CREATE SEQUENCE pacientes.medicamentos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE pacientes.medicamentos_id_seq OWNER TO appbulance;
-
---
--- Name: medicamentos_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
---
-
-ALTER SEQUENCE pacientes.medicamentos_id_seq OWNED BY pacientes.medicamentos.id;
-
-
---
--- Name: padecimientos; Type: TABLE; Schema: pacientes; Owner: appbulance
---
-
-CREATE TABLE pacientes.padecimientos (
-    id integer NOT NULL,
-    descripcion_padecimiento text,
-    id_p integer
-);
-
-
-ALTER TABLE pacientes.padecimientos OWNER TO appbulance;
-
---
--- Name: padecimientos_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
---
-
-CREATE SEQUENCE pacientes.padecimientos_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE pacientes.padecimientos_id_seq OWNER TO appbulance;
-
---
--- Name: padecimientos_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
---
-
-ALTER SEQUENCE pacientes.padecimientos_id_seq OWNED BY pacientes.padecimientos.id;
-
-
---
--- Name: seguro_medico; Type: TABLE; Schema: pacientes; Owner: appbulance
---
-
-CREATE TABLE pacientes.seguro_medico (
-    id_sm integer NOT NULL,
-    descripcion_sm text
-);
-
-
-ALTER TABLE pacientes.seguro_medico OWNER TO appbulance;
-
---
--- Name: seguro_medico_id_seq; Type: SEQUENCE; Schema: pacientes; Owner: appbulance
---
-
-CREATE SEQUENCE pacientes.seguro_medico_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE pacientes.seguro_medico_id_seq OWNER TO appbulance;
-
---
--- Name: seguro_medico_id_seq; Type: SEQUENCE OWNED BY; Schema: pacientes; Owner: appbulance
---
-
-ALTER SEQUENCE pacientes.seguro_medico_id_seq OWNED BY pacientes.seguro_medico.id_sm;
-
-
---
--- Name: crums_id_cm_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
---
-
-CREATE SEQUENCE perfiles.crums_id_cm_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE perfiles.crums_id_cm_seq OWNER TO appbulance;
-
---
--- Name: crums_id_cm_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
---
-
-ALTER SEQUENCE perfiles.crums_id_cm_seq OWNED BY perfiles.crums.id_cm;
-
-
---
--- Name: pacientes_id_p_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
---
-
-CREATE SEQUENCE perfiles.pacientes_id_p_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE perfiles.pacientes_id_p_seq OWNER TO appbulance;
-
---
--- Name: pacientes_id_p_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
---
-
-ALTER SEQUENCE perfiles.pacientes_id_p_seq OWNED BY perfiles.pacientes.id_p;
-
-
---
--- Name: personas_id_prs_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
---
-
-CREATE SEQUENCE perfiles.personas_id_prs_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE perfiles.personas_id_prs_seq OWNER TO appbulance;
-
---
--- Name: personas_id_prs_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
---
-
-ALTER SEQUENCE perfiles.personas_id_prs_seq OWNED BY perfiles.personas.id_prs;
-
-
---
--- Name: tamps_id_tmp_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
---
-
-CREATE SEQUENCE perfiles.tamps_id_tmp_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE perfiles.tamps_id_tmp_seq OWNER TO appbulance;
-
---
--- Name: tamps_id_tmp_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
---
-
-ALTER SEQUENCE perfiles.tamps_id_tmp_seq OWNED BY perfiles.tamps.id_tmp;
-
-
---
--- Name: usuarios_id_usr_seq; Type: SEQUENCE; Schema: perfiles; Owner: appbulance
---
-
-CREATE SEQUENCE perfiles.usuarios_id_usr_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE perfiles.usuarios_id_usr_seq OWNER TO appbulance;
-
---
--- Name: usuarios_id_usr_seq; Type: SEQUENCE OWNED BY; Schema: perfiles; Owner: appbulance
---
-
-ALTER SEQUENCE perfiles.usuarios_id_usr_seq OWNED BY perfiles.usuarios.id_usr;
-
-
---
--- Name: fraps; Type: TABLE; Schema: peticiones; Owner: appbulance
---
-
-CREATE TABLE peticiones.fraps (
-    id_frp integer NOT NULL,
-    id_pt integer NOT NULL,
-    hrllamada_frp timestamp with time zone NOT NULL,
-    hrsalida_frp timestamp with time zone NOT NULL,
-    hrllegada_frp timestamp with time zone,
-    hrtraslado_frp timestamp with time zone,
-    hrhospital_frp time with time zone,
-    hrbase_frp time with time zone,
-    motivo_atencion_frp character varying(30),
-    lg_ocurrencia_frp character varying(30),
-    id_a integer
-);
-
-
-ALTER TABLE peticiones.fraps OWNER TO appbulance;
-
---
--- Name: fraps_id_frp_seq; Type: SEQUENCE; Schema: peticiones; Owner: appbulance
---
-
-CREATE SEQUENCE peticiones.fraps_id_frp_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE peticiones.fraps_id_frp_seq OWNER TO appbulance;
-
---
--- Name: fraps_id_frp_seq; Type: SEQUENCE OWNED BY; Schema: peticiones; Owner: appbulance
---
-
-ALTER SEQUENCE peticiones.fraps_id_frp_seq OWNED BY peticiones.fraps.id_frp;
-
-
---
--- Name: peticiones; Type: TABLE; Schema: peticiones; Owner: appbulance
---
-
-CREATE TABLE peticiones.peticiones (
-    id_pt integer NOT NULL,
-    ubicacion_pt point,
-    direccion_pt character varying(255),
-    id_p integer,
-    id_cm integer
-);
-
-
-ALTER TABLE peticiones.peticiones OWNER TO appbulance;
-
---
--- Name: peticiones_id_pt_seq; Type: SEQUENCE; Schema: peticiones; Owner: appbulance
---
-
-CREATE SEQUENCE peticiones.peticiones_id_pt_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE peticiones.peticiones_id_pt_seq OWNER TO appbulance;
-
---
--- Name: peticiones_id_pt_seq; Type: SEQUENCE OWNED BY; Schema: peticiones; Owner: appbulance
---
-
-ALTER SEQUENCE peticiones.peticiones_id_pt_seq OWNED BY peticiones.peticiones.id_pt;
-
-
---
--- Name: ambulancias id_a; Type: DEFAULT; Schema: administracion; Owner: appbulance
---
-
-ALTER TABLE ONLY administracion.ambulancias ALTER COLUMN id_a SET DEFAULT nextval('administracion.ambulancias_id_a_seq'::regclass);
-
-
---
--- Name: alergias id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.alergias ALTER COLUMN id SET DEFAULT nextval('pacientes.alergias_id_seq'::regclass);
-
-
---
--- Name: enfermedad_cardiovascular id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.enfermedad_cardiovascular ALTER COLUMN id SET DEFAULT nextval('pacientes.enfermedad_cardiovascular_id_seq'::regclass);
-
-
---
--- Name: medicamentos id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.medicamentos ALTER COLUMN id SET DEFAULT nextval('pacientes.medicamentos_id_seq'::regclass);
-
-
---
--- Name: padecimientos id; Type: DEFAULT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.padecimientos ALTER COLUMN id SET DEFAULT nextval('pacientes.padecimientos_id_seq'::regclass);
-
-
---
--- Name: seguro_medico id_sm; Type: DEFAULT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.seguro_medico ALTER COLUMN id_sm SET DEFAULT nextval('pacientes.seguro_medico_id_seq'::regclass);
-
-
---
 -- Name: crums id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.crums ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
+ALTER TABLE ONLY perfiles.crums ALTER COLUMN id_usr SET DEFAULT uuid_generate_v4();
 
 
 --
--- Name: crums id_cm; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- Name: crums valido_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.crums ALTER COLUMN id_cm SET DEFAULT nextval('perfiles.crums_id_cm_seq'::regclass);
+ALTER TABLE ONLY perfiles.crums ALTER COLUMN valido_usr SET DEFAULT false;
 
 
 --
 -- Name: pacientes id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
+ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_usr SET DEFAULT uuid_generate_v4();
 
 
 --
 -- Name: pacientes id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_prs SET DEFAULT nextval('perfiles.personas_id_prs_seq'::regclass);
+ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_prs SET DEFAULT uuid_generate_v4();
 
 
 --
--- Name: pacientes id_p; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- Name: pacientes valido_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN id_p SET DEFAULT nextval('perfiles.pacientes_id_p_seq'::regclass);
+ALTER TABLE ONLY perfiles.pacientes ALTER COLUMN valido_usr SET DEFAULT false;
 
 
 --
 -- Name: personas id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.personas ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
+ALTER TABLE ONLY perfiles.personas ALTER COLUMN id_usr SET DEFAULT uuid_generate_v4();
 
 
 --
--- Name: personas id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- Name: personas valido_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.personas ALTER COLUMN id_prs SET DEFAULT nextval('perfiles.personas_id_prs_seq'::regclass);
+ALTER TABLE ONLY perfiles.personas ALTER COLUMN valido_usr SET DEFAULT false;
 
 
 --
 -- Name: tamps id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
+ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_usr SET DEFAULT uuid_generate_v4();
 
 
 --
 -- Name: tamps id_prs; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_prs SET DEFAULT nextval('perfiles.personas_id_prs_seq'::regclass);
+ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_prs SET DEFAULT uuid_generate_v4();
 
 
 --
--- Name: tamps id_tmp; Type: DEFAULT; Schema: perfiles; Owner: appbulance
+-- Name: tamps valido_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
 --
 
-ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_tmp SET DEFAULT nextval('perfiles.tamps_id_tmp_seq'::regclass);
-
-
---
--- Name: usuarios id_usr; Type: DEFAULT; Schema: perfiles; Owner: appbulance
---
-
-ALTER TABLE ONLY perfiles.usuarios ALTER COLUMN id_usr SET DEFAULT nextval('perfiles.usuarios_id_usr_seq'::regclass);
+ALTER TABLE ONLY perfiles.tamps ALTER COLUMN valido_usr SET DEFAULT false;
 
 
 --
--- Name: fraps id_frp; Type: DEFAULT; Schema: peticiones; Owner: appbulance
+-- Data for Name: ambulancias; Type: TABLE DATA; Schema: administracion; Owner: appbulance
 --
 
-ALTER TABLE ONLY peticiones.fraps ALTER COLUMN id_frp SET DEFAULT nextval('peticiones.fraps_id_frp_seq'::regclass);
-
-
---
--- Name: peticiones id_pt; Type: DEFAULT; Schema: peticiones; Owner: appbulance
---
-
-ALTER TABLE ONLY peticiones.peticiones ALTER COLUMN id_pt SET DEFAULT nextval('peticiones.peticiones_id_pt_seq'::regclass);
 
 
 --
--- Name: ambulancias ambulancias_pkey; Type: CONSTRAINT; Schema: administracion; Owner: appbulance
+-- Data for Name: auditorias; Type: TABLE DATA; Schema: auditorias; Owner: appbulance
+--
+
+
+--
+-- Data for Name: alergias; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: enfermedad_cardiovascular; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: medicamentos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: padecimientos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: seguro_medico; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: crums; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+INSERT INTO perfiles.crums VALUES ('f0f178f6-eaee-48e2-ba02-f61e9a072871', 'crum@email.com', '7532345789', '0afbf9c010d879c71a403220399e1ac5', 1, '2018-01-01', '2018-07-31', NULL, 'a12398c0-8bd0-46fd-9394-17f5e803e10d', 'Cruz Roja Mexicana I.A.P. Delegación Lázaro Cárdenas', 'Aldama 327, Centro, 60950 Lázaro Cárdenas, Mich.', '(17.961215299999999,-102.1933482)', NULL, true);
+
+
+--
+-- Data for Name: pacientes; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+INSERT INTO perfiles.pacientes VALUES ('941931cd-9963-4c48-8ac6-36f4c3479d55', 'jabin753@gmail.com', '7531314257', '018915039597c07806cfb319c4a495d9', 2, '2018-08-01', NULL, NULL, 'e16c86a3-2260-400e-80ee-47ddb1a24a0d', 'Joseph', 'Cuevas', 'Bustos', '1997-12-24', 'M', 'Estudiante', 'e950b37a-1d9b-4727-a5f5-2b5677c36dc9', NULL, 'A+', '002381239', true);
+
+
+--
+-- Data for Name: personas; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: tamps; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: usuarios; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
+--
+
+
+
+--
+-- Data for Name: peticiones; Type: TABLE DATA; Schema: peticiones; Owner: appbulance
+--
+
+
+
+--
+-- Name: ambulancias id_a_pk; Type: CONSTRAINT; Schema: administracion; Owner: appbulance
 --
 
 ALTER TABLE ONLY administracion.ambulancias
-    ADD CONSTRAINT ambulancias_pkey PRIMARY KEY (id_a);
+    ADD CONSTRAINT id_a_pk PRIMARY KEY (id_a);
 
 
 --
--- Name: alergias alergias_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- Name: auditorias auditorias_pkey; Type: CONSTRAINT; Schema: auditorias; Owner: appbulance
+--
+
+ALTER TABLE ONLY auditorias.auditorias
+    ADD CONSTRAINT auditorias_pkey PRIMARY KEY (id_audit);
+
+
+--
+-- Name: alergias alergias_pkey; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.alergias
-    ADD CONSTRAINT alergias_pk PRIMARY KEY (id);
+    ADD CONSTRAINT alergias_pkey PRIMARY KEY (id_alergia);
 
 
 --
--- Name: enfermedad_cardiovascular enfermedad_cardiovascular_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- Name: enfermedad_cardiovascular enfermedad_cardiovascular_pkey; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.enfermedad_cardiovascular
-    ADD CONSTRAINT enfermedad_cardiovascular_pk PRIMARY KEY (id);
+    ADD CONSTRAINT enfermedad_cardiovascular_pkey PRIMARY KEY (id_ecardio);
 
 
 --
--- Name: medicamentos medicamentos_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- Name: medicamentos medicamentos_pkey; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.medicamentos
-    ADD CONSTRAINT medicamentos_pk PRIMARY KEY (id);
+    ADD CONSTRAINT medicamentos_pkey PRIMARY KEY (id_medicamento);
 
 
 --
--- Name: padecimientos padecimientos_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- Name: padecimientos padecimientos_pkey; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.padecimientos
-    ADD CONSTRAINT padecimientos_pk PRIMARY KEY (id);
+    ADD CONSTRAINT padecimientos_pkey PRIMARY KEY (id_padecimiento);
 
 
 --
--- Name: seguro_medico seguro_medico_pk; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
+-- Name: seguro_medico seguro_medico_pkey; Type: CONSTRAINT; Schema: pacientes; Owner: appbulance
 --
 
 ALTER TABLE ONLY pacientes.seguro_medico
-    ADD CONSTRAINT seguro_medico_pk PRIMARY KEY (id_sm);
+    ADD CONSTRAINT seguro_medico_pkey PRIMARY KEY (id_sm);
 
 
 --
@@ -1072,14 +915,6 @@ ALTER TABLE ONLY perfiles.pacientes
 
 
 --
--- Name: personas personas_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
---
-
-ALTER TABLE ONLY perfiles.personas
-    ADD CONSTRAINT personas_pkey PRIMARY KEY (id_prs);
-
-
---
 -- Name: tamps tamps_pkey; Type: CONSTRAINT; Schema: perfiles; Owner: appbulance
 --
 
@@ -1104,40 +939,11 @@ ALTER TABLE ONLY perfiles.usuarios
 
 
 --
--- Name: fraps fraps_pkey; Type: CONSTRAINT; Schema: peticiones; Owner: appbulance
---
-
-ALTER TABLE ONLY peticiones.fraps
-    ADD CONSTRAINT fraps_pkey PRIMARY KEY (id_frp);
-
-
---
 -- Name: peticiones peticiones_pkey; Type: CONSTRAINT; Schema: peticiones; Owner: appbulance
 --
 
 ALTER TABLE ONLY peticiones.peticiones
     ADD CONSTRAINT peticiones_pkey PRIMARY KEY (id_pt);
-
-
---
--- Name: id_usr_i; Type: INDEX; Schema: configuraciones; Owner: appbulance
---
-
-CREATE UNIQUE INDEX id_usr_i ON configuraciones.navegacion USING btree (id_usr);
-
-
---
--- Name: fki_perfiles_pacientes_id_cm_fk; Type: INDEX; Schema: perfiles; Owner: appbulance
---
-
-CREATE INDEX fki_perfiles_pacientes_id_cm_fk ON perfiles.pacientes USING btree (id_cm);
-
-
---
--- Name: fki_perfiles_tamps_id_cm_fk; Type: INDEX; Schema: perfiles; Owner: appbulance
---
-
-CREATE INDEX fki_perfiles_tamps_id_cm_fk ON perfiles.tamps USING btree (id_cm);
 
 
 --
@@ -1183,72 +989,8 @@ CREATE TRIGGER nuevo_perfil AFTER INSERT ON perfiles.tamps FOR EACH ROW EXECUTE 
 
 
 --
--- Name: ambulancias id_cm_fk; Type: FK CONSTRAINT; Schema: administracion; Owner: appbulance
---
-
-ALTER TABLE ONLY administracion.ambulancias
-    ADD CONSTRAINT id_cm_fk FOREIGN KEY (id_cm) REFERENCES perfiles.crums(id_cm) ON UPDATE CASCADE;
-
-
---
--- Name: alergias alergias_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.alergias
-    ADD CONSTRAINT alergias_fk FOREIGN KEY (id_p) REFERENCES perfiles.pacientes(id_p) ON UPDATE CASCADE;
-
-
---
--- Name: enfermedad_cardiovascular enfermedad_cardiovascular_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.enfermedad_cardiovascular
-    ADD CONSTRAINT enfermedad_cardiovascular_fk FOREIGN KEY (id_p) REFERENCES perfiles.pacientes(id_p) ON UPDATE CASCADE;
-
-
---
--- Name: medicamentos medicamentos_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.medicamentos
-    ADD CONSTRAINT medicamentos_fk FOREIGN KEY (id_p) REFERENCES perfiles.pacientes(id_p) ON UPDATE CASCADE;
-
-
---
--- Name: padecimientos padecimientos_fk; Type: FK CONSTRAINT; Schema: pacientes; Owner: appbulance
---
-
-ALTER TABLE ONLY pacientes.padecimientos
-    ADD CONSTRAINT padecimientos_fk FOREIGN KEY (id_p) REFERENCES perfiles.pacientes(id_p) ON UPDATE CASCADE;
-
-
---
--- Name: pacientes perfiles_pacientes_id_cm_fk; Type: FK CONSTRAINT; Schema: perfiles; Owner: appbulance
---
-
-ALTER TABLE ONLY perfiles.pacientes
-    ADD CONSTRAINT perfiles_pacientes_id_cm_fk FOREIGN KEY (id_cm) REFERENCES perfiles.crums(id_cm) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: tamps perilfes_tamps_id_cm_fk; Type: FK CONSTRAINT; Schema: perfiles; Owner: appbulance
---
-
-ALTER TABLE ONLY perfiles.tamps
-    ADD CONSTRAINT perilfes_tamps_id_cm_fk FOREIGN KEY (id_cm) REFERENCES perfiles.crums(id_cm) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: fraps fraps_id_pt_fkey; Type: FK CONSTRAINT; Schema: peticiones; Owner: appbulance
---
-
-ALTER TABLE ONLY peticiones.fraps
-    ADD CONSTRAINT fraps_id_pt_fkey FOREIGN KEY (id_pt) REFERENCES peticiones.peticiones(id_pt) ON UPDATE CASCADE;
-
-INSERT INTO perfiles.crums (email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, nombre_cm, direccion_cm, coordenadas_cm, rango_servicio_cm) VALUES ('crum@email.com', '7531032495', '0afbf9c010d879c71a403220399e1ac5', 1, '2018-05-31', '2018-05-31', '201.222.13.10','Clinica Morelia', 'Tanganxoan 89, Jarene, 60950 Lázaro Cárdenas, Mich', '(17.967739000000002,-102.221377)', NULL);
-INSERT INTO perfiles.pacientes (email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr,nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs,tipo_sangre_p, nss_p, id_sm, id_cm) VALUES ('paciente@email.com', '7531314257', '0afbf9c010d879c71a403220399e1ac5', 2, '2018-05-31', NULL, NULL,'Joseph Jabin', 'Cuevas', 'Bustos', '1997-11-24', 'M', 'Estudiante','A+', '009318231', NULL,1);
-INSERT INTO perfiles.tamps (email_usr, telefono_usr, contrasena_usr, tipo_usr, fecha_registro_usr, fecha_ultimo_acceso_usr, ip_ultimo_acceso_usr, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, id_tmp, grado_tmp, experiencia_tmp, fecha_ingreso_tmp, id_cm) VALUES ('tamp@email.com', '7532345674', '0afbf9c010d879c71a403220399e1ac5', 3, '2018-05-31', '2018-05-31', '202.10.10.20','Juan Arturo', 'Huerta', 'Soto', '1992-12-25', 'M', 'Auxiliar', 1, 'Técnico', '3 Meses atendiendo casos de emergencia', '2018-02-27',1);
---
 -- PostgreSQL database dump complete
 --
+
+
 
