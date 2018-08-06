@@ -65,6 +65,7 @@ module.exports = {
 				return done(null, false)
 			}
 		}catch(err){
+			console.log(err)
 			req.flash('user-login', err.hint)
 			return done(null, false)
 		}

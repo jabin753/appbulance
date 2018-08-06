@@ -17,6 +17,9 @@
           <%if (flashMessage.length > 0){ %>
             <div class="container" style="background-color: #FF5A5A"><%= flashMessage %></div>
           <% } %> 
+          <hr>
+          <h2>Datos personales</h2>
+          <hr>
           <form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
             <div class="form-group">
               <label for="InputName">Nombre</label>
@@ -78,24 +81,15 @@
             </div>              
             <div class="form-group">
               <div class="form-row">
-                  <div class="col-md-6">
-                      <label for="InputSecure">Derechohabiente a</label>
-                      <select class="form-control" name="id_sm" id="InputSecure" required>
-                          <option value="">Selecciona una institución médica</option>     
-                          <option value="1">IMSS</option> 
-                          <option value="2">ISSSTE</option>
-                          <option value="3">SEDENA</option> 
-                          <option value="4">PEMEX</option>
-                          <option value="5">Seguro Popular</option>
-                      </select>
-                  </div>
                 <div class="col-md-6">
                   <label for="InputNSS">Número de Seguro Social</label>
                   <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12" data-smk-type="number">
                 </div>
-                <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces tu NSS? Consúltalo aquí.</a>
+                <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss" target="_blank">¿No conoces tu NSS? Consúltalo aquí.</a>
               </div>
             </div>              
+            <hr>
+            <h2>Datos de acceso</h2>
             <hr>
             <div class="form-group">
               <label for="InputEmail1">Dirección de correo electrónico</label>

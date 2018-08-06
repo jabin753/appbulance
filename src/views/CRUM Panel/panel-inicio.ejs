@@ -1,8 +1,3 @@
-<%# 
-DATOS DE ENTRADA:
-  style.body_style
-  pageTitle
-#%>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,19 +9,20 @@ DATOS DE ENTRADA:
     <div class="container-fluid">
       <main>
         <div id="map" style="width:100%;height:480px;background:white"></div>
-        <div style="display: none">
-          <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
-          <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
-          <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>
-        </div>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap" async defer></script>
-        <script src="/js/ab-google-maps.js"></script>
-        </main>
+      </main>
     </div>
+    <%- include ../partials/modals/petition -%>
     <%- include ../partials/template/footer -%>
     <%- include ../partials/template/top-button -%>
     <%- include ../partials/modals/logout -%>
-    <%- include ../partials/template/js-scripts -%>
+    <script src="/vendor/socket-io/socket.io.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/ab-admin.min.js"></script> 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap" async defer></script>
+    <script src="/js/ab-maps-api.min.js"></script>
+    <script src ="/js/crum-socket-peticiones.min.js"></script>
   </div>
 </body>
 </html>

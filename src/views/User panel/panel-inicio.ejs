@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Appbulance - Panel</title>
-  <%- include ../partials/template/header -%>
-  <%- include ../partials/template/js-scripts -%> 
-  <%- include ../partials/template/js-scripts-googlemaps -%>  
+  <title>Appbulance - Inicio</title>
+  <%- include ../partials/template/header -%> 
 </head>
 <body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
   <%- include ../partials/template/user-navbar%>
@@ -17,9 +15,10 @@
                 <div class="form-row">                    
                     <div class="col-md-6" id="map" style="height: 250px"></div>
                     <div class="col-md-6">                        
-                        <label for="OutputDirection">Tu dirección</label><hr>
-                        <button class="btn btn-primary btn-block" type="submit" id="btnSolicitud">Solicitar ambulancia</button><hr>
-                        <div style="display: none">
+                        <hr>
+                        <button type="button" class="btn btn-primary btn-block" id="btnSolicitud">Solicitar ambulancia</button>
+                        <h4 for="OutputDirection">Tu dirección:</h4><hr>
+                        <div style="display: block">
                             <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
                             <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
                             <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>
@@ -27,51 +26,39 @@
                     </div>
                 </div>
                 </form>
-                <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-                <script>
-                $(function() {
-                    var socket = io();
-                    socket.on('connect', function(){
-                    var peticion = document.forms.formularioPeticion;
-                    if(peticion){
-                        peticion.addEventListener('submit',function(e){
-                            e.preventDefault();
-                            var direction = $('#direction').val();
-                            socket.emit('sendPetition',{
-                                direction: direction,
-                                latLng: [$('#lat').val(),$('#lng').val()]
-                            });
-                        });
-                    }
-                });
-                });
-                </script>
               </div>
         </div>
     <%- include ../partials/template/footer -%>
     <%- include ../partials/template/top-button -%>
     <%- include ../partials/modals/logout -%>
-    <!-- Modal -->
+    <!-- SCRIPTS -->
+    <script src="/vendor/socket-io/socket.io.min.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/js/ab-admin.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap" async defer></script>
+    <script src="/js/ab-maps-api.min.js"></script>
+    <script src="/js/usuario-inicio.min.js"></script>
+    <!-- Cancelation Modal -->
     <div class="modal fade" id="timerCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Cancelacion</h5>
+              <h5 class="modal-title" id="exampleModalCenterTitle">Cancelación</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <form>
                 <div class="modal-body" id="Message">
-                    <p style="text-align: center;">¿Desea cancelar la petición?<br>
-                    Para cancelar el servicio usted tiene</p>
-                    <p id="timer"></p>
+                    <p style="text-align: center;">¿Desea cancelar la petición?</p>
+                    <p class='seconds-timer' id="timer">5</p>
                     <p style="text-align: center;">segundos</p>
-                    <input id="inputCancel" name="inputCancel" placeholder="Escriba 'cancelar' para confirmar" required>
                 </div>
 
-                <div class="modal-body" id="Expirated">  
-                    <p class='seconds-timer'>EXPIRADO</p>              
+                <div class="modal-body" id="Succeded" style="display:none">  
+                    <p class='seconds-timer'>Petición enviada</p>              
                 </div>
 
                 <div class="modal-footer">
@@ -82,44 +69,6 @@
           </div>
         </div>
     </div>
-    <script>
-        var _seconds;    
-        $("#btnSolicitud").on("click", function(){
-            _seconds = 5;
-            $("#Message").show();
-            $("#Expirated").hide();   
-            $('#btnCancelSolicitud').removeAttr('disabled');
-            $('#timerCancel').modal('show');
-            $('#inputCancel').removeAttr('disabled'); 
-            $('#inputCancel').val("");
-            var _timer = setInterval(function() {
-                _seconds = _seconds - 1;
-                $("#timer").html("<p class='seconds-timer'>"+ _seconds + "</p>");
-                
-                if (_seconds < 0) {
-                    clearInterval(_timer);
-                    $("#Message").hide();
-                    $("#Expirated").show();
-                    $('#btnCancelSolicitud').attr('disabled','disabled');
-                    $('#inputCancel').attr('disabled','disabled');
-                    $('#inputCancel').val("");
-                }
-            }, 1000);
-        })
-        
-        $("#btnCancelSolicitud").on("click", function(){
-            var _confirm = $('#inputCancel').val();
-            if(_confirm == "cancelar"){
-                alert("Solicitud cancelada.");
-            } else {
-                alert("Error en la confirmacion.");
-            }
-
-        })
-
-        
-        
-    </script>
   </div>  
 </body>
 </html>
