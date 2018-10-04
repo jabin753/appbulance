@@ -84,7 +84,7 @@ gulp.task('js', ['js:minify']);
 
 //Default
 
-gulp.task('default',['css','js','vendor']);
+gulp.task('build',['css','js','vendor']);
 
 //Servidor para desarrollo
 
