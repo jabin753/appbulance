@@ -1,11 +1,12 @@
 {
   "name": "appbulance",
-  "version": "1.1.6",
+  "version": "1.2.1",
   "description": "A Webapp that allows to people connect with medical service in order to attend an emergency call",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "install": "gulp"
   },
   "keywords": [],
   "author": "",
