@@ -1,7 +1,7 @@
 const { Pool } = require('pg')
 
 const pool = new Pool({connectionString: process.env.PG_CONNECTION_STRING 
-  || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'})
+  || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance2'})
 
 module.exports = {
   
