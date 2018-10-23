@@ -1,8 +1,26 @@
 const bd = require('../config/dbConnection');
 module.exports = app => {
-
+    
+    app.all('/api/*',async (req,res,next) =>{
+        console.log('API call')
+        if (req.user === undefined){
+            res.status(403).json({
+                status:'Petición denegada, debes de contar con una sesión abierta'
+            })        
+        }
+        else next()
+    })
+    app.all('/api/admin/*',async (req,res,next) =>{
+        console.log('API admin call')
+        if(req.user.tipo_usr !== 1){
+            res.status(403).json({
+                status:'Petición denegada. Permisos insuficientes'
+            })
+        }
+        next()
+    })
     //AMBULANCIAS
-    app.get('/api/a',async (req, res) => {
+    app.get('/api/admin/a',async (req, res) => {
         try{
             const { rows } =  await bd.query('SELECT * FROM get_a()')
             res.json(rows)
@@ -12,7 +30,7 @@ module.exports = app => {
 		}
         
     })
-    app.get('/api/a/:id_a',async (req, res) => {
+    app.get('/api/admin/a/:id_a',async (req, res) => {
         try{
             const { id_a } = req.params
             const { rows } = await bd.query('SELECT * FROM get_a($1)',[id_a])
@@ -22,7 +40,7 @@ module.exports = app => {
 			res.json({state: "error", content: err})
 		}
     })
-    app.post('/api/a',async (req, res) => {
+    app.post('/api/admin/a',async (req, res) => {
         try{
             var {num_placa_a, num_economico_a, estado_a, posicion_actual_a} = req.body
             if(typeof num_placa_a === 'undefined') {num_placa_a = '';}
@@ -36,7 +54,7 @@ module.exports = app => {
 			res.json({state: "error", content: err})
 		}
     })
-    app.put('/api/a/:id_a',async (req, res) => {
+    app.put('/api/admin/a/:id_a',async (req, res) => {
         try{
             const { id_a } = req.params
             var {num_placa_a, num_economico_a, estado_a, posicion_actual_a} = req.body
@@ -52,7 +70,7 @@ module.exports = app => {
 			res.json({state: "error", content: err})
 		}
     })
-    app.delete('/api/a/:id_a',async (req, res) => {
+    app.delete('/api/admin/a/:id_a',async (req, res) => {
         try{
             const { id_a } = req.params
             const { rows } = await bd.query('SELECT * FROM delete_a($1)',[id_a])
@@ -64,7 +82,7 @@ module.exports = app => {
     })
     
     //PETICIONES
-    app.get('/api/pt',async (req, res) => {
+    app.get('/api/admin/pt',async (req, res) => {
         try{
             const { rows } =  await bd.query('SELECT * FROM get_pt()')
             res.json(rows)
@@ -74,7 +92,7 @@ module.exports = app => {
 		}
         
     })
-    app.get('/api/pt/:id_pt',async (req, res) => {
+    app.get('/api/admin/pt/:id_pt',async (req, res) => {
         try{
             const { id_pt } = req.params
             const { rows } = await bd.query('SELECT * FROM get_pt($1)',[id_pt])
@@ -98,7 +116,7 @@ module.exports = app => {
 			res.json({state: "error", content: err})
 		}
     })
-    app.put('/api/pt/:id_pt',async (req, res) => {
+    app.put('/api/admin/pt/:id_pt',async (req, res) => {
         try{
             const { id_pt } = req.params
             var {ubicacion_pt, direccion_pt, id_p, id_cm} = req.body
@@ -114,7 +132,7 @@ module.exports = app => {
 			res.json({state: "error", content: err})
 		}
     })
-    app.delete('/api/pt/:id_pt',async (req, res) => {
+    app.delete('/api/admin/pt/:id_pt',async (req, res) => {
         try{
             const { id_pt } = req.params
             const { rows } =  await bd.query('SELECT delete_pt($1)',[id_pt])

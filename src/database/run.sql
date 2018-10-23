@@ -263,41 +263,6 @@ END; $$;
 
 ALTER FUNCTION perfiles.nuevo_perfil() OWNER TO postgres;
 
---
--- Name: delete_a(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
---
-
-CREATE FUNCTION public.delete_a(uuid) RETURNS void
-    LANGUAGE plpgsql
-    AS $_$
-
-BEGIN
-		DELETE FROM administracion.ambulancias
-			WHERE ambulancias.id_a = $1;
-END;
-
-$_$;
-
-
-ALTER FUNCTION public.delete_a(uuid) OWNER TO appbulance;
-
---
--- Name: delete_pt(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
---
-
-CREATE FUNCTION public.delete_pt(uuid) RETURNS void
-    LANGUAGE plpgsql
-    AS $_$
--- Usage: SELECT * FROM delete_pt(1);
-BEGIN
-	DELETE FROM peticiones.peticiones
-		WHERE peticiones.id_pt = $1;
-END;
-$_$;
-
-
-ALTER FUNCTION public.delete_pt(uuid) OWNER TO appbulance;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -317,6 +282,65 @@ CREATE TABLE administracion.ambulancias (
 
 
 ALTER TABLE administracion.ambulancias OWNER TO appbulance;
+
+--
+-- Name: delete_a(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.delete_a(uuid) RETURNS SETOF administracion.ambulancias
+    LANGUAGE plpgsql
+    AS $_$
+
+-- Usage: SELECT * FROM delete_a(1);
+BEGIN
+	RETURN QUERY 
+		DELETE FROM administracion.ambulancias
+		WHERE ambulancias.id_a = $1
+	RETURNING *;
+END;
+
+$_$;
+
+
+ALTER FUNCTION public.delete_a(uuid) OWNER TO appbulance;
+
+--
+-- Name: peticiones; Type: TABLE; Schema: peticiones; Owner: appbulance
+--
+
+CREATE TABLE peticiones.peticiones (
+    id_pt uuid DEFAULT uuid_generate_v4() NOT NULL,
+    id_p uuid,
+    id_cm uuid,
+    ubicacion_pt point,
+    direccion_pt character varying(255),
+    timestamp_pt timestamp with time zone DEFAULT now(),
+    resuelto boolean DEFAULT false
+);
+
+
+ALTER TABLE peticiones.peticiones OWNER TO appbulance;
+
+--
+-- Name: delete_pt(uuid); Type: FUNCTION; Schema: public; Owner: appbulance
+--
+
+CREATE FUNCTION public.delete_pt(uuid) RETURNS SETOF peticiones.peticiones
+    LANGUAGE plpgsql
+    AS $_$
+
+-- Usage: SELECT * FROM delete_pt(1);
+BEGIN
+	RETURN QUERY 
+	DELETE FROM peticiones.peticiones
+		WHERE peticiones.id_pt = $1
+	RETURNING *;
+END;
+
+$_$;
+
+
+ALTER FUNCTION public.delete_pt(uuid) OWNER TO appbulance;
 
 --
 -- Name: get_a(); Type: FUNCTION; Schema: public; Owner: appbulance
@@ -354,23 +378,6 @@ $_$;
 ALTER FUNCTION public.get_a(id_a uuid) OWNER TO appbulance;
 
 --
--- Name: peticiones; Type: TABLE; Schema: peticiones; Owner: appbulance
---
-
-CREATE TABLE peticiones.peticiones (
-    id_pt uuid DEFAULT uuid_generate_v4() NOT NULL,
-    id_p uuid,
-    id_cm uuid,
-    ubicacion_pt point,
-    direccion_pt character varying(255),
-    timestamp_pt timestamp with time zone DEFAULT now(),
-    resuelto boolean DEFAULT false
-);
-
-
-ALTER TABLE peticiones.peticiones OWNER TO appbulance;
-
---
 -- Name: get_pt(); Type: FUNCTION; Schema: public; Owner: appbulance
 --
 
@@ -406,35 +413,24 @@ $_$;
 ALTER FUNCTION public.get_pt(uuid) OWNER TO appbulance;
 
 --
--- Name: glb(text); Type: FUNCTION; Schema: public; Owner: postgres
---
-
-CREATE FUNCTION public.glb(code text) RETURNS text
-    LANGUAGE sql
-    AS $$
-    select current_setting('glb.' || code)::text;
-$$;
-
-
-ALTER FUNCTION public.glb(code text) OWNER TO postgres;
-
---
 -- Name: post_a(character, character, integer, point); Type: FUNCTION; Schema: public; Owner: appbulance
 --
 
-CREATE FUNCTION public.post_a(num_placa_a character, num_economico_a character, estado_a integer, posicion_actual_a point) RETURNS void
+CREATE FUNCTION public.post_a(character, character, integer, point) RETURNS SETOF administracion.ambulancias
     LANGUAGE plpgsql
     AS $_$
 
 BEGIN
+	RETURN QUERY
 		INSERT INTO administracion.ambulancias (num_placa_a, num_economico_a, estado_a, posicion_actual_a)
-			VALUES ($1,$2,$3,$4);
+			VALUES ($1,$2,$3,$4)
+	    RETURNING *;
 END;
 
 $_$;
 
 
-ALTER FUNCTION public.post_a(num_placa_a character, num_economico_a character, estado_a integer, posicion_actual_a point) OWNER TO appbulance;
+ALTER FUNCTION public.post_a(character, character, integer, point) OWNER TO appbulance;
 
 --
 -- Name: post_pt(point, character, uuid, uuid); Type: FUNCTION; Schema: public; Owner: appbulance
@@ -459,14 +455,16 @@ ALTER FUNCTION public.post_pt(point, character, uuid, uuid) OWNER TO appbulance;
 -- Name: put_a(uuid, character, character, integer, point); Type: FUNCTION; Schema: public; Owner: appbulance
 --
 
-CREATE FUNCTION public.put_a(uuid, character, character, integer, point) RETURNS void
+CREATE FUNCTION public.put_a(uuid, character, character, integer, point) RETURNS SETOF administracion.ambulancias
     LANGUAGE plpgsql
     AS $_$
 
 BEGIN
-UPDATE administracion.ambulancias
-	SET num_placa_a=$2, num_economico_a=$3, estado_a=$4, posicion_actual_a=$5
-	WHERE id_a=$1;	
+	RETURN QUERY
+		UPDATE administracion.ambulancias
+		SET num_placa_a=$2, num_economico_a=$3, estado_a=$4, posicion_actual_a=$5
+		WHERE id_a=$1
+	RETURNING *;	
 END;
 
 $_$;
@@ -478,15 +476,19 @@ ALTER FUNCTION public.put_a(uuid, character, character, integer, point) OWNER TO
 -- Name: put_pt(uuid, point, character, uuid, uuid); Type: FUNCTION; Schema: public; Owner: appbulance
 --
 
-CREATE FUNCTION public.put_pt(uuid, point, character, uuid, uuid) RETURNS void
+CREATE FUNCTION public.put_pt(uuid, point, character, uuid, uuid) RETURNS SETOF peticiones.peticiones
     LANGUAGE plpgsql
     AS $_$
+
 -- Usage: SELECT put_pt(2,point(77.21231,77.21434),'Av. Mateo 322#',2,1);
 BEGIN
-	UPDATE peticiones.peticiones 
+	RETURN QUERY
+		UPDATE peticiones.peticiones 
 		SET ubicacion_pt=$2, direccion_pt=$3, id_p=$4, id_cm=$5 
-	WHERE id_pt=$1;
+		WHERE id_pt=$1
+	RETURNING *;
 END;
+
 $_$;
 
 
@@ -753,86 +755,6 @@ ALTER TABLE ONLY perfiles.tamps ALTER COLUMN id_prs SET DEFAULT uuid_generate_v4
 --
 
 ALTER TABLE ONLY perfiles.tamps ALTER COLUMN valido_usr SET DEFAULT false;
-
-
---
--- Data for Name: ambulancias; Type: TABLE DATA; Schema: administracion; Owner: appbulance
---
-
-
-
---
--- Data for Name: auditorias; Type: TABLE DATA; Schema: auditorias; Owner: appbulance
---
-
-
---
--- Data for Name: alergias; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-
-
---
--- Data for Name: enfermedad_cardiovascular; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-
-
---
--- Data for Name: medicamentos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-
-
---
--- Data for Name: padecimientos; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-
-
---
--- Data for Name: seguro_medico; Type: TABLE DATA; Schema: pacientes; Owner: appbulance
---
-
-
-
---
--- Data for Name: crums; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-INSERT INTO perfiles.crums VALUES ('f0f178f6-eaee-48e2-ba02-f61e9a072871', 'crum@email.com', '7532345789', '0afbf9c010d879c71a403220399e1ac5', 1, '2018-01-01', '2018-07-31', NULL, 'a12398c0-8bd0-46fd-9394-17f5e803e10d', 'Cruz Roja Mexicana I.A.P. Delegación Lázaro Cárdenas', 'Aldama 327, Centro, 60950 Lázaro Cárdenas, Mich.', '(17.961215299999999,-102.1933482)', NULL, true);
-
-
---
--- Data for Name: pacientes; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-INSERT INTO perfiles.pacientes VALUES ('941931cd-9963-4c48-8ac6-36f4c3479d55', 'jabin753@gmail.com', '7531314257', '018915039597c07806cfb319c4a495d9', 2, '2018-08-01', NULL, NULL, 'e16c86a3-2260-400e-80ee-47ddb1a24a0d', 'Joseph', 'Cuevas', 'Bustos', '1997-12-24', 'M', 'Estudiante', 'e950b37a-1d9b-4727-a5f5-2b5677c36dc9', NULL, 'A+', '002381239', true);
-
-
---
--- Data for Name: personas; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-
-
---
--- Data for Name: tamps; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-
-
---
--- Data for Name: usuarios; Type: TABLE DATA; Schema: perfiles; Owner: appbulance
---
-
-
-
---
--- Data for Name: peticiones; Type: TABLE DATA; Schema: peticiones; Owner: appbulance
---
-
-
 
 --
 -- Name: ambulancias id_a_pk; Type: CONSTRAINT; Schema: administracion; Owner: appbulance
