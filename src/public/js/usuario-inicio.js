@@ -79,7 +79,7 @@ $(document).ready(function () {
         $('button#btnSolicitud').click(function(){
             window.location.href='tel:911';
          })
-    });
+    },{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
 });
 
 
