@@ -84,7 +84,16 @@ module.exports = app => {
     //PETICIONES
     app.get('/api/admin/pt',async (req, res) => {
         try{
-            const { rows } =  await bd.query('SELECT * FROM get_pt()')
+            const { rows } =  await bd.query('SELECT\
+            peticiones.*,\
+            pacientes.nombre_prs, \
+            pacientes.apellido_paterno_prs, \
+            pacientes.apellido_materno_prs \
+          FROM \
+            perfiles.pacientes, \
+            peticiones.peticiones \
+          WHERE \
+            peticiones.id_p = pacientes.id_p;')
             res.json(rows)
         }
         catch(err){

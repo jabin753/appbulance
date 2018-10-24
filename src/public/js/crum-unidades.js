@@ -2,7 +2,7 @@ var ambulancias = {};
 var ambulancia = {};
 
 $(document).ready(function () {
-    $.getJSON("/api/a", function(json){
+    $.getJSON("/api/admin/a", function(json){
         ambulancias = $("#ambulancias").DataTable({
             select: true,
             data: json,
@@ -54,7 +54,7 @@ $(document).ready(function () {
 
 function post_a(){
     $.ajax({
-        url: '/api/a',
+        url: '/api/admin/a',
         method: 'POST',
         data: {
             num_placa_a: $('#INnum_placa_a').val(),
@@ -72,7 +72,7 @@ function post_a(){
 function put_a(){
     var $form = $('#FRMput_a');
     $.ajax({
-        url: '/api/a/'+ ambulancia.id_a,
+        url: '/api/admin/a/'+ ambulancia.id_a,
         method: 'PUT',
         data:{
             num_placa_a: $form.find("input[name='INnum_placa_a']").val(),
@@ -89,7 +89,7 @@ function put_a(){
 }
 function delete_a(){
     $.ajax({
-        url: '/api/a/'+ ambulancia.id_a,
+        url: '/api/admin/a/'+ ambulancia.id_a,
         method: 'DELETE',
         success: function(response){
             console.log(response);
