@@ -1,8 +1,6 @@
-var CACHE_NAME = 'appbulance-cache-v1.2';
+var CACHE_NAME = 'appbulance-cache-images';
 var urlsToCache = [
-  '/',
   '/images/logo.png',
-  '/vendor/bootstrap/css/bootstrap.min.css'
 ];
 
 self.addEventListener('install', function(event) {
