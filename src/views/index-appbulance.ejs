@@ -3,29 +3,12 @@
 <!--
 Page    : Appbulance.info/
 Version : 2.0
-Author  : Alcantara
+Author  : Alcave Devsys
  -->
 
 <head>
     <title>Appbulance - Bienvenido</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Appbulance - Siempre allí">
-    <meta name="keywords" content="HTML5, bootstrap, mobile, app, landing, ios, android, responsive, ambulancia">
-
-    <!-- Font -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/css-index/appb_bootstrap.min.css">
-    <!-- Themify Icons -->
-    <link rel="stylesheet" href="css/css-index/appb_themify-icons.css">
-    <!-- Owl carousel -->
-    <link rel="stylesheet" href="css/css-index/appb_owl.carousel.min.css">
-    <!-- Main css -->
-    <link href="css/css-index/appb_style.css" rel="stylesheet">
+    <%- include partials/template/index-css -%>
 </head>
 
 <body data-spy="scroll" data-target="#navbar" data-offset="30">
@@ -49,9 +32,11 @@ Author  : Alcantara
                                 <li class="nav-item"> <a class="nav-link" href="#features">CARACTERÍSTICAS</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="#gallery">GALERÍA</a> </li>
                                 <li class="nav-item"> <a class="nav-link" href="#pricing">PRECIO</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#singin">INGRESA</a> </li>
-                                <li class="nav-item"> <a class="nav-link" href="#contact">CONTACTO</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="#singin">ÚNETE</a> </li>
+                                <li class="nav-item"> <a class="nav-link" href="#contact">CONTACTO</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="/faq" target="_blank">¿DUDAS?</a> </li>
                                 <li class="nav-item"><a href="#download" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Descarga</a></li>
+                                <li class="nav-item"><a href="/ingreso" class="btn btn-outline-light my-3 my-sm-0 ml-lg-3">Ingresa</a></li>
                             </ul>
                         </div>
                     </nav>
@@ -78,13 +63,10 @@ Author  : Alcantara
 
     <div class="section light-bg" id="features">
         <div class="container">
-
             <div class="section-title">
-                <small>HIGHLIGHTS</small>
-                <h3>Características que amarás</h3>
+                <small>CARACTERÍSTICAS</small>
+                <h3>Te encantará</h3>
             </div>
-
-
             <div class="row">
                 <div class="col-12 col-lg-4">
                     <div class="card features">
@@ -130,10 +112,8 @@ Author  : Alcantara
         <div class="section light-bg">
             <div class="container">
                 <div class="section-title">
-                    <small>CARACTERÍSTICAS</small>
                     <h3>Haz más con nuestro sistema</h3>
                 </div>
-    
                 <ul class="nav nav-tabs nav-justified" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" data-toggle="tab" href="#communication">Solicitar ambulancia</a>
@@ -153,7 +133,6 @@ Author  : Alcantara
                         <div class="d-flex flex-column flex-lg-row">
                             <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
                             <div>
-    
                                 <h2>Communicate with ease</h2>
                                 <p class="lead">Uniquely underwhelm premium outsourcing with proactive leadership skills. </p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
@@ -211,17 +190,12 @@ Author  : Alcantara
                         </div>
                     </div>
                 </div>
-    
-    
             </div>
         </div>
-
     </div>
 
-
-    <!-- // end .section -->
+    <!-- // end .section --
     <div class="section" id="hibrid">
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-6">
@@ -236,10 +210,9 @@ Author  : Alcantara
             </div>
         </div>
 
-    </div>
-    <!-- // end .section -
+    </div> -->
 
-
+    <!-- // end .section CARACTERISTICAS-
     <div class="section light-bg">
         <div class="container">
             <div class="section-title">
@@ -330,9 +303,7 @@ Author  : Alcantara
     </div>
     <!- // end .section -->
 
-    
-    <!-- // end .section -->
-
+    <!-- // end .section TESTIMONIALS-
     <div class="section">
         <div class="container">
             <div class="section-title">
@@ -364,14 +335,14 @@ Author  : Alcantara
         </div>
 
     </div>
-    <!-- // end .section -->
+    <!- // end .section -->
 
     <!-- // GALERIA -->
     <div class="section light-bg" id="gallery">
         <div class="container">
             <div class="section-title">
-                <small>GALLERY</small>
-                <h3>App Screenshots</h3>
+                <small>GALERÍA</small>
+                <h3>Capturas de pantalla</h3>
             </div>
 
             <div class="img-gallery owl-carousel owl-theme">
@@ -390,10 +361,9 @@ Author  : Alcantara
     <div class="section" id="pricing">
         <div class="container">
             <div class="section-title">
-                <small>PRICING</small>
-                <h3>Upgrade to Pro</h3>
+                <small>PRECIO</small>
+                <h3>Suscríbete</h3>
             </div>
-
             <div class="card-deck">
                 <div class="card pricing">
                     <div class="card-head">
@@ -408,7 +378,7 @@ Author  : Alcantara
                         <div class="list-group-item"><del>Reports and analytics</del></div>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary btn-lg btn-block">Choose this Plan</a>
+                        <a href="#" class="btn btn-primary btn-lg btn-block">Elíge este Plan</a>
                     </div>
                 </div>
                 <div class="card pricing popular">
@@ -424,7 +394,7 @@ Author  : Alcantara
                         <div class="list-group-item">Reports and analytics</div>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary btn-lg btn-block">Choose this Plan</a>
+                        <a href="#" class="btn btn-primary btn-lg btn-block">Elíge este Plan</a>
                     </div>
                 </div>
                 <div class="card pricing">
@@ -440,7 +410,7 @@ Author  : Alcantara
                         <div class="list-group-item">Web hooks</div>
                     </ul>
                     <div class="card-body">
-                        <a href="#" class="btn btn-primary btn-lg btn-block">Choose this Plan</a>
+                        <a href="#" class="btn btn-primary btn-lg btn-block">Elíge este Plan</a>
                     </div>
                 </div>
             </div>
@@ -454,121 +424,93 @@ Author  : Alcantara
 
     <!-- // INICIA -->
     <div class="section" id="singin">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8 d-flex align-items-center">
-                        <ul class="list-unstyled ui-steps">
-                            <li class="media">
-                                <div class="circle-icon mr-4">1</div>
-                                <div class="media-body">
-                                    <h5>Crea una cuenta</h5>
-                                    <p>Ponte en contacto con nosotros para crear tu cuenta. Puede ser por medio de correo electrónico o de manera presencial en nuestra ubicación, con el fin de obtener tus datos y el plan que deseas manejar. Para ello, haz clic <a href="#contact">aquí</a> </p>
-                                </div>
-                            </li>
-                            <li class="media my-4">
-                                <div class="circle-icon mr-4">2</div>
-                                <div class="media-body">
-                                    <h5>Descarga la app</h5>
-                                    <p>Ya teniendo tu cuenta activa, descarga Appbulance en tu móvil, para ello haz clic <a href="#download">aquí</a> </p>
-                                </div>
-                            </li>
-                            <li class="media">
-                                <div class="circle-icon mr-4">3</div>
-                                <div class="media-body">
-                                    <h5>Accede a la app</h5>
-                                    <p>Accede a tu cuenta desde la aplicación y listo, ante cualquier emergencia nosotros estaremos siempre allí.</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <img src="images/iphonex.png" alt="iphone" class="img-fluid">
-                    </div>
-    
-                </div>
-    
-            </div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <img src="images/dualphone.png" alt="dual phone" class="img-fluid">
-                    </div>
-                    <div class="col-md-6 d-flex align-items-center">
-                        <div>
-                            <div class="box-icon"><span class="ti-rocket gradient-fill ti-3x"></span></div>
-                            <h2>Ingresa ahora mismo</h2>
-                            <p class="mb-4">¿Ya posees cuenta en Appbulance? Maravilloso, ahora accede al sistema. ¡Bienvenido!</p>
-                            <a href="#" class="btn btn-primary">Ingresar</a></div>
-                    </div>
-                </div>
-    
-            </div>
-    
-    </div>
-    <!-- // end .section -->
-
-    <div class="section pt-0">
         <div class="container">
             <div class="section-title">
-                <small>FAQ</small>
-                <h3>Frequently Asked Questions</h3>
+                <small>ÚNETE</small>
+                <h3>Únete a Appbulance</h3>
             </div>
-
-            <div class="row pt-4">
-                <div class="col-md-6">
-                    <h4 class="mb-3">Can I try before I buy?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
-                    <h4 class="mb-3">What payment methods do you accept?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
-
+            <div class="row">
+                <div class="col-md-8 d-flex align-items-center">
+                    <ul class="list-unstyled ui-steps">
+                        <li class="media">
+                            <div class="circle-icon mr-4">1</div>
+                            <div class="media-body">
+                                <h5>Crea una cuenta</h5>
+                                <p>Ponte en contacto con nosotros para crear tu cuenta. Puede ser por medio de correo electrónico o de manera presencial en nuestra ubicación, con el fin de obtener tus datos y el plan que deseas manejar. Para ello, haz clic <a href="#contact">aquí</a> </p>
+                            </div>
+                        </li>
+                        <li class="media my-4">
+                            <div class="circle-icon mr-4">2</div>
+                            <div class="media-body">
+                                <h5>Descarga la app</h5>
+                                <p>Ya teniendo tu cuenta activa, descarga Appbulance en tu móvil, para ello haz clic <a href="#download">aquí</a> </p>
+                            </div>
+                        </li>
+                        <li class="media">
+                            <div class="circle-icon mr-4">3</div>
+                            <div class="media-body">
+                                <h5>Accede a la app</h5>
+                                <p>Accede a tu cuenta desde la aplicación y listo, ante cualquier emergencia nosotros estaremos siempre allí.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--<div class="col-md-4">
+                    <img src="images/iphonex.png" alt="iphone" class="img-fluid">
+                </div>-->
+            </div>
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center">
+                    <div>
+                        <div class="box-icon"><span class="ti-rocket gradient-fill ti-3x"></span></div>
+                        <h2>¿Ya eres parte de Appbulance?</h2>
+                        <p class="mb-4">¡Maravilloso! Si gustas, accede a la pagina web, o bien, descarga nuestra app en tu móvil.</p>
+                        <a href="/inicio" class="btn btn-primary">Ingresar</a>
+                        <a href="#download" class="btn btn-primary">Descargar</a>
+                    </div>
                 </div>
                 <div class="col-md-6">
-                    <h4 class="mb-3">Can I change my plan later?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
-                    <h4 class="mb-3">Do you have a contract?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
-
+                    <img src="images/dualphone.png" alt="dual phone" class="img-fluid">
                 </div>
             </div>
-        </div>
-
+        </div>   
     </div>
     <!-- // end .section -->
-
-
-
     <div class="section bg-gradient" id="download">
         <div class="container">
             <div class="call-to-action">
-
                 <div class="box-icon"><span class="ti-mobile gradient-fill ti-3x"></span></div>
-                <h2>Download Anywhere</h2>
-                <p class="tagline">Available for all major mobile and desktop platforms. Rapidiously visualize optimal ROI rather than enterprise-wide methods of empowerment. </p>
+                <h2>Descargar</h2>
+                <p class="tagline">Disponible para las plataformas Android y web. Gracias a la aplicación web, usted puede utilizarla en su dispositivo móvil sin importar la versión de su Android o incluso si utiliza iOS, u otro.</p>
                 <div class="my-4">
-
-                    <a href="#" class="btn btn-light"><img src="images/appleicon.png" alt="icon"> App Store</a>
+                    <!-- <a href="#" class="btn btn-light"><img src="images/appleicon.png" alt="icon"> App Store</a> -->
+                    <a href="/web_version" class="btn btn-light"><img src="images/webicon.png" alt="icon"> Appbulance Web</a>
                     <a href="#" class="btn btn-light"><img src="images/playicon.png" alt="icon"> Google play</a>
                 </div>
-                <p class="text-primary"><small><i>*Works on iOS 10.0.5+, Android Kitkat and above. </i></small></p>
+                <p class="text-primary"><small><i>*Funciona perfectamente en Android 4.4 Kitkat en adelante. </i></small></p>
             </div>
         </div>
-
     </div>
     <!-- // end .section -->
-
     <div class="light-bg py-5" id="contact">
         <div class="container">
+            <div class="section-title">
+                <small>CONTACTO</small>
+                <h3>Contáctanos</h3>
+            </div>
             <div class="row">
                 <div class="col-lg-6 text-center text-lg-left">
-                    <p class="mb-2"> <span class="ti-location-pin mr-2"></span> 1485 Pacific St, Brooklyn, NY 11216 USA</p>
+                    <p class="mb-2"> <span class="ti-location-pin mr-2"></span> 
+                        Orquídeas 81, Nuevo Infonavit, Lázaro Cárdenas 60950, Mich, MEX</p>
                     <div class=" d-block d-sm-inline-block">
                         <p class="mb-2">
-                            <span class="ti-email mr-2"></span> <a class="mr-4" href="mailto:support@mobileapp.com">support@mobileapp.com</a>
+                            <span class="ti-email mr-2"></span> 
+                            <a class="mr-4" href="mailto:appbulance_alcave@gmail.com">appbulance_alcave@gmail.com</a>
                         </p>
                     </div>
                     <div class="d-block d-sm-inline-block">
                         <p class="mb-0">
-                            <span class="ti-headphone-alt mr-2"></span> <a href="tel:51836362800">518-3636-2800</a>
+                            <span class="ti-headphone-alt mr-2"></span> <a href="tel:527531620388">+52 (753) 162 0388</a>
                         </p>
                     </div>
 
@@ -580,24 +522,22 @@ Author  : Alcantara
                         <a href="#"><span class="ti-instagram"></span></a>
                     </div>
                 </div>
-            </div>
-
+            </div>            
         </div>
-
     </div>
-    <!-- // end .section -->
     <footer class="my-5 text-center">
         <!-- Copyright removal is not prohibited! -->
         <p class="mb-2"><small>COPYRIGHT © 2018. TODOS LOS DERECHOS RESERVADOS. APPBULANCE DESARROLLADO POR <a href="https://www.alcave.com.mx">ALCAVE DEVSYS</a></small></p>
 
         <small>
             <a href="#" class="m-2">TÉRMINOS Y CONDICIONES</a>
+            <a href="/faq" class="m-2">¿DUDAS? FAQ</a>
             <a href="#" class="m-2">POLÍTICA DE PRIVACIDAD</a>
         </small>
     </footer>
 
     <!-- Scripts -->
-		<%- include partials/template/js-scripts-index-v2 -%>
+    <%- include partials/template/js-scripts-index-v2 -%>
 
 </body>
 
