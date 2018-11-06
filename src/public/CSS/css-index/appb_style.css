@@ -54,13 +54,13 @@ h1 {
 h2 {
     font-size: 45px;
     font-weight: 300;
-    color: #e60000;
+    color: #f73f1e;
     letter-spacing: -1px;
     margin-bottom: 1rem;
 }
 
 h3 {
-    color: #e60000;
+    color: #f73f1e;
     font-size: 33px;
     font-weight: 500;
 }
@@ -68,7 +68,7 @@ h3 {
 h4 {
     font-size: 20px;
     font-weight: 500;
-    color: #e60000;
+    color: #f73f1e;
 }
 
 h5 {
