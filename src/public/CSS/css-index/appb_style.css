@@ -36,12 +36,12 @@ body {
 }
 
 a {
-    color: #e38cb7;
+    color: #ff6e6e;
 }
 
 a:hover,
 a:focus {
-    color: #d6619c;
+    color: #ff5b5b;
 }
 
 h1 {
@@ -54,13 +54,13 @@ h1 {
 h2 {
     font-size: 45px;
     font-weight: 300;
-    color: #f73f1e;
+    color: #f44336;
     letter-spacing: -1px;
     margin-bottom: 1rem;
 }
 
 h3 {
-    color: #f73f1e;
+    color: #f44336 ;
     font-size: 33px;
     font-weight: 500;
 }
@@ -68,18 +68,18 @@ h3 {
 h4 {
     font-size: 20px;
     font-weight: 500;
-    color: #f73f1e;
+    color: #f44336 ;
 }
 
 h5 {
     font-size: 28px;
     font-weight: 300;
-    color: #e60000;
+    color: #f44336;
     margin-bottom: 0.7rem;
 }
 
 p {
-    color: #959094;
+    color: #a8a8a8;
 }
 
 p.lead {
@@ -109,10 +109,10 @@ p.lead {
 
 .btn-primary {
     border-radius: 3px;
-    background-image: -moz-linear-gradient( 122deg, #e54545 0%, #fd378e 100%);
-    background-image: -webkit-linear-gradient( 122deg, #e54545 0%, #fd378e 100%);
-    background-image: -ms-linear-gradient( 122deg, #e54545 0%, #fd378e 100%);
-    background-image: linear-gradient( 122deg, #e54545 0%, #fd378e 100%);
+    background-image: -moz-linear-gradient( 122deg, #f44336 0%, #ff6030 100%);
+    background-image: -webkit-linear-gradient( 122deg, #f44336 0%, #ff6030 100%);
+    background-image: -ms-linear-gradient( 122deg, #f44336 0%, #ff6030 100%);
+    background-image: linear-gradient( 122deg, #f44336 0%, #ff6030 100%);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
     font-weight: 500;
     padding: 0.6rem 2rem;
@@ -125,7 +125,7 @@ p.lead {
 .btn-primary:not([disabled]):not(.disabled).active,
 .btn-primary:not([disabled]):not(.disabled):active,
 .show>.btn-primary.dropdown-toggle {
-    background-image: linear-gradient( 122deg, #fd378e 0%, #e54595 100%);
+    background-image: linear-gradient( 122deg, #ff7230 0%, #ff9430 100%);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
     color: #FFF;
 }
@@ -136,7 +136,7 @@ p.lead {
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.26);
     font-size: 14px;
     font-weight: 500;
-    color: #633991;
+    color: #913939;
     margin: 0.5rem;
     padding: 0.7rem 1.6rem;
     line-height: 1.8;
@@ -162,7 +162,7 @@ p.lead {
 }
 
 .section-title small {
-    color: #998a9b;
+    color: #9b8a8a;
 }
 
 @media (max-width:767px) {
@@ -185,10 +185,10 @@ p.lead {
 
 .nav-menu.is-scrolling,
 .nav-menu.menu-is-open {
-    background-color: rgb(240, 0,0);
-    background: -moz-linear-gradient(135deg, rgba(240, 0, 0) 0%, rgb(250, 42, 143) 100%);
-    background: -webkit-linear-gradient(135deg, rgba(240, 0, 0) 0%, rgb(250, 42, 143) 100%);
-    background: linear-gradient(135deg, rgb(240, 0, 0) 0%, rgb(250, 42, 143) 100%);
+    background-color: rgb(247, 39, 39);
+    background: -moz-linear-gradient(135deg, rgb(247, 39, 39) 0%, rgb(253, 120, 31) 100%);
+    background: -webkit-linear-gradient(135deg, rgb(247, 39, 39) 0%, rgb(253, 120, 31) 100%);
+    background: linear-gradient(135deg, rgb(247, 39, 39) 0%, rgb(253, 120, 31)100%);
     -webkit-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
     -moz-box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 0px 5px 23px 0px rgba(0, 0, 0, 0.1);
@@ -210,7 +210,7 @@ p.lead {
     }
     .navbar-nav>.nav-item>.nav-link.active:after {
         content: "";
-        border-bottom: 2px solid #cd99d4;
+        border-bottom: 2px solid #fff;
         left: 1rem;
         right: 1rem;
         bottom: 5px;
@@ -239,16 +239,16 @@ header {
 }
 /*Gradiente del fondo del header*/
 .bg-gradient {
-    background-image: -moz-linear-gradient( 135deg, rgba(240, 0, 0) 0%, rgba(250, 0, 118, 0.8)  100%);
-    background-image: -webkit-linear-gradient( 135deg, rrgba(240, 0, 0) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: -ms-linear-gradient( 135deg, rgba(240, 0, 0) 0%, rgba(250, 0, 118, 0.8) 100%);
-    background-image: linear-gradient( 135deg, rgba(240, 0, 0) 0%, rgba(250, 0, 118, 0.8) 100%);
+    background-image: -moz-linear-gradient( 135deg, rgb(247, 39, 39) 0%, rgb(253, 120, 31) 100%);
+    background-image: -webkit-linear-gradient( 135deg, rgb(247, 39, 39) 0%, rgb(253, 120, 31) 100%);
+    background-image: -ms-linear-gradient( 135deg, rgb(247, 39, 39) 0%, rgb(253, 120, 31) 100%);
+    background-image: linear-gradient( 135deg, rgb(247, 39, 39)  0%, rgb(253, 120, 31)  100%);
 }
 
 .tagline {
     font-size: 23px;
     font-weight: 300;
-    color: #ffb8f6;
+    color: #fff;
     max-width: 800px;
     margin: 0 auto;
 }
@@ -279,10 +279,10 @@ header {
 ----------------------*/
 
 .gradient-fill:before {
-    color: #fc73b4;
-    background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
+    color: #fc7373;
+    background: -moz-linear-gradient(top, #f44336 0%, #ff9430 100%);
+    background: -webkit-linear-gradient(top, #f44336 0%, #ff9430 100%);
+    background: linear-gradient(to bottom, #f44336 0%, #ff9430 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -308,10 +308,10 @@ header {
     content: "";
     position: absolute;
     width: 3px;
-    color: #fc73b4;
-    background: -moz-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: -webkit-linear-gradient(top, #9477b4 0%, #fc73b4 100%);
-    background: linear-gradient(to bottom, #9477b4 0%, #fc73b4 100%);
+    color: #fc7373;
+    background: -moz-linear-gradient(top, #f44336 0%, #ff9430 100%);
+    background: -webkit-linear-gradient(top, #f44336 0%, #ff9430 100%);
+    background: linear-gradient(to bottom, #f44336 0%, #ff9430 100%);
     top: 0;
     bottom: 0;
     left: 0;
@@ -345,7 +345,7 @@ header {
     border-radius: 50%;
     margin-bottom: 1.5rem;
     background-color: #FFF;
-    color: #f5378e;
+    color: #ff4747;
     font-size: 48px;
     text-align: center;
     line-height: 80px;
@@ -363,10 +363,10 @@ header {
 }
 
 .ui-steps li:hover .circle-icon {
-    background-image: -moz-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: -webkit-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: -ms-linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
-    background-image: linear-gradient( 122deg, #e6388e 0%, #fb378e 100%);
+    background-image: -moz-linear-gradient( 122deg, #ff4141 0%, #ff7839 100%);
+    background-image: -webkit-linear-gradient( 122deg, #ff4141 0%, #ff7839 100%);
+    background-image: -ms-linear-gradient( 122deg, #ff4141 0%, #ff7839 100%);
+    background-image: linear-gradient( 122deg, #ff4141 0%, #ff7839 100%);
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.09);
     color: #FFF;
 }
@@ -376,7 +376,7 @@ header {
 }
 
 .ui-steps li:not(:last-child) {
-    border-bottom: 1px solid #f8e3f0;
+    border-bottom: 1px solid #ffd9d9;
 }
 
 .perspective-phone {
@@ -424,17 +424,17 @@ header {
 .nav-tabs .nav-link:focus,
 .nav-tabs .nav-link:hover {
     padding: 1rem 1rem;
-    border-color: #faf6fb #faf6fb #FFF;
+    border-color: #fbf6f6 #fbf6f6 #FFF;
     font-size: 19px;
-    color: #b5a4c8;
+    color: #c8a4a4;
     background: #f5eff7;
 }
 
 .nav-tabs .nav-link.active {
     background: #FFF;
     border-top-width: 3px;
-    border-color: #ce75b4 #faf6fb #FFF;
-    color: #633991;
+    border-color: #ff7d41 #ffc5c5 #FFF;
+    color: #ff5d5d;
 }
 
 
@@ -484,7 +484,7 @@ header {
 }
 
 .owl-theme .owl-dots .owl-dot span {
-    background: #e7d9eb;
+    background: #ebd9d9;
     width: 35px;
     height: 8px;
     border-radius: 10px;
@@ -492,11 +492,11 @@ header {
 }
 
 .owl-theme .owl-dots .owl-dot:hover span {
-    background: #ff487e;
+    background: #ff4848;
 }
 
 .owl-theme .owl-dots .owl-dot.active span {
-    background: #ff487e;
+    background: #ff4848;
     box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.07);
 }
 
@@ -534,7 +534,7 @@ header {
 
 .card.pricing.popular {
     border-top-width: 3px;
-    border-color: #ce75b4 #faf6fb #FFF;
+    border-color: #f8703b #faf6fb #FFF;
     box-shadow: 0px 12px 59px 0px rgba(36, 7, 31, 0.11);
     color: #633991;
 }
@@ -548,7 +548,7 @@ header {
     display: block;
     font-size: 45px;
     font-weight: 300;
-    color: #633991;
+    color: #ff4848;
 }
 
 .card.pricing .card-head .price sub {
@@ -624,13 +624,13 @@ header {
     line-height: 50px;
     margin: 0 0.3rem;
     border-radius: 5px;
-    color: #f4c9e2;
+    color: #ff5d5d;
     transition: all 0.3s ease;
 }
 
 .social-icons a:hover {
     text-decoration: none;
-    color: #e38cb7;
+    color: #ff0000;
 }
 
 @media (max-width:991px) {
