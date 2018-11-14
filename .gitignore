@@ -63,3 +63,5 @@ package-lock.json
 src/public/vendor/
 
 *.min.*
+src/public/js/js-validation/jquery.validate.min.js
+src/public/js/js-validation/additional-methods.min.js

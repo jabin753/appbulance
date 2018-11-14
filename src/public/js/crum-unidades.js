@@ -3,16 +3,17 @@ var ambulancia = {};
 
 $(document).ready(function () {
     $.getJSON("/api/admin/a", function(json){
-        ambulancias = $("#ambulancias").DataTable({
-            select: true,
-            data: json,
-            rowId: 'id_a',
-            columns: [
-                { data: 'num_placa_a' },
-                { data: 'num_economico_a' },
-                { data: 'estado_a' }
-            ]
-        });
+        console.log(tableDefaultConfig);
+        ambulancias = $("#ambulancias").DataTable(Object.assign(tableDefaultConfig,
+            {
+                data: json,
+                rowId: 'id_a',
+                columns: [
+                    { data: 'num_placa_a' },
+                    { data: 'num_economico_a' },
+                    { data: 'estado_a' }
+                ]
+            }));
     });
 
     //DOM EVENTS
