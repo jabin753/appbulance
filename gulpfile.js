@@ -21,10 +21,16 @@ gulp.task('vendor', function() {
   // DataTables
   gulp.src([
     './node_modules/datatables.net/js/*.js',
-    './node_modules/datatables.net-bs4/js/*.js',
-    './node_modules/datatables.net-bs4/css/*.css'
+    './node_modules/datatables.net-dt/js/*.js',
+    './node_modules/datatables.net-buttons/js/*.js',
+    './node_modules/datatables.net-dt/css/*.css',
+    './node_modules/datatables.net-select/js/*.js'
   ])
   .pipe(gulp.dest('./src/public/vendor/datatables/'))
+  gulp.src([
+    './node_modules/datatables.net-dt/images/*.png'
+  ])
+  .pipe(gulp.dest('./src/public/vendor/images/'))
   // Font Awesome
   gulp.src([
     './node_modules/font-awesome/**/*',

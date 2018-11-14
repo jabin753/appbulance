@@ -1,6 +1,6 @@
 {
   "name": "appbulance",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A Webapp that allows to people connect with medical service in order to attend an emergency call",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,11 @@
     "chart.js": "^2.7.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
+    "datatables.net": "^1.10.19",
     "datatables.net-bs4": "^1.10.19",
+    "datatables.net-buttons": "^1.5.4",
+    "datatables.net-dt": "^1.10.19",
+    "datatables.net-select": "^1.2.7",
     "ejs": "^2.5.8",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
