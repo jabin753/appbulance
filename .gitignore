@@ -1,6 +1,7 @@
 # Custom ignoring files
+*.min.css
+*.min.js
 src/public/vendor/
-*.min.*
 # Logs
 logs
 *.log
@@ -60,4 +61,3 @@ typings/
 
 # dotenv environment variables file
 .env
-
