@@ -7,10 +7,10 @@ $(document).ready(function () {
                 style: 'single',
                 columns: [
                     {
-                        class: 'info-page',
+                        class: 'details',
                         orderable:      false,
                         data:           null,
-                        defaultContent: ''
+                        defaultContent: '<i class="fa fa-plus-circle"></i>'
                     },
                     {
                         data: 'apellido_paterno_prs',
@@ -22,13 +22,20 @@ $(document).ready(function () {
                 ]
             }
             )); 
-        tablePeticiones.on( 'select', function ( e, dt, type, indexes ) {
-            var rowData = tablePeticiones.rows( indexes ).data().toArray();
-            console.log('selected:',rowData);
-        });
-        tablePeticiones.on( 'deselect', function ( e, dt, type, indexes ) {
-            var rowData = [];
-            console.log('deselected:',rowData);
+        tablePeticiones.on('click','td.details',function(){
+            var tr = $(this).closest('tr');
+            var row = tablePeticiones.row(tr);
+ 
+        if ( row.child.isShown() ) {
+            // This row is already open - close it
+            row.child.hide();
+            tr.removeClass('shown');
+        }
+        else {
+            // Open this row
+            row.child( '<a href="/api/admin/pt/'+row.data().id_pt+'" >Más detalles</h1>' ).show();
+            tr.addClass('shown');
+        }
         });
     });  
 });
