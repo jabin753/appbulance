@@ -1,3 +1,6 @@
+# Custom ignoring files
+src/public/vendor/
+*.min.*
 # Logs
 logs
 *.log
@@ -58,10 +61,3 @@ typings/
 # dotenv environment variables file
 .env
 
-src/public/Thumbs.db
-package-lock.json
-src/public/vendor/
-
-*.min.*
-src/public/js/js-validation/jquery.validate.min.js
-src/public/js/js-validation/additional-methods.min.js

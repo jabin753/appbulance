@@ -51,6 +51,11 @@ gulp.task('vendor', function() {
     './node_modules/jquery.easing/*.js'
   ])
   .pipe(gulp.dest('./src/public/vendor/jquery-easing'))
+  //jQuery Validation
+  gulp.src([
+    './node_modules/jquery-validation/dist/*',
+  ])
+  .pipe(gulp.dest('./src/public/vendor/jquery-validation'))
   // Socket.io
   gulp.src([
       './node_modules/socket.io-client/dist/*.js'
