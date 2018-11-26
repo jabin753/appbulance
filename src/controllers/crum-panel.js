@@ -3,10 +3,12 @@ var path = require('path')
 var rootViewPath = 'CRUM Panel'
 var model = require('../model/model')
 module.exports = {
-  inicio: (req,res)=>{
-    res.render(path.join(rootViewPath,'panel-inicio'),
-    {pageTitle:'Appbulance (CRUM) - Inicio',
-    style:req.user.style})
+  inicio: (req, res) => {
+    res.render(path.join(rootViewPath, 'panel-inicio'),
+      {
+        pageTitle: 'Appbulance (CRUM) - Inicio',
+        style: req.user.style
+      })
   },
   peticiones: model.crumPanelPeticiones,
   peticiones_A: model.crumPanelPeticiones_A,
@@ -28,12 +30,14 @@ module.exports = {
   usuarios_B: model.crumPanelUsuarios_B,
   usuarios_C: model.crumPanelUsuarios_C,
 
-  configuracion: (req,res)=>{
-    res.render(path.join(rootViewPath,'panel-configuracion'),
-    {pageTitle:'Appbulance (CRUM) - Configuracion',
-    style:req.user.style})
+  configuracion: (req, res) => {
+    res.render(path.join(rootViewPath, 'panel-configuracion'),
+      {
+        pageTitle: 'Appbulance (CRUM) - Configuracion',
+        style: req.user.style
+      })
   },
-  sesion: (req,res,next) =>{
+  sesion: (req, res, next) => {
     if (req.isAuthenticated() && req.user.tipo_usr === 1) {
       next()
     } else {

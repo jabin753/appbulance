@@ -1,16 +1,18 @@
 const { Pool } = require('pg')
 
-const pool = new Pool({connectionString: process.env.PG_CONNECTION_STRING
-  || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'})
+const pool = new Pool({
+  connectionString: process.env.PG_CONNECTION_STRING
+    || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'
+})
 
 module.exports = {
-  
-  query: async(text, params) => {
+
+  query: async (text, params) => {
     const start = Date.now()
-      const res = await pool.query(text,params)
-      const duration = Date.now() - start
-      console.log(`Consulta ${text} ejecutada en ${duration} ms`)
-      return res
+    const res = await pool.query(text, params)
+    const duration = Date.now() - start
+    console.log(`Consulta ${text} ejecutada en ${duration} ms`)
+    return res
   },
   getClient: (callback) => {
     pool.connect((err, client, done) => {
@@ -41,11 +43,11 @@ module.exports = {
       callback(err, client, done)
     })
   },
-  prueba:()=>{
-    pool.query('SELECT NOW()',(err,result)=>{
-      if(!err){
-          if(result.rowCount > 0)console.log('Conexión satisfactoria: ',result.rows[0]['now'])
-      } else{console.error('Error en la conexión con la base de datos:, ',process.env.PG_CONNECTION_STRING,err)}
-  })
+  prueba: () => {
+    pool.query('SELECT NOW()', (err, result) => {
+      if (!err) {
+        if (result.rowCount > 0) console.log('Conexión satisfactoria: ', result.rows[0]['now'])
+      } else { console.error('Error en la conexión con la base de datos:, ', process.env.PG_CONNECTION_STRING, err) }
+    })
   }
 }
