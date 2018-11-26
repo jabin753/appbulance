@@ -81,6 +81,16 @@ module.exports = app => {
 		}
     })
     
+    //PACIENTES
+    app.get('/api/admin/p', async (req,res) => {
+        try{
+            const { rows } = await bd.query('SELECT * FROM pacientes');
+            res.json(rows);
+        }
+        catch(err){
+            res.status(304).json({state: "error", content: err})
+        }
+    })
     //PETICIONES
     app.get('/api/admin/pt',async (req, res) => {
         try{
@@ -111,28 +121,28 @@ module.exports = app => {
 			res.json({state: "error", content: err})
 		}
     })
+    // For user.tipo_usr = 2
     app.post('/api/pt',async (req, res) => {
         try{
-            var {ubicacion_pt_x,ubicacion_pt_y, direccion_pt, id_p, id_cm} = req.body
+            var { ubicacion_pt_x,ubicacion_pt_y, direccion_pt } = req.body
+            var { id_p } = req.user
             if(typeof ubicacion_pt === 'undefined') {ubicacion_pt = '';}
             if(typeof direccion_pt === 'undefined') {direccion_pt = '';}
-            if(typeof id_p === 'undefined'){id_p = '';}
-            if(typeof id_cm === 'undefined') {id_cm = '';}
-            const { rows } = await bd.query('SELECT * FROM post_pt(point($1,$2),$3,$4,$5)', [ubicacion_pt_x, ubicacion_pt_y,direccion_pt,id_p,id_cm])
+            const { rows } = await bd.query('SELECT * FROM post_pt(point($1,$2),$3,$4)', [ubicacion_pt_x, ubicacion_pt_y,direccion_pt,id_p])
             res.json(rows)
         }
         catch(err){
+            console.log(err)
 			res.json({state: "error", content: err})
 		}
     })
     app.put('/api/admin/pt/:id_pt',async (req, res) => {
         try{
             const { id_pt } = req.params
-            var {ubicacion_pt, direccion_pt, id_p, id_cm} = req.body
+            var {ubicacion_pt, direccion_pt, id_p} = req.body
             if(typeof ubicacion_pt === 'undefined') {ubicacion_pt = '';}
             if(typeof direccion_pt === 'undefined') {direccion_pt = '';}
             if(typeof id_p === 'undefined'){id_p = '';}
-            if(typeof id_cm === 'undefined') {id_cm = '';}
             const { rows } = await bd.query('SELECT put_pt($1,point($2,$3),$4,$5,$6)', [id_pt,ubicacion_pt.x,ubicacion_pt.y,direccion_pt,id_p,id_cm])
             res.json(rows)
         }

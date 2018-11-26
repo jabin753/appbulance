@@ -31,7 +31,6 @@ module.exports = {
 			text: 'SELECT * FROM perfiles.adduserpacientes($1)',
 			values: [req.body]
 		}, (err, result) => {
-			console.log(err)
 			if (!err) {
 				res.redirect('/usuario/ingreso')
 			} else {
@@ -44,28 +43,23 @@ module.exports = {
 		try{
 			const res = await bd.query('SELECT  * FROM perfiles.authuser($1)',[req.body])
 			var user = {
-				id_usr: res.rows[0]['id_usr'],
-				tipo_usr: res.rows[0]['tipo_usr'],
-				style: {
-					nav_style: res.rows[0]['nav_style'],
-					body_style: res.rows[0]['body_style']
-				}
+				id_usr: res.rows[0]['_id_usr_'],
+				tipo_usr: res.rows[0]['_tipo_usr_'],
 			}
 			switch(user.tipo_usr){
 				case 1:
-					user['id_cm'] = res.rows[0]['id']
+					user['id_cm'] = res.rows[0]['_id_']
 					return done(null, user)
 				case 2:
-					user['id_p'] = res.rows[0]['id']
+					user['id_p'] = res.rows[0]['_id_']
 					return done(null, user)
 				case 3:
-					user['id_tmp'] = res.rows[0]['id']
+					user['id_tmp'] = res.rows[0]['_id_']
 					return done(null, user)
 				default:
 				return done(null, false)
 			}
 		}catch(err){
-			console.log(err)
 			req.flash('user-login', err.hint)
 			return done(null, false)
 		}
@@ -75,7 +69,6 @@ module.exports = {
 			text: 'SELECT * FROM peticiones.peticiones WHERE peticiones.id_cm = $1',
 			values: [req.user.id_cm]
 		}, (err,result) => {
-			console.log(err,result.rows)
 			res.render('CRUM Panel/panel-peticiones',
 			{pageTitle:'Appbulance (CRUM) - Peticiones',
 			style:req.user.style,

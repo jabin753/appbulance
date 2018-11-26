@@ -79,7 +79,7 @@ $(document).ready(function () {
         $('button#btnSolicitud').click(function(){
             window.location.href='tel:911';
          })
-    },{maximumAge:600000, timeout:5000, enableHighAccuracy: true});
+    },{maximumAge:600000, timeout:15000, enableHighAccuracy: true});
 });
 
 
@@ -88,24 +88,18 @@ function post_pt(){
     var data = {
         ubicacion_pt_x:$("input[name=lat_pt]").val(),
         ubicacion_pt_y: $("input[name=lng_pt]").val(),
-        direccion_pt: $("input[name=direccion_pt]").val(),
-        id_p: $("#id_p").val(),
-        id_cm: $("#id_cm").val()
+        direccion_pt: $("input[name=direccion_pt]").val()
     };
     $.ajax({
         url: '/api/pt',
         method: 'POST',
         data: data,
         success: function(res){
-            console.log(res[0]);
+            console.log(res);
             socket.emit('sendPetition',res[0]);
         },
         error: function(err){
             console.log(err);
         }
     });
-function maps_api(){
-    
-}
-    
 }

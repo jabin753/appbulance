@@ -4,7 +4,7 @@
   <title>Appbulance - Inicio</title>
   <%- include ../partials/template/header -%> 
 </head>
-<body class="fixed-nav sticky-footer <%=style.body_style%>" id="page-top">
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <%- include ../partials/template/user-navbar%>
   <div class="content-wrapper">
       <div class="container-fluid">          
@@ -15,14 +15,6 @@
                 <div class="form-row">                    
                     <div class="col-md-6" id="map" style="height: 250px"></div>
                     <div class="col-md-6">                        
-                        <!--<hr>
-                        <h4>Tipo de emergencia</h2>
-                        <select class="form-control" required name="tipo_emergencia">
-                            <option value="">--Tipo de emergencia</option>     
-                            <option value="Tsunami">Tsunami</option> 
-                            <option value="Terremoto">Terremoto/Maremoto</option>
-                            <option value="Volcanica">Actividad geológica</option>
-                        </select>-->
                         <button type="button" class="btn btn-primary btn-block" id="btnSolicitud">Solicitar ambulancia</button>
                         <hr>
                         <h4 for="OutputDirection">Tu dirección:</h4>
