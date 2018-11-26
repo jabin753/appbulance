@@ -34,16 +34,6 @@ app.use(session({//Sesión secreta. Requerida por passport
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session()) //Logins persistentes
-//Middleware de cookies de sesión
-app.use(function (req, res, next) {
-    var user = req.user
-    if(user !==undefined){
-        console.log(user)
-        res.cookie('id_usr',user.id_usr, { maxAge: 900000000000, httpOnly: true });
-    }
-    next();
-  });
-
 //Rutas
 require('../routes/api')(app)
 require('../routes/routes')(app,passport)
