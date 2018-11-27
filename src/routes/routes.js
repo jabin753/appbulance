@@ -5,7 +5,7 @@ var tamp = require('../controllers/tamp-panel')
 var login = require('../controllers/login')
 var registration = require('../controllers/registration')
 module.exports = (app, passport) => {
-    app.get('/', inicio.inicio)
+    app.get('/', login.validate, inicio.inicio)
     app.get('/faq', inicio.faq)
     app.get('/web_version', inicio.web_version)
     app.get('/usuario/ingreso', login.validate, login.user)
