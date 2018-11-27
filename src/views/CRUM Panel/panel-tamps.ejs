@@ -1,94 +1,124 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <%- include ../partials/template/header -%>
+	<%- include ../partials/template/header -%>
 </head>
+
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <%- include ../partials/template/crum-navbar -%>
-  <div class="content-wrapper">
-    <div class="container-fluid">
-      <main>
-        <section id="ViewTAMPS">    
-          <!-- Example DataTables Card-->
-          <div class="card mb-3">
-            <div class="card-header">
-              <i class="fa fa-table"></i> TAMPS</div>
-            <div class="card-body">
-                <!-- Toolbar -->
-                <button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal" data-target="#addModal" > <i class="fa fa-fw fa-plus-circle  fa-lg"></i> </button>
-                <button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true" data-toggle="modal" data-target="#deleteModal" > <i class="fa fa-fw fa-trash  fa-lg"></i> </button>
-                <button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true" data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i> </button>
-                <button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" onclick="load()"> <i class="fa fa-fw fa-refresh fa-lg"></i> </button>
-                <hr>
-              <div class="table-responsive"  id="tableUnits">
-                <table class="table table-bordered table-responsive" id="dataTable" width="100%" cellspacing="0">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido Paterno</th>
-                      <th>Apellido Materno</th>
-                      <th>Teléfono</th>
-                      <th>Sexo</th>
-                      <th>Fecha Nacimiento</th>    
-                      <th>Fecha Ingreso</th>
-                      <th>Experiencia</th>
-                      <th>Grado</th>
-                      <th>Email</th> 
-                    </tr>
-                  </thead>
-                  <tfoot>
-                    <tr>
-                      <th>Nombre</th>
-                      <th>Apellido Paterno</th>
-                      <th>Apellido Materno</th>
-                      <th>Teléfono</th>
-                      <th>Sexo</th>
-                      <th>Fecha Nacimiento</th>    
-                      <th>Fecha Ingreso</th>
-                      <th>Experiencia</th>
-                      <th>Grado</th>
-                      <th>Email</th> 
-                    </tr>
-                  </tfoot>
-                  <tbody id="unitsTable">
-                  <%if (data.length > 0) { %>
-                    <% for (var i = 0; i < data.length; i ++) { %>
-                    <tr id="<%= data[i].id_tmp %>">
-                        <td><%= data[i].nombre_prs %></td>
-                        <td><%= data[i].apellido_paterno_prs %></td>
-                        <td><%= data[i].apellido_materno_prs %></td>
-                        <td><%= data[i].telefono_usr %></td>
-                        <td><%= data[i].sexo_prs %></td>
-                        <td><%= data[i].fecha_nacimiento_prs %></td>
-                        <td><%= data[i].fecha_ingreso_tmp %></td>
-                        <td><%= data[i].experiencia_tmp %></td>
-                        <td><%= data[i].grado_tmp %></td>
-                        <td><%= data[i].email_usr %></td>
-                      </tr>
-                    <% } %>
-                  <% } %>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM</div>
-          </div>
-        </section>
-      </main>
-    </div>
-    <!-- Add TAMP Modal-->    
-    <%- include ../partials/modals/addTamp -%>          
-    <!-- Drop TAMP Modal-->
-    <%- include ../partials/modals/dropTamp -%>          
-    <!-- Modify TAMP Modal-->    
-    <%- include ../partials/modals/modifyTamp -%>
-    <!-- TAMP DOM Events-->
-    <script src="/js/ab-script-tamps.js"></script>
-    <%- include ../partials/template/footer -%>
-    <%- include ../partials/template/top-button -%>
-    <%- include ../partials/modals/logout -%>
-    <%- include ../partials/template/js-scripts -%>
-    <%- include ../partials/template/js-scripts-validation -%>
-  </div>
+	<%- include ../partials/template/crum-navbar -%>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<main>
+				<section id="ViewTAMPS">
+					<!-- Example DataTables Card-->
+					<div class="card mb-3">
+						<div class="card-header">
+							<i class="fa fa-table"></i> TAMPS</div>
+						<div class="card-body">
+							<!-- Toolbar -->
+							<button name="btnAdd" id="btnAdd" type="button" class="btn btn-primary btn-success" data-toggle="modal"
+							 data-target="#addModal"> <i class="fa fa-fw fa-plus-circle  fa-lg"></i>
+							</button>
+							<button name="btnDel" id="btnDelete" type="button" class="btn btn-primary btn-danger" disabled="true"
+							 data-toggle="modal" data-target="#deleteModal"> <i class="fa fa-fw fa-trash  fa-lg"></i>
+							</button>
+							<button name="btnMod" id="btnModify" type="button" class="btn btn-primary btn-warning" disabled="true"
+							 data-toggle="modal" data-target="#modModal"> <i class="fa fa-fw fa-pencil fa-lg"></i>
+							</button>
+							<button name="btnReload" id="btnReload" type="button" class="btn btn-primary btn-primary" onclick="load()">
+								<i class="fa fa-fw fa-refresh fa-lg"></i> </button>
+							<hr>
+							<div class="table-responsive" id="tableUnits">
+								<table class="table table-bordered table-responsive" id="dataTable" width="100%" cellspacing="0">
+									<thead class="thead-dark">
+										<tr>
+											<th>Nombre</th>
+											<th>Apellido Paterno</th>
+											<th>Apellido Materno</th>
+											<th>Teléfono</th>
+											<th>Sexo</th>
+											<th>Fecha Nacimiento</th>
+											<th>Fecha Ingreso</th>
+											<th>Experiencia</th>
+											<th>Grado</th>
+											<th>Email</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Nombre</th>
+											<th>Apellido Paterno</th>
+											<th>Apellido Materno</th>
+											<th>Teléfono</th>
+											<th>Sexo</th>
+											<th>Fecha Nacimiento</th>
+											<th>Fecha Ingreso</th>
+											<th>Experiencia</th>
+											<th>Grado</th>
+											<th>Email</th>
+										</tr>
+									</tfoot>
+									<tbody id="unitsTable">
+										<%if (data.length > 0) { %>
+										<% for (var i = 0; i < data.length; i ++) { %>
+										<tr id="<%= data[i].id_tmp %>">
+											<td>
+												<%= data[i].nombre_prs %>
+											</td>
+											<td>
+												<%= data[i].apellido_paterno_prs %>
+											</td>
+											<td>
+												<%= data[i].apellido_materno_prs %>
+											</td>
+											<td>
+												<%= data[i].telefono_usr %>
+											</td>
+											<td>
+												<%= data[i].sexo_prs %>
+											</td>
+											<td>
+												<%= data[i].fecha_nacimiento_prs %>
+											</td>
+											<td>
+												<%= data[i].fecha_ingreso_tmp %>
+											</td>
+											<td>
+												<%= data[i].experiencia_tmp %>
+											</td>
+											<td>
+												<%= data[i].grado_tmp %>
+											</td>
+											<td>
+												<%= data[i].email_usr %>
+											</td>
+										</tr>
+										<% } %>
+										<% } %>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="card-footer small text-muted">Última actualización: 15/04/2018 11:59 PM</div>
+					</div>
+				</section>
+			</main>
+		</div>
+		<!-- Add TAMP Modal-->
+		<%- include ../partials/modals/addTamp -%>
+		<!-- Drop TAMP Modal-->
+		<%- include ../partials/modals/dropTamp -%>
+		<!-- Modify TAMP Modal-->
+		<%- include ../partials/modals/modifyTamp -%>
+		<!-- TAMP DOM Events-->
+		<script src="/js/ab-script-tamps.js"></script>
+		<%- include ../partials/template/footer -%>
+		<%- include ../partials/template/top-button -%>
+		<%- include ../partials/modals/logout -%>
+		<%- include ../partials/template/js-scripts -%>
+		<%- include ../partials/template/js-scripts-validation -%>
+	</div>
 </body>
+
 </html>

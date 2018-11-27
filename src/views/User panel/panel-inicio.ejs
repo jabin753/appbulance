@@ -1,74 +1,80 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Appbulance - Inicio</title>
-  <%- include ../partials/template/header -%> 
+	<title>Appbulance - Inicio</title>
+	<%- include ../partials/template/header -%>
 </head>
+
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <%- include ../partials/template/user-navbar%>
-  <div class="content-wrapper">
-      <div class="container-fluid">          
-          <h5>Inicio</h5>
-          <hr>
-          <div class="form-group">
-              <form name="formularioPeticion" role="form">
-                <div class="form-row">                    
-                    <div class="col-md-6" id="map" style="height: 250px"></div>
-                    <div class="col-md-6">                        
-                        <button type="button" class="btn btn-primary btn-block" id="btnSolicitud">Solicitar ambulancia</button>
-                        <hr>
-                        <h4 for="OutputDirection">Tu dirección:</h4>
-                        <div style="display: block">
-                            <input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction" disabled>
-                            <input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
-                            <input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>
-                        </div>
-                    </div>
-                </div>
-                </form>
-              </div>
-        </div>
-    <%- include ../partials/template/footer -%>
-    <%- include ../partials/template/top-button -%>
-    <%- include ../partials/modals/logout -%>
-    <!-- SCRIPTS -->
-    <script src="/vendor/socket-io/socket.io.min.js"></script>
-    <script src="/vendor/jquery/jquery.min.js"></script>
-    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="/js/ab-admin.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap" async defer></script>
-    <script src="/js/ab-maps-api.min.js"></script>
-    <script src="/js/usuario-inicio.min.js"></script>
-    <!-- Cancelation Modal -->
-    <div class="modal fade" id="timerCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalCenterTitle">Cancelación</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <form>
-                <div class="modal-body" id="Message">
-                    <p style="text-align: center;">¿Desea cancelar la petición?</p>
-                    <p class='seconds-timer' id="timer">5</p>
-                    <p style="text-align: center;">segundos</p>
-                </div>
+	<%- include ../partials/template/user-navbar%>
+	<div class="content-wrapper">
+		<div class="container-fluid">
+			<h5>Inicio</h5>
+			<hr>
+			<div class="form-group">
+				<form name="formularioPeticion" role="form">
+					<div class="form-row">
+						<div class="col-md-6" id="map" style="height: 250px"></div>
+						<div class="col-md-6">
+							<button type="button" class="btn btn-primary btn-block" id="btnSolicitud">Solicitar ambulancia</button>
+							<hr>
+							<h4 for="OutputDirection">Tu dirección:</h4>
+							<div style="display: block">
+								<input class="form-control" id="direction" name="direccion_pt" type="text" aria-describedby="direction"
+								 disabled>
+								<input class="form-control" id="lat" name="lat_pt" type="text" aria-describedby="direction" disabled>
+								<input class="form-control" id="lng" name="lng_pt" type="text" aria-describedby="direction" disabled>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<%- include ../partials/template/footer -%>
+		<%- include ../partials/template/top-button -%>
+		<%- include ../partials/modals/logout -%>
+		<!-- SCRIPTS -->
+		<script src="/vendor/socket-io/socket.io.min.js"></script>
+		<script src="/vendor/jquery/jquery.min.js"></script>
+		<script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+		<script src="/js/ab-admin.min.js"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap"
+		 async defer></script>
+		<script src="/js/ab-maps-api.min.js"></script>
+		<script src="/js/usuario-inicio.min.js"></script>
+		<!-- Cancelation Modal -->
+		<div class="modal fade" id="timerCancel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+		 aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalCenterTitle">Cancelación</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<form>
+						<div class="modal-body" id="Message">
+							<p style="text-align: center;">¿Desea cancelar la petición?</p>
+							<p class='seconds-timer' id="timer">5</p>
+							<p style="text-align: center;">segundos</p>
+						</div>
 
-                <div class="modal-body" id="Succeded" style="display:none">  
-                    <p class='seconds-timer'>Petición enviada</p>              
-                </div>
+						<div class="modal-body" id="Succeded" style="display:none">
+							<p class='seconds-timer'>Petición enviada</p>
+						</div>
 
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-danger" name="btnCancelSolicitud" id="btnCancelSolicitud" >Cancelar peticion</button>
-                </div>
-            </form>
-          </div>
-        </div>
-    </div>
-  </div>  
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+							<button type="button" class="btn btn-danger" name="btnCancelSolicitud" id="btnCancelSolicitud">Cancelar peticion</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
+
 </html>

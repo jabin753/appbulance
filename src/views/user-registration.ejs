@@ -1,124 +1,138 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <%- include partials/template/header -%>  
+	<%- include partials/template/header -%>
 </head>
-<body class="fixed-nav sticky-footer"  style="background-color:#F7F7F7" id="page-top">
-  <main>
-    <div align="center">
-      <br>
-      <img src="/images/logo.png" width="80px" height="80px" href="/"> <br>
-      <font color="#464646" size="40">&nbsp Appbulance</font>
-    </div>
-    <div class="container">
-      <div class="card card-register mx-auto mt-5">
-        <div class="card-header">Registra una cuenta</div>
-        <div class="card-body">
-          <%if (flashMessage.length > 0){ %>
-            <div class="container" style="background-color: #FF5A5A"><%= flashMessage %></div>
-          <% } %> 
-          <hr>
-          <h2>Datos personales</h2>
-          <hr>
-          <form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
-            <div class="form-group">
-              <label for="InputName">Nombre</label>
-              <input class="form-control" required name="nombre_prs"id="InputName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu nombre" maxLength="30">
-              <div class="help-block with-errors"></div>
-            </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="InputLastName">Apellido Paterno</label>
-                  <input class="form-control" required name="apellido_paterno_prs"id="InputLastName" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno" maxLength="30">
-                </div>
-                <div class="col-md-6">
-                  <label for="InputLastName2">Apellido Materno</label>
-                  <input class="form-control" required name="apellido_materno_prs"id="InputLastName2" type="text" aria-describedby="nameHelp" placeholder="Escribe tu apellido materno" maxLength="30">
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-                <div class="col-md-6">
-                  <label for="InputPassword1">Teléfono</label>
-                  <input class="form-control" required name="telefono_usr"id="InputPhoneNumber" type="text" placeholder="Escribe tu número telefónico" maxlength="10" min="3300000001" max="9999999999">
-                </div>
-                <div class="col-md-6">
-                    <label for="InputLastName">Ocupación</label>
-                    <input class="form-control" required name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp" placeholder="Escribe tu ocupación">
-                  </div>                
-            </div>
-          <br>
-            <div class="form-group">
-              <div class="form-row">
-                  <div class="col-md-4">
-                      <label for="InputSex">Sexo</label><br>
-                      <select class="form-control" required name="sexo_prs">
-                          <option value="">Selecciona tu sexo</option>     
-                          <option value="M">Hombre</option> 
-                          <option value="F">Mujer</option>
-                      </select>
-                    </div>
-                <div class="col-md-4">
-                  <label for="InputBlood">Tipo de sangre</label>
-                  <select class="form-control" name="tipo_sangre_p" id="bloodType" required>
-                      <option value="">Selecciona tu tipo de sangre</option>     
-                      <option value="O+">O+</option> 
-                      <option value="O-">O-</option>
-                      <option value="A+">A+</option> 
-                      <option value="A-">A-</option>
-                      <option value="B+">B+</option> 
-                      <option value="B-">B-</option>
-                      <option value="AB+">AB+</option> 
-                      <option value="AB-">AB-</option>
-                  </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="InputDateBirth">Fecha de nacimiento</label>
-                      <input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
-                  </div>
-              </div>
-            </div>              
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="InputNSS">Número de Seguro Social</label>
-                  <input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe tu NSS" maxLength="12" data-smk-type="number">
-                </div>
-                <a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss" target="_blank">¿No conoces tu NSS? Consúltalo aquí.</a>
-              </div>
-            </div>              
-            <hr>
-            <h2>Datos de acceso</h2>
-            <hr>
-            <div class="form-group">
-              <label for="InputEmail1">Dirección de correo electrónico</label>
-              <input class="form-control" required name="email_usr" id="InputEmail1" type="email" aria-describedby="emailHelp" placeholder="Escribe tu email">
-            </div>
-            <div class="form-group">
-              <div class="form-row">
-                <div class="col-md-6">
-                  <label for="InputPassword1">Contraseña</label>
-                  <input class="form-control" required name="contrasena_usr" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
-                </div>
-                <div class="col-md-6">
-                  <label for="ConfirmPassword">Confirma la contraseña</label>
-                  <input class="form-control" required name="contrasena_usr_conf" id="ConfirmPassword" type="password" placeholder="Confirma la contraseña">
-                </div>
-              </div>
-            </div>
-            <button class="btn btn-primary btn-block" type="submit" name="btnRegister" id="btnRegister">Regístrate</button>
-          </form>
-          <div class="text-center">
-            <a class="d-block small mt-3" href="/usuario/ingreso">¿Ya tienes una cuenta? Inicia sesión...</a>
-            <a class="d-block small" href="#">¿Olvidaste tu contraseña?</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    </main>
-    <%- include partials/template/js-scripts -%>
-    <%- include partials/template/top-button -%>
-    <%- include partials/template/js-scripts-validation -%>
-  </body>    
-  </html>
+
+<body class="fixed-nav sticky-footer" style="background-color:#F7F7F7" id="page-top">
+	<main>
+		<div align="center">
+			<br>
+			<img src="/images/logo.png" width="80px" height="80px" href="/"> <br>
+			<font color="#464646" size="40">&nbsp Appbulance</font>
+		</div>
+		<div class="container">
+			<div class="card card-register mx-auto mt-5">
+				<div class="card-header">Registra una cuenta</div>
+				<div class="card-body">
+					<%if (flashMessage.length > 0){ %>
+					<div class="container" style="background-color: #FF5A5A">
+						<%= flashMessage %>
+					</div>
+					<% } %>
+					<hr>
+					<h2>Datos personales</h2>
+					<hr>
+					<form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
+						<div class="form-group">
+							<label for="InputName">Nombre</label>
+							<input class="form-control" required name="nombre_prs" id="InputName" type="text" aria-describedby="nameHelp"
+							 placeholder="Escribe tu nombre" maxLength="30">
+							<div class="help-block with-errors"></div>
+						</div>
+						<div class="form-group">
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="InputLastName">Apellido Paterno</label>
+									<input class="form-control" required name="apellido_paterno_prs" id="InputLastName" type="text"
+									 aria-describedby="nameHelp" placeholder="Escribe tu apellido paterno" maxLength="30">
+								</div>
+								<div class="col-md-6">
+									<label for="InputLastName2">Apellido Materno</label>
+									<input class="form-control" required name="apellido_materno_prs" id="InputLastName2" type="text"
+									 aria-describedby="nameHelp" placeholder="Escribe tu apellido materno" maxLength="30">
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="col-md-6">
+								<label for="InputPassword1">Teléfono</label>
+								<input class="form-control" required name="telefono_usr" id="InputPhoneNumber" type="text" placeholder="Escribe tu número telefónico"
+								 maxlength="10" min="3300000001" max="9999999999">
+							</div>
+							<div class="col-md-6">
+								<label for="InputLastName">Ocupación</label>
+								<input class="form-control" required name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp"
+								 placeholder="Escribe tu ocupación">
+							</div>
+						</div>
+						<br>
+						<div class="form-group">
+							<div class="form-row">
+								<div class="col-md-4">
+									<label for="InputSex">Sexo</label><br>
+									<select class="form-control" required name="sexo_prs">
+										<option value="">Selecciona tu sexo</option>
+										<option value="M">Hombre</option>
+										<option value="F">Mujer</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label for="InputBlood">Tipo de sangre</label>
+									<select class="form-control" name="tipo_sangre_p" id="bloodType" required>
+										<option value="">Selecciona tu tipo de sangre</option>
+										<option value="O+">O+</option>
+										<option value="O-">O-</option>
+										<option value="A+">A+</option>
+										<option value="A-">A-</option>
+										<option value="B+">B+</option>
+										<option value="B-">B-</option>
+										<option value="AB+">AB+</option>
+										<option value="AB-">AB-</option>
+									</select>
+								</div>
+								<div class="col-md-4">
+									<label for="InputDateBirth">Fecha de nacimiento</label>
+									<input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="InputNSS">Número de Seguro Social</label>
+									<input class="form-control" required name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp"
+									 placeholder="Escribe tu NSS" maxLength="12" data-smk-type="number">
+								</div>
+								<a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss" target="_blank">¿No
+									conoces tu NSS? Consúltalo aquí.</a>
+							</div>
+						</div>
+						<hr>
+						<h2>Datos de acceso</h2>
+						<hr>
+						<div class="form-group">
+							<label for="InputEmail1">Dirección de correo electrónico</label>
+							<input class="form-control" required name="email_usr" id="InputEmail1" type="email" aria-describedby="emailHelp"
+							 placeholder="Escribe tu email">
+						</div>
+						<div class="form-group">
+							<div class="form-row">
+								<div class="col-md-6">
+									<label for="InputPassword1">Contraseña</label>
+									<input class="form-control" required name="contrasena_usr" id="InputPassword1" type="password" placeholder="Escribe una contraseña">
+								</div>
+								<div class="col-md-6">
+									<label for="ConfirmPassword">Confirma la contraseña</label>
+									<input class="form-control" required name="contrasena_usr_conf" id="ConfirmPassword" type="password"
+									 placeholder="Confirma la contraseña">
+								</div>
+							</div>
+						</div>
+						<button class="btn btn-primary btn-block" type="submit" name="btnRegister" id="btnRegister">Regístrate</button>
+					</form>
+					<div class="text-center">
+						<a class="d-block small mt-3" href="/usuario/ingreso">¿Ya tienes una cuenta? Inicia sesión...</a>
+						<a class="d-block small" href="#">¿Olvidaste tu contraseña?</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<%- include partials/template/js-scripts -%>
+	<%- include partials/template/top-button -%>
+	<%- include partials/template/js-scripts-validation -%>
+</body>
+
+</html>
