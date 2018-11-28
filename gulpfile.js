@@ -4,6 +4,7 @@ var cleanCSS = require('gulp-clean-css');
 var rename = require("gulp-rename");
 var uglify = require('gulp-uglify');
 
+const workboxBuild = require('workbox-build');
 //Copiado de librerías de dependencias
 gulp.task('vendor', function () {
   // Bootstrap
@@ -67,14 +68,14 @@ gulp.task('vendor', function () {
 
 gulp.task('css:minify', function () {
   return gulp.src([
-    './src/public/CSS/**/*.css',
-    '!./src/public/CSS/**/*.min.css'
+    './src/public/css/**/*.css',
+    '!./src/public/css/**/*.min.css'
   ])
     .pipe(cleanCSS())
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest('./src/public/CSS'));
+    .pipe(gulp.dest('./src/public/css'));
 });
 gulp.task('css', ['css:minify']);
 
@@ -95,7 +96,43 @@ gulp.task('js', ['js:minify']);
 
 //Default
 
-gulp.task('build', ['css', 'js', 'vendor']);
+gulp.task('build', ['css', 'js', 'vendor','sw']);
+
+//Service Worker
+gulp.task('sw', () => {
+  // Pass Manually:
+  //  workbox.setConfig({ debug: false })
+  return workboxBuild.generateSW({
+    globDirectory: '/src/public/vendor',//Nothing here <--
+    swDest: 'src/public/sw.js',
+    runtimeCaching: [{
+      urlPattern: new RegExp('/vendor/.*\.js'),
+      handler: 'networkFirst',
+      options: {
+        cacheName: 'js-vendor',
+      }
+    },
+    {
+      urlPattern: /.*\.css/,
+      handler: 'networkFirst',
+      options: {
+        cacheName: 'css-cache',
+      }
+    },
+    {
+      urlPattern: /.*\.(?:png|jpg|jpeg|svg|gif)/,
+      handler: 'cacheFirst',
+      options: {
+        cacheName: 'image-cache',
+        expiration: {
+          maxEntries: 20,
+          maxAgeSeconds: 7 * 24 * 60 * 60,
+        }
+      }
+    }]
+
+  });
+});
 
 //Servidor para desarrollo
 
@@ -107,6 +144,6 @@ gulp.task('dev', ['vendor'], function (done) {
     , env: { 'NODE_ENV': 'development' }
     , done: done
   });
-  gulp.watch('./src/public/CSS/**/*.css', ['css']);
+  gulp.watch('./src/public/css/**/*.css', ['css']);
   gulp.watch('./src/public/js/**/*.js', ['js']);
 });
