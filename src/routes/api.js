@@ -1,7 +1,7 @@
 const bd = require('../config/dbConnection');
 module.exports = app => {
 
-    app.all('/api/*', async (req, res, next) => {
+    /*app.all('/api/*', async (req, res, next) => {
         console.log('API call')
         if (req.user === undefined) {
             res.status(403).json({
@@ -19,6 +19,7 @@ module.exports = app => {
         }
         next()
     })
+    */
     //AMBULANCIAS
     app.get('/api/admin/a', async (req, res) => {
         try {
@@ -94,16 +95,17 @@ module.exports = app => {
     //PETICIONES
     app.get('/api/admin/pt', async (req, res) => {
         try {
-            const { rows } = await bd.query('SELECT\
-            peticiones.*,\
-            pacientes.nombre_prs, \
-            pacientes.apellido_paterno_prs, \
-            pacientes.apellido_materno_prs \
-          FROM \
-            perfiles.pacientes, \
-            peticiones.peticiones \
-          WHERE \
-            peticiones.id_p = pacientes.id_p;')
+            const { rows } = await bd.query('SELECT peticiones.id_pt,\
+            peticiones.id_p,\
+            peticiones.ubicacion_pt,\
+            peticiones.direccion_pt,\
+            to_char(timestamp_pt,\'DD-MM-YYYY\') AS fecha_pt,\
+            to_char(timestamp_pt,\'HH:MI\') AS hora_pt,\
+            peticiones.resuelto,\
+            pacientes.apellido_paterno_prs || \' \' || pacientes.apellido_materno_prs || \' \' || pacientes.nombre_prs AS nombre_prs\
+            FROM perfiles.pacientes INNER JOIN peticiones.peticiones\
+            ON peticiones.id_p = pacientes.id_p\
+            ORDER BY to_char(timestamp_pt,\'YYYY-MM-DD\') DESC');
             res.json(rows)
         }
         catch (err) {
