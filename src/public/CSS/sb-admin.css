@@ -33,7 +33,7 @@ body.fixed-nav {
   height: 50px;
   text-align: center;
   color: white;
-  background: #f44336;
+  background: #dc3546b4;
   line-height: 45px;
 }
 
@@ -42,7 +42,7 @@ body.fixed-nav {
 }
 
 .scroll-to-top:hover {
-  background: #ce2c20;
+  background: #dc3545;
 }
 
 .scroll-to-top i {
@@ -227,7 +227,7 @@ body.fixed-nav {
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler {
   /*background-color: #212529;*/
-  background-color: #e93528;
+  background-color: #dc3545;
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
@@ -360,18 +360,18 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 
 @media (min-width: 992px) {
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav {
-    background: #e93528;
+    background: #dc3545;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a {
     color: white !important;
-    background-color: #e93528;
+    background-color: #dc3545;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav li.active a:hover {
     color: white;
   }
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
   #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
-    background: #e93528;
+    background: #dc3545;
   }
 }
 
