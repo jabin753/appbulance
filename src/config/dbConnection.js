@@ -11,7 +11,7 @@ module.exports = {
     const start = Date.now()
     const res = await pool.query(text, params)
     const duration = Date.now() - start
-    console.log(`Consulta ${text} ejecutada en ${duration} ms`)
+    console.log(`Consulta ejecutada en ${duration} ms`)
     return res
   },
   getClient: (callback) => {
