@@ -37,7 +37,7 @@ $(document).ready(function () {
                 <div id="pt_detalles">\
                     <h5>Estado de la petición: '+ row.data().resuelto + '</h5>\
                     <h4>Ubicación:</h4><hr>\
-                    <a href="https://www.google.com/maps/@'+ row.data().ubicacion_pt.x + ',' + row.data().ubicacion_pt.y + ',18z" ><br>\
+                    <a target="_blank" href="https://www.google.com/maps/search/?api=1&query='+ row.data().ubicacion_pt.x + ',' + row.data().ubicacion_pt.y + '" ><br>\
                     <img width="600" src="https://maps.googleapis.com/maps/api/staticmap?autoscale=false&size=600x300&maptype=roadmap&key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&format=png&visual_refresh=true&markers=size:mid%7Ccolor:0xff0000%7Clabel:%7C'+ row.data().ubicacion_pt.x + ',' + row.data().ubicacion_pt.y + '" alt="Mapa de '+ row.data().ubicacion_pt.x + ','+ row.data().ubicacion_pt.y + '">\
                 </div>\
                 ' ).show();
