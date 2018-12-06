@@ -1,7 +1,7 @@
 const bd = require('../config/dbConnection');
 module.exports = app => {
 
-    /*app.all('/api/*', async (req, res, next) => {
+    app.all('/api/*', async (req, res, next) => {
         console.log('API call')
         if (req.user === undefined) {
             res.status(403).json({
@@ -19,7 +19,7 @@ module.exports = app => {
         }
         next()
     })
-    */
+    
     //AMBULANCIAS
     app.get('/api/admin/a', async (req, res) => {
         try {

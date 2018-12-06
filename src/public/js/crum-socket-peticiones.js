@@ -13,9 +13,21 @@ socket.on('receivePetition',function(data){
     });
     map.setCenter(pos);
     map.setZoom(17);
-    $('p#modal_id_p').text(data.id_p);
-    $('p#modal_direccion_pt').text(data.direccion_pt);
-    $('p#modal_ubicacion_pt_x').text(data.ubicacion_pt.x);
-    $('p#modal_ubicacion_pt_y').text(data.ubicacion_pt.y);
+
+    $('#modal-body-petition').html(function(){
+        return "<h2>Datos del paciente</h2>\
+        <hr>\
+        <p>Usuario:</p>\
+        <p id=\"modal_id_p\">"+data.nombre_prs+"</p>\
+        <hr>\
+        <h2>Ubicación</h2>\
+        <hr>\
+        <p>Dirección:</p>\
+        <p id=\"modal_direccion_pt\">"+data.direccion_pt+"</p>\
+        <p>Latitud:</p>\
+        <p id=\"modal_ubicacion_pt_x\">"+data.ubicacion_pt.x+"</p>\
+        <p>Longitud:</p>\
+        <p id=\"modal_ubicacion_pt_y\">"+data.ubicacion_pt.y+"</p>"
+    });
     $('#incoming_petition').modal('show');
 });
