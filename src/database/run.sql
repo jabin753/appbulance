@@ -1,9 +1,5 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 9.6.9
--- Dumped by pg_dump version 9.6.9
+--YOU MUST RUN THIS SCRIPT BEFORE ANYTHING!
+--MAKE SURE IF YOUR PG USER HAS ALL THE REQUIRED PERMISSIONS(CREATE, MODIFY, DELETE APPBULANCE DB).
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
