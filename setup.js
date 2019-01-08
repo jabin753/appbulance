@@ -9,7 +9,7 @@ const db = require('./src/database/db')
 const args = minimist(process.argv)
 const prompt = inquirer.createPromptModule()
 
-async function setup () {
+async function setup(config) {
   if (!args.yes) {
     const answer = await prompt([
       {
@@ -23,28 +23,24 @@ async function setup () {
       return console.log('Nothing happened :)')
     }
   }
-
-  const config = {
-    database: process.env.DB_NAME || 'appbulance_sequelize',
-    username: process.env.DB_USER || 'appbulance',
-    password: process.env.DB_PASS || '::appbulance2018::',
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres',
-    logging: s => debug(s),
-    setup: true
-  }
-
-  const { User } = await db(config).catch(handleFatalError)
-  console.log(User)
+  await db(config).catch(handleFatalError)
 
   console.log('Success!')
   process.exit(0)
 }
 
-function handleFatalError (err) {
+function handleFatalError(err) {
   console.error(`${chalk.red('[fatal error]')} ${err.message}`)
   console.error(err.stack)
   process.exit(1)
 }
 
-setup()
+setup({
+  database: process.env.DB_NAME || 'appbulance_sequelize',
+  username: process.env.DB_USER || 'appbulance',
+  password: process.env.DB_PASS || '::appbulance2018::',
+  host: process.env.DB_HOST || 'localhost',
+  dialect: 'postgres',
+  logging: s => debug(s),
+  setup: true
+})
