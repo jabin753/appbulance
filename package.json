@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "gulp dev",
-    "install": "gulp build"
+    "install": "gulp build",
+    "setup": "node setup.js",
+    "postgresql": "echo Hola && echo hola2"
   },
   "keywords": [],
   "author": "",
