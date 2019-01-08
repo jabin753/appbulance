@@ -11,10 +11,9 @@ module.exports = async function (config) {
     //relations btw models
 
     if(config.setup) {
-        await sequelize.createSchema('perfiles')
         await sequelize.sync({force: true})
     }
-    const User = {}
+    const User = UserModel
     return {
         User
     }
