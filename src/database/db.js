@@ -1,11 +1,16 @@
 'use strict'
 
 const setupDatabase = require('./../lib/db')
-const setupUserModel = require('./../model/usuario')
+const setupUsuarioModel = require('./../model/usuario')
+const setupPersonaModel = require('./../model/persona')
+const setupPacienteModel = require('./../model/paciente')
+
 //const setup[...]Model...
 module.exports = async function (config) {
     const sequelize = setupDatabase(config)
-    const UserModel = setupUserModel(config)
+    const UsuarioModel = setupUsuarioModel(config)
+    const PersonaModel = setupPersonaModel(config)
+    const PacienteModel = setupPacienteModel(config)
 
     await sequelize.authenticate()
     //relations btw models
@@ -13,9 +18,13 @@ module.exports = async function (config) {
     if(config.setup) {
         await sequelize.sync({force: true})
     }
-    const User = UserModel
+    const User = UsuarioModel
+    const Persona = PersonaModel
+    const Paciente = PacienteModel
     return {
-        User
+        User,
+        Persona,
+        Paciente
     }
 }
 
