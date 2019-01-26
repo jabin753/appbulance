@@ -8,7 +8,9 @@
     "dev": "gulp dev",
     "install": "gulp build",
     "setup": "node setup.js",
-    "postgresql": "echo Hola && echo hola2"
+    "postgresql": "echo Hola && echo hola2",
+    "test": "ava tests/"
+
   },
   "keywords": [],
   "author": "",
@@ -43,6 +45,7 @@
     "startbootstrap-sb-admin": "^4.0.0"
   },
   "devDependencies": {
+    "ava": "^1.0.1",
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.4",
     "gulp-nodemon": "^2.2.1",
@@ -50,6 +53,7 @@
     "gulp-uglify": "^3.0.0",
     "morgan": "^1.9.0",
     "nodemon": "^1.17.5",
+    "nyc": "^13.1.0",
     "workbox-build": "^3.6.3"
   }
 }
