@@ -18,10 +18,10 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox
  * requests for URLs in the manifest.
  * See https://goo.gl/S9QRab
  */
-workbox.setConfig({ debug: false });
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
+
 workbox.routing.registerRoute(/\/vendor\/.*.js/, workbox.strategies.networkFirst({ "cacheName":"js-vendor", plugins: [] }), 'GET');
 workbox.routing.registerRoute(/.*\.css/, workbox.strategies.networkFirst({ "cacheName":"css-cache", plugins: [] }), 'GET');
 workbox.routing.registerRoute(/.*\.(?:png|jpg|jpeg|svg|gif)/, workbox.strategies.cacheFirst({ "cacheName":"image-cache", plugins: [new workbox.expiration.Plugin({"maxEntries":20,"maxAgeSeconds":604800,"purgeOnQuotaError":false})] }), 'GET');
