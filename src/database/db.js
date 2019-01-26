@@ -1,6 +1,7 @@
 'use strict'
 
 const setupDatabase = require('./../lib/db')
+const setupUser = require('./../lib/user')
 const setupUserModel = require('./../model/usuario')
 //const setup[...]Model...
 module.exports = async function (config) {
@@ -13,9 +14,10 @@ module.exports = async function (config) {
     if(config.setup) {
         await sequelize.sync({force: true})
     }
-    const User = UserModel
+    const User = setupUser(UserModel)
     return {
-        User
+        User,
+        sequelize
     }
 }
 
