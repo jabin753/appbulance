@@ -14,6 +14,18 @@ socket.on('receivePetition',function(data){
     map.setCenter(pos);
     map.setZoom(17);
 
+    if(Push.Permission.has()) {
+        Push.create("Petición entrante!", {
+            body: "data.direccion_pt",
+            icon: '/favicon.ico',
+            timeout: 4000,
+            onClick: function () {
+                window.focus();
+                this.close();
+            }
+        });
+    }
+
     $('#modal-body-petition').html(function(){
         return "<h2>Datos del paciente</h2>\
         <hr>\
