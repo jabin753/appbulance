@@ -67,6 +67,12 @@ gulp.task('vendor', function () {
     './node_modules/socket.io-client/dist/*.js'
   ])
     .pipe(gulp.dest('./src/public/vendor/socket-io'))
+    
+    // SweetAlert2
+  gulp.src([
+    './node_modules/sweetalert2/dist/*'
+  ])
+    .pipe(gulp.dest('./src/public/vendor/sweetalert2'))
 });
 
 //Minificado de css
