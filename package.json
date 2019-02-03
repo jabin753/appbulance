@@ -34,7 +34,7 @@
     "push.js": "^1.0.9",
     "socket.io": "^1.7.3",
     "startbootstrap-sb-admin": "^4.0.0",
-    "sweetalert2": "^8.0.1"
+    "sweetalert2": "^8.0.5"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
