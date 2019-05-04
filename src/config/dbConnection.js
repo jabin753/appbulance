@@ -1,7 +1,8 @@
 const { Pool } = require('pg')
+const { PG_CONNECTION_STRING } = require('../config/env')
 
 const pool = new Pool({
-  connectionString: process.env.PG_CONNECTION_STRING
+  connectionString: PG_CONNECTION_STRING
     || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'
 })
 
