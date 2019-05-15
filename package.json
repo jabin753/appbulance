@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "gulp dev",
     "install": "gulp build",
-    "build": "webpack"
+    "build": "webpack --watch"
   },
   "keywords": [],
   "author": "",
