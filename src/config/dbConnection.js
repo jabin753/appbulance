@@ -1,12 +1,9 @@
-const { Pool } = require('pg')
+import 'dotenv/config'
+import { Pool } from 'pg'
 
-const pool = new Pool({
-  connectionString: process.env.PG_CONNECTION_STRING
-    || 'postgresql://appbulance:::appbulance2018::@localhost:5432/appbulance'
-})
+const pool = new Pool({ connectionString: process.env.PG_CONNECTION_STRING })
 
 module.exports = {
-
   query: async (text, params) => {
     const start = Date.now()
     const res = await pool.query(text, params)
@@ -29,17 +26,6 @@ module.exports = {
         console.error('A client has been checked out for more than 5 seconds!')
         console.error(`The last executed query on this client was: ${client.lastQuery}`)
       }, 5000)
-
-      const release = (err) => {
-        // call the actual 'done' method, returning this client to the pool
-        done(err)
-
-        // clear our timeout
-        clearTimeout(timeout)
-
-        // set the query method back to its old un-monkey-patched version
-        client.query = query
-      }
       callback(err, client, done)
     })
   },
