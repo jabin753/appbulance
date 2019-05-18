@@ -1,8 +1,10 @@
-var app = require('./config/app')
-var server = app.listen(app.get('port'), () => {
-	var host = server.address().address
-	var port = server.address().port
-	console.log('Servidor iniciado en %s:%s', host, port)
+import app from './config/app'
+import 'dotenv/config'
+import websocket from './config/socketConnections'
 
+var server = app.listen(process.env.PORT, () => {
+  var host = server.address().address
+  var port = server.address().port
+  console.log('Servidor iniciado en %s:%s', host, port)
 })
-require('./config/socketConnections')(server)
+websocket(server)
