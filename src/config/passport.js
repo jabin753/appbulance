@@ -1,21 +1,20 @@
-var LocalStrategy = require('passport-local').Strategy
+import passport from 'passport'
+import LocalStrategy from 'passport-local/lib/strategy'
 var model = require('./../model/model')
 
-module.exports = (passport) => {
+passport.serializeUser((user, done) => {
+  return done(null, user)
+})
+passport.deserializeUser((user, done) => {
+  return done(null, user)
+})
 
-    passport.serializeUser((user, done) => {
-        return done(null, user)
-    })
-    passport.deserializeUser((user, done) => {
-        return done(null, user)
-    })
-
-    //Autenticación local para los usuarios
-    passport.use(new LocalStrategy({
-        usernameField: 'email',
-        passwordField: 'contra',
-        passReqToCallback: true
-    },
-        model.authuser
-    ))
-}
+// Autenticación local para los usuarios
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'contra',
+  passReqToCallback: true
+},
+model.authuser
+))
+export default passport
