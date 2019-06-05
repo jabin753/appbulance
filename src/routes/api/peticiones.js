@@ -7,8 +7,9 @@ router.route('/')
     try {
       var { ubicacion_pt_x, ubicacion_pt_y, direccion_pt } = req.body
       var { id_p } = req.user
-      if (typeof ubicacion_pt === 'undefined') { ubicacion_pt = '' }
-      if (typeof direccion_pt === 'undefined') { direccion_pt = '' }
+      if (typeof ubicacion_pt_x === 'undefined') { ubicacion_pt_x = '' }
+      if (typeof ubicacion_pt_y === 'undefined') { ubicacion_pt_y = '' }
+      console.log(ubicacion_pt_x,ubicacion_pt_y,direccion_pt)
       const { rows } = await bd.query('SELECT * FROM post_pt(point($1,$2),$3,$4)', [ubicacion_pt_x, ubicacion_pt_y, direccion_pt, id_p])
       res.json(rows)
     } catch (err) {
