@@ -4,10 +4,9 @@
   "description": "A Webapp that allows to people connect with medical service in order to attend an emergency call",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "babel-node src/index.js",
     "dev": "gulp dev",
     "install": "gulp build",
-    "build": "webpack --watch",
     "babel": "babel-node src/index.js",
     "lint": "standard --fix"
   },

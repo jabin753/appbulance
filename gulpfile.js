@@ -1,11 +1,11 @@
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var cleanCSS = require('gulp-clean-css');
-var rename = require("gulp-rename");
-var uglify = require('gulp-uglify');
+var gulp = require('gulp')
+var nodemon = require('gulp-nodemon')
+var cleanCSS = require('gulp-clean-css')
+var rename = require('gulp-rename')
+var uglify = require('gulp-uglify')
 
-const workboxBuild = require('workbox-build');
-//Copiado de librerías de dependencias
+const workboxBuild = require('workbox-build')
+// Copiado de librerías de dependencias
 gulp.task('vendor', function () {
   // Bootstrap
   gulp.src([
@@ -52,9 +52,9 @@ gulp.task('vendor', function () {
     './node_modules/jquery.easing/*.js'
   ])
     .pipe(gulp.dest('./src/public/vendor/jquery-easing'))
-  //jQuery Validation
+  // jQuery Validation
   gulp.src([
-    './node_modules/jquery-validation/dist/*',
+    './node_modules/jquery-validation/dist/*'
   ])
     .pipe(gulp.dest('./src/public/vendor/jquery-validation'))
   // Push.js
@@ -67,15 +67,15 @@ gulp.task('vendor', function () {
     './node_modules/socket.io-client/dist/*.js'
   ])
     .pipe(gulp.dest('./src/public/vendor/socket-io'))
-    
-    // SweetAlert2
+
+  // SweetAlert2
   gulp.src([
     './node_modules/sweetalert2/dist/*'
   ])
     .pipe(gulp.dest('./src/public/vendor/sweetalert2'))
-});
+})
 
-//Minificado de css
+// Minificado de css
 
 gulp.task('css:minify', function () {
   return gulp.src([
@@ -86,11 +86,11 @@ gulp.task('css:minify', function () {
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest('./src/public/css'));
-});
-gulp.task('css', ['css:minify']);
+    .pipe(gulp.dest('./src/public/css'))
+})
+gulp.task('css', ['css:minify'])
 
-//Minificado de js
+// Minificado de js
 
 gulp.task('js:minify', function () {
   return gulp.src([
@@ -101,33 +101,33 @@ gulp.task('js:minify', function () {
     .pipe(rename({
       suffix: '.min'
     }))
-    .pipe(gulp.dest('./src/public/js'));
-});
-gulp.task('js', ['js:minify']);
+    .pipe(gulp.dest('./src/public/js'))
+})
+gulp.task('js', ['js:minify'])
 
-//Default
+// Default
 
-gulp.task('build', ['css', 'js', 'vendor','sw']);
+gulp.task('build', ['css', 'js', 'vendor', 'sw'])
 
-//Service Worker
+// Service Worker
 gulp.task('sw', () => {
   // Pass Manually:
   //  workbox.setConfig({ debug: false })
   return workboxBuild.generateSW({
-    globDirectory: '/src/public/vendor',//Nothing here <--
+    globDirectory: '/src/public/vendor', // Nothing here <--
     swDest: 'src/public/sw.js',
     runtimeCaching: [{
       urlPattern: new RegExp('/vendor/.*\.js'),
       handler: 'networkFirst',
       options: {
-        cacheName: 'js-vendor',
+        cacheName: 'js-vendor'
       }
     },
     {
       urlPattern: /.*\.css/,
       handler: 'networkFirst',
       options: {
-        cacheName: 'css-cache',
+        cacheName: 'css-cache'
       }
     },
     {
@@ -137,24 +137,24 @@ gulp.task('sw', () => {
         cacheName: 'image-cache',
         expiration: {
           maxEntries: 20,
-          maxAgeSeconds: 7 * 24 * 60 * 60,
+          maxAgeSeconds: 7 * 24 * 60 * 60
         }
       }
     }]
 
-  });
-});
+  })
+})
 
-//Servidor para desarrollo
+// Servidor para desarrollo
 
 gulp.task('dev', ['vendor'], function (done) {
   nodemon({
-    script: './src/index.js'
-    , ext: 'js'
-    , ignore: ['./src/public', './src/views']
-    , env: { 'NODE_ENV': 'development' }
-    , done: done
-  });
-  gulp.watch('./src/public/css/**/*.css', ['css']);
-  gulp.watch('./src/public/js/**/*.js', ['js']);
-});
+    exec: 'babel-node src/index.js',
+    ext: 'js',
+    ignore: ['./src/public', './src/views'],
+    env: { 'NODE_ENV': 'development' },
+    done: done
+  })
+  gulp.watch('./src/public/css/**/*.css', ['css'])
+  gulp.watch('./src/public/js/**/*.js', ['js'])
+})
