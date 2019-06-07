@@ -10,7 +10,7 @@
 	<script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
 	<script src="/vendor/pushjs/push.min.js"></script>
 	<script src="/vendor/sweetalert2/sweetalert2.min.js"></script>
-	<script src="/js/crum-socket-peticiones.min.js"></script>
+	<script src="/js/crum-socket-peticiones.js"></script>  <!---->
 	<script src="/js/ab-admin.min.js"></script>
 	<script src="/js/ab-maps-api.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDa56T84jpoLhurxSlOf9lou21Xj0jAl90&callback=initMap"
@@ -18,9 +18,11 @@
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+	<audio class="audio"><source src="/audio/notification.wav" type="audio/wav"></audio>
 	<%- include ../partials/template/crum-navbar -%>
 	<div class="content-wrapper">
-		<div class="container-fluid">
+			
+		<div class="container-fluid">					
 			<main>
 				<div id="map" style="width:100%;height:480px;background:white"></div>
 				<script>
@@ -34,7 +36,7 @@
 					Toast.fire({
 						type: 'success',
 						title: 'Ingreso correcto'
-					})
+					})		
 				</script>
 			</main>
 		</div>
@@ -42,8 +44,17 @@
 		<%- include ../partials/template/footer -%>
 		<%- include ../partials/template/top-button -%>
 		<%- include ../partials/modals/logout -%>
-
+		
 	</div>
 </body>
+<script>
+/*	
+$(document).ready(playSound);
+
+function playSound(){
+	$(".audio")[0].play();
+}
+*/
+</script>
 
 </html>
