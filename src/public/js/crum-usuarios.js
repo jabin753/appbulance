@@ -23,18 +23,33 @@ $(document).ready(function () {
         tableUsuarios.on('select',function (e, dt, type, indexes) {
             $("button[name='btnDel']").attr("disabled", false);
             $("button[name='btnMod']").attr("disabled", false);
+            $("button[name='btnInfo']").attr("disabled", false);
             usuario = tableUsuarios.row(indexes).data();
             console.log(usuario);
         });
         tableUsuarios.on('deselect', function(e, dt, type, indexes) {
             $("button[name='btnDel']").attr("disabled", true);
             $("button[name='btnMod']").attr("disabled", true);
+            $("button[name='btnInfo']").attr("disabled", true);
             usuario = {};
         });
     });
 
     $("button[name='btnMod']").on("click", function () {
         var $form = $('#FRMput_u');
+        $form.find("input[name='nombre_prs']").attr("value", usuario.nombre_prs);
+        $form.find("input[name='apellido_paterno_prs']").attr("value", usuario.apellido_paterno_prs);
+        $form.find("input[name='apellido_materno_prs']").attr("value", usuario.apellido_materno_prs);
+        $form.find("input[name='telefono_usr']").attr("value", usuario.telefono_usr);
+        $form.find("input[name='fecha_nacimiento_prs']").attr("value", usuario.fecha_nacimiento_prs.substr(0, 10) );
+        $form.find("input[name='ocupacion_prs']").attr("value", usuario.ocupacion_prs);
+        $form.find("input[name='nss_p']").attr("value", usuario.nss_p);
+        $form.find("input[name='email_usr']").attr("value", usuario.email_usr);
+        $form.find("select[name='sexo_prs']").val(usuario.sexo_prs);
+        $form.find("select[name='tipo_sangre_p']").val(usuario.tipo_sangre_p);
+    });
+    $("button[name='btnInfo']").on("click", function () {
+        var $form = $('#FRMinfo_u');
         $form.find("input[name='nombre_prs']").attr("value", usuario.nombre_prs);
         $form.find("input[name='apellido_paterno_prs']").attr("value", usuario.apellido_paterno_prs);
         $form.find("input[name='apellido_materno_prs']").attr("value", usuario.apellido_materno_prs);
@@ -58,7 +73,7 @@ $(document).ready(function () {
     });
     $('#FRMput_u').on('submit', function (e) {
         e.preventDefault();
-        put_a();
+        put_u();
         reload();
     });
 });
@@ -92,7 +107,7 @@ function post_u() { //Agregar
 }
 
 
-function put_a() { //Obtener
+function put_u() { //Obtener
     var $form = $('#FRMput_u');
     $.ajax({
         url: '/api/admin/u/' + usuario.id_p,
@@ -118,6 +133,33 @@ function put_a() { //Obtener
         }
     });
 }
+
+function info_u() { //Info usuario
+    var $form = $('#FRMinfo_u');
+    $.ajax({
+        url: '/api/admin/info_u/' + usuario.id_p,
+        method: 'PUT',
+        data: {
+            nombre_prs: $form.find("input[name='nombre_prs']").val(),
+            apellido_paterno_prs: $form.find("input[name='apellido_paterno_prs']").val(),
+            apellido_materno_prs: $form.find("input[name='apellido_materno_prs']").val(),
+            telefono_usr: $form.find("input[name='telefono_usr']").val(),
+            fecha_nacimiento_prs: $form.find("input[name='fecha_nacimiento_prs']").val(),
+            sexo_prs: $form.find("input[name='sexo_prs']").val(),
+            tipo_sangre_p: $form.find("input[name='tipo_sangre_p']").val(),
+            ocupacion_prs: $form.find("input[name='ocupacion_prs']").val(),
+            nss_p: $form.find("input[name='nss_p']").val(),
+            email_usr: $form.find("input[name='email_usr']").val(),
+        },
+        success: function (response) {
+            console.log(response);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
 /*
 function delete_a() {
     $.ajax({
