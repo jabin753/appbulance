@@ -520,3 +520,9 @@ background-color: #DD2C00;
   margin-top:0px; 
   color: tomato;
 }
+
+.ghostinput {
+  outline: none;
+  background-color: #fff;
+  border: 0;
+}
