@@ -231,11 +231,11 @@ body.fixed-nav {
 }
 
 #mainNav.fixed-top.navbar-dark .sidenav-toggler a i {
-  color: #adb5bd;
+  color: white;
 }
 
 #mainNav.fixed-top.navbar-light .sidenav-toggler {
-  background-color: #dee2e6;
+  background-color: white;
 }
 
 #mainNav.fixed-top.navbar-light .sidenav-toggler a i {
@@ -332,30 +332,30 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav .nav-link-collapse:after {
-  color: rgba(255, 255, 255, 0.5);
+  color: white
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link {
-  color: rgba(255, 255, 255, 0.5);;
+  color: white
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item > .nav-link:hover {
-  color: rgba(255, 255, 255, 0.5);;
+  color: white
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a,
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a {
-  color: rgba(255, 255, 255, 0.5);;
+  color: white
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:focus, #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level > li > a:hover,
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a:focus,
 #mainNav.navbar-dark .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level > li > a:hover {
-  color: rgba(255, 255, 255, 0.5);;
+  color: white
 }
 
 #mainNav.navbar-dark .navbar-collapse .navbar-nav > .nav-item.dropdown > .nav-link:after {
-  color: rgba(255, 255, 255, 0.5);;
+  color: white
 }
 
 @media (min-width: 992px) {
@@ -404,18 +404,18 @@ body.sidenav-toggled .navbar-sidenav-tooltip.show {
 
 @media (min-width: 992px) {
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav {
-    background: #f8f9fa;
+    background: white;
   }
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a {
     color: #000 !important;
-    background-color: #e9ecef;
+    background-color: white;
   }
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a:focus, #mainNav.navbar-light .navbar-collapse .navbar-sidenav li.active a:hover {
     color: #000;
   }
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-second-level,
   #mainNav.navbar-light .navbar-collapse .navbar-sidenav > .nav-item .sidenav-third-level {
-    background: #f8f9fa;
+    background: white;
   }
 }
 
