@@ -7,7 +7,7 @@
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<form action="/usuario/registro" method="POST" id="modUsers" name="modUsers" role="form">
+			<form id="FRMput_u">
 				<div class="modal-body">
 					<div class="card-body">
 						<div class="form-group">
@@ -59,7 +59,7 @@
 							</div>
 							<div class="col-md-3">
 								<label for="InputDateBirth">Fecha de nacimiento</label>
-								<input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
+								<input class="form-control" required name="fecha_nacimiento_prs" id="InputDateBirthday" type="date" min="1910-01-01" max="2000-12-31">
 							</div>
 						</div> <br>
 						<div class="form-group">
@@ -69,7 +69,7 @@
 									<input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp"
 									 placeholder="Escribe la ocupación">
 								</div>
-								<div class="col-md-4">
+								<!--<div class="col-md-4">
 									<label for="InputSecure">Derechohabiente a</label>
 									<select class="form-control" name="id_sm" id="InputSecure">
 										<option value="">Selecciona una institución médica</option>
@@ -79,7 +79,7 @@
 										<option value="4">PEMEX</option>
 										<option value="5">Seguro Popular</option>
 									</select>
-								</div>
+								</div>-->
 								<div class="col-md-4">
 									<label for="InputNSS">Número de Seguro Social</label>
 									<input class="form-control" name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe el NSS"

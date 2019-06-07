@@ -1,4 +1,3 @@
-<!-- Add User Modal-->
 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -8,12 +7,9 @@
 					<span aria-hidden="true">×</span>
 				</button>
 			</div>
-			<form action="/usuario/registro" method="POST" id="userRegister" name="userRegister">
+			<form id="FRMpost_u">
 				<div class="modal-body">
 					<div class="card-body">
-						<div style="display:none">
-							<input name='id_p' id='id_p'>
-						</div>
 						<div class="form-group">
 							<div class="form-row">
 								<div class="col-md-4">
@@ -41,7 +37,7 @@
 							</div>
 							<div class="col-md-3">
 								<label for="InputSex">Sexo</label><br>
-								<select class="form-control" required name="sexo_prs">
+								<select class="form-control" required name="sexo_prs" id="Sex">
 									<option value="">Selecciona el sexo</option>
 									<option value="M">Hombre</option>
 									<option value="F">Mujer</option>
@@ -63,7 +59,7 @@
 							</div>
 							<div class="col-md-3">
 								<label for="InputDateBirth">Fecha de nacimiento</label>
-								<input class="form-control" required name="fecha_nacimiento_prs" type="date" min="1910-01-01" max="2000-12-31">
+								<input class="form-control" required name="fecha_nacimiento_prs" id="InputDateBirthday" type="date" min="1910-01-01" max="2000-12-31">
 							</div>
 						</div> <br>
 						<div class="form-group">
@@ -89,8 +85,6 @@
 									<input class="form-control" name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe el NSS"
 									 maxLength="11">
 								</div>
-								<a class="d-block small mt-2" href="https://www.numerosegurosocial.com.mx/obtener-o-consultar-nss">¿No conoces
-									tu NSS? Consúltalo aquí.</a>
 							</div>
 						</div>
 						<hr>
@@ -116,9 +110,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-					<button class="btn btn-primary" type="reset">Limpiar</button>
-					<button class="btn btn-success" type="submit" name="btnRegister" id="btnRegister" onclick="">Regístrate</button>
-					<!--<button class="btn btn-success" type="submit" name="btnRegister" id="btnRegister" onclick="addUser()">Registrar</button>-->
+					<button class="btn btn-primary btn-success" type="submit">Registrar</button>
 				</div>
 			</form>
 		</div>
