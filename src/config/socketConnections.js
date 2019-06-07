@@ -10,13 +10,17 @@ module.exports = server => {
             peticiones.direccion_pt,\
             to_char(timestamp_pt,\'DD-MM-YYYY\') AS fecha_pt,\
             to_char(timestamp_pt,\'HH:MI\') AS hora_pt,\
-            pacientes.apellido_paterno_prs || \' \' || pacientes.apellido_materno_prs || \' \' || pacientes.nombre_prs AS nombre_prs\
+            pacientes.apellido_paterno_prs || \' \' || pacientes.apellido_materno_prs || \' \' || pacientes.nombre_prs AS nombre_prs,\
+            pacientes.telefono_usr,\
+            pacientes.tipo_sangre_p,\
+            pacientes.nss_p,\
+            pacientes.sexo_prs,\
+            pacientes.fecha_nacimiento_prs\
             FROM perfiles.pacientes INNER JOIN peticiones.peticiones\
             ON peticiones.id_p = pacientes.id_p\
             WHERE id_pt = $1',[data.id_pt])
             .then(res => {
                 io.emit('receivePetition', res.rows[0])
-
             })
             .catch(e => console.log(e));
             
