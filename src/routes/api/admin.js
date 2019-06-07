@@ -131,4 +131,37 @@ router.delete('/pt/:id_pt', async (req, res) => {
   }
 })
 
+// USUARIOS
+router.get('/u', async (req, res) => {
+  try {
+    const { rows } = await bd.query('SELECT * FROM get_usr()')
+    res.json(rows)
+  } catch (err) {
+    res.json({ state: 'error', content: err })
+  }
+})
+
+router.put('/u/:id_p', async (req, res) => {
+  try {
+    const { id_p } = req.params
+    var { nombre_prs, apellido_paterno_prs, apellido_materno_prs, telefono_usr, ocupacion_prs, sexo_prs, tipo_sangre_p, fecha_nacimiento_prs, nss_p, email_usr,contrasena_usr } = req.body
+    if (typeof nombre_prs === 'undefined') { nombre_prs = '' }
+    if (typeof apellido_paterno_prs === 'undefined') { apellido_paterno_prs = '' }
+    if (typeof apellido_materno_prs === 'undefined') { apellido_materno_prs = '' }
+    if (typeof telefono_usr === 'undefined') { telefono_usr = '' }
+    if (typeof ocupacion_prs === 'undefined') { ocupacion_prs = '' }
+    if (typeof sexo_prs === 'undefined') { sexo_prs = '' }
+    if (typeof tipo_sangre_p === 'undefined') { tipo_sangre_p = '' }
+    if (typeof fecha_nacimiento_prs === 'undefined') { fecha_nacimiento_prs = '' }
+    if (typeof nss_p === 'undefined') { nss_p = '' }
+    if (typeof email_usr === 'undefined') { email_usr = '' }
+    if (typeof contrasena_usr === 'undefined') { email_usr = '' }
+    const { rows } = await bd.query('SELECT * FROM put_usr($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)', [id_p, nombre_prs, apellido_paterno_prs, apellido_materno_prs, telefono_usr, ocupacion_prs, sexo_prs, tipo_sangre_p, fecha_nacimiento_prs, nss_p, email_usr,contrasena_usr])
+    res.json(rows)
+  } catch (err) {
+    console.log(err)
+    res.json({ state: 'error', content: err })
+  }
+})
+
 export default router
