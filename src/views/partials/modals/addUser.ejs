@@ -69,7 +69,7 @@
 									<input class="form-control" name="ocupacion_prs" id="InputOccupation" type="text" aria-describedby="nameHelp"
 									 placeholder="Escribe la ocupación">
 								</div>
-								<div class="col-md-4">
+								<!--<div class="col-md-4">
 									<label for="InputSecure">Derechohabiente a</label>
 									<select class="form-control" name="id_sm" id="InputSecure">
 										<option value="">Selecciona una institución médica</option>
@@ -79,11 +79,19 @@
 										<option value="4">PEMEX</option>
 										<option value="5">Seguro Popular</option>
 									</select>
-								</div>
+								</div>-->
 								<div class="col-md-4">
 									<label for="InputNSS">Número de Seguro Social</label>
 									<input class="form-control" name="nss_p" id="InputNSS" type="text" aria-describedby="nameHelp" placeholder="Escribe el NSS"
 									 maxLength="11">
+								</div>
+								<div class="col-md-4">
+									<label for="InputStatus">Estado de la cuenta</label><br>
+									<select class="form-control" name="valido_usr">
+										<option value="">Selecciona el estado de la cuenta</option>
+										<option value="true">Activa</option>
+										<option value="false">Desactivada</option>
+									</select>
 								</div>
 							</div>
 						</div>
@@ -116,3 +124,4 @@
 		</div>
 	</div>
 </div>
+
