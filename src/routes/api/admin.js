@@ -132,6 +132,34 @@ router.delete('/pt/:id_pt', async (req, res) => {
 })
 
 // USUARIOS
+
+router.post('/u', async (req, res) => {
+  try {
+    var { email_usr, telefono_usr, contrasena_usr, valido_usr, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, tipo_sangre_p, nss_p } = req.body
+    if (typeof email_usr === 'undefined') { email_usr = '' }
+    if (typeof telefono_usr === 'undefined') { telefono_usr = '' }
+    if (typeof contrasena_usr === 'undefined') { email_usr = '' }
+    //tipo_usr
+    //fecha_registro_usr
+    //fecha_ultimo_acceso_usr
+    if (typeof valido_usr === 'undefined') { valido_usr = '' }
+    if (typeof nombre_prs === 'undefined') { nombre_prs = '' }
+    if (typeof apellido_paterno_prs === 'undefined') { apellido_paterno_prs = '' }
+    if (typeof apellido_materno_prs === 'undefined') { apellido_materno_prs = '' }
+    if (typeof fecha_nacimiento_prs === 'undefined') { fecha_nacimiento_prs = '' }
+    if (typeof sexo_prs === 'undefined') { sexo_prs = '' }
+    if (typeof ocupacion_prs === 'undefined') { ocupacion_prs = '' }
+    if (typeof tipo_sangre_p === 'undefined') { tipo_sangre_p = '' }
+    if (typeof nss_p === 'undefined') { nss_p = '' }    
+    if (valido_usr === "true") valido_usr = true;
+      else valido_usr = false;
+    const { rows } = await bd.query('SELECT * FROM post_usr($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12)', [email_usr, telefono_usr, contrasena_usr, valido_usr, nombre_prs, apellido_paterno_prs, apellido_materno_prs, fecha_nacimiento_prs, sexo_prs, ocupacion_prs, tipo_sangre_p, nss_p])
+    res.json(rows)
+  } catch (err) {
+    res.json({ state: 'error', content: err })
+  }
+})
+
 router.get('/u', async (req, res) => {
   try {
     const { rows } = await bd.query('SELECT * FROM get_usr()')
@@ -161,6 +189,16 @@ router.put('/u/:id_p', async (req, res) => { //Info usuario y Modify
     res.json(rows)
   } catch (err) {
     console.log(err)
+    res.json({ state: 'error', content: err })
+  }
+})
+
+router.delete('/u/:id_p', async (req, res) => {
+  try {
+    const { id_p } = req.params
+    const { rows } = await bd.query('SELECT * FROM delete_usr($1)', [id_p])
+    res.json(rows)
+  } catch (err) {
     res.json({ state: 'error', content: err })
   }
 })
