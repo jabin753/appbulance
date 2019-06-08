@@ -11,12 +11,9 @@ $(document).ready(function () {
                     { data: 'apellido_paterno_prs' },
                     { data: 'apellido_materno_prs' },
                     { data: 'telefono_usr' },
-                    { data: 'ocupacion_prs' },
                     { data: 'sexo_prs' },
-                    { data: 'tipo_sangre_p' },
-                    { data: 'fecha_nacimiento_prs' },
-                    { data: 'nss_p' },
-                    { data: 'email_usr' }                 
+                    { data: 'email_usr' },
+                    { data: 'valido_usr' },               
                 ]
             }));
         //DOM EVENTS
@@ -47,6 +44,7 @@ $(document).ready(function () {
         $form.find("input[name='email_usr']").attr("value", usuario.email_usr);
         $form.find("select[name='sexo_prs']").val(usuario.sexo_prs);
         $form.find("select[name='tipo_sangre_p']").val(usuario.tipo_sangre_p);
+        $form.find("select[name='valido_usr']").val(usuario.valido_usr);
     });
     $("button[name='btnInfo']").on("click", function () {
         var $form = $('#FRMinfo_u');
@@ -58,8 +56,9 @@ $(document).ready(function () {
         $form.find("input[name='ocupacion_prs']").attr("value", usuario.ocupacion_prs);
         $form.find("input[name='nss_p']").attr("value", usuario.nss_p);
         $form.find("input[name='email_usr']").attr("value", usuario.email_usr);
-        $form.find("select[name='sexo_prs']").val(usuario.sexo_prs);
-        $form.find("select[name='tipo_sangre_p']").val(usuario.tipo_sangre_p);
+        $form.find("input[name='sexo_prs']").val(usuario.sexo_prs);
+        $form.find("input[name='tipo_sangre_p']").val(usuario.tipo_sangre_p);
+        $form.find("input[name='valido_usr']").val(usuario.valido_usr);
     });
     $('#FRMpost_u').on('submit', function (e) {
         e.preventDefault();
@@ -68,7 +67,7 @@ $(document).ready(function () {
     });
     $('#FRMdelete_u').on('submit', function (e) {
         e.preventDefault();
-        delete_a();
+        delete_u();
         reload();
     });
     $('#FRMput_u').on('submit', function (e) {
@@ -85,17 +84,21 @@ function post_u() { //Agregar
         url: '/api/admin/u',
         method: 'POST',
         data: {
+            email_usr: $('#InputEmail1').val(),
+            telefono_usr: $('#InputPhoneNumber').val(),
+            contrasena_usr: $('#InputPassword1').val(),
+            //tipo_usr
+            //fecha_registro_usr
+            //fecha_ultimo_acceso_usr
+            valido_usr: $("select[name='valido_usr']").val(),
             nombre_prs: $('#InputName').val(),
             apellido_paterno_prs: $('#InputLastName').val(),
-            apellido_materno_prs: $('#InputLastName2').val(),
-            telefono_usr: $('#InputPhoneNumber').val(),
-            fecha_nacimiento_prs: Date($('#InputDateBirthday').val()),
+            apellido_materno_prs: $('#InputLastName2').val(),            
+            fecha_nacimiento_prs: $('#InputDateBirthday').val(),
             sexo_prs: $('#Sex').val(),
-            tipo_sangre_p: $('#bloodType').val(),
             ocupacion_prs: $('#InputOccupation').val(),
-            nss_p: $('#InputNSS').val(),
-            email_usr: $('#InputEmail1').val(),
-            contrasena_usr: $('#InputPassword1').val()
+            tipo_sangre_p: $('#bloodType').val(),
+            nss_p: $('#InputNSS').val()           
         },
         success: function (response) {
             console.log(response);
@@ -105,7 +108,6 @@ function post_u() { //Agregar
         }
     });
 }
-
 
 function put_u() { //Obtener
     var $form = $('#FRMput_u');
@@ -123,7 +125,8 @@ function put_u() { //Obtener
             ocupacion_prs: $form.find("input[name='ocupacion_prs']").val(),
             nss_p: $form.find("input[name='nss_p']").val(),
             email_usr: $form.find("input[name='email_usr']").val(),
-            contrasena_usr: $form.find("input[name='contrasena_usr']").val()
+            contrasena_usr: $form.find("input[name='contrasena_usr']").val(),
+            valido_usr: $form.find("select[name='valido_usr']").val().toString() //No muestra el estado de la cuenta.
         },
         success: function (response) {
             console.log(response);
@@ -137,7 +140,7 @@ function put_u() { //Obtener
 function info_u() { //Info usuario
     var $form = $('#FRMinfo_u');
     $.ajax({
-        url: '/api/admin/info_u/' + usuario.id_p,
+        url: '/api/admin/u/' + usuario.id_p,
         method: 'PUT',
         data: {
             nombre_prs: $form.find("input[name='nombre_prs']").val(),
@@ -150,7 +153,22 @@ function info_u() { //Info usuario
             ocupacion_prs: $form.find("input[name='ocupacion_prs']").val(),
             nss_p: $form.find("input[name='nss_p']").val(),
             email_usr: $form.find("input[name='email_usr']").val(),
+            valido_usr: $form.find("input[name='valido_usr']").val()
         },
+        success: function (response) {            
+            console.log(response);
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+    
+}
+
+function delete_u() {
+    $.ajax({
+        url: '/api/admin/u/' + usuario.id_p,
+        method: 'DELETE',
         success: function (response) {
             console.log(response);
         },
@@ -160,19 +178,18 @@ function info_u() { //Info usuario
     });
 }
 
-/*
-function delete_a() {
-    $.ajax({
-        url: '/api/admin/a/' + usuario.id_p,
-        method: 'DELETE',
-        success: function (response) {
-            console.log(response);
-        },
-        error: function (err) {
-            console.log(err);
-        }
-    });
-}*/
+function calcularEdad(fecha) {
+    fecha = fecha.substring(0,10);
+    var hoy = new Date();
+    var cumpleanos = new Date(fecha);
+    var edad = hoy.getFullYear() - cumpleanos.getFullYear();
+    var m = hoy.getMonth() - cumpleanos.getMonth();    
+    if (m < 0 || (m === 0 && hoy.getDate() < cumpleanos.getDate())) {
+        edad--;
+    }    
+    return edad;
+}
+
 function reload() {
     location.reload();
 }
