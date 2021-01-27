@@ -36,7 +36,7 @@
     "pg": "^7.4.1",
     "popper.js": "^1.15.0",
     "push.js": "^1.0.9",
-    "socket.io": "^1.7.3",
+    "socket.io": "^2.4.0",
     "sweetalert2": "^8.0.5"
   },
   "devDependencies": {
